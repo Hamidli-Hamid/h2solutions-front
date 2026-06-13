@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "siteName": "H2 Solutions",
+    "tagline": "Modern web solutions and SEO to power your business online",
+    "defaultDescription": "H2 Solutions — modern corporate websites with Next.js and Laravel, SEO optimization, and IT consultancy. Personal approach and measurable results under the Hamid Hamidli brand.",
+    "keywords": "web development, SEO Baku, IT consultancy, Next.js Azerbaijan, Laravel website, corporate website, H2 Solutions"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "badge": "H2 — Height & Haste",
+    "title": "Technical partner for digital growth",
+    "subtitle": "Ultra-fast, SEO-first websites built on Next.js and Laravel — a durable technical foundation for online growth.",
+    "ctaPrimary": "Discuss a project",
+    "ctaSecondary": "View our work",
+    "chipsTitle": "Core services",
+    "chips": [
+      { "name": "Websites", "icon": "heroicon-o-window" },
+      { "name": "Mobile apps", "icon": "heroicon-o-device-phone-mobile" },
+      { "name": "E-commerce", "icon": "heroicon-o-shopping-bag" },
+      { "name": "SEO service", "icon": "heroicon-o-magnifying-glass" },
+      { "name": "Business Automation", "icon": "heroicon-o-cog-6-tooth" },
+      { "name": "GEO (AI SEO)", "icon": "heroicon-o-sparkles" }
+    ],
+    "videoFallback": "Showreel coming soon",
+    "videoBadge": "Showreel",
+    "stats": [
+      { "value": "50+", "label": "Projects delivered" },
+      { "value": "99", "label": "PageSpeed score" },
+      { "value": "5+", "label": "Years of practice" }
+    ]
+  },
+  "usp": {
+    "title": "Why H2 Solutions?",
+    "subtitle": "Three pillars our digital practice is built on:",
+    "items": [
+      {
+        "title": "Speed & Performance",
+        "description": "Server-side rendering and static caching deliver Google PageSpeed scores of 95+. Every second is conversion."
+      },
+      {
+        "title": "SEO-First Architecture",
+        "description": "Technical SEO, semantic HTML, dynamic metadata, and automatic sitemaps — built for search engines from day one."
+      },
+      {
+        "title": "Hands-on partnership",
+        "description": "No templates — every solution is engineered to your business. We work one-on-one with each client."
+      }
+    ]
+  },
+  "servicesPreview": {
+    "title": "Our services",
+    "subtitle": "From the first line of code to sustained growth — we cover the full cycle.",
+    "viewAll": "All services"
+  },
+  "services": {
+    "title": "Services",
+    "intro": "From strategy to code, from code to traffic — three core services that span your digital journey."
+  },
+  "about": {
+    "title": "About H2 Solutions",
+    "subtitle": "One brand, one promise: quality and altitude.",
+    "story": "H2 Solutions is the agency Hamid Hamidli built on technical perfectionism and business outcomes. We treat every project with an owner's mindset — building solutions that don't just work but generate revenue.",
+    "valuesTitle": "Our values",
+    "values": [
+      {
+        "title": "Transparency",
+        "description": "We explain the reasoning behind every process and decision."
+      },
+      {
+        "title": "Technical excellence",
+        "description": "One step ahead of industry standards — we adopt new technologies early."
+      },
+      {
+        "title": "Long-term partnership",
+        "description": "We don't ship and disappear — we grow together."
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Our projects",
+    "subtitle": "Real businesses, real outcomes. Stories told as Problem → Solution → Result.",
+    "empty": "Projects coming soon.",
+    "viewCase": "View case",
+    "problemLabel": "Problem",
+    "solutionLabel": "Solution",
+    "resultLabel": "Result"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Expert takes on web development, SEO, and digital business.",
+    "empty": "New articles coming soon...",
+    "readMore": "Read more",
+    "publishedAt": "Published",
+    "minRead": "min read"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's talk about your project. We respond within 24 hours.",
+    "infoTitle": "Direct contact",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "addressLabel": "Address",
+    "email": "info@h2solutions.az",
+    "phone": "+994 50 000 00 00",
+    "address": "Baku, Azerbaijan",
+    "form": {
+      "name": "Your name",
+      "namePlaceholder": "First and last name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone (optional)",
+      "phonePlaceholder": "+994 ...",
+      "company": "Company (optional)",
+      "companyPlaceholder": "Your company name",
+      "service": "Service of interest",
+      "serviceOptions": {
+        "web": "Web Development",
+        "seo": "SEO Optimization",
+        "consult": "IT Consultancy",
+        "other": "Other"
+      },
+      "message": "About your project",
+      "messagePlaceholder": "Tell us briefly about your project, goals, and budget expectations...",
+      "submit": "Send request",
+      "submitting": "Sending...",
+      "success": "Thanks! Your request has been received. We'll be in touch shortly.",
+      "error": "Something went wrong. Please try again.",
+      "required": "This field is required"
+    }
+  },
+  "footer": {
+    "tagline": "Premium web solutions and SEO to power your business online.",
+    "navTitle": "Navigation",
+    "servicesTitle": "Services",
+    "contactTitle": "Contact",
+    "rights": "All rights reserved",
+    "madeWith": "Built with care —"
+  },
+  "common": {
+    "readMore": "Read more",
+    "learnMore": "Learn more",
+    "getStarted": "Get started",
+    "loading": "Loading...",
+    "back": "Back"
+  }
+}

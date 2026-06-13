@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "siteName": "H2 Solutions",
+    "tagline": "Müasir veb həllər və SEO ilə biznesinizin rəqəmsal gücü",
+    "defaultDescription": "H2 Solutions — Next.js və Laravel ilə müasir korporativ saytlar, SEO optimizasiyası və IT konsaltinq. Həmid Həmidli brendi altında fərdi yanaşma və ölçülə bilən nəticələr.",
+    "keywords": "veb sayt hazırlanması, SEO Bakı, IT konsaltinq, Next.js Azərbaycan, Laravel sayt, korporativ sayt, H2 Solutions"
+  },
+  "nav": {
+    "home": "Ana səhifə",
+    "about": "Haqqımızda",
+    "services": "Xidmətlər",
+    "portfolio": "Layihələr",
+    "blog": "Bloq",
+    "contact": "Əlaqə",
+    "menu": "Menyu",
+    "close": "Bağla"
+  },
+  "hero": {
+    "badge": "H2 — Höhe & Hızlı",
+    "title": "Rəqəmsal böyümə üçün texniki tərəfdaş",
+    "subtitle": "Next.js və Laravel üzərində qurulmuş ultra sürətli, SEO-yönümlü saytlar — biznesinizin onlayn böyüməsi üçün dayanıqlı texniki bünövrə.",
+    "ctaPrimary": "Layihə müzakirə edək",
+    "ctaSecondary": "İşlərimizə bax",
+    "chipsTitle": "Əsas xidmətlər",
+    "chips": [
+      { "name": "Veb saytlar", "icon": "heroicon-o-window" },
+      { "name": "Mobil tətbiqlər", "icon": "heroicon-o-device-phone-mobile" },
+      { "name": "E-ticarət", "icon": "heroicon-o-shopping-bag" },
+      { "name": "SEO xidməti", "icon": "heroicon-o-magnifying-glass" },
+      { "name": "Biznes avtomatlaşdırma", "icon": "heroicon-o-cog-6-tooth" },
+      { "name": "GEO (AI üçün SEO)", "icon": "heroicon-o-sparkles" }
+    ],
+    "videoFallback": "Tanıtım video tezliklə",
+    "videoBadge": "Showreel",
+    "stats": [
+      { "value": "50+", "label": "Tamamlanmış layihə" },
+      { "value": "99", "label": "PageSpeed skoru" },
+      { "value": "5+", "label": "İl təcrübə" }
+    ]
+  },
+  "usp": {
+    "title": "Niyə H2 Solutions?",
+    "subtitle": "Üç sütun üzərində qurulan rəqəmsal yanaşma:",
+    "items": [
+      {
+        "title": "Sürət və Performans",
+        "description": "Server-side rendering və static caching ilə Google PageSpeed 95+ skoru. Hər saniyə dönüşüm deməkdir."
+      },
+      {
+        "title": "SEO-First Memarlıq",
+        "description": "Texniki SEO, semantik HTML, dinamik metadata və avtomatik sitemap — axtarış sistemləri üçün doğulmuş."
+      },
+      {
+        "title": "Fərdi yanaşma",
+        "description": "Şablon deyil — biznesinizin xüsusi tələblərinə görə layihələndirilən həllər. Hər müştəri ilə bir-bir işləyirik."
+      }
+    ]
+  },
+  "servicesPreview": {
+    "title": "Xidmətlərimiz",
+    "subtitle": "Veb saytdan davamlı böyüməyə qədər tam dövrü əhatə edirik.",
+    "viewAll": "Bütün xidmətlər"
+  },
+  "services": {
+    "title": "Xidmətlər",
+    "intro": "Strategiyadan koda, koddan trafikə qədər — biznesinizin rəqəmsal yolunu əhatə edən üç əsas xidmət."
+  },
+  "about": {
+    "title": "H2 Solutions haqqında",
+    "subtitle": "Bir brend, bir öhdəlik: keyfiyyət və yüksəklik.",
+    "story": "H2 Solutions — Həmid Həmidlinin texniki perfeksionizm və biznes nəticələri üzərində qurduğu agentlikdir. Hər layihəyə sahibkar gözü ilə yanaşırıq: yalnız işləyən deyil, gəlir gətirən həllər qururuq.",
+    "valuesTitle": "Dəyərlərimiz",
+    "values": [
+      {
+        "title": "Şəffaflıq",
+        "description": "Hər prosesin və qərarın arxasındakı səbəbi izah edirik."
+      },
+      {
+        "title": "Texniki bənzərsizlik",
+        "description": "Sənaye standartlarından bir addım öndə — yeni texnologiyaları erkən tətbiq edirik."
+      },
+      {
+        "title": "Uzun müddətli tərəfdaşlıq",
+        "description": "Layihəni təhvil verib unutmuruq — birgə böyüyürük."
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Layihələrimiz",
+    "subtitle": "Real bizneslər, real nəticələr. Problem → Həll → Nəticə strukturunda hekayələr.",
+    "empty": "Layihələr tezliklə əlavə olunacaq.",
+    "viewCase": "Layihəyə bax",
+    "problemLabel": "Problem",
+    "solutionLabel": "Həll",
+    "resultLabel": "Nəticə"
+  },
+  "blog": {
+    "title": "Bloq",
+    "subtitle": "Veb inkişaf, SEO və rəqəmsal biznes haqqında ekspert rəyləri.",
+    "empty": "Tezliklə yeni məqalələr...",
+    "readMore": "Davamını oxu",
+    "publishedAt": "Dərc edilib",
+    "minRead": "dəq oxunuş"
+  },
+  "contact": {
+    "title": "Əlaqə",
+    "subtitle": "Layihənizi danışaq. 24 saat içində geri qayıdırıq.",
+    "infoTitle": "Birbaşa əlaqə",
+    "emailLabel": "E-poçt",
+    "phoneLabel": "Telefon",
+    "addressLabel": "Ünvan",
+    "email": "info@h2solutions.az",
+    "phone": "+994 50 000 00 00",
+    "address": "Bakı, Azərbaycan",
+    "form": {
+      "name": "Adınız",
+      "namePlaceholder": "Ad Soyad",
+      "email": "E-poçt",
+      "emailPlaceholder": "siz@example.com",
+      "phone": "Telefon (istəyə bağlı)",
+      "phonePlaceholder": "+994 ...",
+      "company": "Şirkət (istəyə bağlı)",
+      "companyPlaceholder": "Şirkətinizin adı",
+      "service": "Maraqlandığınız xidmət",
+      "serviceOptions": {
+        "web": "Web Development",
+        "seo": "SEO Optimization",
+        "consult": "IT Consultancy",
+        "other": "Digər"
+      },
+      "message": "Layihə haqqında",
+      "messagePlaceholder": "Bizə layihəniz, hədəfləriniz və büdcə gözləntiniz haqqında qısa məlumat verin...",
+      "submit": "Müraciəti göndər",
+      "submitting": "Göndərilir...",
+      "success": "Təşəkkürlər! Müraciətiniz qəbul edildi. Tezliklə əlaqə saxlayacağıq.",
+      "error": "Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.",
+      "required": "Bu sahə tələb olunur"
+    }
+  },
+  "footer": {
+    "tagline": "Premium veb həllər və SEO ilə biznesinizin onlayn gücü.",
+    "navTitle": "Naviqasiya",
+    "servicesTitle": "Xidmətlər",
+    "contactTitle": "Əlaqə",
+    "rights": "Bütün hüquqlar qorunur",
+    "madeWith": "Sevgi ilə qurulub —"
+  },
+  "common": {
+    "readMore": "Davamı",
+    "learnMore": "Ətraflı",
+    "getStarted": "Başlayaq",
+    "loading": "Yüklənir...",
+    "back": "Geri"
+  }
+}
