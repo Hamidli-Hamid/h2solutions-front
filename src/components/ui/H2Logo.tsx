@@ -1,9 +1,28 @@
 type Props = {
   className?: string;
   withWordmark?: boolean;
+  /** Logo uploaded in the admin; without one the built-in mark is drawn. */
+  logo?: string | null;
+  /** Accessible name for an uploaded logo — normally the brand name. */
+  alt?: string;
 };
 
-export function H2Logo({ className, withWordmark = true }: Props) {
+export function H2Logo({ className, withWordmark = true, logo, alt }: Props) {
+  if (logo) {
+    /* An uploaded logo replaces the whole lockup, mark and wordmark alike.
+       Height is fixed to the header rhythm; the width follows the artwork. */
+    return (
+      /* eslint-disable-next-line @next/next/no-img-element --
+         arbitrary admin artwork of unknown intrinsic size, which next/image
+         requires; it is a small header asset, so optimisation buys little. */
+      <img
+        src={logo}
+        alt={alt ?? ""}
+        className={`h-9 w-auto max-w-[12rem] object-contain ${className ?? ""}`}
+      />
+    );
+  }
+
   return (
     <span className={`inline-flex items-center gap-2 ${className ?? ""}`}>
       <span

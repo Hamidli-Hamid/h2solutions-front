@@ -1,0 +1,577 @@
+{
+  "meta": {
+    "siteName": "H2 Solutions",
+    "tagline": "Biznesingiz raqamli kuchi uchun zamonaviy veb-yechimlar va SEO",
+    "defaultDescription": "H2 Solutions — Next.js va Laravel asosidagi zamonaviy korporativ saytlar, SEO optimizatsiyasi va IT konsalting. Hamid Hamidli brendi ostida shaxsiy yondashuv va oʻlchanadigan natijalar."
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "about": "Biz haqimizda",
+    "services": "Xizmatlar",
+    "portfolio": "Loyihalar",
+    "blog": "Blog",
+    "contact": "Aloqa",
+    "menu": "Menyu",
+    "close": "Yopish",
+    "language": "Til"
+  },
+  "hero": {
+    "badge": "H2 — Yechimlar & Oʻsish",
+    "title": "Raqamli oʻsish uchun texnik hamkor",
+    "titleAccent": "texnik hamkor",
+    "subtitle": "Next.js va Laravel asosida qurilgan oʻta tez, SEO-ga yoʻnaltirilgan saytlar — biznesingizning onlayn oʻsishi uchun mustahkam texnik poydevor.",
+    "ctaPrimary": "Loyihani muhokama qilamiz",
+    "ctaSecondary": "Ishlarimizni koʻrish",
+    "servicesTitle": "Asosiy xizmatlarimiz",
+    "services": [
+      {
+        "slug": "web-development",
+        "name": "Veb-saytlar",
+        "description": "Zamonaviy, tez va SEO-ga tayyor korporativ hamda biznes saytlar.",
+        "icon": "heroicon-o-computer-desktop"
+      },
+      {
+        "slug": "mobile-apps",
+        "name": "Mobil ilovalar",
+        "description": "iOS va Android platformalari uchun qulay ilovalar.",
+        "icon": "heroicon-o-device-phone-mobile"
+      },
+      {
+        "slug": "e-commerce",
+        "name": "Elektron tijorat",
+        "description": "Savdoyingizni oshiradigan xavfsiz va moslashuvchan onlayn doʻkon yechimlari.",
+        "icon": "heroicon-o-shopping-bag"
+      },
+      {
+        "slug": "seo-optimization",
+        "name": "SEO xizmati",
+        "description": "Qidiruv tizimlaridagi koʻrinishingizni oshiradigan samarali SEO strategiyalari.",
+        "icon": "heroicon-o-magnifying-glass"
+      },
+      {
+        "slug": "business-automation",
+        "name": "Biznesni avtomatlashtirish",
+        "description": "Jarayonlaringizni avtomatlashtiring, vaqt va resursni tejang.",
+        "icon": "heroicon-o-cog-6-tooth"
+      },
+      {
+        "slug": "geo-ai-seo",
+        "name": "GEO (SI uchun SEO)",
+        "description": "Brendingizni sunʼiy intellekt platformalarida koʻproq koʻrinadigan qiling.",
+        "icon": "heroicon-o-viewfinder-circle"
+      }
+    ]
+  },
+  "home": {
+    "projects": {
+      "label": "Loyihalarimiz",
+      "title": "Faxrlanadigan tanlangan ishlarimiz",
+      "viewAll": "Barcha loyihalar",
+      "viewCase": "Keysni koʻrish",
+      "samples": [
+        {
+          "title": "Elektron tijorat platformasi",
+          "category": "Web Development"
+        },
+        {
+          "title": "Korporativ sayt",
+          "category": "Web Development"
+        },
+        {
+          "title": "Mobil ilova",
+          "category": "Mobile Development"
+        },
+        {
+          "title": "SEO loyihasi",
+          "category": "SEO & Marketing"
+        }
+      ]
+    },
+    "process": {
+      "label": "Ish jarayonimiz",
+      "title": "Muvaffaqiyatli loyihaga eltuvchi yoʻl",
+      "steps": [
+        {
+          "title": "Tahlil va rejalashtirish",
+          "description": "Talablaringizni tahlil qilib, loyihangizga eng mos strategiyani belgilaymiz.",
+          "icon": "heroicon-o-clipboard-document-list"
+        },
+        {
+          "title": "Dizayn va UX/UI",
+          "description": "Zamonaviy, qulay va samarali dizayn konsepsiyasini tayyorlaymiz.",
+          "icon": "heroicon-o-pencil-square"
+        },
+        {
+          "title": "Ishlab chiqish",
+          "description": "Toza kod, zamonaviy texnologiyalar va yuqori unumdorlik bilan mahsulotni amalga oshiramiz.",
+          "icon": "heroicon-o-code-bracket"
+        },
+        {
+          "title": "Sinov va optimallashtirish",
+          "description": "Sifat nazorati va optimallashtirish loyihani ishga tushirishga tayyorlaydi.",
+          "icon": "heroicon-o-rocket-launch"
+        },
+        {
+          "title": "Qoʻllab-quvvatlash va oʻsish",
+          "description": "Loyiha ishga tushgach ham yoningizdamiz va oʻsishingizga hissa qoʻshamiz.",
+          "icon": "heroicon-o-paper-airplane"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Loyihangizni boshlaymiz",
+      "subtitle": "Gʻoyangizni haqiqatga aylantiraylik. Jamoamiz siz bilan birga ishlashga tayyor."
+    },
+    "faq": {
+      "label": "Koʻp beriladigan savollar",
+      "title": "Sizni qiziqtiradigan savollar",
+      "items": [
+        {
+          "question": "Loyiha qancha vaqtda tayyor boʻladi?",
+          "answer": "Korporativ sayt odatda 3–5 hafta, elektron tijorat va maxsus platformalar esa 6–12 hafta oladi. Aniq muddat talablar belgilangach yozma kalendar reja bilan tasdiqlanadi."
+        },
+        {
+          "question": "Loyiha tugagach qoʻllab-quvvatlaysizmi?",
+          "answer": "Ha. Topshirgandan soʻng bir oy bepul texnik yordam, keyin esa oylik qoʻllab-quvvatlash va rivojlantirish paketlari taklif etiladi."
+        },
+        {
+          "question": "Toʻlov qanday amalga oshiriladi?",
+          "answer": "Toʻlov bosqichlarga boʻlinadi: boshlangʻich avans, oraliq bosqich va topshirish paytidagi yakuniy toʻlov. Barcha shartlar oldindan shartnomada belgilanadi."
+        },
+        {
+          "question": "Hosting va domenni siz taʼminlaysizmi?",
+          "answer": "Ha. Loyihaga mos hosting va domenni oʻzimiz tanlaymiz; oʻrnatish, SSL sertifikati va koʻchirish jarayonini toʻliq oʻz zimmamizga olamiz."
+        },
+        {
+          "question": "Saytim SEO uchun optimallashtiriladimi?",
+          "answer": "Har bir loyiha texnik SEO bilan birga topshiriladi: semantik HTML, tezlikni optimallashtirish, metamaʼlumotlar, tuzilmali maʼlumot va avtomatik sitemap."
+        },
+        {
+          "question": "Mobil moslik kafolatlanadimi?",
+          "answer": "Barcha loyihalar mobile-first tamoyili asosida quriladi va telefon, planshet hamda kompyuter ekranlarida alohida sinovdan oʻtkaziladi."
+        }
+      ]
+    },
+    "blog": {
+      "label": "Blog",
+      "title": "Maqolalar va yangiliklar",
+      "viewAll": "Barcha maqolalar",
+      "readMore": "Oʻqish",
+      "samples": [
+        {
+          "title": "Texnik SEO auditi: uni qanday toʻgʻri oʻtkazish kerak",
+          "date": "2025-05-20",
+          "category": "SEO"
+        },
+        {
+          "title": "Next.js nega tez va SEO-ga qulay saytlarni taʼminlaydi",
+          "date": "2025-05-15",
+          "category": "Web Development"
+        },
+        {
+          "title": "Onlayn doʻkonlarda konversiyani oshirish yoʻllari",
+          "date": "2025-05-10",
+          "category": "E-commerce"
+        },
+        {
+          "title": "Mobil ilova ishlab chiqishda UI/UX roli",
+          "date": "2025-05-05",
+          "category": "Mobile"
+        }
+      ]
+    },
+    "seoText": {
+      "label": "SEO matni",
+      "title": "Raqamli muvaffaqiyat uchun toʻgʻri texnologik hamkor",
+      "body": [
+        "H2 Solutions sifatida bizneslar raqamli olamda mustahkam oʻrin egallashi uchun zamonaviy texnologiyalar va samarali strategiyalarni qoʻllaymiz. Veb ishlab chiqish, mobil ilovalar, elektron tijorat yechimlari, SEO va biznesni avtomatlashtirish brendingizning onlayn taʼsirini birgalikda oshiradi.",
+        "Next.js va Laravel asosidagi arxitektura saytingizga ham tezlik, ham qidiruv natijalarida barqaror koʻrinish beradi. Texnik SEO, tuzilmali maʼlumot va GEO — yaʼni sunʼiy intellektga asoslangan qidiruv tizimlari uchun optimallashtirish — tufayli brendingiz nafaqat Google’da, balki SI platformalarida ham topiladi.",
+        "Har bir loyihaga uzoq muddatli hamkorlik sifatida qaraymiz: tahlildan dizaynga, koddan doimiy qoʻllab-quvvatlashgacha barcha bosqichlarda biznesingiz muvaffaqiyatiga hissa qoʻshamiz."
+      ]
+    }
+  },
+  "usp": {
+    "label": "Ustunliklarimiz",
+    "title": "Nega H2 Solutions?",
+    "subtitle": "Raqamli yondashuvimiz tayanadigan uchta ustun:",
+    "items": [
+      {
+        "title": "Oʻz vaqtida topshirish",
+        "description": "Kelishilgan sanada topshiramiz va nima tayyor boʻlganini har hafta koʻrsatamiz — loyiha siz uchun qora quti emas."
+      },
+      {
+        "title": "Oʻlchanadigan natija",
+        "description": "Maqsad chiroyli sayt emas, murojaat va savdo. Nima ishlayotganini raqamlar bilan kuzatib, hisobotini siz bilan boʻlishamiz."
+      },
+      {
+        "title": "Shaxsiy hamkorlik",
+        "description": "Shablon emas — har bir yechim biznesingizga moslab quriladi. Har bir mijoz bilan yakkama-yakka ishlaymiz."
+      }
+    ]
+  },
+  "servicesPreview": {
+    "title": "Xizmatlarimiz",
+    "subtitle": "Kodning birinchi satridan barqaror oʻsishgacha — toʻliq siklni qamrab olamiz.",
+    "viewAll": "Barcha xizmatlar"
+  },
+  "services": {
+    "title": "Xizmatlar",
+    "intro": "Saytdan mobil ilovaga, SEO’dan biznesni avtomatlashtirishgacha — biznesingizning onlayn oʻsishi uchun oltita asosiy xizmat.",
+    "included": "Nimalar kiradi?",
+    "related": "Boshqa xizmatlar",
+    "startTitle": "Loyihani boshlaymiz",
+    "startText": "Ushbu xizmat boʻyicha savolingiz bormi? Qisqa brif yuboring, 24 soat ichida javob beramiz.",
+    "empty": "Xizmatlar tez orada qoʻshiladi."
+  },
+  "about": {
+    "label": "Biz haqimizda",
+    "title": "H2 Solutions haqida",
+    "subtitle": "Bitta brend, bitta majburiyat: sifat va balandlik.",
+    "story": "H2 Solutions — Hamid Hamidli texnik perfeksionizm va biznes natijalari asosida qurgan agentlik. Har bir loyihaga tadbirkor koʻzi bilan qaraymiz: shunchaki ishlaydigan emas, daromad keltiradigan yechimlar quramiz.",
+    "storyLabel": "Tariximiz",
+    "storyTitle": "Chiroyli koʻrinadigan emas, natija beradigan raqamli yechimlar",
+    "storyParagraphs": [
+      "H2 Solutions — Bokuda joylashgan texnik agentlik: kichik va oʻrta biznesning onlayn poydevorini quramiz. Nomimizdagi «H2» ikkita oddiy majburiyatni bildiradi — yuqori sifat va balandlik: har bir loyihani boshlangʻich darajasidan bir pogʻona yuqoriga koʻtarish.",
+      "Hammasi bitta savoldan boshlandi: nega koʻplab saytlar chiroyli koʻrinadi, ammo mijoz keltirmaydi? Sababini biznes mantigʻi bilan texnik ijroning bir-biridan ayri rejalashtirilishida koʻrdik. Shu bois ishni dizayndan emas, sizning maqsadingiz, raqobatchilaringiz va haqiqiy qidiruv talabidan boshlaymiz.",
+      "Bugun Next.js va Laravel asosida korporativ saytlar, elektron tijorat platformalari, SEO/GEO va biznesni avtomatlashtirish loyihalarini amalga oshiramiz. Topshirgandan keyin ham yoningizdamiz: oʻlchaymiz, oʻrganamiz va keyingi qadamni birga rejalashtiramiz."
+    ],
+    "founder": {
+      "label": "Asoschi",
+      "name": "Hamid Hamidli",
+      "role": "Asoschi & bosh yechim arxitektori",
+      "quote": "Kod biznes maqsadiga xizmat qilgandagina qiymat kasb etadi. Shu sababli har bir loyihada avval natijani, keyin texnologiyani tanlaymiz.",
+      "linkedinLabel": "LinkedIn profili"
+    },
+    "factsTitle": "Qisqacha maʼlumot",
+    "facts": [
+      {
+        "label": "Joylashuv",
+        "value": "Boku, Ozarbayjon"
+      },
+      {
+        "label": "Ish tillari",
+        "value": "AZ · EN · RU · DE · KK · UZ"
+      },
+      {
+        "label": "Asosiy texnologiya",
+        "value": "Next.js · Laravel"
+      },
+      {
+        "label": "Qamrov",
+        "value": "Ozarbayjon va masofadan"
+      }
+    ],
+    "commitments": {
+      "label": "Majburiyatlarimiz",
+      "title": "Vaʼda bilan emas, shart bilan ishlaymiz",
+      "subtitle": "Hamkorlikning birinchi kunidan kuchga kiradigan toʻrtta oddiy majburiyat:",
+      "items": [
+        {
+          "value": "24 soat",
+          "label": "Har qanday murojaatga javob berish muddati"
+        },
+        {
+          "value": "3–5 hafta",
+          "label": "Korporativ saytning odatiy topshirish muddati"
+        },
+        {
+          "value": "90+",
+          "label": "Maqsad qilgan Lighthouse unumdorlik bali"
+        },
+        {
+          "value": "1 oy",
+          "label": "Topshirilgandan keyingi bepul texnik yordam"
+        }
+      ]
+    },
+    "valuesLabel": "Tamoyillar",
+    "valuesTitle": "Qadriyatlarimiz",
+    "valuesSubtitle": "Bu toʻrt tamoyil hamma narsani belgilaydi — qabul qiladigan loyihamizdan kundalik muloqotimizgacha.",
+    "values": [
+      {
+        "title": "Shaffoflik",
+        "description": "Har bir jarayon va qarorning sababini tushuntiramiz. Narx, muddat va risklar oldindan yozma kelishiladi.",
+        "icon": "heroicon-o-eye"
+      },
+      {
+        "title": "Texnik mahorat",
+        "description": "Soha standartidan bir qadam oldinda — yangi texnologiyalarni erta, ammo oʻzimiz sinab koʻrgandan keyingina qoʻllaymiz.",
+        "icon": "heroicon-o-cpu-chip"
+      },
+      {
+        "title": "Vaqtni hurmat qilish",
+        "description": "Kelishilgan sanaga sodiqmiz. Kechikish xavfi tugʻilsa, oxirgi kuni emas, birinchi kuni xabar beramiz.",
+        "icon": "heroicon-o-clock"
+      },
+      {
+        "title": "Uzoq muddatli hamkorlik",
+        "description": "Loyihani topshirib, gʻoyib boʻlmaymiz — natijani kuzatamiz, mahsulotni yaxshilaymiz va siz bilan birga oʻsamiz.",
+        "icon": "heroicon-o-users"
+      }
+    ],
+    "stack": {
+      "label": "Texnologiya",
+      "title": "Ishlaydigan texnologiyalar toʻplami",
+      "subtitle": "Shablon va tayyor konstruktor emas — har bir yechim tez, ochiq kodli va yillar davomida qoʻllab-quvvatlanadigan texnologiyalarga tayanadi.",
+      "groups": [
+        {
+          "title": "Frontend",
+          "icon": "heroicon-o-computer-desktop",
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS"
+          ]
+        },
+        {
+          "title": "Backend",
+          "icon": "heroicon-o-server-stack",
+          "items": [
+            "Laravel",
+            "PHP 8",
+            "MySQL",
+            "PostgreSQL",
+            "REST API"
+          ]
+        },
+        {
+          "title": "SEO & GEO",
+          "icon": "heroicon-o-magnifying-glass",
+          "items": [
+            "Texnik SEO",
+            "Schema.org",
+            "Core Web Vitals",
+            "SI qidiruvi (GEO)"
+          ]
+        },
+        {
+          "title": "Infratuzilma",
+          "icon": "heroicon-o-cloud",
+          "items": [
+            "Docker",
+            "Linux serverlari",
+            "CI/CD",
+            "Cloudflare",
+            "Analitika"
+          ]
+        }
+      ]
+    },
+    "audience": {
+      "label": "Kim bilan ishlaymiz",
+      "title": "Bizga eng mos keladigan bizneslar",
+      "subtitle": "Har bir loyihani qabul qilavermaymiz. Quyidagi hollarda hamkorlik ikkala tomon uchun ham eng yaxshi natija beradi.",
+      "items": [
+        {
+          "title": "Korporativ bizneslar",
+          "description": "Brendini onlayn toʻgʻri taqdim etish, ishonch qozonish va savdo jamoasiga sifatli murojaat keltirishni istagan kompaniyalar.",
+          "icon": "heroicon-o-building-office-2"
+        },
+        {
+          "title": "Elektron tijorat va chakana savdo",
+          "description": "Onlayn savdosini oshirish, buyurtma va ombor jarayonlarini soddalashtirishni istagan doʻkonlar.",
+          "icon": "heroicon-o-shopping-bag"
+        },
+        {
+          "title": "Startaplar",
+          "description": "Birinchi mahsulotini (MVP) tez bozorga chiqarish, sinab koʻrish va investorga koʻrsatishni istagan jamoalar.",
+          "icon": "heroicon-o-rocket-launch"
+        },
+        {
+          "title": "Mahalliy xizmat sohalari",
+          "description": "Qidiruv orqali murojaat olishni istagan klinikalar, salonlar, servis markazlari va studiyalar.",
+          "icon": "heroicon-o-map-pin"
+        }
+      ]
+    }
+  },
+  "portfolio": {
+    "title": "Loyihalarimiz",
+    "subtitle": "Haqiqiy bizneslar, haqiqiy natijalar. Muammo → Yechim → Natija tuzilmasidagi hikoyalar.",
+    "empty": "Loyihalar tez orada qoʻshiladi.",
+    "viewCase": "Loyihani koʻrish",
+    "problemLabel": "Muammo",
+    "solutionLabel": "Yechim",
+    "resultLabel": "Natija",
+    "overviewTitle": "Loyiha haqida",
+    "galleryTitle": "Loyiha galereyasi",
+    "galleryHint": "Kattalashtirish uchun rasmni bosing",
+    "clientLabel": "Mijoz",
+    "yearLabel": "Yil",
+    "visitSite": "Saytga oʻtish",
+    "related": "Boshqa loyihalar",
+    "processTitle": "Qanday ishladik",
+    "galleryClose": "Yopish"
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Blog",
+    "subtitle": "Veb ishlab chiqish, SEO va raqamli biznes haqida ekspert fikrlari.",
+    "empty": "Yangi maqolalar tez orada...",
+    "emptyCta": "Biz bilan bogʻlaning",
+    "readMore": "Batafsil oʻqish",
+    "publishedAt": "Chop etilgan",
+    "minRead": "daq oʻqish",
+    "featuredLabel": "Tanlangan maqola",
+    "latestTitle": "Barcha maqolalar",
+    "authorLabel": "Muallif",
+    "shareLabel": "Ulashish",
+    "related": "Boshqa maqolalar",
+    "backToList": "Barcha maqolalarga qaytish",
+    "tocTitle": "Maqolada",
+    "helpTitle": "Shu mavzuda yordam kerakmi?",
+    "helpText": "Saytingizni birga koʻrib chiqamiz va nimadan boshlash kerakligini aytamiz."
+  },
+  "contact": {
+    "label": "Biz bilan aloqa",
+    "title": "Aloqa",
+    "subtitle": "Loyihangiz haqida gaplashaylik. 24 soat ichida javob beramiz.",
+    "infoTitle": "Bevosita aloqa",
+    "infoHeading": "Oʻzingizga qulay kanalni tanlang",
+    "infoSubtitle": "Forma toʻldirish shart emas — quyidagi kanallardan biri orqali bevosita yozing yoki qoʻngʻiroq qiling.",
+    "emailLabel": "Elektron pochta",
+    "email": "info@h2solutions.az",
+    "emailNote": "Eng tez yoʻl — brifingizni yuboring, 24 soat ichida javob beramiz.",
+    "phoneLabel": "Telefon",
+    "phone": "+994 50 000 00 00",
+    "phoneNote": "Ish kunlari 09:00–18:00 oraligʻida qoʻngʻiroq qilishingiz mumkin.",
+    "whatsappLabel": "WhatsApp",
+    "whatsappValue": "Xabar yozing",
+    "whatsappNote": "Qisqa savollar va fayl ulashish uchun qulay.",
+    "addressLabel": "Manzil",
+    "address": "Boku, Ozarbayjon",
+    "addressNote": "Uchrashuvlar oldindan kelishiladi; loyihani toʻliq onlayn ham olib boramiz.",
+    "hoursLabel": "Ish vaqti",
+    "hours": "Du – Ju, 09:00–18:00 (GMT+4)",
+    "hoursNote": "Dam olish kunlari kelgan murojaatlar dushanba kuni koʻrib chiqiladi.",
+    "responseLabel": "Javob berish muddati",
+    "responseValue": "24 soat ichida",
+    "mailSubject": "Yangi loyiha soʻrovi",
+    "brief": {
+      "label": "Brif",
+      "title": "Yozganda shularni koʻrsating",
+      "text": "Bu tafsilotlar birinchi javobimizni aniq qiladi: taxminiy byudjet, muddat va mos texnik yechim.",
+      "items": [
+        "Kompaniyangiz va faoliyat sohangiz",
+        "Kerakli xizmat: sayt, mobil ilova, elektron tijorat, SEO yoki avtomatlashtirish",
+        "Loyihaning asosiy maqsadi va muvaffaqiyatni qanday oʻlchaysiz",
+        "Taxminiy byudjet doirasi va istalgan boshlanish sanasi",
+        "Hozirgi saytingiz, namuna havolalar yoki raqobatchi misollari"
+      ],
+      "cta": "Brifni pochta orqali yuborish"
+    },
+    "next": {
+      "label": "Keyingi qadamlar",
+      "title": "Yozganingizdan keyin nima boʻladi",
+      "subtitle": "Qisqa va shaffof jarayon — uzun soʻrovnomalar va kutish yoʻq.",
+      "steps": [
+        {
+          "title": "Murojaatingizni koʻrib chiqamiz",
+          "description": "Xabaringizni 24 soat ichida oʻqiymiz va biror maʼlumot yetishmasa, bir nechta aniqlashtiruvchi savol yuboramiz.",
+          "icon": "heroicon-o-inbox-arrow-down"
+        },
+        {
+          "title": "Bepul maslahat",
+          "description": "30 daqiqalik onlayn uchrashuvda maqsadlar, texnik talablar va mumkin boʻlgan variantlarni muhokama qilamiz.",
+          "icon": "heroicon-o-chat-bubble-left-right"
+        },
+        {
+          "title": "Taklif va kalendar reja",
+          "description": "Ish hajmi, narx va bosqichli reja yozma taklif shaklida taqdim etiladi — qaror sizniki.",
+          "icon": "heroicon-o-document-check"
+        }
+      ]
+    },
+    "direct": {
+      "title": "Loyihangiz haqida gaplashaylik",
+      "text": "Bir jumlalik savol boʻlsa ham yozing — har bir murojaatga shaxsan javob beramiz.",
+      "emailCta": "Xat yozish",
+      "whatsappCta": "WhatsApp orqali yozish",
+      "linkedin": "LinkedIn’da bogʻlanish"
+    }
+  },
+  "footer": {
+    "tagline": "Biz biznesning raqamlashuviga yordam beradigan texnologik yechimlar va innovatsion mahsulotlar yaratamiz.",
+    "navTitle": "Tezkor havolalar",
+    "servicesTitle": "Xizmatlarimiz",
+    "contactTitle": "Aloqa",
+    "rights": "Barcha huquqlar himoyalangan",
+    "madeWith": "Mehr bilan qurilgan —",
+    "newsletterTitle": "Yangiliklar xabarnomasi",
+    "newsletterText": "Yangiliklar va foydali maʼlumotlarga obuna boʻling.",
+    "newsletterPlaceholder": "Elektron pochta manzilingiz",
+    "newsletterSubmit": "Obuna boʻlish",
+    "newsletterSuccess": "Obunangiz qayd etildi. Rahmat!",
+    "newsletterError": "Xatolik yuz berdi. Iltimos, qayta urinib koʻring."
+  },
+  "common": {
+    "readMore": "Davomi",
+    "learnMore": "Batafsil",
+    "getStarted": "Boshlaymiz",
+    "loading": "Yuklanmoqda...",
+    "back": "Orqaga",
+    "skipToContent": "Asosiy mazmunga oʻtish"
+  },
+  "site": {
+    "brand": "H2 Solutions",
+    "founder": "Hamid Hamidli",
+    "domain": "h2solutions.az",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/hamidhamidli/",
+      "github": "https://github.com/",
+      "twitter": "https://x.com/",
+      "facebook": "https://www.facebook.com/",
+      "instagram": "https://www.instagram.com/"
+    },
+    "twitterHandle": "@h2solutions",
+    "addressLocality": "Baku",
+    "addressCountry": "AZ",
+    "priceRange": "$$"
+  },
+  "navigation": [
+    {
+      "label": "Bosh sahifa",
+      "href": "/",
+      "external": false
+    },
+    {
+      "label": "Biz haqimizda",
+      "href": "/about",
+      "external": false
+    },
+    {
+      "label": "Xizmatlar",
+      "href": "/services",
+      "external": false
+    },
+    {
+      "label": "Loyihalar",
+      "href": "/portfolio",
+      "external": false
+    },
+    {
+      "label": "Blog",
+      "href": "/blog",
+      "external": false
+    },
+    {
+      "label": "Aloqa",
+      "href": "/contact",
+      "external": false
+    }
+  ],
+  "notFound": {
+    "eyebrow": "404",
+    "titleAccent": "Bunday",
+    "title": "sahifa yoʻq",
+    "text": "Siz qidirayotgan sahifa mavjud emas yoki koʻchirilgan.",
+    "ctaLabel": "Bosh sahifa"
+  },
+  "branding": {
+    "themeColor": "#0d1117",
+    "backgroundColor": "#0d1117",
+    "appName": "H2 Solutions — Premium veb yechimlar va SEO",
+    "appShortName": "H2 Solutions"
+  }
+}

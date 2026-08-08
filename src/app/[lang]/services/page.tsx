@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ServiceCard } from "@/components/ui/ServiceCard";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { Icon } from "@/components/ui/Icon";
+import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { WhyUs } from "@/components/sections/WhyUs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchServices } from "@/lib/api";
-import { i18n, isLocale } from "@/i18n-config";
+import { isLocale } from "@/i18n-config";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 import {
   breadcrumbJsonLd,
@@ -22,28 +26,13 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const dict = await getDictionary(lang);
-  const url = `${siteConfig.url}/${lang}/services`;
-  return {
+
+  return pageMetadata("services", {
+    lang,
+    path: "/services",
     title: dict.services.title,
     description: dict.services.intro,
-    alternates: {
-      canonical: url,
-      languages: Object.fromEntries(
-        i18n.locales.map((l) => [l, `${siteConfig.url}/${l}/services`]),
-      ),
-    },
-    openGraph: {
-      title: `${dict.services.title} — ${siteConfig.brand}`,
-      description: dict.services.intro,
-      url,
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${dict.services.title} — ${siteConfig.brand}`,
-      description: dict.services.intro,
-    },
-  };
+  });
 }
 
 export default async function ServicesHubPage({
@@ -76,54 +65,66 @@ export default async function ServicesHubPage({
   );
 
   return (
-    <>
+    <div className="tech-canvas">
       <PageHeader
+        withGrid={false}
+        breadcrumbs={{
+          label: dict.nav.menu,
+          items: [
+            { label: dict.nav.home, href: `/${lang}` },
+            { label: dict.services.title },
+          ],
+        }}
         eyebrow={dict.meta.siteName}
         title={dict.services.title}
         subtitle={dict.services.intro}
+        actions={
+          <>
+            <Link href={`/${lang}/contact`} className="btn-primary">
+              {dict.hero.ctaPrimary}
+              <ArrowRightIcon aria-hidden className="h-4 w-4" />
+            </Link>
+            <Link href={`/${lang}/portfolio`} className="btn-secondary">
+              {dict.hero.ctaSecondary}
+            </Link>
+          </>
+        }
       />
 
-      <section className="border-b border-[color:var(--color-border)] bg-[color:var(--color-background)]">
-        <div className="container-h2 py-20 md:py-28">
+      <section aria-label={dict.services.title}>
+        <div className="container-h2 pb-12 md:pb-14">
           {services.length === 0 ? (
-            <div className="card flex flex-col items-center justify-center gap-3 p-12 text-center">
-              <p className="text-base text-[color:var(--color-foreground-muted)]">
-                {dict.portfolio.empty}
-              </p>
-            </div>
+            <p className="panel p-10 text-center text-sm text-[color:var(--color-foreground-soft)]">
+              {dict.services.empty}
+            </p>
           ) : (
-            <div className="grid gap-6 md:grid-cols-3">
+            <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {services.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/${lang}/services/${service.slug}`}
-                  className="card group flex flex-col p-6 md:p-7"
-                  aria-label={service.title}
-                >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-background)] text-[color:var(--color-accent)] transition group-hover:shadow-[var(--shadow-glow)]">
-                    <Icon name={service.icon} className="h-5 w-5" />
-                  </div>
-                  <h2 className="mt-5 text-xl font-semibold transition group-hover:text-[color:var(--color-accent)]">
-                    {service.title}
-                  </h2>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-[color:var(--color-foreground-soft)]">
-                    {service.summary}
-                  </p>
-                  <span className="mt-6 text-sm font-medium text-[color:var(--color-accent)]">
-                    {dict.common.learnMore} →
-                  </span>
-                </Link>
+                <li key={service.slug} className="flex">
+                  <ServiceCard
+                    service={service}
+                    lang={lang}
+                    ctaLabel={dict.common.learnMore}
+                  />
+                </li>
               ))}
-            </div>
+            </ul>
           )}
         </div>
       </section>
 
-      <CtaBanner lang={lang} dict={dict} />
+      <WhyUs dict={dict} />
+      <ProcessSteps dict={dict} />
+      <CtaBanner lang={lang} dict={dict} className="reveal" />
+
       <JsonLd
         id="ld-services"
-        data={services.length > 0 ? [collection, itemList, breadcrumb] : [collection, breadcrumb]}
+        data={
+          services.length > 0
+            ? [collection, itemList, breadcrumb]
+            : [collection, breadcrumb]
+        }
       />
-    </>
+    </div>
   );
 }

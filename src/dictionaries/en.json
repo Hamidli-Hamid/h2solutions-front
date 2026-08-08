@@ -2,8 +2,7 @@
   "meta": {
     "siteName": "H2 Solutions",
     "tagline": "Modern web solutions and SEO to power your business online",
-    "defaultDescription": "H2 Solutions — modern corporate websites with Next.js and Laravel, SEO optimization, and IT consultancy. Personal approach and measurable results under the Hamid Hamidli brand.",
-    "keywords": "web development, SEO Baku, IT consultancy, Next.js Azerbaijan, Laravel website, corporate website, H2 Solutions"
+    "defaultDescription": "H2 Solutions — modern corporate websites with Next.js and Laravel, SEO optimization, and IT consultancy. Personal approach and measurable results under the Hamid Hamidli brand."
   },
   "nav": {
     "home": "Home",
@@ -13,46 +12,200 @@
     "blog": "Blog",
     "contact": "Contact",
     "menu": "Menu",
-    "close": "Close"
+    "close": "Close",
+    "language": "Language"
   },
   "hero": {
-    "badge": "H2 — Height & Haste",
+    "badge": "H2 — Solutions & Growth",
     "title": "Technical partner for digital growth",
+    "titleAccent": "for digital growth",
     "subtitle": "Ultra-fast, SEO-first websites built on Next.js and Laravel — a durable technical foundation for online growth.",
     "ctaPrimary": "Discuss a project",
     "ctaSecondary": "View our work",
-    "chipsTitle": "Core services",
-    "chips": [
-      { "name": "Websites", "icon": "heroicon-o-window" },
-      { "name": "Mobile apps", "icon": "heroicon-o-device-phone-mobile" },
-      { "name": "E-commerce", "icon": "heroicon-o-shopping-bag" },
-      { "name": "SEO service", "icon": "heroicon-o-magnifying-glass" },
-      { "name": "Business Automation", "icon": "heroicon-o-cog-6-tooth" },
-      { "name": "GEO (AI SEO)", "icon": "heroicon-o-sparkles" }
-    ],
-    "videoFallback": "Showreel coming soon",
-    "videoBadge": "Showreel",
-    "stats": [
-      { "value": "50+", "label": "Projects delivered" },
-      { "value": "99", "label": "PageSpeed score" },
-      { "value": "5+", "label": "Years of practice" }
+    "servicesTitle": "Our core services",
+    "services": [
+      {
+        "slug": "web-development",
+        "name": "Websites",
+        "description": "Modern, fast and SEO-ready corporate and business websites.",
+        "icon": "heroicon-o-computer-desktop"
+      },
+      {
+        "slug": "mobile-apps",
+        "name": "Mobile apps",
+        "description": "User-friendly applications for both iOS and Android platforms.",
+        "icon": "heroicon-o-device-phone-mobile"
+      },
+      {
+        "slug": "e-commerce",
+        "name": "E-commerce",
+        "description": "Secure and flexible online store solutions that grow your sales.",
+        "icon": "heroicon-o-shopping-bag"
+      },
+      {
+        "slug": "seo-optimization",
+        "name": "SEO service",
+        "description": "Effective SEO strategies that increase your visibility in search engines.",
+        "icon": "heroicon-o-magnifying-glass"
+      },
+      {
+        "slug": "business-automation",
+        "name": "Business automation",
+        "description": "Automate your processes and save time as well as resources.",
+        "icon": "heroicon-o-cog-6-tooth"
+      },
+      {
+        "slug": "geo-ai-seo",
+        "name": "GEO (SEO for AI)",
+        "description": "Make your brand more visible across AI-driven platforms.",
+        "icon": "heroicon-o-viewfinder-circle"
+      }
     ]
   },
+  "home": {
+    "projects": {
+      "label": "Our projects",
+      "title": "Selected work we are proud of",
+      "viewAll": "All projects",
+      "viewCase": "View case",
+      "samples": [
+        {
+          "title": "E-commerce Platform",
+          "category": "Web Development"
+        },
+        {
+          "title": "Corporate Website",
+          "category": "Web Development"
+        },
+        {
+          "title": "Mobile Application",
+          "category": "Mobile Development"
+        },
+        {
+          "title": "SEO Project",
+          "category": "SEO & Marketing"
+        }
+      ]
+    },
+    "process": {
+      "label": "Our process",
+      "title": "The road to a successful project",
+      "steps": [
+        {
+          "title": "Analysis & Planning",
+          "description": "We analyse your requirements and define the strategy that fits your project best.",
+          "icon": "heroicon-o-clipboard-document-list"
+        },
+        {
+          "title": "Design & UX/UI",
+          "description": "We craft a modern, user-friendly and effective design concept.",
+          "icon": "heroicon-o-pencil-square"
+        },
+        {
+          "title": "Development",
+          "description": "We build the product with clean code, current technologies and high performance.",
+          "icon": "heroicon-o-code-bracket"
+        },
+        {
+          "title": "Testing & Optimisation",
+          "description": "Quality assurance and optimisation get the project ready for launch.",
+          "icon": "heroicon-o-rocket-launch"
+        },
+        {
+          "title": "Support & Growth",
+          "description": "After launch we stay on board and keep contributing to your growth.",
+          "icon": "heroicon-o-paper-airplane"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Let's start your project",
+      "subtitle": "Let's turn your idea into reality. Our team is ready to work alongside you."
+    },
+    "faq": {
+      "label": "Frequently asked questions",
+      "title": "Questions you may have",
+      "items": [
+        {
+          "question": "How long does a project take?",
+          "answer": "A corporate website usually takes 3–5 weeks, while e-commerce and custom platforms take 6–12 weeks. The exact timeline is confirmed in a written schedule once requirements are set."
+        },
+        {
+          "question": "Do you provide support after launch?",
+          "answer": "Yes. Delivery includes one month of free technical support, followed by optional monthly support and growth packages."
+        },
+        {
+          "question": "How does payment work?",
+          "answer": "Payment is split into milestones: an initial deposit, an interim milestone and a final payment on delivery. All terms are agreed upfront in the contract."
+        },
+        {
+          "question": "Do you handle hosting and domains?",
+          "answer": "Yes. We select hosting and domains that fit the project and take care of setup, SSL certificates and migration end to end."
+        },
+        {
+          "question": "Will my site be optimised for SEO?",
+          "answer": "Every project ships with technical SEO in place: semantic HTML, speed optimisation, metadata, structured data and an automatic sitemap."
+        },
+        {
+          "question": "Is mobile compatibility guaranteed?",
+          "answer": "All projects are built mobile-first and tested separately on phone, tablet and desktop screens."
+        }
+      ]
+    },
+    "blog": {
+      "label": "Blog",
+      "title": "Articles and updates",
+      "viewAll": "All articles",
+      "readMore": "Read",
+      "samples": [
+        {
+          "title": "Technical SEO audits: how to run one properly",
+          "date": "2025-05-20",
+          "category": "SEO"
+        },
+        {
+          "title": "Why Next.js delivers fast, SEO-friendly websites",
+          "date": "2025-05-15",
+          "category": "Web Development"
+        },
+        {
+          "title": "Ways to increase conversion on e-commerce sites",
+          "date": "2025-05-10",
+          "category": "E-commerce"
+        },
+        {
+          "title": "The role of UI/UX in mobile app development",
+          "date": "2025-05-05",
+          "category": "Mobile"
+        }
+      ]
+    },
+    "seoText": {
+      "label": "SEO text",
+      "title": "The right technology partner for digital success",
+      "body": [
+        "At H2 Solutions we apply current technologies and effective strategies so businesses can hold a strong position in the digital world. Web development, mobile applications, e-commerce solutions, SEO and business automation together increase the online impact of your brand.",
+        "An architecture built on Next.js and Laravel gives your website both speed and durable visibility in search results. Technical SEO, structured data and GEO — optimisation for AI-driven search engines — mean your brand is found not only on Google but across AI platforms as well.",
+        "We treat every project as a long-term partnership: from analysis to design, from code to continued support, we contribute to your business at every stage."
+      ]
+    }
+  },
   "usp": {
+    "label": "Why us",
     "title": "Why H2 Solutions?",
     "subtitle": "Three pillars our digital practice is built on:",
     "items": [
       {
-        "title": "Speed & Performance",
-        "description": "Server-side rendering and static caching deliver Google PageSpeed scores of 95+. Every second is conversion."
+        "title": "Delivered on time",
+        "description": "We hand over on the agreed date and show you what is ready every week — the project is never a black box."
       },
       {
-        "title": "SEO-First Architecture",
-        "description": "Technical SEO, semantic HTML, dynamic metadata, and automatic sitemaps — built for search engines from day one."
+        "title": "Measurable results",
+        "description": "The goal isn't a pretty website, it's enquiries and sales. We track what works in numbers and share the report with you."
       },
       {
         "title": "Hands-on partnership",
-        "description": "No templates — every solution is engineered to your business. We work one-on-one with each client."
+        "description": "No templates — every solution is built around your business. We work one-on-one with each client."
       }
     ]
   },
@@ -63,27 +216,175 @@
   },
   "services": {
     "title": "Services",
-    "intro": "From strategy to code, from code to traffic — three core services that span your digital journey."
+    "intro": "From websites and mobile apps to SEO and business automation — six core services for growing your business online.",
+    "included": "What's included?",
+    "related": "Other services",
+    "startTitle": "Start your project",
+    "startText": "Questions about this service? Send a short brief and we'll get back to you within 24 hours.",
+    "empty": "Services will be added shortly."
   },
   "about": {
+    "label": "About us",
     "title": "About H2 Solutions",
     "subtitle": "One brand, one promise: quality and altitude.",
     "story": "H2 Solutions is the agency Hamid Hamidli built on technical perfectionism and business outcomes. We treat every project with an owner's mindset — building solutions that don't just work but generate revenue.",
+    "storyLabel": "Our story",
+    "storyTitle": "Digital work that performs, not just looks good",
+    "storyParagraphs": [
+      "H2 Solutions is a technical agency based in Baku, building the online foundation of small and mid-sized businesses. The “H2” in our name stands for two simple commitments — high quality and height: taking every project one level above where we found it.",
+      "It started with one question: why do so many websites look great yet bring in no customers? The reason, we found, is that business logic and technical execution are usually planned apart. So we start not with design, but with your goal, your competitors and real search demand.",
+      "Today we deliver corporate websites, e-commerce platforms, SEO/GEO and business automation projects on Next.js and Laravel. We stay after launch too: measuring, learning and planning the next step together with you."
+    ],
+    "founder": {
+      "label": "Founder",
+      "name": "Hamid Hamidli",
+      "role": "Founder & lead solution architect",
+      "quote": "Code only earns its value when it serves a business goal. That's why on every project we pick the outcome first and the technology second.",
+      "linkedinLabel": "LinkedIn profile"
+    },
+    "factsTitle": "At a glance",
+    "facts": [
+      {
+        "label": "Based in",
+        "value": "Baku, Azerbaijan"
+      },
+      {
+        "label": "Working languages",
+        "value": "AZ · EN · RU · DE · KK · UZ"
+      },
+      {
+        "label": "Core stack",
+        "value": "Next.js · Laravel"
+      },
+      {
+        "label": "Coverage",
+        "value": "Azerbaijan & remote"
+      }
+    ],
+    "commitments": {
+      "label": "Our commitments",
+      "title": "We work on terms, not on promises",
+      "subtitle": "Four simple commitments that apply from day one of the engagement:",
+      "items": [
+        {
+          "value": "24 hours",
+          "label": "Response time to any enquiry"
+        },
+        {
+          "value": "3–5 weeks",
+          "label": "Typical delivery of a corporate website"
+        },
+        {
+          "value": "90+",
+          "label": "Lighthouse performance score we aim for"
+        },
+        {
+          "value": "1 month",
+          "label": "Free technical support after launch"
+        }
+      ]
+    },
+    "valuesLabel": "Principles",
     "valuesTitle": "Our values",
+    "valuesSubtitle": "These four principles shape everything — from the projects we take on to how we talk to you day to day.",
     "values": [
       {
         "title": "Transparency",
-        "description": "We explain the reasoning behind every process and decision."
+        "description": "We explain the reasoning behind every process and decision. Price, timeline and risks are agreed in writing up front.",
+        "icon": "heroicon-o-eye"
       },
       {
         "title": "Technical excellence",
-        "description": "One step ahead of industry standards — we adopt new technologies early."
+        "description": "One step ahead of industry standards — we adopt new technologies early, but only after we've proven them ourselves.",
+        "icon": "heroicon-o-cpu-chip"
+      },
+      {
+        "title": "Respect for time",
+        "description": "We stand by the agreed date. If a delay becomes likely, you hear about it on the first day — not the last.",
+        "icon": "heroicon-o-clock"
       },
       {
         "title": "Long-term partnership",
-        "description": "We don't ship and disappear — we grow together."
+        "description": "We don't ship and disappear — we track the results, keep improving the product and grow together with you.",
+        "icon": "heroicon-o-users"
       }
-    ]
+    ],
+    "stack": {
+      "label": "Technology",
+      "title": "The stack we build on",
+      "subtitle": "No templates, no page builders — every solution runs on fast, open-source technology that stays maintainable for years.",
+      "groups": [
+        {
+          "title": "Frontend",
+          "icon": "heroicon-o-computer-desktop",
+          "items": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS"
+          ]
+        },
+        {
+          "title": "Backend",
+          "icon": "heroicon-o-server-stack",
+          "items": [
+            "Laravel",
+            "PHP 8",
+            "MySQL",
+            "PostgreSQL",
+            "REST API"
+          ]
+        },
+        {
+          "title": "SEO & GEO",
+          "icon": "heroicon-o-magnifying-glass",
+          "items": [
+            "Technical SEO",
+            "Schema.org",
+            "Core Web Vitals",
+            "AI search (GEO)"
+          ]
+        },
+        {
+          "title": "Infrastructure",
+          "icon": "heroicon-o-cloud",
+          "items": [
+            "Docker",
+            "Linux servers",
+            "CI/CD",
+            "Cloudflare",
+            "Analytics"
+          ]
+        }
+      ]
+    },
+    "audience": {
+      "label": "Who we work with",
+      "title": "Businesses we fit best",
+      "subtitle": "We don't take on every project. In the cases below the collaboration delivers the best result for both sides.",
+      "items": [
+        {
+          "title": "Corporate businesses",
+          "description": "Companies that need to represent their brand properly online, earn trust and hand qualified leads to their sales team.",
+          "icon": "heroicon-o-building-office-2"
+        },
+        {
+          "title": "E-commerce & retail",
+          "description": "Stores looking to grow online sales and simplify their order flow and inventory processes.",
+          "icon": "heroicon-o-shopping-bag"
+        },
+        {
+          "title": "Startups",
+          "description": "Teams that need to ship an MVP fast, validate it in the market and show it to investors.",
+          "icon": "heroicon-o-rocket-launch"
+        },
+        {
+          "title": "Local service businesses",
+          "description": "Clinics, salons, service centres and studios in Baku and the regions that want enquiries coming from search.",
+          "icon": "heroicon-o-map-pin"
+        }
+      ]
+    }
   },
   "portfolio": {
     "title": "Our projects",
@@ -92,64 +393,185 @@
     "viewCase": "View case",
     "problemLabel": "Problem",
     "solutionLabel": "Solution",
-    "resultLabel": "Result"
+    "resultLabel": "Result",
+    "overviewTitle": "About the project",
+    "galleryTitle": "Project gallery",
+    "galleryHint": "Click an image to enlarge",
+    "clientLabel": "Client",
+    "yearLabel": "Year",
+    "visitSite": "Visit the site",
+    "related": "Other projects",
+    "processTitle": "How we worked",
+    "galleryClose": "Close"
   },
   "blog": {
+    "label": "Blog",
     "title": "Blog",
-    "subtitle": "Expert takes on web development, SEO, and digital business.",
+    "subtitle": "Expert notes on web development, SEO and digital business.",
     "empty": "New articles coming soon...",
+    "emptyCta": "Get in touch",
     "readMore": "Read more",
     "publishedAt": "Published",
-    "minRead": "min read"
+    "minRead": "min read",
+    "featuredLabel": "Featured article",
+    "latestTitle": "All articles",
+    "authorLabel": "Author",
+    "shareLabel": "Share",
+    "related": "More articles",
+    "backToList": "Back to all articles",
+    "tocTitle": "In this article",
+    "helpTitle": "Need a hand with this?",
+    "helpText": "Let's review your site together and tell you where to start."
   },
   "contact": {
+    "label": "Get in touch",
     "title": "Contact",
     "subtitle": "Let's talk about your project. We respond within 24 hours.",
     "infoTitle": "Direct contact",
+    "infoHeading": "Pick the channel that suits you",
+    "infoSubtitle": "No form to fill in — write or call us directly through one of the channels below.",
     "emailLabel": "Email",
-    "phoneLabel": "Phone",
-    "addressLabel": "Address",
     "email": "info@h2solutions.az",
+    "emailNote": "The fastest route — send your brief and we reply within 24 hours.",
+    "phoneLabel": "Phone",
     "phone": "+994 50 000 00 00",
+    "phoneNote": "Call us on weekdays between 09:00 and 18:00.",
+    "whatsappLabel": "WhatsApp",
+    "whatsappValue": "Send a message",
+    "whatsappNote": "Best for quick questions and sharing files.",
+    "addressLabel": "Address",
     "address": "Baku, Azerbaijan",
-    "form": {
-      "name": "Your name",
-      "namePlaceholder": "First and last name",
-      "email": "Email",
-      "emailPlaceholder": "you@example.com",
-      "phone": "Phone (optional)",
-      "phonePlaceholder": "+994 ...",
-      "company": "Company (optional)",
-      "companyPlaceholder": "Your company name",
-      "service": "Service of interest",
-      "serviceOptions": {
-        "web": "Web Development",
-        "seo": "SEO Optimization",
-        "consult": "IT Consultancy",
-        "other": "Other"
-      },
-      "message": "About your project",
-      "messagePlaceholder": "Tell us briefly about your project, goals, and budget expectations...",
-      "submit": "Send request",
-      "submitting": "Sending...",
-      "success": "Thanks! Your request has been received. We'll be in touch shortly.",
-      "error": "Something went wrong. Please try again.",
-      "required": "This field is required"
+    "addressNote": "Meetings by prior arrangement; we also run projects fully online.",
+    "hoursLabel": "Working hours",
+    "hours": "Mon – Fri, 09:00–18:00 (GMT+4)",
+    "hoursNote": "Enquiries that arrive over the weekend are handled on Monday.",
+    "responseLabel": "Response time",
+    "responseValue": "within 24 hours",
+    "mailSubject": "New project enquiry",
+    "brief": {
+      "label": "Brief",
+      "title": "What to include when you write",
+      "text": "These details let our first reply be specific: an indicative budget, a timeline and the right technical approach.",
+      "items": [
+        "Your company and the field you work in",
+        "The service you need: website, mobile app, e-commerce, SEO or automation",
+        "The main goal of the project and how you will measure success",
+        "An approximate budget range and your preferred start date",
+        "Your current website, reference links or competitor examples"
+      ],
+      "cta": "Send your brief by email"
+    },
+    "next": {
+      "label": "Next steps",
+      "title": "What happens after you write",
+      "subtitle": "A short, transparent process — no long questionnaires, no waiting.",
+      "steps": [
+        {
+          "title": "We review your message",
+          "description": "We read every enquiry within 24 hours and send a couple of clarifying questions if something is missing.",
+          "icon": "heroicon-o-inbox-arrow-down"
+        },
+        {
+          "title": "Free consultation",
+          "description": "In a 30-minute online call we go through your goals, technical requirements and the available options.",
+          "icon": "heroicon-o-chat-bubble-left-right"
+        },
+        {
+          "title": "Proposal and timeline",
+          "description": "You receive a written proposal with scope, price and a phased timeline — the decision stays with you.",
+          "icon": "heroicon-o-document-check"
+        }
+      ]
+    },
+    "direct": {
+      "title": "Let's talk about your project",
+      "text": "Even a one-line question is welcome — every enquiry gets a personal reply.",
+      "emailCta": "Write an email",
+      "whatsappCta": "Message on WhatsApp",
+      "linkedin": "Connect on LinkedIn"
     }
   },
   "footer": {
-    "tagline": "Premium web solutions and SEO to power your business online.",
-    "navTitle": "Navigation",
-    "servicesTitle": "Services",
+    "tagline": "We build technology solutions and innovative products that support the digitalisation of business.",
+    "navTitle": "Quick links",
+    "servicesTitle": "Our services",
     "contactTitle": "Contact",
     "rights": "All rights reserved",
-    "madeWith": "Built with care —"
+    "madeWith": "Built with care —",
+    "newsletterTitle": "Newsletter",
+    "newsletterText": "Subscribe for news and useful insights.",
+    "newsletterPlaceholder": "Your email address",
+    "newsletterSubmit": "Subscribe",
+    "newsletterSuccess": "You're subscribed. Thank you!",
+    "newsletterError": "Something went wrong. Please try again."
   },
   "common": {
     "readMore": "Read more",
     "learnMore": "Learn more",
     "getStarted": "Get started",
     "loading": "Loading...",
-    "back": "Back"
+    "back": "Back",
+    "skipToContent": "Skip to main content"
+  },
+  "site": {
+    "brand": "H2 Solutions",
+    "founder": "Hamid Hamidli",
+    "domain": "h2solutions.az",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/hamidhamidli/",
+      "github": "https://github.com/",
+      "twitter": "https://x.com/",
+      "facebook": "https://www.facebook.com/",
+      "instagram": "https://www.instagram.com/"
+    },
+    "twitterHandle": "@h2solutions",
+    "addressLocality": "Baku",
+    "addressCountry": "AZ",
+    "priceRange": "$$"
+  },
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/",
+      "external": false
+    },
+    {
+      "label": "About",
+      "href": "/about",
+      "external": false
+    },
+    {
+      "label": "Services",
+      "href": "/services",
+      "external": false
+    },
+    {
+      "label": "Projects",
+      "href": "/portfolio",
+      "external": false
+    },
+    {
+      "label": "Blog",
+      "href": "/blog",
+      "external": false
+    },
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "external": false
+    }
+  ],
+  "notFound": {
+    "eyebrow": "404",
+    "titleAccent": "No",
+    "title": "such page",
+    "text": "The page you are looking for does not exist or has moved.",
+    "ctaLabel": "Home"
+  },
+  "branding": {
+    "themeColor": "#0d1117",
+    "backgroundColor": "#0d1117",
+    "appName": "H2 Solutions — Premium web solutions and SEO",
+    "appShortName": "H2 Solutions"
   }
 }

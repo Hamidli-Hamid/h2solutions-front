@@ -3,8 +3,16 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  experimental: {
+    // The root layout sits under `[lang]`, so a 404 for an unmatched URL has no
+    // layout to render into — app/global-not-found.tsx supplies the document.
+    globalNotFound: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
+    // Next 16 blocks optimizing images that resolve to a private IP. In dev the
+    // Laravel API is on localhost, so allow it there only — never in production.
+    dangerouslyAllowLocalIP: process.env.NODE_ENV !== "production",
     remotePatterns: [
       {
         protocol: "https",
@@ -17,6 +25,12 @@ const nextConfig: NextConfig = {
       {
         protocol: "http",
         hostname: "localhost",
+        port: "8888",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "8888",
       },
       {
         protocol: "http",

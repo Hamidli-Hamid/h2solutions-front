@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import {
+  ArrowRightIcon,
+  CheckIcon,
+  EnvelopeIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
+import { ServiceCard } from "@/components/ui/ServiceCard";
+import { Icon } from "@/components/ui/Icon";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchService, fetchServices } from "@/lib/api";
 import { i18n, isLocale } from "@/i18n-config";
+import { buildMetadata } from "@/lib/seo";
+import { getPageSeo } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 
@@ -28,28 +39,19 @@ export async function generateMetadata({
   if (!isLocale(lang)) return {};
   const service = await fetchService(slug, lang);
   if (!service) return {};
-  const url = `${siteConfig.url}/${lang}/services/${slug}`;
-  return {
+
+  // A service carries its own overrides; the `service-detail` page row holds
+  // the defaults for every service that has none.
+  const template = await getPageSeo(lang, "service-detail");
+
+  return buildMetadata({
+    lang,
+    path: `/services/${slug}`,
     title: service.title,
     description: service.summary,
-    alternates: {
-      canonical: url,
-      languages: Object.fromEntries(
-        i18n.locales.map((l) => [l, `${siteConfig.url}/${l}/services/${slug}`]),
-      ),
-    },
-    openGraph: {
-      title: `${service.title} — ${siteConfig.brand}`,
-      description: service.summary,
-      url,
-      type: "article",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${service.title} — ${siteConfig.brand}`,
-      description: service.summary,
-    },
-  };
+    ogType: "article",
+    seo: { ...template, ...(service.seo ?? {}) },
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -68,9 +70,6 @@ export default async function ServiceDetailPage({
 
   const related = allServices.filter((s) => s.slug !== slug);
 
-  const includedLabel =
-    lang === "az" ? "Nə daxildir?" : lang === "ru" ? "Что входит?" : "What's included?";
-
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
     { name: dict.services.title, url: `${siteConfig.url}/${lang}/services` },
@@ -79,80 +78,142 @@ export default async function ServiceDetailPage({
   const serviceLd = serviceJsonLd(service, dict, lang);
 
   return (
-    <>
+    <div className="tech-canvas">
       <PageHeader
+        withGrid={false}
+        breadcrumbs={{
+          label: dict.nav.menu,
+          items: [
+            { label: dict.nav.home, href: `/${lang}` },
+            { label: dict.services.title, href: `/${lang}/services` },
+            { label: service.title },
+          ],
+        }}
         eyebrow={dict.services.title}
         title={service.title}
         subtitle={service.summary}
+        actions={
+          <>
+            <Link href={`/${lang}/contact`} className="btn-primary">
+              {dict.hero.ctaPrimary}
+              <ArrowRightIcon aria-hidden className="h-4 w-4" />
+            </Link>
+            <Link href={`/${lang}/services`} className="btn-secondary">
+              {dict.servicesPreview.viewAll}
+            </Link>
+          </>
+        }
       />
 
-      <article className="border-b border-[color:var(--color-border)] bg-[color:var(--color-background)]">
-        <div className="container-h2 grid gap-12 py-20 md:grid-cols-[1.4fr_1fr] md:py-28">
+      <article>
+        <div className="container-h2 grid items-start gap-8 pb-12 md:pb-14 lg:grid-cols-[1.6fr_1fr] lg:gap-10">
           <div>
-            <p className="text-lg leading-relaxed text-[color:var(--color-foreground-soft)]">
-              {service.description}
-            </p>
+            <div className="panel p-6 md:p-8">
+              <span aria-hidden className="icon-tile h-11 w-11">
+                <Icon name={service.icon} className="h-5 w-5" />
+              </span>
+              <p className="mt-5 text-base leading-[1.85] text-[color:var(--color-foreground-soft)]">
+                {service.description}
+              </p>
+            </div>
 
             {service.features.length > 0 && (
-              <>
-                <h2 className="mt-12 text-2xl font-bold">{includedLabel}</h2>
-                <ul className="mt-6 space-y-3">
-                  {service.features.map((feat, i) => (
+              <section aria-labelledby="included-heading" className="mt-8">
+                <h2 id="included-heading" className="text-xl font-bold md:text-2xl">
+                  {dict.services.included}
+                </h2>
+                <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+                  {service.features.map((feature) => (
                     <li
-                      key={i}
-                      className="flex items-start gap-3 text-[color:var(--color-foreground-soft)]"
+                      key={feature}
+                      className="panel flex items-start gap-3 p-4 text-sm leading-relaxed text-[color:var(--color-foreground-soft)]"
                     >
                       <span
                         aria-hidden
-                        className="mt-1 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-[color:var(--color-accent)] shadow-[var(--shadow-glow)]"
-                      />
-                      <span>{feat}</span>
+                        className="mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-accent)]"
+                      >
+                        <CheckIcon className="h-3 w-3" strokeWidth={2.5} />
+                      </span>
+                      {feature}
                     </li>
                   ))}
                 </ul>
-              </>
+              </section>
             )}
           </div>
 
-          <aside className="card flex flex-col gap-5 p-7">
-            <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-foreground-muted)]">
-              {dict.services.title}
+          <aside className="panel p-6 lg:sticky lg:top-24">
+            <p className="section-label">{dict.services.title}</p>
+            <h2 className="mt-3 text-lg font-semibold">{dict.services.startTitle}</h2>
+            <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+              {dict.services.startText}
             </p>
-            <h2 className="text-lg font-semibold">{dict.common.getStarted}</h2>
-            <p className="text-sm leading-relaxed text-[color:var(--color-foreground-muted)]">
-              {dict.contact.subtitle}
-            </p>
-            <Link href={`/${lang}/contact`} className="btn-primary self-start">
+            <Link
+              href={`/${lang}/contact`}
+              className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm"
+            >
               {dict.hero.ctaPrimary}
+              <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>
-            {related.length > 0 && (
-              <nav
-                aria-label={dict.servicesPreview.viewAll}
-                className="mt-2 border-t border-[color:var(--color-border)] pt-5"
-              >
-                <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-foreground-muted)]">
-                  {dict.servicesPreview.viewAll}
-                </p>
-                <ul className="mt-3 space-y-1.5 text-sm">
-                  {related.map((s) => (
-                    <li key={s.slug}>
-                      <Link
-                        href={`/${lang}/services/${s.slug}`}
-                        className="text-[color:var(--color-foreground-soft)] hover:text-[color:var(--color-accent)]"
-                      >
-                        {s.title} →
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            )}
+
+            <address className="mt-5 space-y-2.5 border-t border-[color:var(--color-border)] pt-5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
+              <div className="flex items-center gap-2.5">
+                <PhoneIcon
+                  aria-hidden
+                  className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
+                />
+                <a
+                  href={`tel:${dict.contact.phone.replace(/\s+/g, "")}`}
+                  className="transition hover:text-[color:var(--color-accent)]"
+                >
+                  {dict.contact.phone}
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <EnvelopeIcon
+                  aria-hidden
+                  className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
+                />
+                <a
+                  href={`mailto:${dict.contact.email}`}
+                  className="transition hover:text-[color:var(--color-accent)]"
+                >
+                  {dict.contact.email}
+                </a>
+              </div>
+            </address>
           </aside>
         </div>
       </article>
 
-      <CtaBanner lang={lang} dict={dict} />
+      <ProcessSteps dict={dict} />
+
+      {related.length > 0 && (
+        <section aria-labelledby="related-heading" className="reveal">
+          <div className="container-h2 py-12 md:py-14">
+            <p className="section-label">{dict.servicesPreview.viewAll}</p>
+            <h2 id="related-heading" className="mt-3 text-2xl font-bold md:text-[1.75rem]">
+              {dict.services.related}
+            </h2>
+            <ul className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {related.map((item) => (
+                <li key={item.slug} className="flex">
+                  <ServiceCard
+                    service={item}
+                    lang={lang}
+                    ctaLabel={dict.common.learnMore}
+                    headingLevel="h3"
+                    featureCount={2}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <CtaBanner lang={lang} dict={dict} className="reveal" />
       <JsonLd id="ld-service" data={[serviceLd, breadcrumb]} />
-    </>
+    </div>
   );
 }

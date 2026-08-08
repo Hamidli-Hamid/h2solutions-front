@@ -1,4 +1,4 @@
-import { siteConfig } from "@/lib/site-config";
+import { resolveSite, siteConfig } from "@/lib/site-config";
 import { i18n, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
@@ -12,12 +12,14 @@ export function jsonLdScript(payload: unknown): string {
 }
 
 export function organizationJsonLd(dict: Dictionary, lang: Locale) {
+  const site = resolveSite(dict);
+
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${siteConfig.url}/#organization`,
-    name: siteConfig.brand,
-    legalName: siteConfig.brand,
+    name: site.brand,
+    legalName: site.brand,
     alternateName: dict.meta.siteName,
     url: `${siteConfig.url}/${lang}`,
     logo: {
@@ -30,26 +32,29 @@ export function organizationJsonLd(dict: Dictionary, lang: Locale) {
     description: dict.meta.defaultDescription,
     founder: {
       "@type": "Person",
-      name: siteConfig.founder,
-      url: siteConfig.social.linkedin,
+      name: site.founder,
+      url: site.social.linkedin,
     },
     sameAs: [
-      siteConfig.social.linkedin,
-      siteConfig.social.github,
-      siteConfig.social.twitter,
+      site.social.linkedin,
+      site.social.github,
+      site.social.twitter,
+      site.social.facebook,
+      site.social.instagram,
     ].filter(Boolean),
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Baku",
-      addressCountry: "AZ",
+      addressLocality: site.addressLocality,
+      addressCountry: site.addressCountry,
     },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
       email: dict.contact.email,
       telephone: dict.contact.phone,
-      areaServed: ["AZ", "Worldwide"],
-      availableLanguage: ["Azerbaijani", "English", "Russian"],
+      areaServed: [site.addressCountry, "Worldwide"],
+      // Kept in step with the locales the site actually ships.
+      availableLanguage: i18n.locales,
     },
   };
 }
@@ -68,24 +73,26 @@ export function websiteJsonLd(dict: Dictionary, lang: Locale) {
 }
 
 export function professionalServiceJsonLd(dict: Dictionary, lang: Locale) {
+  const site = resolveSite(dict);
+
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "@id": `${siteConfig.url}/#business`,
-    name: siteConfig.brand,
+    name: site.brand,
     image: `${siteConfig.url}/opengraph-image`,
     url: `${siteConfig.url}/${lang}`,
     telephone: dict.contact.phone,
     email: dict.contact.email,
-    priceRange: "$$",
+    priceRange: site.priceRange,
     description: dict.meta.defaultDescription,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Baku",
-      addressCountry: "AZ",
+      addressLocality: site.addressLocality,
+      addressCountry: site.addressCountry,
     },
-    areaServed: ["AZ", "Worldwide"],
-    founder: { "@type": "Person", name: siteConfig.founder },
+    areaServed: [site.addressCountry, "Worldwide"],
+    founder: { "@type": "Person", name: site.founder },
   };
 }
 
@@ -114,7 +121,7 @@ export function serviceJsonLd(service: ApiService, dict: Dictionary, lang: Local
     url: `${siteConfig.url}/${lang}/services/${service.slug}`,
     provider: { "@id": `${siteConfig.url}/#organization` },
     areaServed: ["AZ", "Worldwide"],
-    availableLanguage: ["az", "en", "ru"],
+    availableLanguage: i18n.locales,
     ...(service.features.length > 0 && {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -140,6 +147,97 @@ export function itemListJsonLd(name: string, items: { name: string; url: string 
       position: index + 1,
       name: item.name,
       url: item.url,
+    })),
+  };
+}
+
+export function projectJsonLd(
+  project: {
+    slug: string;
+    title: string;
+    summary: string;
+    client: string | null;
+    year: number | null;
+    cover_image: string | null;
+    gallery: string[];
+  },
+  lang: Locale,
+) {
+  const images = [project.cover_image, ...project.gallery].filter(
+    (src): src is string => Boolean(src),
+  );
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.summary,
+    url: `${siteConfig.url}/${lang}/portfolio/${project.slug}`,
+    inLanguage: lang,
+    ...(images.length > 0 && { image: images }),
+    ...(project.year && { dateCreated: String(project.year) }),
+    creator: { "@id": `${siteConfig.url}/#organization` },
+    ...(project.client && {
+      about: { "@type": "Organization", name: project.client },
+    }),
+  };
+}
+
+export function blogJsonLd(dict: Dictionary, lang: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": `${siteConfig.url}/${lang}/blog#blog`,
+    name: dict.blog.title,
+    description: dict.blog.subtitle,
+    url: `${siteConfig.url}/${lang}/blog`,
+    inLanguage: lang,
+    publisher: { "@id": `${siteConfig.url}/#organization` },
+  };
+}
+
+export function blogPostingJsonLd(
+  post: {
+    slug: string;
+    title: string;
+    excerpt: string;
+    cover_image: string | null;
+    published_at: string | null;
+    author?: { name: string | null };
+  },
+  lang: Locale,
+) {
+  const url = `${siteConfig.url}/${lang}/blog/${post.slug}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    inLanguage: lang,
+    ...(post.cover_image && { image: [post.cover_image] }),
+    ...(post.published_at && {
+      datePublished: post.published_at,
+      dateModified: post.published_at,
+    }),
+    author: post.author?.name
+      ? { "@type": "Person", name: post.author.name }
+      : { "@id": `${siteConfig.url}/#organization` },
+    publisher: { "@id": `${siteConfig.url}/#organization` },
+    isPartOf: { "@id": `${siteConfig.url}/${lang}/blog#blog` },
+  };
+}
+
+export function faqJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
   };
 }

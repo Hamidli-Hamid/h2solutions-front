@@ -21,7 +21,7 @@ export function EmptyState({ icon: IconComponent, title, description, ctaLabel, 
           <IconComponent className="h-6 w-6" aria-hidden />
         </div>
         <h3 className="mt-6 text-xl font-semibold">{title}</h3>
-        <p className="mt-3 max-w-md text-sm text-[color:var(--color-foreground-muted)]">
+        <p className="mt-3 max-w-md text-sm text-[color:var(--color-foreground-soft)]">
           {description}
         </p>
         {ctaLabel && ctaHref && (

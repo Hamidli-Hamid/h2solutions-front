@@ -8,7 +8,14 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
-import { siteConfig } from "@/lib/site-config";
+import {
+  resolveBranding,
+  resolveSite,
+  siteConfig,
+  type Branding,
+} from "@/lib/site-config";
+import { getPageSeo } from "@/lib/content";
+import { buildMetadata } from "@/lib/seo";
 import { i18n, isLocale } from "@/i18n-config";
 import { fetchServices } from "@/lib/api";
 import {
@@ -29,15 +36,24 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0d1117" },
-    { media: "(prefers-color-scheme: light)", color: "#0d1117" },
-  ],
-  colorScheme: "dark",
-  width: "device-width",
-  initialScale: 1,
-};
+/** The browser-UI colour follows the theme colour set in the admin. */
+export async function generateViewport({
+  params,
+}: LayoutProps<"/[lang]">): Promise<Viewport> {
+  const { lang } = await params;
+  const dict = await getDictionary(isLocale(lang) ? lang : i18n.defaultLocale);
+  const { themeColor } = resolveBranding(dict);
+
+  return {
+    themeColor: [
+      { media: "(prefers-color-scheme: dark)", color: themeColor },
+      { media: "(prefers-color-scheme: light)", color: themeColor },
+    ],
+    colorScheme: "dark",
+    width: "device-width",
+    initialScale: 1,
+  };
+}
 
 export async function generateStaticParams() {
   return i18n.locales.map((lang) => ({ lang }));
@@ -50,51 +66,50 @@ export async function generateMetadata({
   if (!isLocale(lang)) return {};
 
   const dict = await getDictionary(lang);
-  const languagesMap = Object.fromEntries(
-    i18n.locales.map((locale) => [locale, `${siteConfig.url}/${locale}`]),
-  );
+  const site = resolveSite(dict);
+  const branding = resolveBranding(dict);
+
+  /* The site-wide defaults: the `layout` page row in the admin, with the
+     homepage row on top of it, so editing either lands here. */
+  const [layoutSeo, homeSeo] = await Promise.all([
+    getPageSeo(lang, "layout"),
+    getPageSeo(lang, "home"),
+  ]);
+  const seo = { ...layoutSeo, ...homeSeo };
+
+  const defaultTitle = `${dict.meta.siteName} — ${dict.meta.tagline}`;
+
+  const base = buildMetadata({
+    lang,
+    path: "",
+    title: defaultTitle,
+    description: dict.meta.defaultDescription,
+    seo: Object.keys(seo).length > 0 ? seo : null,
+    absoluteTitle: true,
+  });
 
   return {
+    ...base,
     metadataBase: new URL(siteConfig.url),
+    // Child routes append the brand; the layout itself carries the full title.
     title: {
-      default: `${dict.meta.siteName} — ${dict.meta.tagline}`,
+      default: seo.title || defaultTitle,
       template: `%s — ${dict.meta.siteName}`,
     },
-    description: dict.meta.defaultDescription,
-    keywords: dict.meta.keywords,
     applicationName: dict.meta.siteName,
-    authors: [{ name: siteConfig.founder, url: siteConfig.social.linkedin }],
-    creator: siteConfig.founder,
+    authors: [{ name: site.founder, url: site.social.linkedin }],
+    creator: site.founder,
     publisher: dict.meta.siteName,
     category: "technology",
     referrer: "origin-when-cross-origin",
     formatDetection: { telephone: false, email: false, address: false },
-    alternates: {
-      canonical: `${siteConfig.url}/${lang}`,
-      languages: {
-        ...languagesMap,
-        "x-default": `${siteConfig.url}/${i18n.defaultLocale}`,
-      },
-    },
-    openGraph: {
-      type: "website",
-      siteName: dict.meta.siteName,
-      title: `${dict.meta.siteName} — ${dict.meta.tagline}`,
-      description: dict.meta.defaultDescription,
-      url: `${siteConfig.url}/${lang}`,
-      locale: lang === "az" ? "az_AZ" : lang === "ru" ? "ru_RU" : "en_US",
-      alternateLocale: i18n.locales
-        .filter((l) => l !== lang)
-        .map((l) => (l === "az" ? "az_AZ" : l === "ru" ? "ru_RU" : "en_US")),
-    },
+    ...brandedIcons(branding),
     twitter: {
-      card: "summary_large_image",
-      title: `${dict.meta.siteName} — ${dict.meta.tagline}`,
-      description: dict.meta.defaultDescription,
-      creator: "@h2solutions",
-      site: "@h2solutions",
+      ...base.twitter,
+      creator: site.twitterHandle,
+      site: site.twitterHandle,
     },
-    robots: {
+    robots: base.robots ?? {
       index: true,
       follow: true,
       nocache: false,
@@ -105,6 +120,39 @@ export async function generateMetadata({
         "max-image-preview": "large",
         "max-snippet": -1,
       },
+    },
+  };
+}
+
+/**
+ * Icon links for an uploaded favicon set. With nothing uploaded this returns
+ * nothing and the built-in icon/apple-icon routes provide the tags instead.
+ */
+function brandedIcons(branding: Branding): Pick<Metadata, "icons"> {
+  const { icons, svg } = branding;
+
+  // The generated PNG set is what makes an override complete; an SVG on its
+  // own would leave iOS and older browsers without an icon.
+  if (!icons["32"]) return {};
+
+  const png = ["16", "32", "48", "96", "192", "512"]
+    .filter((size) => icons[size])
+    .map((size) => ({
+      url: icons[size],
+      sizes: `${size}x${size}`,
+      type: "image/png",
+    }));
+
+  return {
+    icons: {
+      icon: [
+        ...(svg ? [{ url: svg, type: "image/svg+xml" }] : []),
+        ...png,
+      ],
+      apple: ["180", "167", "152", "120"]
+        .filter((size) => icons[size])
+        .map((size) => ({ url: icons[size], sizes: `${size}x${size}` })),
+      ...(icons.ico && { shortcut: [{ url: icons.ico }] }),
     },
   };
 }
@@ -132,11 +180,7 @@ export default async function LangLayout({
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[color:var(--color-accent)] focus:px-4 focus:py-2 focus:font-semibold focus:text-[#001019]"
         >
-          {dict.common.back === "Geri"
-            ? "Əsas məzmuna keç"
-            : dict.common.back === "Назад"
-              ? "Перейти к содержимому"
-              : "Skip to main content"}
+          {dict.common.skipToContent}
         </a>
         <Header lang={lang} dict={dict} />
         <main id="main-content" className="flex-1">

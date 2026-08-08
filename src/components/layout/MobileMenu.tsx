@@ -2,17 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { navItems } from "@/lib/site-config";
-import type { Locale } from "@/i18n-config";
+import type { NavItem } from "@/lib/site-config";
 
 type Props = {
-  lang: Locale;
+  items: NavItem[];
   labels: Record<string, string>;
   ctaLabel: string;
   ctaHref: string;
 };
 
-export function MobileMenu({ lang, labels, ctaLabel, ctaHref }: Props) {
+export function MobileMenu({ items, labels, ctaLabel, ctaHref }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ export function MobileMenu({ lang, labels, ctaLabel, ctaHref }: Props) {
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] md:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] lg:hidden"
       >
         <span className="sr-only">{open ? labels.close : labels.menu}</span>
         <div aria-hidden className="flex flex-col gap-1.5">
@@ -57,17 +56,20 @@ export function MobileMenu({ lang, labels, ctaLabel, ctaHref }: Props) {
       {open && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 top-16 z-40 origin-top border-t border-[color:var(--color-border)] bg-[color:var(--color-background)]/95 backdrop-blur md:hidden"
+          className="fixed inset-x-0 top-16 z-40 max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto border-t border-[color:var(--color-border)] bg-[color:var(--color-background)]/95 backdrop-blur md:top-18 md:max-h-[calc(100dvh-4.5rem)] lg:hidden"
         >
           <nav aria-label={labels.menu} className="container-h2 flex flex-col gap-1 py-4">
-            {navItems.map((item) => (
+            {items.map((item) => (
               <Link
                 key={item.key}
-                href={item.href(lang)}
+                href={item.href}
+                {...(item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
                 onClick={close}
                 className="rounded-md px-3 py-3 text-base text-[color:var(--color-foreground-soft)] hover:bg-[color:var(--color-background-elevated)] hover:text-[color:var(--color-foreground)]"
               >
-                {labels[item.key]}
+                {item.label}
               </Link>
             ))}
             <Link

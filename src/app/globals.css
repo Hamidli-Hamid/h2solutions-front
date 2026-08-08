@@ -1,14 +1,17 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0d1117;
-  --color-background-elevated: #11161f;
-  --color-surface: #161c27;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.18);
-  --color-foreground: #e6edf3;
-  --color-foreground-muted: #8b96a7;
-  --color-foreground-soft: #b3bdcc;
+  --color-background: #070c15;
+  --color-background-elevated: #0b111d;
+  --color-surface: #0e1524;
+  --color-border: rgba(125, 190, 255, 0.1);
+  --color-border-strong: rgba(125, 190, 255, 0.2);
+  /* Text scale on --color-background (#070c15), WCAG contrast in comments.
+     Three deliberate steps: headings > body copy > meta/labels. */
+  --color-foreground: #e9f0f7; /* 16.9:1 — headings, primary text */
+  --color-foreground-soft: #ccd6e4; /* 13.4:1 — body copy, paragraphs */
+  --color-foreground-muted: #a7b4c8; /* 9.3:1 — meta, labels, captions */
+  --color-foreground-faint: #8592a6; /* 6.2:1 — placeholders only */
   --color-accent: #00f2fe;
   --color-accent-strong: #4cf6ff;
   --color-accent-deep: #0099b3;
@@ -44,6 +47,7 @@
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   ::selection {
@@ -58,6 +62,12 @@
     font-family: var(--font-display);
     letter-spacing: -0.015em;
     color: var(--color-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 
   ::-webkit-scrollbar {
@@ -80,13 +90,13 @@
   .container-h2 {
     width: 100%;
     margin-inline: auto;
-    padding-inline: 1.25rem;
-    max-width: 80rem;
+    padding-inline: 1rem;
+    max-width: 92rem;
   }
 
   @media (min-width: 768px) {
     .container-h2 {
-      padding-inline: 2rem;
+      padding-inline: 1.5rem;
     }
   }
 
@@ -119,7 +129,7 @@
     gap: 0.5rem;
     padding: 0.875rem 1.5rem;
     border-radius: var(--radius-md);
-    background: transparent;
+    background: color-mix(in oklab, var(--color-background-elevated) 70%, transparent);
     color: var(--color-foreground);
     font-weight: 500;
     font-size: 0.95rem;
@@ -163,5 +173,297 @@
       linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
     background-size: auto, 56px 56px, 56px 56px;
     background-position: center top, center, center;
+  }
+
+  /* ---------------------------------------------------------------
+     Technical canvas — the atmospheric glow that runs behind every
+     section of a page. The square grid belongs to the hero alone and
+     is drawn there by `.hero-grid`.
+     --------------------------------------------------------------- */
+  .tech-canvas {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Same 56px square grid as `.grid-bg`, extended with sparse cyan nodes on
+     every fourth intersection, scoped to the hero section of a page and faded
+     out at its bottom edge so it ends without a hard seam. */
+  .hero-grid {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hero-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(90deg, var(--color-border) 1px, transparent 1px),
+      linear-gradient(var(--color-border) 1px, transparent 1px),
+      radial-gradient(
+        circle,
+        color-mix(in oklab, var(--color-accent) 45%, transparent) 0 1px,
+        transparent 1.6px
+      );
+    background-size:
+      56px 56px,
+      56px 56px,
+      224px 224px;
+    background-position: center top;
+    -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  }
+
+  /* Restrained atmospheric glow — kept low so text stays readable. */
+  .tech-canvas::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+      radial-gradient(
+        58% 42% at 76% 4%,
+        color-mix(in oklab, var(--color-accent) 11%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(
+        48% 30% at 6% 26%,
+        color-mix(in oklab, #2563eb 13%, transparent),
+        transparent 72%
+      ),
+      radial-gradient(
+        60% 26% at 50% 100%,
+        color-mix(in oklab, var(--color-accent) 7%, transparent),
+        transparent 75%
+      );
+  }
+
+  @media (max-width: 767px) {
+    .hero-grid::before {
+      background-image:
+        linear-gradient(90deg, rgba(125, 190, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(rgba(125, 190, 255, 0.07) 1px, transparent 1px);
+      background-size: 48px 48px, 48px 48px;
+    }
+    .tech-canvas::after {
+      opacity: 0.6;
+    }
+  }
+
+  /* Thin connecting line that visually separates stacked sections
+     without breaking the continuity of the grid behind them. */
+  .section-rule {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--color-accent) 78%, var(--color-foreground-soft));
+  }
+
+  /* Translucent surface used across the homepage so the grid stays visible. */
+  .panel {
+    position: relative;
+    background-color: color-mix(
+      in oklab,
+      var(--color-background-elevated) 72%,
+      transparent
+    );
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+  }
+
+  .panel-interactive {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .panel-interactive:hover {
+    border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+    box-shadow: 0 18px 40px -28px color-mix(in oklab, var(--color-accent) 90%, transparent);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel-interactive:hover {
+      transform: none;
+    }
+  }
+
+  /* Square icon tile used by service, process and contact items. */
+  .icon-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-strong);
+    background-color: color-mix(in oklab, var(--color-background) 70%, transparent);
+    color: var(--color-accent);
+  }
+
+  /* Abstract technical preview behind cards that have no cover image. */
+  .media-placeholder {
+    background-color: var(--color-background-elevated);
+    background-image:
+      radial-gradient(
+        50% 60% at 50% 45%,
+        color-mix(in oklab, var(--color-accent) 13%, transparent),
+        transparent 70%
+      ),
+      linear-gradient(90deg, rgba(125, 190, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(rgba(125, 190, 255, 0.08) 1px, transparent 1px);
+    background-size: auto, 28px 28px, 28px 28px;
+    background-position: center;
+  }
+
+  /* ---------------------------------------------------------------
+     Article body — styles the HTML the admin rich editor produces.
+     Only element selectors; the editor emits no classes.
+     --------------------------------------------------------------- */
+  .prose-tech {
+    color: var(--color-foreground-soft);
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+  .prose-tech > * + * {
+    margin-top: 1.25rem;
+  }
+  .prose-tech h2 {
+    margin-top: 2.75rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+    scroll-margin-top: 6rem;
+  }
+  .prose-tech h3 {
+    margin-top: 2rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    scroll-margin-top: 6rem;
+  }
+  .prose-tech h2 + *,
+  .prose-tech h3 + * {
+    margin-top: 0.75rem;
+  }
+  .prose-tech strong {
+    color: var(--color-foreground);
+    font-weight: 600;
+  }
+  .prose-tech a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+  }
+  .prose-tech a:hover {
+    text-decoration-color: var(--color-accent);
+  }
+  .prose-tech ul,
+  .prose-tech ol {
+    padding-left: 1.25rem;
+  }
+  .prose-tech ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .prose-tech ul > li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .prose-tech ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0.25rem;
+    top: 0.8em;
+    height: 5px;
+    width: 5px;
+    border-radius: 999px;
+    background: var(--color-accent);
+  }
+  .prose-tech ol {
+    list-style: decimal;
+  }
+  .prose-tech li + li {
+    margin-top: 0.5rem;
+  }
+  .prose-tech blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    color: var(--color-foreground);
+    font-style: italic;
+  }
+  .prose-tech code {
+    background: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.4em;
+    font-size: 0.875em;
+  }
+  .prose-tech pre {
+    background: var(--color-background-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+  }
+  .prose-tech pre code {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .prose-tech img {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    max-width: 100%;
+    height: auto;
+  }
+  .prose-tech hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin-block: 2rem;
+  }
+  .prose-tech table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .prose-tech th,
+  .prose-tech td {
+    border: 1px solid var(--color-border);
+    padding: 0.625rem 0.75rem;
+    text-align: left;
+  }
+  .prose-tech th {
+    background: var(--color-background-elevated);
+    color: var(--color-foreground);
+    font-weight: 600;
+  }
+
+  /* Scroll reveal — zero-JS, progressive, motion-safe. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: reveal-in linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 45%;
+      }
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -1,24 +1,54 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site-config";
 
-export default function manifest(): MetadataRoute.Manifest {
+import { getDictionary } from "@/lib/dictionaries";
+import { resolveBranding } from "@/lib/site-config";
+import { i18n } from "@/i18n-config";
+
+/** Sizes worth listing for installed apps and Android launchers. */
+const PWA_SIZES = ["192", "256", "384", "512"];
+
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const dict = await getDictionary(i18n.defaultLocale);
+  const branding = resolveBranding(dict);
+
+  /* The generated PNG set when a favicon was uploaded; the bundled vector mark
+     otherwise. */
+  const uploaded = PWA_SIZES.filter((size) => branding.icons[size]).map((size) => ({
+    src: branding.icons[size],
+    sizes: `${size}x${size}`,
+    type: "image/png",
+    purpose: "any" as const,
+  }));
+
+  const icons: MetadataRoute.Manifest["icons"] =
+    uploaded.length > 0
+      ? [
+          ...uploaded,
+          {
+            src: branding.icons["512"],
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
+        ]
+      : [
+          { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+          { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" },
+        ];
+
   return {
-    name: `${siteConfig.brand} — Premium veb həllər və SEO`,
-    short_name: siteConfig.brand,
-    description:
-      "H2 Solutions — Next.js və Laravel ilə müasir korporativ saytlar, SEO və IT konsaltinq.",
-    start_url: "/az",
+    name: branding.appName,
+    short_name: branding.appShortName,
+    description: dict.meta.defaultDescription,
+    start_url: `/${i18n.defaultLocale}`,
     scope: "/",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#0d1117",
-    theme_color: "#0d1117",
-    lang: "az",
+    background_color: branding.backgroundColor,
+    theme_color: branding.themeColor,
+    lang: i18n.defaultLocale,
     dir: "ltr",
     categories: ["business", "productivity", "developer"],
-    icons: [
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" },
-    ],
+    icons,
   };
 }
