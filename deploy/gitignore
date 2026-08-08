@@ -1,0 +1,13 @@
+# Installed on the server once with `npm ci --omit=dev`, never committed:
+# it contains platform-specific binaries (this machine is arm64, cPanel is x64).
+node_modules/
+
+# Written at runtime by the server (ISR / fetch cache). Committing it would
+# make every `git pull` on cPanel conflict.
+.next/cache/
+
+# Runtime secrets live in the cPanel Node.js app's environment variables.
+.env*
+
+npm-debug.log*
+.DS_Store
