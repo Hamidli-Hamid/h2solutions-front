@@ -34,7 +34,7 @@ export function Hero({ lang, dict, services }: Props) {
 
   return (
     <section className="hero-grid">
-      <div className="container-h2 py-8 md:py-10 lg:py-12">
+      <div className="container-h2 py-8 md:py-10 lg:pt-10 lg:pb-8">
         <div className="grid gap-10 lg:grid-cols-[1.02fr_1fr] lg:items-stretch lg:gap-12">
           {/* LEFT — brand message */}
           <div className="flex flex-col justify-center">
@@ -109,7 +109,9 @@ export function Hero({ lang, dict, services }: Props) {
               </Link>
             </div>
 
-            <ul className="grid flex-1 auto-rows-fr gap-3 p-3 sm:grid-cols-2 md:gap-3.5 md:p-4">
+            {/* No auto-rows-fr: rows size to their own content, so the panel
+                never grows taller than the copy beside it needs. */}
+            <ul className="grid flex-1 gap-3 p-3 sm:grid-cols-2 md:p-3.5">
               {dict.hero.services.map((service) => (
                 <li key={service.name} className="flex">
                   <Link
@@ -127,22 +129,16 @@ export function Hero({ lang, dict, services }: Props) {
                       >
                         <Icon name={service.icon} className="h-5 w-5" />
                       </span>
-                      <span className="text-[0.9375rem] font-semibold text-[color:var(--color-foreground)] transition group-hover:text-[color:var(--color-accent)]">
+                      <span className="flex-1 text-[0.9375rem] font-semibold text-[color:var(--color-foreground)] transition group-hover:text-[color:var(--color-accent)]">
                         {service.name}
                       </span>
-                    </span>
-
-                    <span className="mt-2.5 flex-1 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
-                      {service.description}
-                    </span>
-
-                    <span className="mt-3 flex items-center justify-between gap-2">
-                      <span className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[color:var(--color-foreground-faint)] opacity-0 transition group-hover:opacity-100">
-                        {dict.common.learnMore}
-                      </span>
-                      <span aria-hidden className="arrow-chip">
+                      <span aria-hidden className="arrow-chip flex-none">
                         <ArrowRightIcon className="h-3.5 w-3.5" />
                       </span>
+                    </span>
+
+                    <span className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                      {service.description}
                     </span>
                   </Link>
                 </li>
