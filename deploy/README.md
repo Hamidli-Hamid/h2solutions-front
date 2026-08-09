@@ -16,11 +16,21 @@ Build vurur → çıxışı `front-build/`-ə sinxronlaşdırır → commit + pu
 
 ```bash
 cd ~/h2front
-git pull
+git fetch origin
+git reset --hard origin/main
 npm ci --omit=dev     # YALNIZ package-lock.json dəyişəndə
 ```
 
 Sonra cPanel → **Setup Node.js App** → **Restart**.
+
+**Niyə `git pull` yox, `reset --hard`?** İşləyən Next ISR revalidasiyası zamanı
+`.next/server/app/**` altındakı prerender fayllarını (`*.html`, `*.rsc`,
+`*.segment.rsc`) yenidən yazır. Onlar git-in izlədiyi fayllardır, ona görə
+serverdə "local changes" kimi görünür və `git pull` "would be overwritten by
+merge" xətası verib dayanır. Bu faylların serverdəki versiyası atılmalıdır —
+yeni build onsuz da təzəsini gətirir. `reset --hard` yalnız izlənən faylları
+sıfırlayır; `.env`, `.htaccess`, `node_modules/` və `.next/cache/` gitignore-da
+olduğuna görə toxunulmur.
 
 ## cPanel-də birdəfəlik quraşdırma
 
