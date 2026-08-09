@@ -24,7 +24,7 @@ export function organizationJsonLd(dict: Dictionary, lang: Locale) {
     url: `${siteConfig.url}/${lang}`,
     logo: {
       "@type": "ImageObject",
-      url: `${siteConfig.url}/icon.svg`,
+      url: `${siteConfig.url}/android-chrome-512x512.png`,
       width: 512,
       height: 512,
     },

@@ -8,8 +8,6 @@ const METADATA_ROUTES = [
   "/manifest.webmanifest",
   "/sitemap.xml",
   "/robots.txt",
-  "/icon",
-  "/apple-icon",
   "/opengraph-image",
   "/twitter-image",
 ];

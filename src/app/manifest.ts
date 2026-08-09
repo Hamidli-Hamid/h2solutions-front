@@ -32,8 +32,27 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
           },
         ]
       : [
-          { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
-          { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" },
+          {
+            src: "/android-chrome-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "any",
+          },
+          /* Drawn with the 20% margin Android crops into its own shape; the
+             plain 512 would lose its border to that mask. */
+          {
+            src: "/android-chrome-maskable-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
+          { src: "/favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
         ];
 
   return {

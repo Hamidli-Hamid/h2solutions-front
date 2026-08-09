@@ -41,6 +41,9 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|_next/data|api|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)",
+    /* The social image routes carry no file extension, so they need naming
+       here or the locale redirect swallows them (/opengraph-image ->
+       /az/opengraph-image -> 404). */
+    "/((?!_next/static|_next/image|_next/data|api|favicon.ico|opengraph-image|twitter-image|robots.txt|sitemap.xml|.*\\..*).*)",
   ],
 };

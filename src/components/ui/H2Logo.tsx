@@ -34,7 +34,7 @@ export function H2Logo({ className, withWordmark = true, logo, alt }: Props) {
       </span>
       {withWordmark && (
         <span className="text-sm font-semibold tracking-wide text-[color:var(--color-foreground)]">
-          H2 <span className="text-[color:var(--color-foreground-muted)]">Solutions</span>
+          <span className="text-[color:var(--color-foreground-muted)]">Solutions</span>
         </span>
       )}
     </span>

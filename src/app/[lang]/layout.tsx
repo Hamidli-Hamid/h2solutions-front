@@ -125,15 +125,32 @@ export async function generateMetadata({
 }
 
 /**
- * Icon links for an uploaded favicon set. With nothing uploaded this returns
- * nothing and the built-in icon/apple-icon routes provide the tags instead.
+ * The built-in mark, as the files `scripts/generate-icons.mjs` writes into
+ * `public/`. Ordered the way browsers read the list: the legacy container
+ * first, then the vector modern engines prefer, then the raster fallbacks.
+ */
+const DEFAULT_ICONS: Metadata["icons"] = {
+  icon: [
+    { url: "/favicon.ico", sizes: "any" },
+    { url: "/favicon.svg", type: "image/svg+xml" },
+    { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    // Google Search reads the 48px one when picking a result icon.
+    { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+  ],
+  apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  shortcut: [{ url: "/favicon.ico" }],
+};
+
+/**
+ * Icon links for an uploaded favicon set, falling back to the built-in mark.
  */
 function brandedIcons(branding: Branding): Pick<Metadata, "icons"> {
   const { icons, svg } = branding;
 
   // The generated PNG set is what makes an override complete; an SVG on its
   // own would leave iOS and older browsers without an icon.
-  if (!icons["32"]) return {};
+  if (!icons["32"]) return { icons: DEFAULT_ICONS };
 
   const png = ["16", "32", "48", "96", "192", "512"]
     .filter((size) => icons[size])
@@ -146,6 +163,8 @@ function brandedIcons(branding: Branding): Pick<Metadata, "icons"> {
   return {
     icons: {
       icon: [
+        // Served by the /favicon.ico route, which redirects to the upload.
+        { url: "/favicon.ico", sizes: "any" },
         ...(svg ? [{ url: svg, type: "image/svg+xml" }] : []),
         ...png,
       ],
