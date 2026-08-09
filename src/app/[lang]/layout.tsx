@@ -24,12 +24,20 @@ import {
   professionalServiceJsonLd,
 } from "@/lib/jsonld";
 
+/* Body copy and the hero heading are both above the fold, so both families stay
+   preloaded — but `subsets` only decides what goes on the critical path, not
+   what is available: next/font emits an @font-face for every cut either way.
+   Cyrillic is therefore left out. Four of the six locales would never render a
+   glyph from it, and ru/kk still get it, fetched on demand once `unicode-range`
+   matches. */
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext", "cyrillic"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
+/* Space Grotesk has no Cyrillic cut at all; ru/kk headings fall through to
+   Inter via the `--font-display` stack. */
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin", "latin-ext"],
@@ -45,10 +53,9 @@ export async function generateViewport({
   const { themeColor } = resolveBranding(dict);
 
   return {
-    themeColor: [
-      { media: "(prefers-color-scheme: dark)", color: themeColor },
-      { media: "(prefers-color-scheme: light)", color: themeColor },
-    ],
+    /* One colour, no media split: the site renders dark in both schemes, so
+       two identical entries only told the browser the same thing twice. */
+    themeColor,
     colorScheme: "dark",
     width: "device-width",
     initialScale: 1,
@@ -139,7 +146,6 @@ const DEFAULT_ICONS: Metadata["icons"] = {
     { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
   ],
   apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-  shortcut: [{ url: "/favicon.ico" }],
 };
 
 /**
@@ -171,7 +177,6 @@ function brandedIcons(branding: Branding): Pick<Metadata, "icons"> {
       apple: ["180", "167", "152", "120"]
         .filter((size) => icons[size])
         .map((size) => ({ url: icons[size], sizes: `${size}x${size}` })),
-      ...(icons.ico && { shortcut: [{ url: icons.ico }] }),
     },
   };
 }

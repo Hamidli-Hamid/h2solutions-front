@@ -12,6 +12,16 @@ export const siteConfig = {
   brand: "H2 Solutions",
   founder: "Hamid Hamidli",
   twitterHandle: "@h2solutions",
+  /* The generated share card — rendered by `src/app/opengraph-image.tsx` and
+     re-exported for Twitter. Used as the fallback whenever a page has no
+     artwork of its own, so no route ever ships a card without an image. */
+  shareImage: {
+    og: "/opengraph-image",
+    twitter: "/twitter-image",
+    width: 1200,
+    height: 630,
+    type: "image/png",
+  },
   /* Structured-data values: read by the schema.org markup, not shown on a page. */
   addressLocality: "Baku",
   addressCountry: "AZ",

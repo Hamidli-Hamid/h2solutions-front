@@ -17,9 +17,12 @@ import { i18n } from "@/i18n-config";
  */
 const lang = i18n.defaultLocale;
 
+/* Kept in step with the subsets in `[lang]/layout.tsx` — Next preloads the
+   union of every next/font declaration in the app, so a wider list here would
+   put Cyrillic back on the critical path of every route. */
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext", "cyrillic"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 

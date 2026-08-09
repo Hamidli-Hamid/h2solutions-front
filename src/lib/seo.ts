@@ -22,6 +22,15 @@ type BuildInput = {
   absoluteTitle?: boolean;
 };
 
+/**
+ * The brand, exactly once. Derived titles get it from the layout's
+ * `title.template`, so the share cards have to reproduce that suffix rather
+ * than add a second one — and a title that already names the brand keeps it.
+ */
+function withBrand(title: string): string {
+  return title.includes(siteConfig.brand) ? title : `${title} — ${siteConfig.brand}`;
+}
+
 function alternates(path: string) {
   return Object.fromEntries(
     i18n.locales.map((locale) => [locale, `${siteConfig.url}/${locale}${path}`]),
@@ -48,20 +57,42 @@ export function buildMetadata({
   const url = `${siteConfig.url}/${lang}${path}`;
   const metaTitle = seo?.title || title;
   const metaDescription = seo?.description || description;
-  /* The share card mirrors the meta pair, so a page is never described twice. */
-  const ogTitle = `${metaTitle} — ${siteConfig.brand}`;
+
+  /* An overridden title, and the layout's own, are used verbatim; a derived one
+     picks up the brand from the layout's title template. Either way the share
+     cards repeat the resolved <title>, so the brand is never doubled. */
+  const isAbsolute = Boolean(seo?.title) || absoluteTitle;
+  const shareTitle = isAbsolute ? metaTitle : withBrand(metaTitle);
   const ogDescription = metaDescription;
 
   const pictures = [seo?.og_image, ...images].filter(
     (src): src is string => Boolean(src),
   );
 
+  /* A page's own artwork when it has some, otherwise the generated card — so
+     `summary_large_image` always has an image to render. */
+  const { shareImage } = siteConfig;
+  const ogImages =
+    pictures.length > 0
+      ? pictures.map((src) => ({ url: src, alt: shareTitle }))
+      : [
+          {
+            url: `${siteConfig.url}${shareImage.og}`,
+            width: shareImage.width,
+            height: shareImage.height,
+            type: shareImage.type,
+            alt: shareTitle,
+          },
+        ];
+  const twitterImages =
+    pictures.length > 0
+      ? ogImages
+      : [{ ...ogImages[0], url: `${siteConfig.url}${shareImage.twitter}` }];
+
   const robots = seo?.robots;
 
   return {
-    // An overridden meta title is used verbatim; a derived one still gets the
-    // brand suffix from the layout's title template.
-    title: seo?.title || absoluteTitle ? { absolute: metaTitle } : (metaTitle as string),
+    title: isAbsolute ? { absolute: metaTitle } : metaTitle,
     description: metaDescription,
     alternates: {
       canonical: url,
@@ -73,21 +104,21 @@ export function buildMetadata({
     openGraph: {
       type: ogType,
       siteName: siteConfig.brand,
-      title: ogTitle,
+      title: shareTitle,
       description: ogDescription,
       url,
       locale: ogLocales[lang],
       alternateLocale: i18n.locales
         .filter((locale) => locale !== lang)
         .map((locale) => ogLocales[locale]),
-      ...(pictures.length > 0 && { images: pictures }),
+      images: ogImages,
       ...(publishedTime && { publishedTime }),
     },
     twitter: {
       card: "summary_large_image",
-      title: ogTitle,
+      title: shareTitle,
       description: ogDescription,
-      ...(pictures.length > 0 && { images: pictures }),
+      images: twitterImages,
     },
     ...(robots && {
       robots: {

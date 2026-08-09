@@ -7,6 +7,23 @@ function sanitize(value: string): string {
   return value.replace(/</g, "\\u003c");
 }
 
+/**
+ * `sameAs` is meant to list profiles Google can tie back to the brand. The
+ * unfilled defaults in `siteConfig.social` are bare domain roots
+ * ("https://github.com/"), which point at the network rather than at us — so
+ * only entries carrying a path survive.
+ */
+function profileUrls(social: Record<string, string>): string[] {
+  return Object.values(social).filter((href) => {
+    if (!href) return false;
+    try {
+      return new URL(href).pathname.replace(/\/+$/, "") !== "";
+    } catch {
+      return false;
+    }
+  });
+}
+
 export function jsonLdScript(payload: unknown): string {
   return sanitize(JSON.stringify(payload));
 }
@@ -35,13 +52,7 @@ export function organizationJsonLd(dict: Dictionary, lang: Locale) {
       name: site.founder,
       url: site.social.linkedin,
     },
-    sameAs: [
-      site.social.linkedin,
-      site.social.github,
-      site.social.twitter,
-      site.social.facebook,
-      site.social.instagram,
-    ].filter(Boolean),
+    sameAs: profileUrls(site.social),
     address: {
       "@type": "PostalAddress",
       addressLocality: site.addressLocality,
