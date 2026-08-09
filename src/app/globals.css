@@ -297,6 +297,79 @@
     }
   }
 
+  /* ---------------------------------------------------------------
+     Hero service card — a `.panel` cell with a faint diagonal tint and
+     a corner glow that only lights up on hover, so the six cards read
+     as one calm set at rest and respond individually to the cursor.
+     --------------------------------------------------------------- */
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid var(--color-border);
+    background-image: linear-gradient(
+      152deg,
+      color-mix(in oklab, var(--color-accent) 6%, var(--color-surface)) 0%,
+      var(--color-surface) 58%
+    );
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .service-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background-image: radial-gradient(
+      72% 62% at 92% 2%,
+      color-mix(in oklab, var(--color-accent) 20%, transparent),
+      transparent 70%
+    );
+  }
+
+  .service-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .service-card:hover {
+    border-color: color-mix(in oklab, var(--color-accent) 42%, transparent);
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px -30px color-mix(in oklab, var(--color-accent) 90%, transparent);
+  }
+  .service-card:hover::after {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card:hover {
+      transform: none;
+    }
+  }
+
+  /* Round chip carrying the card's "go" arrow. */
+  .arrow-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-foreground-muted);
+    transition: background-color 0.25s ease, border-color 0.25s ease,
+      color 0.25s ease, transform 0.25s ease;
+  }
+  .service-card:hover .arrow-chip {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #001019;
+    transform: translateX(2px);
+  }
+
   /* Square icon tile used by service, process and contact items. */
   .icon-tile {
     display: inline-flex;

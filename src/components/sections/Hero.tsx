@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightIcon,
+  CheckCircleIcon,
+  ClockIcon,
+} from "@heroicons/react/24/outline";
 
 import { Icon } from "@/components/ui/Icon";
 import type { Locale } from "@/i18n-config";
@@ -24,48 +28,88 @@ export function Hero({ lang, dict, services }: Props) {
   const { lead, accent } = splitTitle(dict.hero.title, dict.hero.titleAccent);
   const publishedSlugs = new Set(services.map((service) => service.slug));
 
+  /* The three selling points already written for every locale in `usp` —
+     reused here as trust chips so the hero has no locale-specific copy. */
+  const proofPoints = dict.usp.items.slice(0, 3);
+
   return (
     <section className="hero-grid">
-      <div className="container-h2 py-12 md:py-14 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-14">
+      <div className="container-h2 py-8 md:py-10 lg:py-12">
+        <div className="grid gap-10 lg:grid-cols-[1.02fr_1fr] lg:items-stretch lg:gap-12">
           {/* LEFT — brand message */}
           <div className="flex flex-col justify-center">
             <span className="inline-flex w-fit items-center gap-2 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-background-elevated)]/70 px-3 py-1.5 text-xs font-medium tracking-wide text-[color:var(--color-foreground-soft)] backdrop-blur">
               <span
                 aria-hidden
-                className="inline-block h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] shadow-[var(--shadow-glow)]"
-              />
+                className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] shadow-[var(--shadow-glow)]"
+              >
+                <span className="absolute inset-0 animate-ping rounded-full bg-[color:var(--color-accent)] opacity-60 motion-reduce:hidden" />
+              </span>
               {dict.hero.badge}
             </span>
 
-            <h1 className="mt-6 text-[2rem] font-bold leading-[1.12] sm:text-4xl lg:text-[2.625rem]">
+            <h1 className="mt-6 text-[2.125rem] font-bold leading-[1.1] sm:text-[2.75rem] lg:text-[3.25rem]">
               {lead}
               {accent && (
-                <span className="mt-1 block text-[color:var(--color-accent)]">
-                  {accent}
-                </span>
+                <span className="accent-text mt-1 block">{accent}</span>
               )}
             </h1>
 
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-[color:var(--color-foreground-soft)]">
+            <p className="mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
               {dict.hero.subtitle}
             </p>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link href={`/${lang}/contact`} className="btn-primary">
+            <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-3">
+              {proofPoints.map((point) => (
+                <li
+                  key={point.title}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-foreground-soft)]"
+                >
+                  <CheckCircleIcon
+                    aria-hidden
+                    className="h-[1.125rem] w-[1.125rem] flex-none text-[color:var(--color-accent)]"
+                  />
+                  {point.title}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href={`/${lang}/contact`}
+                className="btn-primary max-sm:w-full max-sm:justify-center"
+              >
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon aria-hidden className="h-4 w-4" />
               </Link>
-              <Link href={`/${lang}/portfolio`} className="btn-secondary">
+              <Link
+                href={`/${lang}/portfolio`}
+                className="btn-secondary max-sm:w-full max-sm:justify-center"
+              >
                 {dict.hero.ctaSecondary}
               </Link>
             </div>
+
+            <p className="mt-4 inline-flex items-center gap-2 text-xs text-[color:var(--color-foreground-muted)]">
+              <ClockIcon aria-hidden className="h-4 w-4 flex-none" />
+              {dict.contact.subtitle}
+            </p>
           </div>
 
-          {/* RIGHT — core services grid (no illustration, by design) */}
-          <div>
-            <h2 className="section-label">{dict.hero.servicesTitle}</h2>
-            <ul className="mt-4 grid gap-3.5 sm:grid-cols-2">
+          {/* RIGHT — core services: cards inside one framed panel */}
+          <div className="panel flex flex-col overflow-hidden shadow-[0_28px_70px_-45px_color-mix(in_oklab,var(--color-accent)_85%,transparent)]">
+            <div className="flex items-center justify-between gap-3 border-b border-[color:var(--color-border)] px-4 py-3.5 md:px-5">
+              <h2 className="section-label">{dict.hero.servicesTitle}</h2>
+              <Link
+                href={`/${lang}/services`}
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[color:var(--color-foreground-muted)] transition hover:text-[color:var(--color-accent)]"
+              >
+                {dict.common.learnMore}
+                <ArrowRightIcon aria-hidden className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+
+            <ul className="grid flex-1 auto-rows-fr gap-3 p-3 sm:grid-cols-2 md:gap-3.5 md:p-4">
               {dict.hero.services.map((service) => (
                 <li key={service.name} className="flex">
                   <Link
@@ -74,12 +118,12 @@ export function Hero({ lang, dict, services }: Props) {
                         ? `/${lang}/services/${service.slug}`
                         : `/${lang}/services`
                     }
-                    className="panel panel-interactive group flex w-full flex-col p-4"
+                    className="service-card group flex w-full flex-col p-4"
                   >
                     <span className="flex items-center gap-3">
                       <span
                         aria-hidden
-                        className="icon-tile h-10 w-10 flex-none transition group-hover:shadow-[var(--shadow-glow)]"
+                        className="icon-tile h-10 w-10 flex-none transition group-hover:border-[color:var(--color-accent)] group-hover:shadow-[var(--shadow-glow)]"
                       >
                         <Icon name={service.icon} className="h-5 w-5" />
                       </span>
@@ -92,10 +136,14 @@ export function Hero({ lang, dict, services }: Props) {
                       {service.description}
                     </span>
 
-                    <ArrowRightIcon
-                      aria-hidden
-                      className="mt-3 h-4 w-4 self-end text-[color:var(--color-foreground-muted)] transition group-hover:translate-x-0.5 group-hover:text-[color:var(--color-accent)]"
-                    />
+                    <span className="mt-3 flex items-center justify-between gap-2">
+                      <span className="text-[0.6875rem] font-medium uppercase tracking-[0.14em] text-[color:var(--color-foreground-faint)] opacity-0 transition group-hover:opacity-100">
+                        {dict.common.learnMore}
+                      </span>
+                      <span aria-hidden className="arrow-chip">
+                        <ArrowRightIcon className="h-3.5 w-3.5" />
+                      </span>
+                    </span>
                   </Link>
                 </li>
               ))}

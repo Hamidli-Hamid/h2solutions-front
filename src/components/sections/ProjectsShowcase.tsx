@@ -47,7 +47,7 @@ export function ProjectsShowcase({ lang, dict, projects }: Props) {
       aria-labelledby="projects-heading"
       className="reveal"
     >
-      <div className="container-h2 py-12 md:py-14">
+      <div className="container-h2 pb-12 pt-8 md:pb-14 md:pt-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="section-label">{t.label}</p>
