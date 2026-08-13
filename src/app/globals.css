@@ -216,6 +216,21 @@
     mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
   }
 
+  /* Home hero only (not `.hero-grid`, which page headers reuse). From `lg`
+     up the hero owns the fold: it grows to fill the viewport under the
+     sticky 4.5rem header and centres its content, so wide monitors get a
+     full-height hero instead of a short band with dead space beneath it.
+     The `min()` cap keeps very tall screens from over-stretching it and
+     leaves the next section peeking as a scroll cue. */
+  @media (min-width: 1024px) {
+    .hero-shell {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: min(calc(100svh - 4.5rem), 50rem);
+    }
+  }
+
   /* Restrained atmospheric glow — kept low so text stays readable. */
   .tech-canvas::after {
     content: "";
