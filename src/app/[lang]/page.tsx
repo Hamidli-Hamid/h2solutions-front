@@ -39,6 +39,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <Hero lang={lang} dict={dict} services={services} />
       <ProjectsShowcase lang={lang} dict={dict} projects={projects} />
       <ProcessSteps dict={dict} />
+      <FaqAccordion content={dict.home.faq} />
+      <BlogPreview lang={lang} dict={dict} posts={posts} />
+      <SeoContent content={dict.home.seoText} />
+      {/* Closing call to action — the last thing above the footer. */}
       <CtaBanner
         lang={lang}
         dict={dict}
@@ -46,9 +50,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         subtitle={dict.home.cta.subtitle}
         className="reveal"
       />
-      <FaqAccordion dict={dict} />
-      <BlogPreview lang={lang} dict={dict} posts={posts} />
-      <SeoContent dict={dict} />
 
       {services.length > 0 && <JsonLd id="ld-home-services" data={serviceList} />}
       <JsonLd id="ld-home-faq" data={faqJsonLd(dict.home.faq.items)} />

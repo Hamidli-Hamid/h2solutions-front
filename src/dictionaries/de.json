@@ -221,7 +221,47 @@
     "related": "Weitere Leistungen",
     "startTitle": "Starten Sie Ihr Projekt",
     "startText": "Fragen zu dieser Leistung? Senden Sie ein kurzes Briefing — wir melden uns innerhalb von 24 Stunden.",
-    "empty": "Leistungen werden in Kürze ergänzt."
+    "empty": "Leistungen werden in Kürze ergänzt.",
+    "faqTitle": "Fragen zu dieser Leistung",
+    "faq": {
+      "label": "Fragen zu den Leistungen",
+      "title": "Was Kunden vor dem Projektstart fragen",
+      "items": [
+        {
+          "question": "Woher wissen wir, welche Leistung zu uns passt?",
+          "answer": "In einem kostenlosen Erstgespräch prüfen wir Ihr Geschäftsziel, Ihre bestehende digitale Infrastruktur und Ihr Budget. Sie erhalten ein schriftliches Angebot, welche Leistungen in welcher Reihenfolge sinnvoll sind."
+        },
+        {
+          "question": "Lassen sich mehrere Leistungen kombinieren?",
+          "answer": "Ja. Website, mobile App, SEO und Automatisierung können als ein Projekt geplant werden — das erleichtert die Integration und senkt das Gesamtbudget."
+        },
+        {
+          "question": "Wir haben bereits eine Website — muss alles neu gebaut werden?",
+          "answer": "Nicht zwingend. Wir starten mit einem technischen Audit; oft genügen Verbesserungen bei Geschwindigkeit, SEO und Design. Ein kompletter Neubau ist nur bei veralteter Technologie zu empfehlen."
+        },
+        {
+          "question": "Wie entsteht der Preis?",
+          "answer": "Der Preis richtet sich nach Umfang, Integrationen und Anzahl der Sprachen. Auf Basis Ihres Briefings erstellen wir ein Festpreisangebot — ungeplante Kosten während des Projekts gibt es nicht."
+        },
+        {
+          "question": "Wann können Sie mit der Arbeit beginnen?",
+          "answer": "In der Regel 3–5 Werktage nach Vertragsunterzeichnung. Für dringende Projekte stellen wir ein paralleles Team bereit."
+        },
+        {
+          "question": "Wem gehört das Projekt nach der Übergabe?",
+          "answer": "Ihnen. Code, Domain, Hosting und Admin-Zugänge werden vollständig übergeben, inklusive Dokumentation und Einweisung."
+        }
+      ]
+    },
+    "seoText": {
+      "label": "SEO-Text",
+      "title": "Digitale Leistungen aus einer Hand",
+      "body": [
+        "H2 Solutions vereint Webentwicklung, mobile Anwendungen, E-Commerce, SEO und Prozessautomatisierung unter einem Dach. Statt mehrere Dienstleister zu koordinieren, arbeiten Sie mit einem Team, das das gesamte System kennt — von der Datenbank bis zur Oberfläche, die Ihre Kundschaft sieht.",
+        "Alle Leistungen folgen demselben technischen Standard: Architektur mit Next.js und Laravel, mobile-first Oberflächen, messbare Ladegeschwindigkeit, technisches SEO und strukturierte Daten. Deshalb bleibt eine von uns übergebene Website auch nach dem Launch schnell und sichtbar — in klassischen Suchmaschinen ebenso wie in KI-gestützter Suche.",
+        "Unsere Arbeit endet nicht mit der Übergabe. Analytics, Inhalte, laufendes SEO und die Entwicklung neuer Funktionen laufen in monatlichen Paketen weiter, damit Ihr digitales Produkt mit dem Unternehmen Schritt hält."
+      ]
+    }
   },
   "about": {
     "label": "Über uns",
@@ -238,11 +278,9 @@
     "founder": {
       "label": "Gründer",
       "name": "Hamid Hamidli",
-      "role": "Gründer & leitender Lösungsarchitekt",
-      "quote": "Code gewinnt erst dann an Wert, wenn er einem Geschäftsziel dient. Deshalb wählen wir in jedem Projekt zuerst das Ergebnis und dann die Technologie.",
-      "linkedinLabel": "LinkedIn-Profil"
+      "role": "Gründer",
+      "quote": "Code gewinnt erst dann an Wert, wenn er einem Geschäftsziel dient. Deshalb wählen wir in jedem Projekt zuerst das Ergebnis und dann die Technologie."
     },
-    "factsTitle": "Auf einen Blick",
     "facts": [
       {
         "label": "Standort",
@@ -391,14 +429,14 @@
     "subtitle": "Echte Unternehmen, echte Ergebnisse. Erzählt als Problem → Lösung → Ergebnis.",
     "empty": "Projekte folgen in Kürze.",
     "viewCase": "Case ansehen",
-    "problemLabel": "Problem",
-    "solutionLabel": "Lösung",
-    "resultLabel": "Ergebnis",
     "overviewTitle": "Über das Projekt",
+    "videoTitle": "Projektvideo",
+    "videoPlay": "Video abspielen",
     "galleryTitle": "Projektgalerie",
     "galleryHint": "Zum Vergrößern auf ein Bild klicken",
     "clientLabel": "Kunde",
     "yearLabel": "Jahr",
+    "domainLabel": "Domain",
     "visitSite": "Website besuchen",
     "related": "Weitere Projekte",
     "processTitle": "So haben wir gearbeitet",

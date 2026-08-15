@@ -15,9 +15,26 @@ const staticPaths: Array<{ path: string; page: PageKey }> = [
 ];
 
 function buildAlternates(path: string) {
-  return Object.fromEntries(
-    i18n.locales.map((l) => [l, `${siteConfig.url}/${l}${path}`]),
-  );
+  return {
+    ...Object.fromEntries(
+      i18n.locales.map((l) => [l, `${siteConfig.url}/${l}${path}`]),
+    ),
+    /* The same fallback the <head> annotations declare — the two hreflang
+       clusters have to agree or Google discards the pair. */
+    "x-default": `${siteConfig.url}/${i18n.defaultLocale}${path}`,
+  };
+}
+
+/**
+ * `lastmod` only helps when it is true: Google leans on it to decide what to
+ * recrawl and discounts sitemaps that stamp every URL with the current time.
+ * An unparseable or missing date yields `undefined`, which drops the element
+ * rather than inventing one.
+ */
+function lastModified(value: string | null | undefined): Date | undefined {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
 function priorityFor(path: string): number {
@@ -36,20 +53,24 @@ function changeFrequencyFor(
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
   const entries: MetadataRoute.Sitemap = [];
   const locales = i18n.locales as readonly Locale[];
 
   /* A page or record switched to "no indexing" in the admin is left out of the
      sitemap as well, so the two never contradict each other. */
-  const seoByLocale = Object.fromEntries(
+  const contentByLocale = Object.fromEntries(
     await Promise.all(
-      locales.map(async (locale) => [locale, (await getContent(locale))?.seo ?? {}] as const),
+      locales.map(async (locale) => [locale, await getContent(locale)] as const),
     ),
-  ) as Record<Locale, Record<string, { robots?: { index: boolean } }>>;
+  ) as Record<Locale, Awaited<ReturnType<typeof getContent>>>;
 
   const indexable = (locale: Locale, page: PageKey) =>
-    seoByLocale[locale]?.[page]?.robots?.index !== false;
+    contentByLocale[locale]?.seo?.[page]?.robots?.index !== false;
+
+  /* When the page was last edited in the admin. Absent until the API ships the
+     `updated` map, in which case the entry simply carries no `lastmod`. */
+  const editedAt = (locale: Locale, page: PageKey) =>
+    lastModified(contentByLocale[locale]?.updated?.[page]);
 
   for (const { path, page } of staticPaths) {
     for (const locale of locales) {
@@ -57,7 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       entries.push({
         url: `${siteConfig.url}/${locale}${path}`,
-        lastModified: now,
+        lastModified: editedAt(locale, page),
         changeFrequency: changeFrequencyFor(path),
         priority: priorityFor(path),
         alternates: { languages: buildAlternates(path) },
@@ -77,7 +98,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       entries.push({
         url: `${siteConfig.url}/${locale}/services/${service.slug}`,
-        lastModified: now,
+        lastModified: lastModified(service.updated_at),
         changeFrequency: "monthly",
         priority: 0.8,
         alternates: { languages: buildAlternates(`/services/${service.slug}`) },
@@ -97,7 +118,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       entries.push({
         url: `${siteConfig.url}/${locale}/portfolio/${project.slug}`,
-        lastModified: now,
+        lastModified: lastModified(project.updated_at),
         changeFrequency: "monthly",
         priority: 0.7,
         alternates: { languages: buildAlternates(`/portfolio/${project.slug}`) },
@@ -117,7 +138,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       entries.push({
         url: `${siteConfig.url}/${locale}/blog/${post.slug}`,
-        lastModified: post.published_at ? new Date(post.published_at) : now,
+        /* An edited post is fresher than its publication date; either beats
+           stamping it with the moment the sitemap was fetched. */
+        lastModified: lastModified(post.updated_at) ?? lastModified(post.published_at),
         changeFrequency: "monthly",
         priority: 0.6,
         alternates: { languages: buildAlternates(`/blog/${post.slug}`) },

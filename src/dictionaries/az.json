@@ -221,7 +221,47 @@
     "related": "Digər xidmətlər",
     "startTitle": "Layihəyə başlayaq",
     "startText": "Bu xidmətlə bağlı sualınız var? Qısa brif göndərin, 24 saat ərzində geri dönüş edək.",
-    "empty": "Xidmətlər tezliklə əlavə olunacaq."
+    "empty": "Xidmətlər tezliklə əlavə olunacaq.",
+    "faqTitle": "Bu xidmət haqqında suallar",
+    "faq": {
+      "label": "Xidmətlər üzrə suallar",
+      "title": "Layihəyə başlamazdan əvvəl soruşulanlar",
+      "items": [
+        {
+          "question": "Hansı xidmətin bizə uyğun olduğunu necə müəyyən edək?",
+          "answer": "Pulsuz ilkin konsultasiyada biznes məqsədinizi, mövcud rəqəmsal infrastrukturunuzu və büdcənizi dəyərləndiririk. Nəticədə hansı xidmətlərin hansı ardıcıllıqla daha çox fayda verəcəyi yazılı təklif şəklində təqdim olunur."
+        },
+        {
+          "question": "Bir neçə xidməti birlikdə sifariş etmək mümkündürmü?",
+          "answer": "Bəli. Veb sayt, mobil tətbiq, SEO və avtomatlaşdırma vahid layihə kimi planlaşdırıla bilər — bu həm inteqrasiyanı asanlaşdırır, həm də ümumi büdcəyə qənaət edir."
+        },
+        {
+          "question": "Mövcud saytımız var — onu sıfırdan yenidən qurmaq lazımdırmı?",
+          "answer": "Mütləq deyil. Əvvəlcə mövcud sistemin texniki auditini aparırıq; çox vaxt sürət, SEO və dizayn təkmilləşdirmələri kifayət edir. Tam yenidən qurulma yalnız texnologiya köhnəldikdə tövsiyə olunur."
+        },
+        {
+          "question": "Xidmətlərin qiyməti necə formalaşır?",
+          "answer": "Qiymət funksionallığın həcmindən, inteqrasiyalardan və dil sayından asılıdır. Brif əsasında sabit qiymətli təklif hazırlayırıq — layihə gedişində razılaşdırılmamış əlavə xərc çıxmır."
+        },
+        {
+          "question": "İşə nə vaxt başlaya bilərsiniz?",
+          "answer": "Adətən müqavilə imzalandıqdan sonra 3–5 iş günü ərzində. Təcili layihələr üçün paralel işləyən komanda resursu ayırırıq."
+        },
+        {
+          "question": "Təhvildən sonra layihə kimə məxsus olur?",
+          "answer": "Sizə. Bütün kod, domen, hosting və admin panel girişləri tam şəkildə təhvil verilir; sənədləşmə və idarəetmə üzrə təlim də buraya daxildir."
+        }
+      ]
+    },
+    "seoText": {
+      "label": "SEO mətn",
+      "title": "Bir tərəfdaşdan idarə olunan rəqəmsal xidmətlər",
+      "body": [
+        "H2 Solutions veb sayt hazırlanması, mobil tətbiqlər, e-ticarət, SEO və biznes avtomatlaşdırma xidmətlərini vahid çətir altında birləşdirir. Bir neçə fərqli təchizatçını əlaqələndirmək əvəzinə sistemin bütövünü — verilənlər bazasından müştərinizin gördüyü interfeysə qədər — tanıyan bir komanda ilə işləyirsiniz.",
+        "Bütün xidmətlər eyni mühəndislik standartı üzərində qurulur: Next.js və Laravel memarlığı, mobile-first interfeyslər, ölçülə bilən səhifə sürəti, texniki SEO və strukturlaşdırılmış data. Buna görə təhvil verdiyimiz sayt istifadəyə verildikdən sonra da sürətli qalır, axtarış nəticələrində görünür və süni intellekt əsaslı axtarış sistemləri üçün də uyğun işləyir.",
+        "İşimiz təhvil ilə bitmir. Analitika, kontent, davamlı SEO və yeni funksionallıqların inkişafı aylıq paketlərlə davam edir ki, rəqəmsal məhsulunuz biznesinizin templi ilə ayaqlaşsın."
+      ]
+    }
   },
   "about": {
     "label": "Haqqımızda",
@@ -238,11 +278,9 @@
     "founder": {
       "label": "Təsisçi",
       "name": "Həmid Həmidli",
-      "role": "Təsisçi & baş həll memarı",
-      "quote": "Kod yalnız biznes məqsədinə xidmət edəndə dəyər qazanır. Buna görə hər layihədə əvvəlcə nəticəni, sonra texnologiyanı seçirik.",
-      "linkedinLabel": "LinkedIn profili"
+      "role": "Təsisçi",
+      "quote": "Kod yalnız biznes məqsədinə xidmət edəndə dəyər qazanır. Buna görə hər layihədə əvvəlcə nəticəni, sonra texnologiyanı seçirik."
     },
-    "factsTitle": "Qısa məlumat",
     "facts": [
       {
         "label": "Ünvan",
@@ -391,14 +429,14 @@
     "subtitle": "Real bizneslər, real nəticələr. Problem → Həll → Nəticə strukturunda hekayələr.",
     "empty": "Layihələr tezliklə əlavə olunacaq.",
     "viewCase": "Layihəyə bax",
-    "problemLabel": "Problem",
-    "solutionLabel": "Həll",
-    "resultLabel": "Nəticə",
     "overviewTitle": "Layihə haqqında",
+    "videoTitle": "Layihə videosu",
+    "videoPlay": "Videonu izlə",
     "galleryTitle": "Layihə qalereyası",
     "galleryHint": "Şəklə klikləyib böyüdün",
     "clientLabel": "Müştəri",
     "yearLabel": "İl",
+    "domainLabel": "Domen",
     "visitSite": "Sayta bax",
     "related": "Digər layihələr",
     "processTitle": "Necə işlədik",

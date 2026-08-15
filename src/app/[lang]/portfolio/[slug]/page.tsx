@@ -1,27 +1,27 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   ArrowRightIcon,
   ArrowTopRightOnSquareIcon,
-  ExclamationTriangleIcon,
-  SparklesIcon,
-  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
-import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectGallery } from "@/components/sections/ProjectGallery";
+import { ProjectVideo } from "@/components/sections/ProjectVideo";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
+import { hostname } from "@/lib/format";
 import { fetchProject, fetchProjects } from "@/lib/api";
 import { i18n, isLocale } from "@/i18n-config";
 import { buildMetadata } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
 import { breadcrumbJsonLd, projectJsonLd } from "@/lib/jsonld";
+import { resolveProjectVideo } from "@/lib/video";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -68,7 +68,8 @@ export default async function ProjectDetailPage({
 
   if (!project) notFound();
 
-  const related = allProjects.filter((item) => item.slug !== slug).slice(0, 3);
+  /* The rail beside the text lists the rest of the portfolio. */
+  const related = allProjects.filter((item) => item.slug !== slug).slice(0, 5);
   /* The cover chosen in the admin leads the mosaic; the rest follow in
      upload order, de-duplicated in case the cover is also in the gallery. */
   const galleryImages = Array.from(
@@ -78,27 +79,10 @@ export default async function ProjectDetailPage({
       ),
     ),
   );
-
-  const story = [
-    {
-      label: dict.portfolio.problemLabel,
-      text: project.problem,
-      icon: ExclamationTriangleIcon,
-      accent: false,
-    },
-    {
-      label: dict.portfolio.solutionLabel,
-      text: project.solution,
-      icon: WrenchScrewdriverIcon,
-      accent: false,
-    },
-    {
-      label: dict.portfolio.resultLabel,
-      text: project.result,
-      icon: SparklesIcon,
-      accent: true,
-    },
-  ].filter((block) => Boolean(block.text));
+  const hasGallery = galleryImages.length > 0;
+  const video = resolveProjectVideo(project);
+  /* The bare host is what reads as the project's domain in the meta row. */
+  const domain = project.url ? hostname(project.url) : null;
 
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
@@ -142,7 +126,7 @@ export default async function ProjectDetailPage({
         }
       />
 
-      {(project.client || project.year) && (
+      {(project.client || project.year || domain) && (
         <div className="container-h2 pb-4">
           <dl className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
             {project.client && (
@@ -161,84 +145,143 @@ export default async function ProjectDetailPage({
                 <dd className="font-medium">{project.year}</dd>
               </div>
             )}
+            {domain && (
+              <div className="flex items-center gap-2">
+                <dt className="text-[color:var(--color-foreground-muted)]">
+                  {dict.portfolio.domainLabel}:
+                </dt>
+                <dd className="font-medium">
+                  <a
+                    href={project.url ?? undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                  >
+                    {domain}
+                    <ArrowTopRightOnSquareIcon aria-hidden className="h-3.5 w-3.5" />
+                  </a>
+                </dd>
+              </div>
+            )}
           </dl>
         </div>
       )}
 
-      <ProjectGallery
-        images={galleryImages}
-        title={project.title}
-        labels={{
-          heading: dict.portfolio.galleryTitle,
-          hint: dict.portfolio.galleryHint,
-          close: dict.portfolio.galleryClose,
-        }}
-      />
+      {video && (
+        <ProjectVideo
+          video={video}
+          poster={project.cover_image ?? galleryImages[0] ?? null}
+          title={project.title}
+          labels={{
+            heading: dict.portfolio.videoTitle,
+            play: dict.portfolio.videoPlay,
+          }}
+        />
+      )}
 
-      <article aria-labelledby="overview-heading" className="reveal">
-        <div className="container-h2 py-12 md:py-14">
-          <h2 id="overview-heading" className="text-2xl font-bold md:text-[1.75rem]">
-            {dict.portfolio.overviewTitle}
-          </h2>
-
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
-            {story.map((block) => (
-              <section
-                key={block.label}
-                className={`panel flex flex-col p-6 ${
-                  block.accent
-                    ? "border-[color:color-mix(in_oklab,var(--color-accent)_40%,transparent)]"
-                    : ""
-                }`}
+      {/* Under the video: the project text with its gallery below it, and the
+          rest of the portfolio in the rail beside them. */}
+      <div className="reveal">
+        <div className="container-h2 grid items-start gap-10 py-12 md:py-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+          <div className="min-w-0">
+            <article aria-labelledby="overview-heading">
+              <h2
+                id="overview-heading"
+                className="text-2xl font-bold md:text-[1.75rem]"
               >
-                <span aria-hidden className="icon-tile h-10 w-10">
-                  <block.icon className="h-5 w-5" />
-                </span>
-                <h3
-                  className={`mt-5 text-base font-semibold ${
-                    block.accent ? "text-[color:var(--color-accent)]" : ""
-                  }`}
-                >
-                  {block.label}
-                </h3>
-                <p className="mt-3 text-[0.875rem] leading-[1.85] text-[color:var(--color-foreground-soft)]">
-                  {block.text}
-                </p>
-              </section>
-            ))}
+                {dict.portfolio.overviewTitle}
+              </h2>
+              {/* The text keeps the panel background the old story blocks had. */}
+              <div className="panel mt-6 p-6 md:p-8">
+                <div
+                  className="prose-tech max-w-[68ch]"
+                  /* Content comes from the admin rich editor, which stores HTML. */
+                  dangerouslySetInnerHTML={{ __html: project.body ?? "" }}
+                />
+              </div>
+            </article>
+
+            {hasGallery && (
+              <div className="mt-12">
+                <ProjectGallery
+                  variant="stacked"
+                  images={galleryImages}
+                  title={project.title}
+                  labels={{
+                    heading: dict.portfolio.galleryTitle,
+                    hint: dict.portfolio.galleryHint,
+                    close: dict.portfolio.galleryClose,
+                  }}
+                />
+              </div>
+            )}
           </div>
+
+          {/* Heading + panel, mirroring the text column so both cards line up
+              on the same edge. */}
+          {related.length > 0 && (
+            <aside className="lg:sticky lg:top-24">
+              <h2
+                id="related-projects-heading"
+                className="text-2xl font-bold md:text-[1.75rem]"
+              >
+                {dict.portfolio.related}
+              </h2>
+              <nav
+                aria-labelledby="related-projects-heading"
+                className="panel mt-6 p-6 md:p-8"
+              >
+                <ul>
+                  {related.map((item) => (
+                    <li
+                      key={item.slug}
+                      className="border-t border-[color:var(--color-border)] first:border-t-0 first:[&>a]:pt-0"
+                    >
+                      <Link
+                        href={`/${lang}/portfolio/${item.slug}`}
+                        className="group flex items-start gap-3 py-3.5"
+                      >
+                        <span className="media-placeholder relative aspect-16/10 w-20 flex-none overflow-hidden rounded-md border border-[color:var(--color-border)]">
+                          {item.cover_image && (
+                            <Image
+                              src={item.cover_image}
+                              alt=""
+                              fill
+                              sizes="80px"
+                              className="object-cover"
+                            />
+                          )}
+                        </span>
+
+                        <span className="flex min-w-0 flex-col gap-1.5">
+                          <span className="text-[0.875rem] font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
+                            {item.title}
+                          </span>
+                          <span className="flex flex-wrap items-center gap-x-2 text-[0.6875rem] text-[color:var(--color-foreground-muted)]">
+                            {item.client && <span>{item.client}</span>}
+                            {item.client && item.year && <span aria-hidden>·</span>}
+                            {item.year && <span>{item.year}</span>}
+                          </span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href={`/${lang}/portfolio`}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                >
+                  {dict.portfolio.title}
+                  <ArrowRightIcon aria-hidden className="h-4 w-4" />
+                </Link>
+              </nav>
+            </aside>
+          )}
         </div>
-      </article>
+      </div>
 
       <ProcessSteps dict={dict} />
-
-      {related.length > 0 && (
-        <section aria-labelledby="related-projects-heading" className="reveal">
-          <div className="container-h2 py-12 md:py-14">
-            <p className="section-label">{dict.portfolio.title}</p>
-            <h2
-              id="related-projects-heading"
-              className="mt-3 text-2xl font-bold md:text-[1.75rem]"
-            >
-              {dict.portfolio.related}
-            </h2>
-            <ul className="mt-9 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-              {related.map((item, index) => (
-                <li key={item.slug} className="flex">
-                  <ProjectCard
-                    project={item}
-                    lang={lang}
-                    ctaLabel={dict.portfolio.viewCase}
-                    variant={index + 1}
-                    headingLevel="h3"
-                    sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
 
       <CtaBanner lang={lang} dict={dict} className="reveal" />
       <JsonLd

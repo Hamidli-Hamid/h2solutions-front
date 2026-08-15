@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRightIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -11,7 +11,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { resolveSite, siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site-config";
 import { aboutPageJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export async function generateMetadata({
@@ -34,7 +34,6 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
   if (!isLocale(lang)) notFound();
   const dict = await getDictionary(lang);
   const t = dict.about;
-  const site = resolveSite(dict);
 
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
@@ -116,20 +115,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
               {t.founder.quote}
             </blockquote>
 
-            <a
-              href={site.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
-            >
-              {t.founder.linkedinLabel}
-              <ArrowUpRightIcon aria-hidden className="h-4 w-4" />
-            </a>
-
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--color-foreground-muted)]">
-              {t.factsTitle}
-            </p>
-            <dl className="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+            <dl className="mt-8 grid gap-x-6 gap-y-4 sm:grid-cols-2">
               {t.facts.map((fact) => (
                 <div
                   key={fact.label}

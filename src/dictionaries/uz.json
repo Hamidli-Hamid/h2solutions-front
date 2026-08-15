@@ -221,7 +221,47 @@
     "related": "Boshqa xizmatlar",
     "startTitle": "Loyihani boshlaymiz",
     "startText": "Ushbu xizmat boʻyicha savolingiz bormi? Qisqa brif yuboring, 24 soat ichida javob beramiz.",
-    "empty": "Xizmatlar tez orada qoʻshiladi."
+    "empty": "Xizmatlar tez orada qoʻshiladi.",
+    "faqTitle": "Ushbu xizmat haqidagi savollar",
+    "faq": {
+      "label": "Xizmatlar boʻyicha savollar",
+      "title": "Loyiha boshlanishidan oldin beriladigan savollar",
+      "items": [
+        {
+          "question": "Bizga qaysi xizmat mos kelishini qanday bilamiz?",
+          "answer": "Bepul dastlabki maslahatda biznes maqsadingiz, mavjud raqamli infratuzilmangiz va byudjetingiz baholanadi. Natijada qaysi xizmatlar qanday ketma-ketlikda kerakligi yozma taklif sifatida taqdim etiladi."
+        },
+        {
+          "question": "Bir nechta xizmatni birga buyurtma qilish mumkinmi?",
+          "answer": "Ha. Sayt, mobil ilova, SEO va avtomatlashtirishni yagona loyiha sifatida rejalashtirish mumkin — bu integratsiyani osonlashtiradi va umumiy byudjetni tejaydi."
+        },
+        {
+          "question": "Bizda sayt bor — uni noldan qayta qurish kerakmi?",
+          "answer": "Shart emas. Avval texnik audit oʻtkazamiz; koʻpincha tezlik, SEO va dizaynni yaxshilash kifoya qiladi. Toʻliq qayta qurish faqat texnologiya eskirgan holatda tavsiya etiladi."
+        },
+        {
+          "question": "Xizmat narxi qanday belgilanadi?",
+          "answer": "Narx funksional hajmi, integratsiyalar va tillar soniga bogʻliq. Brif asosida qatʼiy narxli taklif tayyorlaymiz — loyiha davomida kelishilmagan qoʻshimcha xarajat chiqmaydi."
+        },
+        {
+          "question": "Ishni qachon boshlay olasiz?",
+          "answer": "Odatda shartnoma imzolangach 3–5 ish kuni ichida. Shoshilinch loyihalar uchun parallel ishlaydigan jamoa ajratamiz."
+        },
+        {
+          "question": "Topshirilgandan soʻng loyiha kimga tegishli boʻladi?",
+          "answer": "Sizga. Barcha kod, domen, hosting va admin panel kirishlari toʻliq topshiriladi; hujjatlar va boshqaruv boʻyicha oʻquv ham shunga kiradi."
+        }
+      ]
+    },
+    "seoText": {
+      "label": "SEO matni",
+      "title": "Yagona hamkor boshqaradigan raqamli xizmatlar",
+      "body": [
+        "H2 Solutions veb ishlab chiqish, mobil ilovalar, elektron tijorat, SEO va biznesni avtomatlashtirish xizmatlarini bitta tom ostida birlashtiradi. Bir nechta yetkazib beruvchini muvofiqlashtirish oʻrniga tizimning butun tuzilishini — maʼlumotlar bazasidan mijozingiz koʻradigan interfeysgacha — biladigan bitta jamoa bilan ishlaysiz.",
+        "Barcha xizmatlar bir xil muhandislik standartiga asoslanadi: Next.js va Laravel arxitekturasi, mobile-first interfeyslar, oʻlchanadigan sahifa tezligi, texnik SEO va tuzilmali maʼlumot. Shu sababli biz topshirgan sayt ishga tushgandan keyin ham tez ishlaydi, qidiruv natijalarida koʻrinadi va sunʼiy intellektga asoslangan qidiruv uchun ham mos keladi.",
+        "Ishimiz topshirish bilan tugamaydi. Analitika, kontent, doimiy SEO va yangi funksiyalarni ishlab chiqish oylik paketlar orqali davom etadi — raqamli mahsulotingiz biznesingiz surʼati bilan hamqadam boʻladi."
+      ]
+    }
   },
   "about": {
     "label": "Biz haqimizda",
@@ -238,11 +278,9 @@
     "founder": {
       "label": "Asoschi",
       "name": "Hamid Hamidli",
-      "role": "Asoschi & bosh yechim arxitektori",
-      "quote": "Kod biznes maqsadiga xizmat qilgandagina qiymat kasb etadi. Shu sababli har bir loyihada avval natijani, keyin texnologiyani tanlaymiz.",
-      "linkedinLabel": "LinkedIn profili"
+      "role": "Asoschi",
+      "quote": "Kod biznes maqsadiga xizmat qilgandagina qiymat kasb etadi. Shu sababli har bir loyihada avval natijani, keyin texnologiyani tanlaymiz."
     },
-    "factsTitle": "Qisqacha maʼlumot",
     "facts": [
       {
         "label": "Joylashuv",
@@ -391,14 +429,14 @@
     "subtitle": "Haqiqiy bizneslar, haqiqiy natijalar. Muammo → Yechim → Natija tuzilmasidagi hikoyalar.",
     "empty": "Loyihalar tez orada qoʻshiladi.",
     "viewCase": "Loyihani koʻrish",
-    "problemLabel": "Muammo",
-    "solutionLabel": "Yechim",
-    "resultLabel": "Natija",
     "overviewTitle": "Loyiha haqida",
+    "videoTitle": "Loyiha videosi",
+    "videoPlay": "Videoni koʻrish",
     "galleryTitle": "Loyiha galereyasi",
     "galleryHint": "Kattalashtirish uchun rasmni bosing",
     "clientLabel": "Mijoz",
     "yearLabel": "Yil",
+    "domainLabel": "Domen",
     "visitSite": "Saytga oʻtish",
     "related": "Boshqa loyihalar",
     "processTitle": "Qanday ishladik",

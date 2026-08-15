@@ -289,7 +289,7 @@ export default async function ContactPage({
       </section>
 
       {/* The homepage FAQ answers the questions that used to arrive through the form. */}
-      <FaqAccordion dict={dict} />
+      <FaqAccordion content={dict.home.faq} />
 
       {/* DIRECT — closing band; every action here leaves the site, none loops back. */}
       <section aria-labelledby="contact-direct-heading" className="reveal">

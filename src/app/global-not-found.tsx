@@ -6,6 +6,10 @@ import "./globals.css";
 
 import { getDictionary } from "@/lib/dictionaries";
 import { i18n } from "@/i18n-config";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/analytics/GoogleTagManager";
 
 /**
  * The 404 for URLs that match no route at all. The site's root layout lives
@@ -52,7 +56,11 @@ export default async function GlobalNotFound() {
       dir="ltr"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
+      {/* This document is composed separately from the site layout, so the
+          container has to be repeated here or 404s go unrecorded. */}
+      <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-[color:var(--color-background)] text-[color:var(--color-foreground)]">
+        <GoogleTagManagerNoScript />
         <main className="grid-bg flex flex-1 items-center">
           <div className="container-h2 py-24 md:py-32">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--color-accent)]">

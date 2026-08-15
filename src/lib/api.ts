@@ -24,6 +24,8 @@ export type ApiContent = {
   content: Record<string, unknown>;
   /** Keyed by page key: `home`, `about`, `service-detail`, … */
   seo: Record<string, ApiSeo>;
+  /** Last edit per page key, keyed as `seo` is — the sitemap's `lastmod`. */
+  updated?: Record<string, string>;
 };
 
 export type ApiService = {
@@ -34,7 +36,10 @@ export type ApiService = {
   summary: string;
   description: string;
   features: string[];
+  /** Questions written for this one service; empty when none were filled in. */
+  faq?: { question: string; answer: string }[];
   sort_order: number;
+  updated_at?: string | null;
   seo?: ApiSeo;
 };
 
@@ -47,11 +52,15 @@ export type ApiProject = {
   cover_image: string | null;
   /** Ordered gallery image URLs; empty when nothing has been uploaded yet. */
   gallery: string[];
+  /** Absolute URL of a clip uploaded in the admin; wins over `video_url`. */
+  video_file?: string | null;
+  /** YouTube/Vimeo link or a direct video URL — see lib/video.ts. */
+  video_url?: string | null;
   title: string;
   summary: string;
-  problem: string;
-  solution: string;
-  result: string;
+  /** The project story as rich-text HTML from the admin editor. */
+  body: string;
+  updated_at?: string | null;
   seo?: ApiSeo;
 };
 
@@ -61,6 +70,7 @@ export type ApiBlogPost = {
   cover_image: string | null;
   read_minutes: number;
   published_at: string | null;
+  updated_at?: string | null;
   author?: { name: string | null };
   title: string;
   excerpt: string;

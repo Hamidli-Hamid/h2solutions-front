@@ -221,7 +221,47 @@
     "related": "Other services",
     "startTitle": "Start your project",
     "startText": "Questions about this service? Send a short brief and we'll get back to you within 24 hours.",
-    "empty": "Services will be added shortly."
+    "empty": "Services will be added shortly.",
+    "faqTitle": "Questions about this service",
+    "faq": {
+      "label": "Service FAQ",
+      "title": "What clients ask before starting",
+      "items": [
+        {
+          "question": "How do we know which service fits us?",
+          "answer": "A free initial consultation reviews your business goal, your current digital setup and your budget. You receive a written proposal stating which services are worth taking and in what order."
+        },
+        {
+          "question": "Can several services be combined?",
+          "answer": "Yes. Web development, mobile apps, SEO and automation can be planned as a single project, which simplifies integration and lowers the overall budget."
+        },
+        {
+          "question": "We already have a website — does it need rebuilding from scratch?",
+          "answer": "Not necessarily. We start with a technical audit; improvements to speed, SEO and design are often enough. A full rebuild is recommended only when the underlying technology is out of date."
+        },
+        {
+          "question": "How is the price determined?",
+          "answer": "The price depends on scope, integrations and the number of languages. We prepare a fixed-price offer from your brief, so no unagreed cost appears mid-project."
+        },
+        {
+          "question": "When can you start work?",
+          "answer": "Usually within 3–5 working days of signing the contract. For urgent projects we allocate a parallel team."
+        },
+        {
+          "question": "Who owns the project after delivery?",
+          "answer": "You do. All code, the domain, hosting and admin access are handed over in full, together with documentation and a training session."
+        }
+      ]
+    },
+    "seoText": {
+      "label": "SEO text",
+      "title": "Digital services managed by a single partner",
+      "body": [
+        "H2 Solutions brings web development, mobile applications, e-commerce, SEO and business automation together under one roof. Instead of coordinating several suppliers, you work with one team that knows the whole system — from the database to the interface your customers see.",
+        "Every service is built to the same engineering standard: Next.js and Laravel architecture, mobile-first interfaces, measurable page speed, technical SEO and structured data. That is why a site we deliver stays fast and visible in search results long after launch, and works for AI-driven search as well.",
+        "Our work does not stop at delivery. Analytics, content, ongoing SEO and new feature development continue as monthly packages, so your digital product keeps pace with your business."
+      ]
+    }
   },
   "about": {
     "label": "About us",
@@ -238,11 +278,9 @@
     "founder": {
       "label": "Founder",
       "name": "Hamid Hamidli",
-      "role": "Founder & lead solution architect",
-      "quote": "Code only earns its value when it serves a business goal. That's why on every project we pick the outcome first and the technology second.",
-      "linkedinLabel": "LinkedIn profile"
+      "role": "Founder",
+      "quote": "Code only earns its value when it serves a business goal. That's why on every project we pick the outcome first and the technology second."
     },
-    "factsTitle": "At a glance",
     "facts": [
       {
         "label": "Based in",
@@ -391,14 +429,14 @@
     "subtitle": "Real businesses, real outcomes. Stories told as Problem → Solution → Result.",
     "empty": "Projects coming soon.",
     "viewCase": "View case",
-    "problemLabel": "Problem",
-    "solutionLabel": "Solution",
-    "resultLabel": "Result",
     "overviewTitle": "About the project",
+    "videoTitle": "Project video",
+    "videoPlay": "Play the video",
     "galleryTitle": "Project gallery",
     "galleryHint": "Click an image to enlarge",
     "clientLabel": "Client",
     "yearLabel": "Year",
+    "domainLabel": "Domain",
     "visitSite": "Visit the site",
     "related": "Other projects",
     "processTitle": "How we worked",

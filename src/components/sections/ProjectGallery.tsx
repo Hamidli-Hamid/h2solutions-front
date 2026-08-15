@@ -17,6 +17,11 @@ type Props = {
     hint: string;
     close: string;
   };
+  /**
+   * `mosaic` is the full-width band; `stacked` is the narrow column that sits
+   * beside the project text, one image under the other.
+   */
+  variant?: "mosaic" | "stacked";
 };
 
 /**
@@ -24,7 +29,12 @@ type Props = {
  * full size in a native <dialog>, which gives us Esc, focus trapping and the
  * backdrop for free — no lightbox dependency.
  */
-export function ProjectGallery({ images, title, labels }: Props) {
+export function ProjectGallery({
+  images,
+  title,
+  labels,
+  variant = "mosaic",
+}: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -80,63 +90,93 @@ export function ProjectGallery({ images, title, labels }: Props) {
      — which is what kept distorting the cover. */
   const tileGrid = visible.length === 1 ? "grid-cols-1" : "grid-cols-2";
 
+  const header = (
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3">
+      <h2 id="gallery-heading" className="text-2xl font-bold md:text-[1.75rem]">
+        {labels.heading}
+      </h2>
+      <p className="text-xs text-[color:var(--color-foreground-muted)]">
+        {labels.hint}
+      </p>
+    </div>
+  );
+
   return (
-    <section aria-labelledby="gallery-heading" className="reveal">
-      <div className="container-h2 py-12 md:py-14">
-        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3">
-          <h2 id="gallery-heading" className="text-2xl font-bold md:text-[1.75rem]">
-            {labels.heading}
-          </h2>
-          <p className="text-xs text-[color:var(--color-foreground-muted)]">
-            {labels.hint}
-          </p>
-        </div>
+    <section
+      aria-labelledby="gallery-heading"
+      className={variant === "mosaic" ? "reveal" : undefined}
+    >
+      {variant === "stacked" ? (
+        <>
+          {header}
+          {/* One image under the other, below the project text. */}
+          <ul className="mt-6 flex flex-col gap-4">
+            {images.map((image, index) => (
+              <li key={image} className="flex">
+                <Tile
+                  image={image}
+                  index={index}
+                  total={images.length}
+                  title={title}
+                  onOpen={setOpenIndex}
+                  className="aspect-16/10"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  eager={index === 0}
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <div className="container-h2 py-12 md:py-14">
+          {header}
 
-        {/* Mosaic: the cover (first image) leads at full height on the left,
-            the remaining shots sit beside it as a tile grid. */}
-        <div className="mt-6 grid items-start gap-4 lg:grid-cols-2">
-          <Tile
-            image={images[0]}
-            index={0}
-            total={images.length}
-            title={title}
-            onOpen={setOpenIndex}
-            className="aspect-16/10"
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            eager
-          />
+          {/* Mosaic: the cover (first image) leads at full height on the left,
+              the remaining shots sit beside it as a tile grid. */}
+          <div className="mt-6 grid items-start gap-4 lg:grid-cols-2">
+            <Tile
+              image={images[0]}
+              index={0}
+              total={images.length}
+              title={title}
+              onOpen={setOpenIndex}
+              className="aspect-16/10"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              eager
+            />
 
-          {visible.length > 0 && (
-            <ul className={`grid gap-4 ${tileGrid}`}>
-              {visible.map((image, index) => (
-                <li key={image} className="flex">
-                  <Tile
-                    image={image}
-                    index={index + 1}
-                    total={images.length}
-                    title={title}
-                    onOpen={setOpenIndex}
-                    className="aspect-16/10"
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    eager={index < 3}
-                    overlayCount={
-                      hiddenCount > 0 && index === visible.length - 1
-                        ? hiddenCount
-                        : 0
-                    }
-                    /* The badge tile jumps straight to the first hidden shot. */
-                    openAt={
-                      hiddenCount > 0 && index === visible.length - 1
-                        ? visible.length + 1
-                        : undefined
-                    }
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+            {visible.length > 0 && (
+              <ul className={`grid gap-4 ${tileGrid}`}>
+                {visible.map((image, index) => (
+                  <li key={image} className="flex">
+                    <Tile
+                      image={image}
+                      index={index + 1}
+                      total={images.length}
+                      title={title}
+                      onOpen={setOpenIndex}
+                      className="aspect-16/10"
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      eager={index < 3}
+                      overlayCount={
+                        hiddenCount > 0 && index === visible.length - 1
+                          ? hiddenCount
+                          : 0
+                      }
+                      /* The badge tile jumps straight to the first hidden shot. */
+                      openAt={
+                        hiddenCount > 0 && index === visible.length - 1
+                          ? visible.length + 1
+                          : undefined
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <dialog
         ref={dialogRef}

@@ -1,12 +1,15 @@
-import type { Dictionary } from "@/lib/dictionaries";
-
-type Props = {
-  dict: Dictionary;
+/** Shape every SEO text block shares — home, services and any page added later. */
+export type SeoTextContent = {
+  label: string;
+  title: string;
+  body: string[];
 };
 
-export function SeoContent({ dict }: Props) {
-  const t = dict.home.seoText;
+type Props = {
+  content: SeoTextContent;
+};
 
+export function SeoContent({ content: t }: Props) {
   return (
     <section aria-labelledby="seo-content-heading" className="reveal">
       <div className="container-h2 py-12 md:py-14">

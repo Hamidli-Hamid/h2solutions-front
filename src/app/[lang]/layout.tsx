@@ -7,6 +7,10 @@ import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  GoogleTagManager,
+  GoogleTagManagerNoScript,
+} from "@/components/analytics/GoogleTagManager";
 import { getDictionary } from "@/lib/dictionaries";
 import {
   resolveBranding,
@@ -108,6 +112,14 @@ export async function generateMetadata({
     creator: site.founder,
     publisher: dict.meta.siteName,
     category: "technology",
+    /* Ownership proofs for the webmaster consoles. They have to stay on every
+       indexable route: each console re-checks the tag periodically and drops
+       the property when it stops finding it. Bing has no dedicated field, so
+       `msvalidate.01` goes through `other`, whose keys become meta names. */
+    verification: {
+      yandex: "08c85d38ca8cf549",
+      other: { "msvalidate.01": "88789CB6C61874F3854CC07A77F1DA20" },
+    },
     referrer: "origin-when-cross-origin",
     formatDetection: { telephone: false, email: false, address: false },
     ...brandedIcons(branding),
@@ -199,7 +211,9 @@ export default async function LangLayout({
       dir="ltr"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
+      <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-[color:var(--color-background)] text-[color:var(--color-foreground)]">
+        <GoogleTagManagerNoScript />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[color:var(--color-accent)] focus:px-4 focus:py-2 focus:font-semibold focus:text-[#001019]"

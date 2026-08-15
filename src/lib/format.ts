@@ -16,3 +16,16 @@ export function formatDate(value: string | null | undefined, lang: Locale): stri
     timeZone: "UTC",
   }).format(date);
 }
+
+/**
+ * The bare host of a project URL — "https://www.example.az/" reads as
+ * "example.az". Returns "" when the value is not a usable URL.
+ */
+export function hostname(value: string | null | undefined): string {
+  if (!value) return "";
+  try {
+    return new URL(value).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+}

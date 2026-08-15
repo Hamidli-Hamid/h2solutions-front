@@ -9,10 +9,10 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
-import { ServiceCard } from "@/components/ui/ServiceCard";
 import { Icon } from "@/components/ui/Icon";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchService, fetchServices } from "@/lib/api";
@@ -20,7 +20,7 @@ import { i18n, isLocale } from "@/i18n-config";
 import { buildMetadata } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
-import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -69,6 +69,8 @@ export default async function ServiceDetailPage({
   if (!service) notFound();
 
   const related = allServices.filter((s) => s.slug !== slug);
+  // Written per service in the admin panel; the block is skipped when empty.
+  const faq = service.faq ?? [];
 
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
@@ -140,80 +142,122 @@ export default async function ServiceDetailPage({
                 </ul>
               </section>
             )}
+
+            {faq.length > 0 && (
+              <div className="mt-8">
+                <FaqAccordion
+                  variant="inline"
+                  content={{
+                    label: dict.services.faq.label,
+                    title: dict.services.faqTitle,
+                    items: faq,
+                  }}
+                />
+              </div>
+            )}
           </div>
 
-          <aside className="panel p-6 lg:sticky lg:top-24">
-            <p className="section-label">{dict.services.title}</p>
-            <h2 className="mt-3 text-lg font-semibold">{dict.services.startTitle}</h2>
-            <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
-              {dict.services.startText}
-            </p>
-            <Link
-              href={`/${lang}/contact`}
-              className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm"
-            >
-              {dict.hero.ctaPrimary}
-              <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+          {/* Rail: the contact card first, the other services under it. */}
+          <aside className="flex flex-col gap-6 lg:sticky lg:top-24">
+            <div className="panel p-6">
+              <p className="section-label">{dict.services.title}</p>
+              <h2 className="mt-3 text-lg font-semibold">
+                {dict.services.startTitle}
+              </h2>
+              <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                {dict.services.startText}
+              </p>
+              <Link
+                href={`/${lang}/contact`}
+                className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm"
+              >
+                {dict.hero.ctaPrimary}
+                <ArrowRightIcon aria-hidden className="h-4 w-4" />
+              </Link>
 
-            <address className="mt-5 space-y-2.5 border-t border-[color:var(--color-border)] pt-5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
-              <div className="flex items-center gap-2.5">
-                <PhoneIcon
-                  aria-hidden
-                  className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
-                />
-                <a
-                  href={`tel:${dict.contact.phone.replace(/\s+/g, "")}`}
-                  className="transition hover:text-[color:var(--color-accent)]"
+              <address className="mt-5 space-y-2.5 border-t border-[color:var(--color-border)] pt-5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
+                <div className="flex items-center gap-2.5">
+                  <PhoneIcon
+                    aria-hidden
+                    className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
+                  />
+                  <a
+                    href={`tel:${dict.contact.phone.replace(/\s+/g, "")}`}
+                    className="transition hover:text-[color:var(--color-accent)]"
+                  >
+                    {dict.contact.phone}
+                  </a>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <EnvelopeIcon
+                    aria-hidden
+                    className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
+                  />
+                  <a
+                    href={`mailto:${dict.contact.email}`}
+                    className="transition hover:text-[color:var(--color-accent)]"
+                  >
+                    {dict.contact.email}
+                  </a>
+                </div>
+              </address>
+            </div>
+
+            {related.length > 0 && (
+              <nav aria-labelledby="related-heading" className="panel p-6">
+                <h2 id="related-heading" className="text-lg font-semibold">
+                  {dict.services.related}
+                </h2>
+                <ul className="mt-4">
+                  {related.map((item) => (
+                    <li
+                      key={item.slug}
+                      className="border-t border-[color:var(--color-border)] first:border-t-0 first:[&>a]:pt-0"
+                    >
+                      <Link
+                        href={`/${lang}/services/${item.slug}`}
+                        className="group flex items-start gap-3 py-3.5"
+                      >
+                        <span aria-hidden className="icon-tile h-9 w-9 flex-none">
+                          <Icon name={item.icon} className="h-4 w-4" />
+                        </span>
+                        <span className="flex min-w-0 flex-col gap-1">
+                          <span className="text-[0.875rem] font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
+                            {item.title}
+                          </span>
+                          <span className="line-clamp-2 text-[0.6875rem] leading-relaxed text-[color:var(--color-foreground-muted)]">
+                            {item.summary}
+                          </span>
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href={`/${lang}/services`}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
                 >
-                  {dict.contact.phone}
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <EnvelopeIcon
-                  aria-hidden
-                  className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
-                />
-                <a
-                  href={`mailto:${dict.contact.email}`}
-                  className="transition hover:text-[color:var(--color-accent)]"
-                >
-                  {dict.contact.email}
-                </a>
-              </div>
-            </address>
+                  {dict.servicesPreview.viewAll}
+                  <ArrowRightIcon aria-hidden className="h-4 w-4" />
+                </Link>
+              </nav>
+            )}
           </aside>
         </div>
       </article>
 
       <ProcessSteps dict={dict} />
 
-      {related.length > 0 && (
-        <section aria-labelledby="related-heading" className="reveal">
-          <div className="container-h2 py-12 md:py-14">
-            <p className="section-label">{dict.servicesPreview.viewAll}</p>
-            <h2 id="related-heading" className="mt-3 text-2xl font-bold md:text-[1.75rem]">
-              {dict.services.related}
-            </h2>
-            <ul className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {related.map((item) => (
-                <li key={item.slug} className="flex">
-                  <ServiceCard
-                    service={item}
-                    lang={lang}
-                    ctaLabel={dict.common.learnMore}
-                    headingLevel="h3"
-                    featureCount={2}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      )}
-
       <CtaBanner lang={lang} dict={dict} className="reveal" />
-      <JsonLd id="ld-service" data={[serviceLd, breadcrumb]} />
+      <JsonLd
+        id="ld-service"
+        data={
+          faq.length > 0
+            ? [serviceLd, breadcrumb, faqJsonLd(faq)]
+            : [serviceLd, breadcrumb]
+        }
+      />
     </div>
   );
 }

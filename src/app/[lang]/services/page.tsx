@@ -5,9 +5,10 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ServiceCard } from "@/components/ui/ServiceCard";
-import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { WhyUs } from "@/components/sections/WhyUs";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
+import { SeoContent } from "@/components/sections/SeoContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchServices } from "@/lib/api";
@@ -17,6 +18,7 @@ import { siteConfig } from "@/lib/site-config";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
+  faqJsonLd,
   itemListJsonLd,
 } from "@/lib/jsonld";
 
@@ -115,7 +117,8 @@ export default async function ServicesHubPage({
 
       <WhyUs dict={dict} />
       <ProcessSteps dict={dict} />
-      <CtaBanner lang={lang} dict={dict} className="reveal" />
+      <FaqAccordion content={dict.services.faq} />
+      <SeoContent content={dict.services.seoText} />
 
       <JsonLd
         id="ld-services"
@@ -125,6 +128,7 @@ export default async function ServicesHubPage({
             : [collection, breadcrumb]
         }
       />
+      <JsonLd id="ld-services-faq" data={faqJsonLd(dict.services.faq.items)} />
     </div>
   );
 }

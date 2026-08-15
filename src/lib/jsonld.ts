@@ -2,6 +2,7 @@ import { resolveSite, siteConfig } from "@/lib/site-config";
 import { i18n, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
+import { resolveProjectVideo } from "@/lib/video";
 
 function sanitize(value: string): string {
   return value.replace(/</g, "\\u003c");
@@ -171,12 +172,32 @@ export function projectJsonLd(
     year: number | null;
     cover_image: string | null;
     gallery: string[];
+    video_file?: string | null;
+    video_url?: string | null;
+    updated_at?: string | null;
   },
   lang: Locale,
 ) {
   const images = [project.cover_image, ...project.gallery].filter(
     (src): src is string => Boolean(src),
   );
+
+  const video = resolveProjectVideo(project);
+  /* Google only reads a VideoObject with a thumbnail and an upload date, so
+     the node is emitted only when both are actually there. */
+  const videoNode =
+    video && images[0] && project.updated_at
+      ? {
+          "@type": "VideoObject",
+          name: project.title,
+          description: project.summary,
+          thumbnailUrl: images[0],
+          uploadDate: project.updated_at,
+          ...(video.kind === "file"
+            ? { contentUrl: video.src }
+            : { embedUrl: video.src }),
+        }
+      : null;
 
   return {
     "@context": "https://schema.org",
@@ -186,6 +207,7 @@ export function projectJsonLd(
     url: `${siteConfig.url}/${lang}/portfolio/${project.slug}`,
     inLanguage: lang,
     ...(images.length > 0 && { image: images }),
+    ...(videoNode && { video: videoNode }),
     ...(project.year && { dateCreated: String(project.year) }),
     creator: { "@id": `${siteConfig.url}/#organization` },
     ...(project.client && {
@@ -214,6 +236,7 @@ export function blogPostingJsonLd(
     excerpt: string;
     cover_image: string | null;
     published_at: string | null;
+    updated_at?: string | null;
     author?: { name: string | null };
   },
   lang: Locale,
@@ -231,7 +254,9 @@ export function blogPostingJsonLd(
     ...(post.cover_image && { image: [post.cover_image] }),
     ...(post.published_at && {
       datePublished: post.published_at,
-      dateModified: post.published_at,
+      // The real edit date when the API reports one — claiming a post was last
+      // modified the day it went up is a fabricated date either way.
+      dateModified: post.updated_at || post.published_at,
     }),
     author: post.author?.name
       ? { "@type": "Person", name: post.author.name }
