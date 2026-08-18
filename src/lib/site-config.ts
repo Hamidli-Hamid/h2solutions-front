@@ -6,9 +6,19 @@ import type { Locale } from "@/i18n-config";
  * with `resolveSite(dict)` rather than these defaults, which only stand in
  * when the API has not answered.
  */
+/**
+ * Every canonical URL, hreflang annotation and sitemap `<loc>` is built from
+ * this value, so a trailing slash in the environment would turn all of them
+ * into `https://h2solutions.az//az` — a second, non-canonical URL for the same
+ * page. Normalised once, here.
+ */
+const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://h2solutions.az")
+  .trim()
+  .replace(/\/+$/, "");
+
 export const siteConfig = {
   domain: "h2solutions.az",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://h2solutions.az",
+  url: siteUrl,
   brand: "H2 Solutions",
   founder: "Hamid Hamidli",
   twitterHandle: "@h2solutions",

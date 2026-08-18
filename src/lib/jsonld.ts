@@ -3,6 +3,7 @@ import { i18n, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
 import { resolveProjectVideo } from "@/lib/video";
+import { realPhone } from "@/lib/format";
 
 function sanitize(value: string): string {
   return value.replace(/</g, "\\u003c");
@@ -31,6 +32,7 @@ export function jsonLdScript(payload: unknown): string {
 
 export function organizationJsonLd(dict: Dictionary, lang: Locale) {
   const site = resolveSite(dict);
+  const telephone = realPhone(dict.contact.phone);
 
   return {
     "@context": "https://schema.org",
@@ -63,7 +65,9 @@ export function organizationJsonLd(dict: Dictionary, lang: Locale) {
       "@type": "ContactPoint",
       contactType: "customer service",
       email: dict.contact.email,
-      telephone: dict.contact.phone,
+      /* Omitted rather than published as the shipped placeholder — see
+         `realPhone`. */
+      ...(telephone ? { telephone } : {}),
       areaServed: [site.addressCountry, "Worldwide"],
       // Kept in step with the locales the site actually ships.
       availableLanguage: i18n.locales,
@@ -86,6 +90,7 @@ export function websiteJsonLd(dict: Dictionary, lang: Locale) {
 
 export function professionalServiceJsonLd(dict: Dictionary, lang: Locale) {
   const site = resolveSite(dict);
+  const telephone = realPhone(dict.contact.phone);
 
   return {
     "@context": "https://schema.org",
@@ -94,7 +99,7 @@ export function professionalServiceJsonLd(dict: Dictionary, lang: Locale) {
     name: site.brand,
     image: `${siteConfig.url}/opengraph-image`,
     url: `${siteConfig.url}/${lang}`,
-    telephone: dict.contact.phone,
+    ...(telephone ? { telephone } : {}),
     email: dict.contact.email,
     priceRange: site.priceRange,
     description: dict.meta.defaultDescription,

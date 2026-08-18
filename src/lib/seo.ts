@@ -23,12 +23,34 @@ type BuildInput = {
 };
 
 /**
+ * Google renders about 580 CSS pixels of a title and 920 of a snippet before
+ * cutting; ~60 and ~155 characters are the usual working equivalents. Nothing
+ * is penalised for running longer — the sentence is simply truncated mid-word
+ * in the result — so these are limits on *derived* copy only. Anything an
+ * editor typed into the admin is published exactly as typed.
+ */
+const TITLE_LIMIT = 60;
+const DESCRIPTION_LIMIT = 155;
+const BRAND_SUFFIX = ` — ${siteConfig.brand}`;
+
+/** Trimmed at a word boundary, so the snippet ends on a word and not a stump. */
+function clamp(text: string, limit: number): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= limit) return clean;
+
+  const cut = clean.slice(0, limit);
+  const lastSpace = cut.lastIndexOf(" ");
+  const kept = lastSpace > limit * 0.6 ? cut.slice(0, lastSpace) : cut;
+  return `${kept.replace(/[\s,;:.\-–—]+$/, "")}…`;
+}
+
+/**
  * The brand, exactly once. Derived titles get it from the layout's
  * `title.template`, so the share cards have to reproduce that suffix rather
  * than add a second one — and a title that already names the brand keeps it.
  */
 function withBrand(title: string): string {
-  return title.includes(siteConfig.brand) ? title : `${title} — ${siteConfig.brand}`;
+  return title.includes(siteConfig.brand) ? title : `${title}${BRAND_SUFFIX}`;
 }
 
 function alternates(path: string) {
@@ -56,12 +78,26 @@ export function buildMetadata({
 }: BuildInput): Metadata {
   const url = `${siteConfig.url}/${lang}${path}`;
   const metaTitle = seo?.title || title;
-  const metaDescription = seo?.description || description;
+  /* Page copy is written to be read on the page — `about.story` is a paragraph,
+     a post's excerpt a lead-in. Cut to snippet length when it is standing in
+     for a description nobody wrote; an admin-set one is left alone. */
+  const metaDescription = seo?.description || clamp(description, DESCRIPTION_LIMIT);
 
   /* An overridden title, and the layout's own, are used verbatim; a derived one
      picks up the brand from the layout's title template. Either way the share
-     cards repeat the resolved <title>, so the brand is never doubled. */
-  const isAbsolute = Boolean(seo?.title) || absoluteTitle;
+     cards repeat the resolved <title>, so the brand is never doubled.
+
+     A long derived title (most blog headlines) skips the suffix: with it the
+     line overruns and Google cuts the brand off mid-word anyway, which reads
+     worse than a clean headline — and it appends the site name itself. */
+  const isAbsolute =
+    Boolean(seo?.title) ||
+    absoluteTitle ||
+    /* The layout's template appends the brand unconditionally, so a page whose
+       own title already names it came out as "H2 Solutions haqqında — H2
+       Solutions" — every /about page, in all six languages. */
+    metaTitle.includes(siteConfig.brand) ||
+    withBrand(metaTitle).length > TITLE_LIMIT;
   const shareTitle = isAbsolute ? metaTitle : withBrand(metaTitle);
   const ogDescription = metaDescription;
 

@@ -27,6 +27,16 @@ function pickLocale(request: NextRequest): Locale {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const [first, ...rest] = pathname.split("/").filter(Boolean);
+
+  /* `/AZ/about` matches no route, so without this it would fall through to the
+     locale detector and be sent to `/az/AZ/about` — a redirect whose target is
+     a 404. Normalising the case lands it on the real page instead. */
+  if (first && !isLocale(first) && isLocale(first.toLowerCase())) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${[first.toLowerCase(), ...rest].join("/")}`;
+    return NextResponse.redirect(url, 308);
+  }
 
   const pathnameHasLocale = i18n.locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
@@ -36,7 +46,14 @@ export function proxy(request: NextRequest) {
   const locale = pickLocale(request);
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+
+  /* This target is negotiated from the request, so a shared cache must not
+     hand one visitor's language to the next — nor pin Googlebot to whichever
+     locale was cached first. Temporary (307) for the same reason: the URL has
+     no single permanent destination. */
+  const response = NextResponse.redirect(url);
+  response.headers.set("Vary", "Accept-Language, Cookie");
+  return response;
 }
 
 export const config = {
@@ -44,6 +61,6 @@ export const config = {
     /* The social image routes carry no file extension, so they need naming
        here or the locale redirect swallows them (/opengraph-image ->
        /az/opengraph-image -> 404). */
-    "/((?!_next/static|_next/image|_next/data|api|favicon.ico|opengraph-image|twitter-image|robots.txt|sitemap.xml|.*\\..*).*)",
+    "/((?!_next/static|_next/image|_next/data|api|favicon.ico|opengraph-image|twitter-image|robots.txt|sitemap.xml|llms.txt|.*\\..*).*)",
   ],
 };
