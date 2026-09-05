@@ -1,4 +1,4 @@
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 
 /**
  * Deployment-level constants. Everything an editor can change (brand name,
@@ -45,6 +45,16 @@ export const siteConfig = {
   },
 };
 
+/**
+ * The absolute URL of a route in one language — the form canonical tags,
+ * hreflang annotations, the sitemap and every piece of structured data use.
+ * The default language carries no prefix; see `localePath`.
+ */
+export function localeUrl(lang: Locale, path: string = ""): string {
+  // `siteConfig.url` never ends in a slash, and `localePath` always starts with one.
+  return `${siteConfig.url}${localePath(lang, path)}`;
+}
+
 export type SiteProfile = typeof siteConfig;
 
 type SiteOverrides = {
@@ -83,12 +93,12 @@ export type NavItem = { key: string; label?: string; href: string; external?: bo
 
 /** Fallback menu, used only when the admin menu is empty or unreachable. */
 export const navItems: Array<{ key: NavKey; href: (lang: Locale) => string }> = [
-  { key: "home", href: (lang) => `/${lang}` },
-  { key: "about", href: (lang) => `/${lang}/about` },
-  { key: "services", href: (lang) => `/${lang}/services` },
-  { key: "portfolio", href: (lang) => `/${lang}/portfolio` },
-  { key: "blog", href: (lang) => `/${lang}/blog` },
-  { key: "contact", href: (lang) => `/${lang}/contact` },
+  { key: "home", href: (lang) => localePath(lang) },
+  { key: "about", href: (lang) => localePath(lang, "/about") },
+  { key: "services", href: (lang) => localePath(lang, "/services") },
+  { key: "portfolio", href: (lang) => localePath(lang, "/portfolio") },
+  { key: "blog", href: (lang) => localePath(lang, "/blog") },
+  { key: "contact", href: (lang) => localePath(lang, "/contact") },
 ];
 
 type MenuSource = {
@@ -119,8 +129,8 @@ export function resolveNav(dict: MenuSource, lang: Locale): NavItem[] {
       key: href,
       label: item.label,
       external,
-      // Stored as a path under the language prefix: "/" is the homepage.
-      href: external ? href : `/${lang}${href === "/" ? "" : href}`,
+      // Stored as a language-independent path: "/" is the homepage.
+      href: external ? href : localePath(lang, href),
     };
   });
 }

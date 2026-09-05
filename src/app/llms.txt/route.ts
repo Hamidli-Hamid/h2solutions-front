@@ -1,7 +1,7 @@
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPosts, fetchProjects, fetchServices } from "@/lib/api";
 import { i18n } from "@/i18n-config";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { realPhone } from "@/lib/format";
 
 /**
@@ -37,36 +37,38 @@ export async function GET() {
     fetchBlogPosts(lang),
   ]);
 
-  const base = `${siteConfig.url}/${lang}`;
+  /* The default language is served from the bare path, so `/about` — not
+     `/az/about` — is the URL the canonical tag names. */
+  const url = (path: string = "") => localeUrl(lang, path);
 
   const sections = [
     `# ${dict.meta.siteName}`,
     ``,
     `> ${dict.meta.defaultDescription}`,
     ``,
-    `${dict.meta.siteName} is based in ${siteConfig.addressLocality}, ${siteConfig.addressCountry}, and publishes every page in ${i18n.locales.length} languages: ${i18n.locales.join(", ")}. Swap the language code in any URL below to read that version — ${i18n.locales
-      .map((locale) => `${siteConfig.url}/${locale}`)
+    `${dict.meta.siteName} is based in ${siteConfig.addressLocality}, ${siteConfig.addressCountry}, and publishes every page in ${i18n.locales.length} languages: ${i18n.locales.join(", ")}. The URLs below are the ${lang} ones, which carry no language prefix; every other language prefixes the same path with its code — ${i18n.locales
+      .map((locale) => localeUrl(locale))
       .join(", ")}.`,
     ``,
     `## Pages`,
     ``,
     list([
-      { title: dict.nav.home, url: base, summary: dict.hero.subtitle },
-      { title: dict.about.title, url: `${base}/about`, summary: dict.about.story },
+      { title: dict.nav.home, url: url(), summary: dict.hero.subtitle },
+      { title: dict.about.title, url: url("/about"), summary: dict.about.story },
       {
         title: dict.services.title,
-        url: `${base}/services`,
+        url: url("/services"),
         summary: dict.services.intro,
       },
       {
         title: dict.portfolio.title,
-        url: `${base}/portfolio`,
+        url: url("/portfolio"),
         summary: dict.portfolio.subtitle,
       },
-      { title: dict.blog.title, url: `${base}/blog`, summary: dict.blog.subtitle },
+      { title: dict.blog.title, url: url("/blog"), summary: dict.blog.subtitle },
       {
         title: dict.contact.title,
-        url: `${base}/contact`,
+        url: url("/contact"),
         summary: dict.contact.subtitle,
       },
     ]),
@@ -80,7 +82,7 @@ export async function GET() {
       list(
         services.map((service) => ({
           title: service.title,
-          url: `${base}/services/${service.slug}`,
+          url: url(`/services/${service.slug}`),
           summary: service.summary,
         })),
       ),
@@ -95,7 +97,7 @@ export async function GET() {
       list(
         projects.map((project) => ({
           title: project.title,
-          url: `${base}/portfolio/${project.slug}`,
+          url: url(`/portfolio/${project.slug}`),
           summary: project.summary,
         })),
       ),
@@ -110,7 +112,7 @@ export async function GET() {
       list(
         posts.map((post) => ({
           title: post.title,
-          url: `${base}/blog/${post.slug}`,
+          url: url(`/blog/${post.slug}`),
           summary: post.excerpt,
         })),
       ),

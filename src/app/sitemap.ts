@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { i18n, type Locale } from "@/i18n-config";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl } from "@/lib/site-config";
 import {
   fetchBlogPosts,
   fetchProjects,
@@ -68,8 +68,8 @@ function images(...sources: Array<string | null | undefined>): string[] | undefi
  * slugs and `<loc>` is interpolated raw by Next (see `xml` above), so one
  * ampersand in a slug would otherwise take the whole document down with it.
  */
-function loc(locale: string, path: string): string {
-  return xml(`${siteConfig.url}/${locale}${path}`);
+function loc(locale: Locale, path: string): string {
+  return xml(localeUrl(locale, path));
 }
 
 function buildAlternates(path: string) {

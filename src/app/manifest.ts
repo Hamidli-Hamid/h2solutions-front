@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { getDictionary } from "@/lib/dictionaries";
 import { resolveBranding } from "@/lib/site-config";
-import { i18n } from "@/i18n-config";
+import { i18n, localePath } from "@/i18n-config";
 
 /** Sizes worth listing for installed apps and Android launchers. */
 const PWA_SIZES = ["192", "256", "384", "512"];
@@ -59,7 +59,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     name: branding.appName,
     short_name: branding.appShortName,
     description: dict.meta.defaultDescription,
-    start_url: `/${i18n.defaultLocale}`,
+    start_url: localePath(i18n.defaultLocale),
     scope: "/",
     display: "standalone",
     orientation: "portrait",

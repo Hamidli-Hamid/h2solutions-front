@@ -23,6 +23,11 @@
     "ctaPrimary": "Loyihani muhokama qilamiz",
     "ctaSecondary": "Ishlarimizni koʻrish",
     "servicesTitle": "Asosiy xizmatlarimiz",
+    "proofPoints": [
+      "Oʻz vaqtida topshirish",
+      "Oʻlchanadigan natija",
+      "Shaxsiy hamkorlik"
+    ],
     "services": [
       {
         "slug": "web-development",

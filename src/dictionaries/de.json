@@ -23,6 +23,11 @@
     "ctaPrimary": "Projekt besprechen",
     "ctaSecondary": "Arbeiten ansehen",
     "servicesTitle": "Unsere Kernleistungen",
+    "proofPoints": [
+      "Pünktliche Übergabe",
+      "Messbare Ergebnisse",
+      "Persönliche Partnerschaft"
+    ],
     "services": [
       {
         "slug": "web-development",

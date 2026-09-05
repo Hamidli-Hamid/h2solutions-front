@@ -2,7 +2,7 @@ import "server-only";
 import type { Metadata } from "next";
 
 import { i18n, ogLocales, type Locale } from "@/i18n-config";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { getPageSeo, type PageKey } from "@/lib/content";
 import type { ApiSeo } from "@/lib/api";
 
@@ -55,7 +55,7 @@ function withBrand(title: string): string {
 
 function alternates(path: string) {
   return Object.fromEntries(
-    i18n.locales.map((locale) => [locale, `${siteConfig.url}/${locale}${path}`]),
+    i18n.locales.map((locale) => [locale, localeUrl(locale, path)]),
   );
 }
 
@@ -76,7 +76,7 @@ export function buildMetadata({
   publishedTime,
   absoluteTitle = false,
 }: BuildInput): Metadata {
-  const url = `${siteConfig.url}/${lang}${path}`;
+  const url = localeUrl(lang, path);
   const metaTitle = seo?.title || title;
   /* Page copy is written to be read on the page — `about.story` is a paragraph,
      a post's excerpt a lead-in. Cut to snippet length when it is standing in
@@ -134,7 +134,7 @@ export function buildMetadata({
       canonical: url,
       languages: {
         ...alternates(path),
-        "x-default": `${siteConfig.url}/${i18n.defaultLocale}${path}`,
+        "x-default": localeUrl(i18n.defaultLocale, path),
       },
     },
     openGraph: {

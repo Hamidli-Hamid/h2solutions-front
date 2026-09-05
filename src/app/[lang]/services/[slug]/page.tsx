@@ -16,10 +16,10 @@ import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchService, fetchServices } from "@/lib/api";
-import { i18n, isLocale } from "@/i18n-config";
+import { localePath, i18n, isLocale } from "@/i18n-config";
 import { buildMetadata } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
@@ -73,9 +73,9 @@ export default async function ServiceDetailPage({
   const faq = service.faq ?? [];
 
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
-    { name: dict.services.title, url: `${siteConfig.url}/${lang}/services` },
-    { name: service.title, url: `${siteConfig.url}/${lang}/services/${slug}` },
+    { name: dict.nav.home, url: localeUrl(lang) },
+    { name: dict.services.title, url: localeUrl(lang, "/services") },
+    { name: service.title, url: localeUrl(lang, `/services/${slug}`) },
   ]);
   const serviceLd = serviceJsonLd(service, dict, lang);
 
@@ -86,8 +86,8 @@ export default async function ServiceDetailPage({
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
-            { label: dict.nav.home, href: `/${lang}` },
-            { label: dict.services.title, href: `/${lang}/services` },
+            { label: dict.nav.home, href: localePath(lang) },
+            { label: dict.services.title, href: localePath(lang, "/services") },
             { label: service.title },
           ],
         }}
@@ -96,11 +96,11 @@ export default async function ServiceDetailPage({
         subtitle={service.summary}
         actions={
           <>
-            <Link href={`/${lang}/contact`} className="btn-primary">
+            <Link href={localePath(lang, "/contact")} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>
-            <Link href={`/${lang}/services`} className="btn-secondary">
+            <Link href={localePath(lang, "/services")} className="btn-secondary">
               {dict.servicesPreview.viewAll}
             </Link>
           </>
@@ -168,7 +168,7 @@ export default async function ServiceDetailPage({
                 {dict.services.startText}
               </p>
               <Link
-                href={`/${lang}/contact`}
+                href={localePath(lang, "/contact")}
                 className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm"
               >
                 {dict.hero.ctaPrimary}
@@ -215,7 +215,7 @@ export default async function ServiceDetailPage({
                       className="border-t border-[color:var(--color-border)] first:border-t-0 first:[&>a]:pt-0"
                     >
                       <Link
-                        href={`/${lang}/services/${item.slug}`}
+                        href={localePath(lang, `/services/${item.slug}`)}
                         className="group flex items-start gap-3 py-3.5"
                       >
                         <span aria-hidden className="icon-tile h-9 w-9 flex-none">
@@ -235,7 +235,7 @@ export default async function ServiceDetailPage({
                 </ul>
 
                 <Link
-                  href={`/${lang}/services`}
+                  href={localePath(lang, "/services")}
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
                 >
                   {dict.servicesPreview.viewAll}

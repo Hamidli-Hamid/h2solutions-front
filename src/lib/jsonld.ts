@@ -1,4 +1,4 @@
-import { resolveSite, siteConfig } from "@/lib/site-config";
+import { localeUrl, resolveSite, siteConfig } from "@/lib/site-config";
 import { i18n, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
@@ -41,7 +41,7 @@ export function organizationJsonLd(dict: Dictionary, lang: Locale) {
     name: site.brand,
     legalName: site.brand,
     alternateName: dict.meta.siteName,
-    url: `${siteConfig.url}/${lang}`,
+    url: localeUrl(lang),
     logo: {
       "@type": "ImageObject",
       url: `${siteConfig.url}/android-chrome-512x512.png`,
@@ -80,7 +80,7 @@ export function websiteJsonLd(dict: Dictionary, lang: Locale) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${siteConfig.url}/#website`,
-    url: `${siteConfig.url}/${lang}`,
+    url: localeUrl(lang),
     name: dict.meta.siteName,
     description: dict.meta.defaultDescription,
     inLanguage: i18n.locales,
@@ -98,7 +98,7 @@ export function professionalServiceJsonLd(dict: Dictionary, lang: Locale) {
     "@id": `${siteConfig.url}/#business`,
     name: site.brand,
     image: `${siteConfig.url}/opengraph-image`,
-    url: `${siteConfig.url}/${lang}`,
+    url: localeUrl(lang),
     ...(telephone ? { telephone } : {}),
     email: dict.contact.email,
     priceRange: site.priceRange,
@@ -135,7 +135,7 @@ export function serviceJsonLd(service: ApiService, dict: Dictionary, lang: Local
     name: service.title,
     description: service.summary,
     serviceType: service.title,
-    url: `${siteConfig.url}/${lang}/services/${service.slug}`,
+    url: localeUrl(lang, `/services/${service.slug}`),
     provider: { "@id": `${siteConfig.url}/#organization` },
     areaServed: ["AZ", "Worldwide"],
     availableLanguage: i18n.locales,
@@ -209,7 +209,7 @@ export function projectJsonLd(
     "@type": "CreativeWork",
     name: project.title,
     description: project.summary,
-    url: `${siteConfig.url}/${lang}/portfolio/${project.slug}`,
+    url: localeUrl(lang, `/portfolio/${project.slug}`),
     inLanguage: lang,
     ...(images.length > 0 && { image: images }),
     ...(videoNode && { video: videoNode }),
@@ -225,10 +225,10 @@ export function blogJsonLd(dict: Dictionary, lang: Locale) {
   return {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "@id": `${siteConfig.url}/${lang}/blog#blog`,
+    "@id": localeUrl(lang, "/blog#blog"),
     name: dict.blog.title,
     description: dict.blog.subtitle,
-    url: `${siteConfig.url}/${lang}/blog`,
+    url: localeUrl(lang, "/blog"),
     inLanguage: lang,
     publisher: { "@id": `${siteConfig.url}/#organization` },
   };
@@ -246,7 +246,7 @@ export function blogPostingJsonLd(
   },
   lang: Locale,
 ) {
-  const url = `${siteConfig.url}/${lang}/blog/${post.slug}`;
+  const url = localeUrl(lang, `/blog/${post.slug}`);
 
   return {
     "@context": "https://schema.org",
@@ -267,7 +267,7 @@ export function blogPostingJsonLd(
       ? { "@type": "Person", name: post.author.name }
       : { "@id": `${siteConfig.url}/#organization` },
     publisher: { "@id": `${siteConfig.url}/#organization` },
-    isPartOf: { "@id": `${siteConfig.url}/${lang}/blog#blog` },
+    isPartOf: { "@id": localeUrl(lang, "/blog#blog") },
   };
 }
 
@@ -289,7 +289,7 @@ export function contactPageJsonLd(dict: Dictionary, lang: Locale) {
     "@type": "ContactPage",
     name: dict.contact.title,
     description: dict.contact.subtitle,
-    url: `${siteConfig.url}/${lang}/contact`,
+    url: localeUrl(lang, "/contact"),
     inLanguage: lang,
     isPartOf: { "@id": `${siteConfig.url}/#website` },
     mainEntity: { "@id": `${siteConfig.url}/#organization` },
@@ -302,7 +302,7 @@ export function aboutPageJsonLd(dict: Dictionary, lang: Locale) {
     "@type": "AboutPage",
     name: dict.about.title,
     description: dict.about.story,
-    url: `${siteConfig.url}/${lang}/about`,
+    url: localeUrl(lang, "/about"),
     inLanguage: lang,
     mainEntity: { "@id": `${siteConfig.url}/#organization` },
   };

@@ -9,6 +9,7 @@ import {
   i18n,
   isLocale,
   localeNames,
+  localePath,
   localeShortLabels,
   type Locale,
 } from "@/i18n-config";
@@ -36,17 +37,18 @@ function persistLocaleCookie(locale: Locale) {
  */
 export function LanguageSwitcher({ current, label }: Props) {
   const details = useRef<HTMLDetailsElement>(null);
-  const pathname = usePathname() ?? `/${current}`;
+  const pathname = usePathname() ?? localePath(current);
 
-  /** The current route under another language prefix. */
+  /** The current route in another language. */
   function pathFor(locale: Locale) {
     const segments = pathname.split("/").filter(Boolean);
+    /* The default language carries no prefix, so the first segment is a
+       language code on five of the six trees and the route itself on the
+       sixth. Strip it only when it really is one. */
     if (segments.length > 0 && isLocale(segments[0])) {
-      segments[0] = locale;
-    } else {
-      segments.unshift(locale);
+      segments.shift();
     }
-    return "/" + segments.join("/");
+    return localePath(locale, segments.length > 0 ? `/${segments.join("/")}` : "");
   }
 
   return (

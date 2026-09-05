@@ -6,7 +6,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 import { resolveBranding, resolveNav, resolveSite } from "@/lib/site-config";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export function Header({ lang, dict }: Props) {
-  const contactHref = `/${lang}/contact`;
+  const contactHref = localePath(lang, "/contact");
   const navigation = resolveNav(dict, lang);
   const branding = resolveBranding(dict);
   const site = resolveSite(dict);
@@ -26,7 +26,7 @@ export function Header({ lang, dict }: Props) {
     >
       <div className="container-h2 flex h-16 items-center justify-between gap-6 md:h-18">
         <Link
-          href={`/${lang}`}
+          href={localePath(lang)}
           aria-label={`${dict.meta.siteName} — ${dict.nav.home}`}
           className="flex items-center"
         >

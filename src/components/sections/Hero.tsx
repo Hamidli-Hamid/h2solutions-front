@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { Icon } from "@/components/ui/Icon";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
 
@@ -28,9 +28,16 @@ export function Hero({ lang, dict, services }: Props) {
   const { lead, accent } = splitTitle(dict.hero.title, dict.hero.titleAccent);
   const publishedSlugs = new Set(services.map((service) => service.slug));
 
-  /* The three selling points already written for every locale in `usp` —
-     reused here as trust chips so the hero has no locale-specific copy. */
-  const proofPoints = dict.usp.items.slice(0, 3);
+  /* Trust chips, editable with the rest of the hero in the admin. An editor
+     who empties the list gets the three `usp` headings back, so the row is
+     never blank. */
+  const proofPoints = (
+    dict.hero.proofPoints?.length
+      ? dict.hero.proofPoints
+      : dict.usp.items.map((item) => item.title)
+  )
+    .filter((point) => point.trim() !== "")
+    .slice(0, 3);
 
   return (
     <section className="hero-grid">
@@ -68,28 +75,28 @@ export function Hero({ lang, dict, services }: Props) {
             <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-3 xl:mt-9 xl:gap-x-8">
               {proofPoints.map((point) => (
                 <li
-                  key={point.title}
+                  key={point}
                   className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-foreground-soft)] xl:text-[0.9375rem]"
                 >
                   <CheckCircleIcon
                     aria-hidden
                     className="h-[1.125rem] w-[1.125rem] flex-none text-[color:var(--color-accent)] xl:h-5 xl:w-5"
                   />
-                  {point.title}
+                  {point}
                 </li>
               ))}
             </ul>
 
             <div className="mt-8 flex flex-wrap gap-3 xl:mt-10 xl:gap-4">
               <Link
-                href={`/${lang}/contact`}
+                href={localePath(lang, "/contact")}
                 className="btn-primary max-sm:w-full max-sm:justify-center"
               >
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon aria-hidden className="h-4 w-4" />
               </Link>
               <Link
-                href={`/${lang}/portfolio`}
+                href={localePath(lang, "/portfolio")}
                 className="btn-secondary max-sm:w-full max-sm:justify-center"
               >
                 {dict.hero.ctaSecondary}
@@ -107,7 +114,7 @@ export function Hero({ lang, dict, services }: Props) {
             <div className="flex items-center justify-between gap-3 border-b border-[color:var(--color-border)] px-4 py-3.5 md:px-5 xl:px-6 xl:py-4">
               <h2 className="section-label">{dict.hero.servicesTitle}</h2>
               <Link
-                href={`/${lang}/services`}
+                href={localePath(lang, "/services")}
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-[color:var(--color-foreground-muted)] transition hover:text-[color:var(--color-accent)]"
               >
                 {dict.common.learnMore}
@@ -123,8 +130,8 @@ export function Hero({ lang, dict, services }: Props) {
                   <Link
                     href={
                       publishedSlugs.has(service.slug)
-                        ? `/${lang}/services/${service.slug}`
-                        : `/${lang}/services`
+                        ? localePath(lang, `/services/${service.slug}`)
+                        : localePath(lang, "/services")
                     }
                     className="service-card group flex w-full flex-col p-4 xl:p-5"
                   >

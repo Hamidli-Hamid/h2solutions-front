@@ -11,9 +11,9 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchProjects } from "@/lib/api";
-import { isLocale } from "@/i18n-config";
+import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
@@ -46,9 +46,9 @@ export default async function PortfolioPage({
     fetchProjects(lang),
   ]);
 
-  const url = `${siteConfig.url}/${lang}/portfolio`;
+  const url = localeUrl(lang, "/portfolio");
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
+    { name: dict.nav.home, url: localeUrl(lang) },
     { name: dict.portfolio.title, url },
   ]);
   const collection = collectionPageJsonLd({
@@ -61,7 +61,7 @@ export default async function PortfolioPage({
     dict.portfolio.title,
     projects.map((project) => ({
       name: project.title,
-      url: `${siteConfig.url}/${lang}/portfolio/${project.slug}`,
+      url: localeUrl(lang, `/portfolio/${project.slug}`),
     })),
   );
 
@@ -72,7 +72,7 @@ export default async function PortfolioPage({
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
-            { label: dict.nav.home, href: `/${lang}` },
+            { label: dict.nav.home, href: localePath(lang) },
             { label: dict.portfolio.title },
           ],
         }}
@@ -81,11 +81,11 @@ export default async function PortfolioPage({
         subtitle={dict.portfolio.subtitle}
         actions={
           <>
-            <Link href={`/${lang}/contact`} className="btn-primary">
+            <Link href={localePath(lang, "/contact")} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>
-            <Link href={`/${lang}/services`} className="btn-secondary">
+            <Link href={localePath(lang, "/services")} className="btn-secondary">
               {dict.servicesPreview.viewAll}
             </Link>
           </>
@@ -100,7 +100,7 @@ export default async function PortfolioPage({
               title={dict.portfolio.empty}
               description={dict.portfolio.subtitle}
               ctaLabel={dict.hero.ctaPrimary}
-              ctaHref={`/${lang}/contact`}
+              ctaHref={localePath(lang, "/contact")}
             />
           ) : (
             <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">

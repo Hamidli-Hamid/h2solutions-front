@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { CardMedia } from "@/components/ui/CardMedia";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiProject } from "@/lib/api";
 
@@ -31,14 +31,14 @@ export function ProjectsShowcase({ lang, dict, projects }: Props) {
           key: project.slug,
           title: project.title,
           category: [project.client, project.year].filter(Boolean).join(" · "),
-          href: `/${lang}/portfolio/${project.slug}`,
+          href: localePath(lang, `/portfolio/${project.slug}`),
           image: project.cover_image,
         }))
       : t.samples.map((sample) => ({
           key: sample.title,
           title: sample.title,
           category: sample.category,
-          href: `/${lang}/portfolio`,
+          href: localePath(lang, "/portfolio"),
           image: null,
         }));
 
@@ -59,7 +59,7 @@ export function ProjectsShowcase({ lang, dict, projects }: Props) {
             </h2>
           </div>
           <Link
-            href={`/${lang}/portfolio`}
+            href={localePath(lang, "/portfolio")}
             className="btn-secondary px-4 py-2 text-sm"
           >
             {t.viewAll}

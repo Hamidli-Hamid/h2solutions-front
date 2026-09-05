@@ -16,10 +16,10 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPost, fetchBlogPosts } from "@/lib/api";
 import { formatDate } from "@/lib/format";
-import { i18n, isLocale } from "@/i18n-config";
+import { localePath, i18n, isLocale } from "@/i18n-config";
 import { buildMetadata } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { blogPostingJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
@@ -71,11 +71,11 @@ export default async function BlogPostPage({
   /* The five most recent other posts, listed in the rail beside the article. */
   const related = allPosts.filter((item) => item.slug !== slug).slice(0, 5);
   const published = formatDate(post.published_at, lang);
-  const url = `${siteConfig.url}/${lang}/blog/${slug}`;
+  const url = localeUrl(lang, `/blog/${slug}`);
 
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
-    { name: dict.blog.title, url: `${siteConfig.url}/${lang}/blog` },
+    { name: dict.nav.home, url: localeUrl(lang) },
+    { name: dict.blog.title, url: localeUrl(lang, "/blog") },
     { name: post.title, url },
   ]);
 
@@ -112,8 +112,8 @@ export default async function BlogPostPage({
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
-            { label: dict.nav.home, href: `/${lang}` },
-            { label: dict.blog.title, href: `/${lang}/blog` },
+            { label: dict.nav.home, href: localePath(lang) },
+            { label: dict.blog.title, href: localePath(lang, "/blog") },
             { label: post.title },
           ],
         }}
@@ -177,7 +177,7 @@ export default async function BlogPostPage({
               {dict.blog.helpText}
             </p>
             <Link
-              href={`/${lang}/contact`}
+              href={localePath(lang, "/contact")}
               className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
             >
               {dict.hero.ctaPrimary}
@@ -202,7 +202,7 @@ export default async function BlogPostPage({
                       className="border-t border-[color:var(--color-border)] first:border-t-0 first:[&>a]:pt-0"
                     >
                       <Link
-                        href={`/${lang}/blog/${item.slug}`}
+                        href={localePath(lang, `/blog/${item.slug}`)}
                         className="group flex items-start gap-3 py-3.5"
                       >
                         {/* Thumbnail; the placeholder texture stands in when a
@@ -257,7 +257,7 @@ export default async function BlogPostPage({
 
               <div className="mt-4 border-t border-[color:var(--color-border)] pt-4">
                 <Link
-                  href={`/${lang}/blog`}
+                  href={localePath(lang, "/blog")}
                   className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
                 >
                   {dict.blog.latestTitle}

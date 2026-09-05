@@ -3,7 +3,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { CardMedia } from "@/components/ui/CardMedia";
 import { formatDate } from "@/lib/format";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiBlogPost } from "@/lib/api";
 
@@ -31,14 +31,14 @@ export function BlogPreview({ lang, dict, posts }: Props) {
           key: post.slug,
           title: post.title,
           date: post.published_at,
-          href: `/${lang}/blog/${post.slug}`,
+          href: localePath(lang, `/blog/${post.slug}`),
           image: post.cover_image,
         }))
       : t.samples.map((sample) => ({
           key: sample.title,
           title: sample.title,
           date: sample.date,
-          href: `/${lang}/blog`,
+          href: localePath(lang, "/blog"),
           image: null,
         }));
 
@@ -52,7 +52,7 @@ export function BlogPreview({ lang, dict, posts }: Props) {
               {t.title}
             </h2>
           </div>
-          <Link href={`/${lang}/blog`} className="btn-secondary px-4 py-2 text-sm">
+          <Link href={localePath(lang, "/blog")} className="btn-secondary px-4 py-2 text-sm">
             {t.viewAll}
             <ArrowRightIcon aria-hidden className="h-4 w-4" />
           </Link>

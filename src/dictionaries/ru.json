@@ -23,6 +23,11 @@
     "ctaPrimary": "Обсудить проект",
     "ctaSecondary": "Наши работы",
     "servicesTitle": "Основные услуги",
+    "proofPoints": [
+      "Сдаём в срок",
+      "Измеримый результат",
+      "Персональный подход"
+    ],
     "services": [
       {
         "slug": "web-development",

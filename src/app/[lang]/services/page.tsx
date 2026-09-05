@@ -12,9 +12,9 @@ import { SeoContent } from "@/components/sections/SeoContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchServices } from "@/lib/api";
-import { isLocale } from "@/i18n-config";
+import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
@@ -47,9 +47,9 @@ export default async function ServicesHubPage({
     fetchServices(lang),
   ]);
 
-  const url = `${siteConfig.url}/${lang}/services`;
+  const url = localeUrl(lang, "/services");
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
+    { name: dict.nav.home, url: localeUrl(lang) },
     { name: dict.services.title, url },
   ]);
   const collection = collectionPageJsonLd({
@@ -62,7 +62,7 @@ export default async function ServicesHubPage({
     dict.services.title,
     services.map((s) => ({
       name: s.title,
-      url: `${siteConfig.url}/${lang}/services/${s.slug}`,
+      url: localeUrl(lang, `/services/${s.slug}`),
     })),
   );
 
@@ -73,7 +73,7 @@ export default async function ServicesHubPage({
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
-            { label: dict.nav.home, href: `/${lang}` },
+            { label: dict.nav.home, href: localePath(lang) },
             { label: dict.services.title },
           ],
         }}
@@ -82,11 +82,11 @@ export default async function ServicesHubPage({
         subtitle={dict.services.intro}
         actions={
           <>
-            <Link href={`/${lang}/contact`} className="btn-primary">
+            <Link href={localePath(lang, "/contact")} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>
-            <Link href={`/${lang}/portfolio`} className="btn-secondary">
+            <Link href={localePath(lang, "/portfolio")} className="btn-secondary">
               {dict.hero.ctaSecondary}
             </Link>
           </>

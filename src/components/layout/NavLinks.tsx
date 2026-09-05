@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import type { NavItem } from "@/lib/site-config";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 
 type Props = {
   lang: Locale;
@@ -13,8 +13,8 @@ type Props = {
 };
 
 export function NavLinks({ lang, items }: Props) {
-  const pathname = usePathname() ?? `/${lang}`;
-  const home = `/${lang}`;
+  const pathname = usePathname() ?? localePath(lang);
+  const home = localePath(lang);
 
   return (
     <>

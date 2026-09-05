@@ -9,7 +9,7 @@ import {
   resolveSite,
   type SiteProfile,
 } from "@/lib/site-config";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
 
@@ -54,11 +54,11 @@ export function Footer({ lang, dict, services }: Props) {
     services.length > 0
       ? services.map((service) => ({
           label: service.title,
-          href: `/${lang}/services/${service.slug}`,
+          href: localePath(lang, `/services/${service.slug}`),
         }))
       : dict.hero.services.map((service) => ({
           label: service.name,
-          href: `/${lang}/services`,
+          href: localePath(lang, "/services"),
         }));
 
   return (

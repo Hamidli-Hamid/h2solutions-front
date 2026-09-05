@@ -9,9 +9,9 @@ import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
-import { isLocale } from "@/i18n-config";
+import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { aboutPageJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export async function generateMetadata({
@@ -36,8 +36,8 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
   const t = dict.about;
 
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
-    { name: t.title, url: `${siteConfig.url}/${lang}/about` },
+    { name: dict.nav.home, url: localeUrl(lang) },
+    { name: t.title, url: localeUrl(lang, "/about") },
   ]);
 
   return (
@@ -47,18 +47,18 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
-          items: [{ label: dict.nav.home, href: `/${lang}` }, { label: t.title }],
+          items: [{ label: dict.nav.home, href: localePath(lang) }, { label: t.title }],
         }}
         eyebrow={t.label}
         title={t.title}
         subtitle={t.subtitle}
         actions={
           <>
-            <Link href={`/${lang}/contact`} className="btn-primary">
+            <Link href={localePath(lang, "/contact")} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>
-            <Link href={`/${lang}/portfolio`} className="btn-secondary">
+            <Link href={localePath(lang, "/portfolio")} className="btn-secondary">
               {dict.hero.ctaSecondary}
             </Link>
           </>

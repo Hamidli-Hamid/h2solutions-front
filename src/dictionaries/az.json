@@ -23,6 +23,11 @@
     "ctaPrimary": "Layihə müzakirə edək",
     "ctaSecondary": "İşlərimizə bax",
     "servicesTitle": "Əsas xidmətlərimiz",
+    "proofPoints": [
+      "Vaxtında təhvil",
+      "Ölçülə bilən nəticə",
+      "Fərdi yanaşma"
+    ],
     "services": [
       {
         "slug": "web-development",

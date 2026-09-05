@@ -5,7 +5,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 import { getDictionary } from "@/lib/dictionaries";
-import { i18n } from "@/i18n-config";
+import { localePath, i18n } from "@/i18n-config";
 import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
@@ -74,7 +74,7 @@ export default async function GlobalNotFound() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link href={`/${lang}`} className="btn-primary">
+              <Link href={localePath(lang)} className="btn-primary">
                 {t.ctaLabel}
               </Link>
             </div>

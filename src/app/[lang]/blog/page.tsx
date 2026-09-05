@@ -12,9 +12,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPosts } from "@/lib/api";
 import { formatDate } from "@/lib/format";
-import { isLocale } from "@/i18n-config";
+import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { blogJsonLd, breadcrumbJsonLd, itemListJsonLd } from "@/lib/jsonld";
 
 export async function generateMetadata({
@@ -45,9 +45,9 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
   const [featured, ...rest] = posts;
   const cardLabels = { readMore: dict.blog.readMore, minRead: dict.blog.minRead };
 
-  const url = `${siteConfig.url}/${lang}/blog`;
+  const url = localeUrl(lang, "/blog");
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
+    { name: dict.nav.home, url: localeUrl(lang) },
     { name: dict.blog.title, url },
   ]);
   const blog = blogJsonLd(dict, lang);
@@ -55,7 +55,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
     dict.blog.title,
     posts.map((post) => ({
       name: post.title,
-      url: `${siteConfig.url}/${lang}/blog/${post.slug}`,
+      url: localeUrl(lang, `/blog/${post.slug}`),
     })),
   );
 
@@ -66,7 +66,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
-            { label: dict.nav.home, href: `/${lang}` },
+            { label: dict.nav.home, href: localePath(lang) },
             { label: dict.blog.title },
           ],
         }}
@@ -83,7 +83,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
               title={dict.blog.empty}
               description={dict.blog.subtitle}
               ctaLabel={dict.blog.emptyCta}
-              ctaHref={`/${lang}/contact`}
+              ctaHref={localePath(lang, "/contact")}
             />
           </div>
         </section>
@@ -119,7 +119,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
                     className="mt-3 text-xl font-bold leading-snug md:text-2xl"
                   >
                     <Link
-                      href={`/${lang}/blog/${featured.slug}`}
+                      href={localePath(lang, `/blog/${featured.slug}`)}
                       className="transition before:absolute before:inset-0 before:content-[''] group-hover:text-[color:var(--color-accent)]"
                     >
                       {featured.title}

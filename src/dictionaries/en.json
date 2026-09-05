@@ -23,6 +23,11 @@
     "ctaPrimary": "Discuss a project",
     "ctaSecondary": "View our work",
     "servicesTitle": "Our core services",
+    "proofPoints": [
+      "Delivered on time",
+      "Measurable results",
+      "Hands-on partnership"
+    ],
     "services": [
       {
         "slug": "web-development",

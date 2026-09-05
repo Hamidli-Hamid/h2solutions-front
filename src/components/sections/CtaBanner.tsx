@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 
 type Props = {
@@ -59,7 +59,7 @@ export function CtaBanner({ lang, dict, title, subtitle, className }: Props) {
                 {subtitle ?? dict.contact.subtitle}
               </p>
             </div>
-            <Link href={`/${lang}/contact`} className="btn-primary self-start">
+            <Link href={localePath(lang, "/contact")} className="btn-primary self-start">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>

@@ -16,9 +16,9 @@ import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
-import { isLocale } from "@/i18n-config";
+import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { resolveSite, siteConfig } from "@/lib/site-config";
+import { localeUrl, resolveSite, siteConfig } from "@/lib/site-config";
 import { breadcrumbJsonLd, contactPageJsonLd } from "@/lib/jsonld";
 
 export async function generateMetadata({
@@ -46,8 +46,8 @@ export default async function ContactPage({
   const site = resolveSite(dict);
 
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
-    { name: t.title, url: `${siteConfig.url}/${lang}/contact` },
+    { name: dict.nav.home, url: localeUrl(lang) },
+    { name: t.title, url: localeUrl(lang, "/contact") },
   ]);
 
   /* All outbound channels derive from the two dictionary values, so a phone or
@@ -105,7 +105,7 @@ export default async function ContactPage({
         withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
-          items: [{ label: dict.nav.home, href: `/${lang}` }, { label: t.title }],
+          items: [{ label: dict.nav.home, href: localePath(lang) }, { label: t.title }],
         }}
         eyebrow={t.label}
         title={t.title}

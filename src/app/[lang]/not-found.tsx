@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { getDictionary } from "@/lib/dictionaries";
-import { i18n } from "@/i18n-config";
+import { localePath, i18n } from "@/i18n-config";
 
 /* Next does not pass route params to not-found, so the page speaks the site's
    default language. The copy itself is admin-managed for every locale. */
@@ -36,7 +36,7 @@ export default async function NotFound() {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <Link href={`/${lang}`} className="btn-primary">
+          <Link href={localePath(lang)} className="btn-primary">
             {t.ctaLabel}
           </Link>
         </div>

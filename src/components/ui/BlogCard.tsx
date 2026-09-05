@@ -3,7 +3,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { CardMedia } from "@/components/ui/CardMedia";
 import { formatDate } from "@/lib/format";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { ApiBlogPost } from "@/lib/api";
 
 type Props = {
@@ -46,7 +46,7 @@ export function BlogCard({
 
         <Heading className="mt-2 text-base font-semibold leading-snug">
           <Link
-            href={`/${lang}/blog/${post.slug}`}
+            href={localePath(lang, `/blog/${post.slug}`)}
             className="transition before:absolute before:inset-0 before:content-[''] group-hover:text-[color:var(--color-accent)]"
           >
             {post.title}

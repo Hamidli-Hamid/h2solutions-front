@@ -16,10 +16,10 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { hostname } from "@/lib/format";
 import { fetchProject, fetchProjects } from "@/lib/api";
-import { i18n, isLocale } from "@/i18n-config";
+import { localePath, i18n, isLocale } from "@/i18n-config";
 import { buildMetadata } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import { breadcrumbJsonLd, projectJsonLd } from "@/lib/jsonld";
 import { resolveProjectVideo } from "@/lib/video";
 
@@ -85,9 +85,9 @@ export default async function ProjectDetailPage({
   const domain = project.url ? hostname(project.url) : null;
 
   const breadcrumb = breadcrumbJsonLd([
-    { name: dict.nav.home, url: `${siteConfig.url}/${lang}` },
-    { name: dict.portfolio.title, url: `${siteConfig.url}/${lang}/portfolio` },
-    { name: project.title, url: `${siteConfig.url}/${lang}/portfolio/${slug}` },
+    { name: dict.nav.home, url: localeUrl(lang) },
+    { name: dict.portfolio.title, url: localeUrl(lang, "/portfolio") },
+    { name: project.title, url: localeUrl(lang, `/portfolio/${slug}`) },
   ]);
 
   return (
@@ -97,8 +97,8 @@ export default async function ProjectDetailPage({
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
-            { label: dict.nav.home, href: `/${lang}` },
-            { label: dict.portfolio.title, href: `/${lang}/portfolio` },
+            { label: dict.nav.home, href: localePath(lang) },
+            { label: dict.portfolio.title, href: localePath(lang, "/portfolio") },
             { label: project.title },
           ],
         }}
@@ -107,7 +107,7 @@ export default async function ProjectDetailPage({
         subtitle={project.summary}
         actions={
           <>
-            <Link href={`/${lang}/contact`} className="btn-primary">
+            <Link href={localePath(lang, "/contact")} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </Link>
@@ -238,7 +238,7 @@ export default async function ProjectDetailPage({
                       className="border-t border-[color:var(--color-border)] first:border-t-0 first:[&>a]:pt-0"
                     >
                       <Link
-                        href={`/${lang}/portfolio/${item.slug}`}
+                        href={localePath(lang, `/portfolio/${item.slug}`)}
                         className="group flex items-start gap-3 py-3.5"
                       >
                         <span className="media-placeholder relative aspect-16/10 w-20 flex-none overflow-hidden rounded-md border border-[color:var(--color-border)]">
@@ -269,7 +269,7 @@ export default async function ProjectDetailPage({
                 </ul>
 
                 <Link
-                  href={`/${lang}/portfolio`}
+                  href={localePath(lang, "/portfolio")}
                   className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
                 >
                   {dict.portfolio.title}

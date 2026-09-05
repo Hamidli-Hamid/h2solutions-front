@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { i18n, isLocale, type Locale } from "@/i18n-config";
+import { i18n, isLocale, localePath, type Locale } from "@/i18n-config";
 
 function pickLocale(request: NextRequest): Locale {
   const cookie = request.cookies.get("NEXT_LOCALE")?.value;
@@ -25,27 +25,48 @@ function pickLocale(request: NextRequest): Locale {
   return i18n.defaultLocale;
 }
 
+/**
+ * Azerbaijani is served from the bare path (`/about`), the other five from
+ * their prefix (`/en/about`) — see `localePath`. The routes themselves all
+ * live under `app/[lang]`, so a prefix-less URL is *rewritten* onto the
+ * default locale's tree: the address bar keeps `/about` while `[lang]`
+ * resolves to `az`.
+ *
+ * The permanent `/az/...` → `/...` redirect is not here but in
+ * `next.config.ts`: Next re-normalises a middleware `Location` against the
+ * incoming request, which behind the cPanel proxy stamps the origin's internal
+ * port onto it. Config redirects are emitted verbatim.
+ */
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const [first, ...rest] = pathname.split("/").filter(Boolean);
 
-  /* `/AZ/about` matches no route, so without this it would fall through to the
-     locale detector and be sent to `/az/AZ/about` — a redirect whose target is
+  /* `/EN/about` matches no route, so without this it would fall through to the
+     locale detector and be sent to `/en/EN/about` — a redirect whose target is
      a 404. Normalising the case lands it on the real page instead. */
   if (first && !isLocale(first) && isLocale(first.toLowerCase())) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${[first.toLowerCase(), ...rest].join("/")}`;
+    const tail = rest.length > 0 ? `/${rest.join("/")}` : "";
+    url.pathname = localePath(first.toLowerCase() as Locale, tail);
     return NextResponse.redirect(url, 308);
   }
 
-  const pathnameHasLocale = i18n.locales.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
-  );
-  if (pathnameHasLocale) return;
+  // A real prefix (`/en/about`): the route tree already matches it.
+  if (first && isLocale(first)) return;
 
   const locale = pickLocale(request);
+
+  /* The visitor reads the default language — or asked for nothing in
+     particular. Serve the page at the URL they requested: no redirect, so the
+     canonical URL stays a 200 for crawlers and for anyone following a link. */
+  if (locale === i18n.defaultLocale) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${i18n.defaultLocale}${pathname === "/" ? "" : pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
   const url = request.nextUrl.clone();
-  url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
+  url.pathname = localePath(locale, pathname === "/" ? "" : pathname);
 
   /* This target is negotiated from the request, so a shared cache must not
      hand one visitor's language to the next — nor pin Googlebot to whichever

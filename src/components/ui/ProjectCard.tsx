@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { CardMedia } from "@/components/ui/CardMedia";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { ApiProject } from "@/lib/api";
 
 type Props = {
@@ -40,7 +40,7 @@ export function ProjectCard({
         )}
         <Heading className="mt-2 text-base font-semibold">
           <Link
-            href={`/${lang}/portfolio/${project.slug}`}
+            href={localePath(lang, `/portfolio/${project.slug}`)}
             className="transition before:absolute before:inset-0 before:content-[''] group-hover:text-[color:var(--color-accent)]"
           >
             {project.title}

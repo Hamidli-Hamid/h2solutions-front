@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { i18n } from "./src/i18n-config";
+
 /**
  * The one hostname every canonical URL, hreflang annotation and sitemap entry
  * names. `www.` resolves and serves the whole site as well, which makes every
@@ -42,9 +44,30 @@ function canonicalHostRedirects() {
   ];
 }
 
+/**
+ * `/az/...` → `/...`, permanently.
+ *
+ * Azerbaijani is the default language and is served from the bare path, so the
+ * prefixed form is a second URL for every az page. It was the only form the
+ * site ever published, which is what Google has indexed — the redirect is what
+ * moves that history onto the new URLs, and it stays for good.
+ *
+ * Here rather than in `src/proxy.ts` for the same reason as the www rule: a
+ * middleware `Location` is re-normalised against the incoming request, which
+ * behind the cPanel proxy would hand Googlebot `https://h2solutions.az:3000/`.
+ */
+function defaultLocaleRedirects() {
+  const { defaultLocale } = i18n;
+
+  return [
+    { source: `/${defaultLocale}`, destination: "/", permanent: true },
+    { source: `/${defaultLocale}/:path*`, destination: "/:path*", permanent: true },
+  ];
+}
+
 const nextConfig: NextConfig = {
   async redirects() {
-    return canonicalHostRedirects();
+    return [...defaultLocaleRedirects(), ...canonicalHostRedirects()];
   },
   reactStrictMode: true,
   poweredByHeader: false,

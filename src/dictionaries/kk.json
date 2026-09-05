@@ -23,6 +23,11 @@
     "ctaPrimary": "Жобаны талқылайық",
     "ctaSecondary": "Жұмыстарымызды көру",
     "servicesTitle": "Негізгі қызметтеріміз",
+    "proofPoints": [
+      "Уақытында тапсыру",
+      "Өлшенетін нәтиже",
+      "Жеке серіктестік"
+    ],
     "services": [
       {
         "slug": "web-development",

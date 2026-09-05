@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { Icon } from "@/components/ui/Icon";
-import type { Locale } from "@/i18n-config";
+import { localePath, type Locale } from "@/i18n-config";
 import type { ApiService } from "@/lib/api";
 
 type Props = {
@@ -35,7 +35,7 @@ export function ServiceCard({
 
       <Heading className="mt-5 text-lg font-semibold">
         <Link
-          href={`/${lang}/services/${service.slug}`}
+          href={localePath(lang, `/services/${service.slug}`)}
           className="transition before:absolute before:inset-0 before:content-[''] group-hover:text-[color:var(--color-accent)]"
         >
           {service.title}

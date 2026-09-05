@@ -12,7 +12,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPosts, fetchProjects, fetchServices } from "@/lib/api";
 import { isLocale } from "@/i18n-config";
 import { faqJsonLd, itemListJsonLd } from "@/lib/jsonld";
-import { siteConfig } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -29,7 +29,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     dict.services.title,
     services.map((s) => ({
       name: s.title,
-      url: `${siteConfig.url}/${lang}/services/${s.slug}`,
+      url: localeUrl(lang, `/services/${s.slug}`),
     })),
   );
 
