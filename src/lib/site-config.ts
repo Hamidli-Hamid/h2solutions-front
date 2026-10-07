@@ -22,12 +22,15 @@ export const siteConfig = {
   brand: "H2 Solutions",
   founder: "Hamid Hamidli",
   twitterHandle: "@h2solutions",
-  /* The generated share card — rendered by `src/app/opengraph-image.tsx` and
-     re-exported for Twitter. Used as the fallback whenever a page has no
-     artwork of its own, so no route ever ships a card without an image. */
+  /* The share card — a static PNG (public/og/h2-card.png): the logo stacked (H2 over
+     "solutions") inside the centre 630x630, which is all older WhatsApp versions show as
+     the thumbnail; the generated text card left only cut-off words there. Used as the
+     fallback whenever a page has no artwork of its own. A new design gets a new file
+     name — WhatsApp and Facebook cache previews by image URL. `src/app/opengraph-image.tsx`
+     stays so links shared before still resolve. */
   shareImage: {
-    og: "/opengraph-image",
-    twitter: "/twitter-image",
+    og: "/og/h2-card.png",
+    twitter: "/og/h2-card.png",
     width: 1200,
     height: 630,
     type: "image/png",
