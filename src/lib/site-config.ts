@@ -183,7 +183,7 @@ export function resolveBranding(dict: BrandingSource): Branding {
     /* The light theme's page colour — what the site ships as. An admin who
        sets these explicitly overrides them; the dark theme is a visitor
        preference and is applied client-side, so it cannot be answered here. */
-    themeColor: branding.themeColor || "#f6f8fc",
+    themeColor: branding.themeColor || "#070c15",
     backgroundColor: branding.backgroundColor || "#f6f8fc",
     appName: branding.appName || siteConfig.brand,
     appShortName: branding.appShortName || siteConfig.brand,

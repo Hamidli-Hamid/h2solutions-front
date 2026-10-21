@@ -12,10 +12,10 @@
    Theme tokens.
 
    Every colour in the system is an `--h2-*` custom property written
-   out twice below: once on `:root` for the light theme, which is what
-   the site ships as and what a first-time visitor gets, and once under
-   `:root[data-theme="dark"]` for the dark one. `ThemeScript` sets that
-   attribute from `localStorage` before the first paint.
+   out twice below: once on `:root` for the light theme and once under
+   `[data-theme="dark"]` for the dark one. The site is dark-only: the root
+   layout renders `<html data-theme="dark">` and there is no switch. The
+   light block stays as the base the dark one overrides.
 
    `@theme inline` only *aliases* those properties into Tailwind's
    colour names, so `bg-background` and a hand-written
@@ -1498,26 +1498,9 @@
 }
 
 /* ---------------------------------------------------------------
-   Theme toggle faces.
-
-   Unlayered on purpose: these rules have to win against Tailwind's own
-   `display` utilities, and an `@layer components` rule loses to any
-   unlayered — or later-layered — declaration.
-   --------------------------------------------------------------- */
-.theme-when-light,
-.theme-when-dark {
-  display: none;
-}
-
-:root:not([data-theme="dark"]) .theme-when-light,
-:root[data-theme="dark"] .theme-when-dark {
-  display: inline-flex;
-}
-
-/* ---------------------------------------------------------------
    Logo artwork. Read from the nearest theme block rather than from
    `:root`, so a re-themed subtree (the dark footer) picks its own face.
-   Unlayered for the same reason as the toggle faces.
+   Unlayered so it wins against Tailwind's `display` utilities.
    --------------------------------------------------------------- */
 .h2-logo-on-light {
   display: var(--h2-logo-light);
@@ -1530,7 +1513,7 @@
 /* ---------------------------------------------------------------
    Hero services on a phone.
 
-   Unlayered for the same reason as the toggle faces: the list carries
+   Unlayered on purpose: the list carries
    Tailwind's `grid` utility, and a layered rule could never override it.
    Under `sm` the six cards become one snap-scrolling row instead of a
    six-card column: the fold keeps the headline and the actions, and the

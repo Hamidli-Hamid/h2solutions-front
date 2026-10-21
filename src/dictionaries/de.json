@@ -13,10 +13,7 @@
     "contact": "Kontakt",
     "menu": "Menü",
     "close": "Schließen",
-    "language": "Sprache",
-    "theme": "Design",
-    "themeLight": "Heller Modus",
-    "themeDark": "Dunkler Modus"
+    "language": "Sprache"
   },
   "hero": {
     "badge": "H2 — Lösungen & Wachstum",

@@ -13,10 +13,7 @@
     "contact": "Contact",
     "menu": "Menu",
     "close": "Close",
-    "language": "Language",
-    "theme": "Theme",
-    "themeLight": "Light mode",
-    "themeDark": "Dark mode"
+    "language": "Language"
   },
   "hero": {
     "badge": "H2 — Solutions & Growth",

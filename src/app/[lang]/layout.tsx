@@ -12,7 +12,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { FloatingContact } from "@/components/layout/FloatingContact";
 import { PointerGlow } from "@/components/ui/PointerGlow";
 import { RevealObserver } from "@/components/ui/RevealObserver";
-import { ThemeScript } from "@/components/layout/ThemeScript";
 import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
@@ -65,11 +64,10 @@ export async function generateViewport({
   const { themeColor } = resolveBranding(dict);
 
   return {
-    /* The value the document ships with, i.e. the light theme's page colour;
-       `ThemeToggle` rewrites the meta tag when the visitor switches, so the
-       browser UI follows the theme rather than the system setting. */
+    /* Browser-UI colour; the site is dark-only, so the admin value should be
+       a dark page colour. */
     themeColor,
-    colorScheme: "light dark",
+    colorScheme: "dark",
     width: "device-width",
     initialScale: 1,
   };
@@ -235,16 +233,12 @@ export default async function LangLayout({
       lang={lang}
       dir="ltr"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
-      /* `ThemeScript` writes `data-theme` onto this element before React
-         hydrates, so the attribute always differs from what the server sent
-         for a visitor on the dark theme. That one attribute is the whole
-         mismatch, and it is deliberate. */
-      suppressHydrationWarning
+      /* The site has a single theme: dark. */
+      data-theme="dark"
     >
       <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-[color:var(--color-background)] text-[color:var(--color-foreground)]">
         <GoogleTagManagerNoScript />
-        <ThemeScript />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[color:var(--color-accent)] focus:px-4 focus:py-2 focus:font-semibold focus:text-[color:var(--color-on-accent)]"

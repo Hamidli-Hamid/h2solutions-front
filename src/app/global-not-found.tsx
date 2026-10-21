@@ -4,7 +4,6 @@ import { Inter, Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
-import { ThemeScript } from "@/components/layout/ThemeScript";
 import { getDictionary } from "@/lib/dictionaries";
 import { localePath, i18n } from "@/i18n-config";
 import {
@@ -58,18 +57,14 @@ export default async function GlobalNotFound() {
       lang={lang}
       dir="ltr"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
-      /* `ThemeScript` writes `data-theme` onto this element before React
-         hydrates, so the attribute always differs from what the server sent
-         for a visitor on the dark theme. That one attribute is the whole
-         mismatch, and it is deliberate. */
-      suppressHydrationWarning
+      /* The site has a single theme: dark. */
+      data-theme="dark"
     >
       {/* This document is composed separately from the site layout, so the
           container has to be repeated here or 404s go unrecorded. */}
       <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-[color:var(--color-background)] text-[color:var(--color-foreground)]">
         <GoogleTagManagerNoScript />
-        <ThemeScript />
         <main className="grid-bg flex flex-1 items-center">
           <div className="container-h2 py-24 md:py-32">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--color-accent)]">

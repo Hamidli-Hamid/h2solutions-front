@@ -13,10 +13,7 @@
     "contact": "Контакты",
     "menu": "Меню",
     "close": "Закрыть",
-    "language": "Язык",
-    "theme": "Тема",
-    "themeLight": "Светлая тема",
-    "themeDark": "Тёмная тема"
+    "language": "Язык"
   },
   "hero": {
     "badge": "H2 — Решения и Развитие",

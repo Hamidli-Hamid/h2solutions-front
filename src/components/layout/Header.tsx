@@ -4,7 +4,6 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { H2Logo } from "@/components/ui/H2Logo";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
-import { ThemeToggle } from "./ThemeToggle";
 import { NavLinks } from "./NavLinks";
 import { resolveBranding, resolveNav, resolveSite } from "@/lib/site-config";
 import { localePath, type Locale } from "@/i18n-config";
@@ -42,13 +41,6 @@ export function Header({ lang, dict }: Props) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle
-            labels={{
-              theme: dict.nav.theme,
-              light: dict.nav.themeLight,
-              dark: dict.nav.themeDark,
-            }}
-          />
           <LanguageSwitcher current={lang} label={dict.nav.language} />
           <Link
             href={contactHref}
