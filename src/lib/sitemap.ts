@@ -1,18 +1,34 @@
-import type { MetadataRoute } from "next";
+import "server-only";
+
 import { i18n, type Locale } from "@/i18n-config";
-import { localeUrl } from "@/lib/site-config";
+import { localeUrl, siteConfig } from "@/lib/site-config";
 import {
   fetchBlogPosts,
+  fetchContent,
   fetchProjects,
   fetchServices,
   type ApiBlogPost,
+  type ApiContent,
   type ApiProject,
   type ApiService,
 } from "@/lib/api";
-import { getContent, type PageKey } from "@/lib/content";
+import type { PageKey } from "@/lib/content";
 import { resolveProjectVideo } from "@/lib/video";
 
-type Entry = MetadataRoute.Sitemap[number];
+/** One `<url>`. Every string in it is already XML-escaped. */
+export type SitemapEntry = {
+  url: string;
+  lastModified?: Date;
+  alternates: Record<string, string>;
+  images?: string[];
+  videos?: Array<{
+    title: string;
+    description: string;
+    thumbnail_loc: string;
+    content_loc?: string;
+    player_loc?: string;
+  }>;
+};
 
 /** Static routes and the admin page they are managed from. */
 const staticPaths: Array<{ path: string; page: PageKey }> = [
@@ -25,14 +41,21 @@ const staticPaths: Array<{ path: string; page: PageKey }> = [
 ];
 
 /**
- * Next writes sitemap values into the XML verbatim — see
- * `next/dist/build/webpack/loaders/metadata/resolve-route-data.js`, which
- * interpolates `<loc>`, `<image:loc>` and every `<video:*>` field without
- * escaping. One ampersand in an upload path or in a project title would make
- * the whole document unparseable, so everything admin-authored is escaped here.
+ * A read that has not answered by then fails the sitemap with a 503 rather
+ * than holding the request for the HTTP client's own (minutes-long) timeouts.
+ */
+const READ_TIMEOUT_MS = 10_000;
+
+/**
+ * Everything written into the XML is escaped here, once: one ampersand in an
+ * upload path or in a project title would otherwise make the whole document
+ * unparseable. Characters XML 1.0 does not allow at all (C0 controls other
+ * than tab/newline/CR, U+FFFE/U+FFFF) cannot be escaped, so they are dropped —
+ * one pasted control character in a title would otherwise break every URL.
  */
 function xml(value: string): string {
   return value
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\uFFFE\uFFFF]/g, "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -64,15 +87,18 @@ function images(...sources: Array<string | null | undefined>): string[] | undefi
 }
 
 /**
- * The canonical URL for a route, XML-escaped. `path` carries admin-authored
- * slugs and `<loc>` is interpolated raw by Next (see `xml` above), so one
- * ampersand in a slug would otherwise take the whole document down with it.
+ * The canonical URL for a route, XML-escaped, in exactly the form the page's
+ * own `<link rel="canonical">` carries. Next resolves the home page against
+ * `metadataBase` to the bare origin, so the root is written without its slash —
+ * here, the one helper behind `<loc>`, `hreflang="az"` and `x-default`, so all
+ * three agree with the head.
  */
 function loc(locale: Locale, path: string): string {
-  return xml(localeUrl(locale, path));
+  const url = localeUrl(locale, path);
+  return xml(url === `${siteConfig.url}/` ? siteConfig.url : url);
 }
 
-function buildAlternates(path: string) {
+function buildAlternates(path: string): Record<string, string> {
   return {
     ...Object.fromEntries(i18n.locales.map((l) => [l, loc(l, path)])),
     /* The same fallback the <head> annotations declare — the two hreflang
@@ -107,52 +133,52 @@ function newestOf(records: Array<{ updated_at?: string | null }>): Date | undefi
 }
 
 /**
- * Google ignores `<priority>` (and `<changefreq>`, which is why it is not
- * emitted at all — declaring "monthly" for a page nobody touches is a claim
- * the sitemap cannot keep). It is kept only as an honest statement of relative
- * importance for the crawlers that still read it.
+ * The detail page's date: `lastmod` covers the record *and* what the page
+ * renders with it (its SEO row, FAQs, gallery); `updated_at` is the record
+ * alone and stands in until the API sends `lastmod`.
  */
-function priorityFor(path: string): number {
-  if (path === "") return 1;
-  if (path === "/services") return 0.9;
-  if (path === "/contact") return 0.8;
-  return 0.7;
+function recordModified(record: { lastmod?: string | null; updated_at?: string | null }) {
+  return lastModified(record.lastmod || record.updated_at);
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const entries: MetadataRoute.Sitemap = [];
+function byLocale<T>(pairs: Array<readonly [Locale, T]>): Record<Locale, T> {
+  return Object.fromEntries(pairs) as Record<Locale, T>;
+}
+
+/**
+ * Every indexable URL, per language, from one pass over the API.
+ *
+ * The reads are strict: an unreachable or failing API throws instead of
+ * yielding a shorter list, and the route answers 503 — never a 200 that
+ * silently withdraws URLs.
+ */
+export async function collectSitemapEntries(): Promise<SitemapEntry[]> {
+  const entries: SitemapEntry[] = [];
   const locales = i18n.locales as readonly Locale[];
 
-  /* One pass over the API: the page tree per language, plus the three
-     collections per language. */
-  const [contentPairs, servicesByLocale, projectsByLocale, postsByLocale] =
-    await Promise.all([
-      Promise.all(
-        locales.map(async (locale) => [locale, await getContent(locale)] as const),
-      ),
-      Promise.all(
-        locales.map(async (locale) => [locale, await fetchServices(locale)] as const),
-      ),
-      Promise.all(
-        locales.map(async (locale) => [locale, await fetchProjects(locale)] as const),
-      ),
-      Promise.all(
-        locales.map(async (locale) => [locale, await fetchBlogPosts(locale)] as const),
-      ),
-    ]);
+  const options = { timeoutMs: READ_TIMEOUT_MS };
+  const [contentPairs, servicePairs, projectPairs, postPairs] = await Promise.all([
+    Promise.all(locales.map(async (l) => [l, await fetchContent(l, options)] as const)),
+    Promise.all(locales.map(async (l) => [l, await fetchServices(l, options)] as const)),
+    Promise.all(locales.map(async (l) => [l, await fetchProjects(l, options)] as const)),
+    Promise.all(locales.map(async (l) => [l, await fetchBlogPosts(l, options)] as const)),
+  ]);
 
-  const contentByLocale = Object.fromEntries(contentPairs) as Record<
-    Locale,
-    Awaited<ReturnType<typeof getContent>>
-  >;
-  const services = Object.fromEntries(servicesByLocale) as Record<Locale, ApiService[]>;
-  const projects = Object.fromEntries(projectsByLocale) as Record<Locale, ApiProject[]>;
-  const posts = Object.fromEntries(postsByLocale) as Record<Locale, ApiBlogPost[]>;
+  const contentByLocale = byLocale<ApiContent | null>(contentPairs);
+  const services = byLocale<ApiService[]>(servicePairs);
+  const projects = byLocale<ApiProject[]>(projectPairs);
+  const posts = byLocale<ApiBlogPost[]>(postPairs);
 
   /* A page or record switched to "no indexing" in the admin is left out of the
      sitemap as well, so the two never contradict each other. */
   const indexable = (locale: Locale, page: PageKey) =>
     contentByLocale[locale]?.seo?.[page]?.robots?.index !== false;
+
+  /* A listing with nothing in it is `noindex` (see EMPTY_LISTING_ROBOTS), so
+     it stays out of the sitemap too, until its first record is published. */
+  const isEmptyListing = (locale: Locale, path: string) =>
+    (path === "/portfolio" && projects[locale].length === 0) ||
+    (path === "/blog" && posts[locale].length === 0);
 
   /* When the page was last edited in the admin. Absent until the API ships the
      `updated` map, in which case the entry simply carries no `lastmod`. */
@@ -165,10 +191,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
    * homepage carries all three, since it previews services, work and posts.
    */
   const contentAge = (locale: Locale, path: string) => {
-    const fromServices = newestOf(services[locale] ?? []);
-    const fromProjects = newestOf(projects[locale] ?? []);
+    const fromServices = newestOf(services[locale]);
+    const fromProjects = newestOf(projects[locale]);
     const fromPosts = newest(
-      ...(posts[locale] ?? []).map(
+      ...posts[locale].map(
         (post) => lastModified(post.updated_at) ?? lastModified(post.published_at),
       ),
     );
@@ -182,13 +208,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const { path, page } of staticPaths) {
     for (const locale of locales) {
-      if (!indexable(locale, page)) continue;
+      if (!indexable(locale, page) || isEmptyListing(locale, path)) continue;
 
       entries.push({
         url: loc(locale, path),
         lastModified: newest(editedAt(locale, page), contentAge(locale, path)),
-        priority: priorityFor(path),
-        alternates: { languages: buildAlternates(path) },
+        alternates: buildAlternates(path),
       });
     }
   }
@@ -196,14 +221,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of locales) {
     if (!indexable(locale, "service-detail")) continue;
 
-    for (const service of services[locale] ?? []) {
+    for (const service of services[locale]) {
       if (service.seo?.robots?.index === false) continue;
 
       entries.push({
         url: loc(locale, `/services/${service.slug}`),
-        lastModified: lastModified(service.updated_at),
-        priority: 0.8,
-        alternates: { languages: buildAlternates(`/services/${service.slug}`) },
+        lastModified: recordModified(service),
+        alternates: buildAlternates(`/services/${service.slug}`),
         images: images(service.seo?.og_image),
       });
     }
@@ -212,14 +236,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of locales) {
     if (!indexable(locale, "project-detail")) continue;
 
-    for (const project of projects[locale] ?? []) {
+    for (const project of projects[locale]) {
       if (project.seo?.robots?.index === false) continue;
 
-      const entry: Entry = {
+      const entry: SitemapEntry = {
         url: loc(locale, `/portfolio/${project.slug}`),
-        lastModified: lastModified(project.updated_at),
-        priority: 0.7,
-        alternates: { languages: buildAlternates(`/portfolio/${project.slug}`) },
+        lastModified: recordModified(project),
+        alternates: buildAlternates(`/portfolio/${project.slug}`),
         /* The cover and the case-study gallery, which is what a portfolio page
            is mostly made of — image results are a real entry point for it. */
         images: images(project.cover_image, ...project.gallery.slice(0, 10)),
@@ -253,16 +276,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of locales) {
     if (!indexable(locale, "blog-detail")) continue;
 
-    for (const post of posts[locale] ?? []) {
+    for (const post of posts[locale]) {
       if (post.seo?.robots?.index === false) continue;
 
       entries.push({
         url: loc(locale, `/blog/${post.slug}`),
         /* An edited post is fresher than its publication date; either beats
            stamping it with the moment the sitemap was fetched. */
-        lastModified: lastModified(post.updated_at) ?? lastModified(post.published_at),
-        priority: 0.6,
-        alternates: { languages: buildAlternates(`/blog/${post.slug}`) },
+        lastModified: recordModified(post) ?? lastModified(post.published_at),
+        alternates: buildAlternates(`/blog/${post.slug}`),
         images: images(post.cover_image, post.seo?.og_image),
       });
     }
@@ -277,4 +299,53 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     seen.add(entry.url);
     return true;
   });
+}
+
+/**
+ * The document, byte for byte what Next's `app/sitemap.ts` convention wrote
+ * (next/dist/build/webpack/loaders/metadata/resolve-route-data.js) plus the
+ * one thing that convention cannot emit: the `<?xml-stylesheet?>` instruction
+ * that gives a browser a readable table. Every XML parser and crawler skips a
+ * processing instruction, so nothing about indexing depends on it. No
+ * `<priority>` or `<changefreq>`: Google ignores both.
+ */
+export function renderSitemap(entries: SitemapEntry[]): string {
+  const hasImages = entries.some((entry) => (entry.images?.length ?? 0) > 0);
+  const hasVideos = entries.some((entry) => (entry.videos?.length ?? 0) > 0);
+
+  let content = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  content += '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n';
+  content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"';
+  if (hasImages) content += ' xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"';
+  if (hasVideos) content += ' xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"';
+  content += ' xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
+
+  for (const entry of entries) {
+    content += "<url>\n";
+    content += `<loc>${entry.url}</loc>\n`;
+    for (const [language, href] of Object.entries(entry.alternates)) {
+      content += `<xhtml:link rel="alternate" hreflang="${language}" href="${href}" />\n`;
+    }
+    for (const image of entry.images ?? []) {
+      content += `<image:image>\n<image:loc>${image}</image:loc>\n</image:image>\n`;
+    }
+    for (const video of entry.videos ?? []) {
+      content += [
+        "<video:video>",
+        `<video:title>${video.title}</video:title>`,
+        `<video:thumbnail_loc>${video.thumbnail_loc}</video:thumbnail_loc>`,
+        `<video:description>${video.description}</video:description>`,
+        ...(video.content_loc ? [`<video:content_loc>${video.content_loc}</video:content_loc>`] : []),
+        ...(video.player_loc ? [`<video:player_loc>${video.player_loc}</video:player_loc>`] : []),
+        "</video:video>\n",
+      ].join("\n");
+    }
+    if (entry.lastModified) {
+      content += `<lastmod>${entry.lastModified.toISOString()}</lastmod>\n`;
+    }
+    content += "</url>\n";
+  }
+
+  content += "</urlset>\n";
+  return content;
 }

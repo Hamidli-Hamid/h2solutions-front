@@ -75,6 +75,11 @@ const nextConfig: NextConfig = {
     // The root layout sits under `[lang]`, so a 404 for an unmatched URL has no
     // layout to render into — app/global-not-found.tsx supplies the document.
     globalNotFound: true,
+    // Route changes run inside the browser's View Transitions API, so the
+    // `<ViewTransition>` boundary around the page content in the `[lang]`
+    // layout cross-fades the old page into the new one instead of swapping
+    // them in a single frame. Browsers without the API swap as before.
+    viewTransition: true,
   },
   images: {
     formats: ["image/avif", "image/webp"],
@@ -95,6 +100,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "admin.h2solutions.az",
+      },
+      // Production serves the backend's public disk from its own origin.
+      {
+        protocol: "https",
+        hostname: "storage.h2solutions.az",
       },
       {
         protocol: "http",

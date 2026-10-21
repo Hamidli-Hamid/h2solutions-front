@@ -13,32 +13,46 @@ import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPosts } from "@/lib/api";
 import { formatDate } from "@/lib/format";
 import { localePath, isLocale } from "@/i18n-config";
-import { pageMetadata } from "@/lib/seo";
-import { localeUrl, siteConfig } from "@/lib/site-config";
-import { blogJsonLd, breadcrumbJsonLd, itemListJsonLd } from "@/lib/jsonld";
+import { EMPTY_LISTING_ROBOTS, pageMetadata } from "@/lib/seo";
+import { getPageSeo } from "@/lib/content";
+import { localeUrl } from "@/lib/site-config";
+import {
+  blogJsonLd,
+  breadcrumbJsonLd,
+  itemListJsonLd,
+  mergeAdminNodes,
+} from "@/lib/jsonld";
 
 export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/blog">): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
-  const dict = await getDictionary(lang);
+  /* The same read the page makes (deduplicated). It throws when the API
+     fails, so an outage can never pass for "no posts" and de-index the page. */
+  const [dict, posts] = await Promise.all([
+    getDictionary(lang),
+    fetchBlogPosts(lang),
+  ]);
 
-  return pageMetadata("blog", {
+  const metadata = await pageMetadata("blog", {
     lang,
     path: "/blog",
     title: dict.blog.title,
     description: dict.blog.subtitle,
   });
+
+  return posts.length > 0 ? metadata : { ...metadata, robots: EMPTY_LISTING_ROBOTS };
 }
 
 export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
 
-  const [dict, posts] = await Promise.all([
+  const [dict, posts, pageSeo] = await Promise.all([
     getDictionary(lang),
     fetchBlogPosts(lang),
+    getPageSeo(lang, "blog"),
   ]);
 
   /* The newest post leads the page; the rest fill the grid below it. */
@@ -116,7 +130,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
 
                   <h2
                     id="featured-post-heading"
-                    className="mt-3 text-xl font-bold leading-snug md:text-2xl"
+                    className="type-h3 mt-4 leading-snug"
                   >
                     <Link
                       href={localePath(lang, `/blog/${featured.slug}`)}
@@ -145,7 +159,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
           {rest.length > 0 && (
             <section aria-labelledby="all-posts-heading" className="reveal">
               <div className="container-h2 pb-12 md:pb-14">
-                <h2 id="all-posts-heading" className="text-2xl font-bold md:text-[1.75rem]">
+                <h2 id="all-posts-heading" className="type-h2">
                   {dict.blog.latestTitle}
                 </h2>
                 <ul className="mt-9 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -171,9 +185,11 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
       <CtaBanner lang={lang} dict={dict} className="reveal" />
       <JsonLd
         id="ld-blog"
-        data={
-          posts.length > 0 ? [blog, itemList, breadcrumb] : [blog, breadcrumb]
-        }
+        data={mergeAdminNodes(
+          posts.length > 0 ? [blog, itemList, breadcrumb] : [blog, breadcrumb],
+          pageSeo?.structured_data,
+          lang,
+        )}
       />
     </div>
   );

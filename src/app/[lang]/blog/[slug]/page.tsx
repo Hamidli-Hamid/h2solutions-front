@@ -17,10 +17,10 @@ import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPost, fetchBlogPosts } from "@/lib/api";
 import { formatDate } from "@/lib/format";
 import { localePath, i18n, isLocale } from "@/i18n-config";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, twitterHandleFor } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
-import { localeUrl, siteConfig } from "@/lib/site-config";
-import { blogPostingJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { localeUrl, resolveSite } from "@/lib/site-config";
+import { blogPostingJsonLd, breadcrumbJsonLd, mergeAdminNodes } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -36,11 +36,15 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/blog/[slug]">): Promise<Metadata> {
   const { lang, slug } = await params;
-  if (!isLocale(lang)) return {};
+  if (!isLocale(lang)) notFound();
   const post = await fetchBlogPost(slug, lang);
-  if (!post) return {};
+  // Otherwise the 404 inherits the layout's canonical and hreflang (the home page's).
+  if (!post) notFound();
 
-  const template = await getPageSeo(lang, "blog-detail");
+  const [template, twitterHandle] = await Promise.all([
+    getPageSeo(lang, "blog-detail"),
+    twitterHandleFor(lang),
+  ]);
 
   return buildMetadata({
     lang,
@@ -51,6 +55,7 @@ export async function generateMetadata({
     images: [post.cover_image],
     publishedTime: post.published_at,
     seo: { ...template, ...(post.seo ?? {}) },
+    twitterHandle,
   });
 }
 
@@ -270,7 +275,14 @@ export default async function BlogPostPage({
       </div>
 
       <CtaBanner lang={lang} dict={dict} className="reveal" />
-      <JsonLd id="ld-blog-post" data={[blogPostingJsonLd(post, lang), breadcrumb]} />
+      <JsonLd
+        id="ld-blog-post"
+        data={mergeAdminNodes(
+          [blogPostingJsonLd(post, lang, resolveSite(dict).founder), breadcrumb],
+          post.seo?.structured_data,
+          lang,
+        )}
+      />
     </div>
   );
 }

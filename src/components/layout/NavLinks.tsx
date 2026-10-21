@@ -32,19 +32,13 @@ export function NavLinks({ lang, items }: Props) {
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {})}
             aria-current={active ? "page" : undefined}
-            className={`relative rounded-md px-3 py-2 text-sm transition ${
+            className={`nav-link rounded-md px-3 py-2 text-sm transition ${
               active
                 ? "text-[color:var(--color-foreground)]"
                 : "text-[color:var(--color-foreground-soft)] hover:text-[color:var(--color-foreground)]"
             }`}
           >
             {item.label}
-            {active && (
-              <span
-                aria-hidden
-                className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-[color:var(--color-accent)] shadow-[var(--shadow-glow)]"
-              />
-            )}
           </Link>
         );
       })}

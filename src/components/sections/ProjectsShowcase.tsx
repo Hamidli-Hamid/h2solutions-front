@@ -1,101 +1,172 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-import { CardMedia } from "@/components/ui/CardMedia";
+import { ProjectTimelineGallery } from "@/components/sections/ProjectTimelineGallery";
+import { CardLink } from "@/components/ui/CardLink";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiProject } from "@/lib/api";
+import { shotsByImage } from "@/lib/project-shots";
 
 type Props = {
   lang: Locale;
   dict: Dictionary;
   projects: ApiProject[];
+  /** Ordinal beside the label; the home page numbers only the sections it shows. */
+  index: number;
 };
 
-type Card = {
-  key: string;
-  title: string;
-  category: string;
-  href: string;
-  image: string | null;
-};
+/** Entries on the home page; the full list lives on /portfolio. Mirrors the
+    backend's Project::HOME_LIMIT, which already refuses an eleventh. */
+const MAX_ENTRIES = 10;
 
-export function ProjectsShowcase({ lang, dict, projects }: Props) {
+const pad = (n: number) => String(n).padStart(2, "0");
+
+/**
+ * The projects ticked "Show on the home page" in the admin, in the order the
+ * API returns them — the admin's own Order field, lowest first. Nothing is
+ * re-sorted here: which projects appear, and in what order, is the editor's
+ * call.
+ */
+function selected(projects: ApiProject[]): ApiProject[] {
+  return projects.filter((project) => project.show_on_home).slice(0, MAX_ENTRIES);
+}
+
+/**
+ * Published case studies as a vertical timeline: each entry has its story on
+ * the left — step, year, client, title, summary, case link — and its shots as a
+ * gallery on the right. A rail runs down the left edge and fills as the
+ * timeline scrolls past; each node lights when its entry reaches the middle
+ * of the viewport.
+ *
+ * There is deliberately no link to the client's live site, here or on the
+ * case page: a visitor who leaves to look at it does not come back.
+ *
+ * With no project picked for the home page — or when the list could not be
+ * read — the whole section, heading included, is left out: sample cards presented work that does not
+ * exist as if it did.
+ */
+export function ProjectsShowcase({ lang, dict, projects, index }: Props) {
   const t = dict.home.projects;
+  const picked = selected(projects);
+  if (picked.length === 0) return null;
 
-  /* Real portfolio data wins; the curated samples only fill the section
-     while the CMS has no published projects yet. */
-  const cards: Card[] =
-    projects.length > 0
-      ? projects.slice(0, 4).map((project) => ({
-          key: project.slug,
-          title: project.title,
-          category: [project.client, project.year].filter(Boolean).join(" · "),
-          href: localePath(lang, `/portfolio/${project.slug}`),
-          image: project.cover_image,
-        }))
-      : t.samples.map((sample) => ({
-          key: sample.title,
-          title: sample.title,
-          category: sample.category,
-          href: localePath(lang, "/portfolio"),
-          image: null,
-        }));
+  const entries = picked.map((project) => ({
+    key: project.slug,
+    title: project.title,
+    summary: project.summary,
+    client: project.client,
+    year: project.year,
+    href: localePath(lang, `/portfolio/${project.slug}`),
+    /* Cover first, then the gallery in upload order, de-duplicated in case
+       the cover is also in the gallery — the same set the case page shows. */
+    images: Array.from(
+      new Set([project.cover_image, ...project.gallery].filter((src): src is string => Boolean(src))),
+    ),
+    shots: shotsByImage(project),
+  }));
+
+  const galleryLabels = {
+    heading: dict.portfolio.galleryTitle,
+    hint: dict.portfolio.galleryHint,
+    close: dict.portfolio.galleryClose,
+    prev: dict.portfolio.galleryPrev,
+    next: dict.portfolio.galleryNext,
+  };
 
   return (
-    <section
-      aria-labelledby="projects-heading"
-      className="reveal"
-    >
-      <div className="container-h2 pb-12 pt-6 md:pb-14 md:pt-8">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="section-label">{t.label}</p>
-            <h2
-              id="projects-heading"
-              className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+    <section aria-labelledby="projects-heading" className="reveal">
+      <div className="container-h2 pb-14 pt-12 md:pb-20 md:pt-16">
+        <SectionHeading
+          id="projects-heading"
+          label={t.label}
+          title={t.title}
+          index={index}
+          action={
+            <Link
+              href={localePath(lang, "/portfolio")}
+              className="btn-secondary px-5 py-2.5 text-sm"
             >
-              {t.title}
-            </h2>
-          </div>
-          <Link
-            href={localePath(lang, "/portfolio")}
-            className="btn-secondary px-4 py-2 text-sm"
-          >
-            {t.viewAll}
-            <ArrowRightIcon aria-hidden className="h-4 w-4" />
-          </Link>
-        </div>
+              {t.viewAll}
+              <ArrowRightIcon aria-hidden className="h-4 w-4" />
+            </Link>
+          }
+        />
 
-        <ul className="mt-9 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {cards.map((card, index) => (
-            <li key={card.key} className="flex">
-              <article className="panel panel-interactive group flex w-full flex-col overflow-hidden">
-                <CardMedia src={card.image} alt={card.title} variant={index} />
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-[0.95rem] font-semibold">
-                    <Link
-                      href={card.href}
-                      className="transition group-hover:text-[color:var(--color-accent)] before:absolute before:inset-0 before:content-['']"
-                    >
-                      {card.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-1.5 flex-1 text-[0.8125rem] text-[color:var(--color-foreground-muted)]">
-                    {card.category}
-                  </p>
-                  <span
-                    aria-hidden
-                    className="mt-5 inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
-                  >
-                    {t.viewCase}
-                    <ArrowRightIcon className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+        <ol className="project-timeline mt-10 md:mt-14">
+          {entries.map((entry, position) => (
+            <li key={entry.key} className="timeline-entry reveal-item">
+              <span aria-hidden className="timeline-node" />
+
+              <article>
+                <div className="flex items-center gap-3">
+                  <span aria-hidden className="step-ordinal">
+                    {pad(position + 1)}
                   </span>
+                  {entry.year && (
+                    <>
+                      <span aria-hidden className="timeline-dash" />
+                      <span className="font-[family-name:var(--font-display)] text-sm font-semibold tabular-nums tracking-[0.12em] text-[color:var(--color-foreground-muted)]">
+                        {entry.year}
+                      </span>
+                    </>
+                  )}
+                </div>
+
+                {/* Story and gallery share one row. The gallery's lead shot sets
+                    its height; the copy stays short beside it — a two-line
+                    summary, the whole of it is on the case page. */}
+                <div className="mt-5 grid gap-6 md:gap-8 lg:grid-cols-12 lg:gap-10">
+                  {/* The whole story block opens the case; the gallery beside it
+                      keeps its own clicks for the viewer. */}
+                  <div className="group relative lg:col-span-4">
+                    {entry.client && <p className="chip flex w-fit">{entry.client}</p>}
+
+                    <h3 className="type-h3 mt-3 text-balance">
+                      <Link
+                        href={entry.href}
+                        className="transition group-hover:text-[color:var(--color-accent)]"
+                      >
+                        {entry.title}
+                      </Link>
+                    </h3>
+
+                    {entry.summary && (
+                      <p className="mt-3 line-clamp-2 max-w-xl text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                        {entry.summary}
+                      </p>
+                    )}
+
+                    <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                      <Link
+                        href={entry.href}
+                        /* Above the block's overlay link, so its own hover state shows. */
+                        className="btn-secondary relative z-[4] px-5 py-2.5 text-sm"
+                      >
+                        {t.viewCase}
+                        <ArrowRightIcon aria-hidden className="h-4 w-4" />
+                      </Link>
+                    </div>
+
+                    <CardLink href={entry.href} />
+                  </div>
+
+                  {entry.images.length > 0 && (
+                    <div className="lg:col-span-8">
+                      <ProjectTimelineGallery
+                        images={entry.images}
+                        shots={entry.shots}
+                        title={entry.title}
+                        labels={galleryLabels}
+                      />
+                    </div>
+                  )}
                 </div>
               </article>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

@@ -56,7 +56,7 @@ export function MobileMenu({ items, labels, ctaLabel, ctaHref }: Props) {
       {open && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 top-16 z-40 max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto border-t border-[color:var(--color-border)] bg-[color:var(--color-background)]/95 backdrop-blur md:top-18 md:max-h-[calc(100dvh-4.5rem)] lg:hidden"
+          className="menu-in fixed inset-x-0 top-16 z-40 max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto border-t border-[color:var(--color-border)] bg-[color:var(--color-background)]/95 backdrop-blur md:top-18 md:max-h-[calc(100dvh-4.5rem)] lg:hidden"
         >
           <nav aria-label={labels.menu} className="container-h2 flex flex-col gap-1 py-4">
             {items.map((item) => (

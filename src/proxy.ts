@@ -1,28 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { i18n, isLocale, localePath, type Locale } from "@/i18n-config";
 
+/**
+ * The visitor's explicit choice — the `NEXT_LOCALE` cookie the language
+ * switcher writes — or the default language. `Accept-Language` is deliberately
+ * not consulted: redirecting on it sent an English-language browser that
+ * followed an Azerbaijani search result to a different page from the one that
+ * was ranked, and made the canonical az URLs a redirect for every AI fetcher
+ * that forwards its user's language.
+ */
 function pickLocale(request: NextRequest): Locale {
   const cookie = request.cookies.get("NEXT_LOCALE")?.value;
-  if (cookie && isLocale(cookie)) return cookie;
-
-  const header = request.headers.get("accept-language");
-  if (header) {
-    const candidates = header
-      .split(",")
-      .map((part) => {
-        const [tag, qPart] = part.trim().split(";");
-        const q = qPart && qPart.startsWith("q=") ? parseFloat(qPart.slice(2)) : 1;
-        return { tag: tag.toLowerCase(), q: Number.isFinite(q) ? q : 1 };
-      })
-      .sort((a, b) => b.q - a.q);
-
-    for (const { tag } of candidates) {
-      const base = tag.split("-")[0];
-      if (isLocale(base)) return base;
-    }
-  }
-
-  return i18n.defaultLocale;
+  return cookie && isLocale(cookie) ? cookie : i18n.defaultLocale;
 }
 
 /**
@@ -56,9 +45,8 @@ export function proxy(request: NextRequest) {
 
   const locale = pickLocale(request);
 
-  /* The visitor reads the default language — or asked for nothing in
-     particular. Serve the page at the URL they requested: no redirect, so the
-     canonical URL stays a 200 for crawlers and for anyone following a link. */
+  /* No explicit choice of another language: serve the page at the URL
+     requested, so the canonical URL is a 200 for every client. */
   if (locale === i18n.defaultLocale) {
     const url = request.nextUrl.clone();
     url.pathname = `/${i18n.defaultLocale}${pathname === "/" ? "" : pathname}`;
@@ -68,12 +56,12 @@ export function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   url.pathname = localePath(locale, pathname === "/" ? "" : pathname);
 
-  /* This target is negotiated from the request, so a shared cache must not
-     hand one visitor's language to the next — nor pin Googlebot to whichever
-     locale was cached first. Temporary (307) for the same reason: the URL has
-     no single permanent destination. */
+  /* This target depends on the visitor's cookie, so a shared cache must not
+     hand one visitor's language to the next — nor pin a crawler (which never
+     carries the cookie) to a redirect. Temporary (307) for the same reason:
+     the URL has no single permanent destination. */
   const response = NextResponse.redirect(url);
-  response.headers.set("Vary", "Accept-Language, Cookie");
+  response.headers.set("Vary", "Cookie");
   return response;
 }
 

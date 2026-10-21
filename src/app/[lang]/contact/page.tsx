@@ -12,14 +12,22 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
+import { SplitWords } from "@/components/ui/SplitWords";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { localeUrl, resolveSite, siteConfig } from "@/lib/site-config";
-import { breadcrumbJsonLd, contactPageJsonLd } from "@/lib/jsonld";
+import { getPageSeo } from "@/lib/content";
+import { localeUrl, resolveSite } from "@/lib/site-config";
+import { contactNumbers, telHref, whatsappHref } from "@/lib/format";
+import {
+  breadcrumbJsonLd,
+  contactPageJsonLd,
+  isProfileUrl,
+  mergeAdminNodes,
+} from "@/lib/jsonld";
 
 export async function generateMetadata({
   params,
@@ -41,19 +49,25 @@ export default async function ContactPage({
 }: PageProps<"/[lang]/contact">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, pageSeo] = await Promise.all([
+    getDictionary(lang),
+    getPageSeo(lang, "contact"),
+  ]);
   const t = dict.contact;
   const site = resolveSite(dict);
+  const linkedin = isProfileUrl(site.social.linkedin) ? site.social.linkedin : null;
 
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: localeUrl(lang) },
     { name: t.title, url: localeUrl(lang, "/contact") },
   ]);
 
-  /* All outbound channels derive from the two dictionary values, so a phone or
-     address change in the JSON propagates to tel:, wa.me and mailto: at once. */
-  const telHref = `tel:${t.phone.replace(/[^\d+]/g, "")}`;
-  const whatsappHref = `https://wa.me/${t.phone.replace(/\D/g, "")}`;
+  /* Every outbound channel derives from the contact values, so a change in the
+     admin propagates to tel:, wa.me and mailto: at once. A number is a
+     channel only when it is real: the shipped placeholder would be a dead
+     line on the page built to convert. */
+  const numbers = contactNumbers(t);
+  const whatsappLink = numbers.whatsapp ? whatsappHref(numbers.whatsapp) : null;
   const mailHref = `mailto:${t.email}?subject=${encodeURIComponent(t.mailSubject)}`;
 
   const channels: Array<{
@@ -71,21 +85,29 @@ export default async function ContactPage({
       href: mailHref,
       icon: EnvelopeIcon,
     },
-    {
-      label: t.phoneLabel,
-      value: t.phone,
-      note: t.phoneNote,
-      href: telHref,
-      icon: PhoneIcon,
-    },
-    {
-      label: t.whatsappLabel,
-      value: t.whatsappValue,
-      note: t.whatsappNote,
-      href: whatsappHref,
-      icon: ChatBubbleOvalLeftEllipsisIcon,
-      external: true,
-    },
+    ...(numbers.phone
+      ? [
+          {
+            label: t.phoneLabel,
+            value: numbers.phone,
+            note: t.phoneNote,
+            href: telHref(numbers.phone),
+            icon: PhoneIcon,
+          },
+        ]
+      : []),
+    ...(whatsappLink
+      ? [
+          {
+            label: t.whatsappLabel,
+            value: t.whatsappValue,
+            note: t.whatsappNote,
+            href: whatsappLink,
+            icon: ChatBubbleOvalLeftEllipsisIcon,
+            external: true,
+          },
+        ]
+      : []),
   ];
 
   const details: Array<{
@@ -116,14 +138,16 @@ export default async function ContactPage({
               {t.direct.emailCta}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </a>
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              {t.direct.whatsappCta}
-            </a>
+            {whatsappLink && (
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+              >
+                {t.direct.whatsappCta}
+              </a>
+            )}
           </>
         }
       />
@@ -135,9 +159,9 @@ export default async function ContactPage({
             <p className="section-label">{t.infoTitle}</p>
             <h2
               id="contact-channels-heading"
-              className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+              className="type-h2 mt-4"
             >
-              {t.infoHeading}
+              <SplitWords text={t.infoHeading} />
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-[color:var(--color-foreground-soft)] md:text-base">
               {t.infoSubtitle}
@@ -178,23 +202,24 @@ export default async function ContactPage({
               ))}
             </ul>
 
+            {/* A `<div>` inside a `<dl>` may hold only its `dt`/`dd` group, so
+                the icon sits inside the `dt` and is placed where the old flex
+                column put it (p-5 + 2.75rem tile + 1rem gap = pl-20). */}
             <dl className="mt-3 grid gap-3 sm:grid-cols-2">
               {details.map((detail) => (
-                <div key={detail.label} className="panel flex items-start gap-4 p-5">
-                  <span aria-hidden className="icon-tile h-11 w-11 flex-none">
-                    <detail.icon className="h-5 w-5" />
-                  </span>
-                  <div className="min-w-0">
-                    <dt className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-foreground-muted)]">
-                      {detail.label}
-                    </dt>
-                    <dd className="mt-1 text-[0.9375rem] font-medium">
-                      {detail.value}
-                    </dd>
-                    <dd className="mt-1.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
-                      {detail.note}
-                    </dd>
-                  </div>
+                <div key={detail.label} className="panel min-w-0 p-5 pl-20">
+                  <dt className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-foreground-muted)]">
+                    <span aria-hidden className="icon-tile absolute left-5 top-5 h-11 w-11">
+                      <detail.icon className="h-5 w-5" />
+                    </span>
+                    {detail.label}
+                  </dt>
+                  <dd className="mt-1 text-[0.9375rem] font-medium">
+                    {detail.value}
+                  </dd>
+                  <dd className="mt-1.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                    {detail.note}
+                  </dd>
                 </div>
               ))}
             </dl>
@@ -209,7 +234,7 @@ export default async function ContactPage({
 
             <div className="relative">
               <p className="section-label">{t.brief.label}</p>
-              <h2 className="mt-3 text-xl font-bold md:text-2xl">{t.brief.title}</h2>
+              <h2 className="type-h3 mt-4">{t.brief.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-foreground-soft)]">
                 {t.brief.text}
               </p>
@@ -222,7 +247,7 @@ export default async function ContactPage({
                   >
                     <span
                       aria-hidden
-                      className="icon-tile mt-0.5 h-6 w-6 flex-none font-[var(--font-display)] text-[0.6875rem] font-bold"
+                      className="icon-tile mt-0.5 h-6 w-6 flex-none font-[family-name:var(--font-display)] text-[0.6875rem] font-bold"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -256,9 +281,9 @@ export default async function ContactPage({
           <p className="section-label">{t.next.label}</p>
           <h2
             id="contact-next-heading"
-            className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+            className="type-h2 mt-4"
           >
-            {t.next.title}
+            <SplitWords text={t.next.title} />
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-[color:var(--color-foreground-soft)] md:text-base">
             {t.next.subtitle}
@@ -273,7 +298,7 @@ export default async function ContactPage({
                   </span>
                   <span
                     aria-hidden
-                    className="font-[var(--font-display)] text-sm font-bold tracking-wider text-[color:var(--color-foreground-muted)]"
+                    className="font-[family-name:var(--font-display)] text-sm font-bold tracking-wider text-[color:var(--color-foreground-muted)]"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -308,22 +333,24 @@ export default async function ContactPage({
               <div>
                 <h2
                   id="contact-direct-heading"
-                  className="text-2xl font-bold md:text-[1.75rem]"
+                  className="type-h2"
                 >
                   {t.direct.title}
                 </h2>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-[color:var(--color-foreground-soft)] md:text-base">
                   {t.direct.text}
                 </p>
-                <a
-                  href={site.social.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
-                >
-                  {t.direct.linkedin}
-                  <ArrowUpRightIcon aria-hidden className="h-4 w-4" />
-                </a>
+                {linkedin && (
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                  >
+                    {t.direct.linkedin}
+                    <ArrowUpRightIcon aria-hidden className="h-4 w-4" />
+                  </a>
+                )}
               </div>
 
               <div className="flex flex-wrap gap-3 md:justify-end">
@@ -331,21 +358,30 @@ export default async function ContactPage({
                   {t.direct.emailCta}
                   <ArrowRightIcon aria-hidden className="h-4 w-4" />
                 </a>
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary"
-                >
-                  {t.direct.whatsappCta}
-                </a>
+                {whatsappLink && (
+                  <a
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                  >
+                    {t.direct.whatsappCta}
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <JsonLd id="ld-contact" data={[contactPageJsonLd(dict, lang), breadcrumb]} />
+      <JsonLd
+        id="ld-contact"
+        data={mergeAdminNodes(
+          [contactPageJsonLd(dict, lang), breadcrumb],
+          pageSeo?.structured_data,
+          lang,
+        )}
+      />
     </div>
   );
 }

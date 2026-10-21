@@ -1,5 +1,7 @@
 import "server-only";
-import type { Locale } from "@/i18n-config";
+import { cache } from "react";
+
+import { i18n, type Locale } from "@/i18n-config";
 import { deepMerge, getContent } from "@/lib/content";
 
 const loaders = {
@@ -11,7 +13,17 @@ const loaders = {
   uz: () => import("@/dictionaries/uz.json").then((m) => m.default),
 } satisfies Record<Locale, () => Promise<Dictionary>>;
 
-export type Dictionary = typeof import("@/dictionaries/az.json");
+type Bundled = typeof import("@/dictionaries/az.json");
+
+/**
+ * Values the admin can publish that the bundled files deliberately do not ship
+ * — a WhatsApp line exists only once someone enters one.
+ */
+type ManagedOnly = {
+  contact: { whatsapp?: string };
+};
+
+export type Dictionary = Bundled & ManagedOnly;
 
 /**
  * Site copy for one language: what the admin publishes, laid over the
@@ -29,3 +41,13 @@ export async function getDictionary(locale: Locale): Promise<Dictionary> {
 
   return deepMerge(bundled, managed.content);
 }
+
+/**
+ * All six languages at once, for the few facts that have to read the same on
+ * every page — the founder's spellings on the one `#founder` node. Cached per
+ * render pass; each language's content read is shared with its own pages.
+ */
+export const getAllDictionaries = cache(
+  async (): Promise<Dictionary[]> =>
+    Promise.all(i18n.locales.map((locale) => getDictionary(locale))),
+);

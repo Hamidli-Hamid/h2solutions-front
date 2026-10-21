@@ -26,25 +26,29 @@ export function BlogCard({
   const published = formatDate(post.published_at, lang);
 
   return (
-    <article className="panel panel-interactive group flex h-full flex-col overflow-hidden">
+    <article
+      data-glow
+      className="panel panel-interactive glow-card sheen group flex h-full flex-col overflow-hidden"
+    >
       <CardMedia
         src={post.cover_image}
         alt={post.title}
         variant={variant}
         sizes={sizes}
       />
-      <div className="flex flex-1 flex-col p-5">
-        <p className="flex flex-wrap items-center gap-x-2 text-[0.75rem] text-[color:var(--color-foreground-muted)]">
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <p className="flex flex-wrap items-center gap-2">
           {published && (
-            <time dateTime={post.published_at ?? undefined}>{published}</time>
+            <time dateTime={post.published_at ?? undefined} className="chip">
+              {published}
+            </time>
           )}
-          {published && <span aria-hidden>·</span>}
-          <span>
+          <span className="chip">
             {post.read_minutes} {labels.minRead}
           </span>
         </p>
 
-        <Heading className="mt-2 text-base font-semibold leading-snug">
+        <Heading className="mt-3 text-base font-semibold leading-snug md:text-[1.0625rem]">
           <Link
             href={localePath(lang, `/blog/${post.slug}`)}
             className="transition before:absolute before:inset-0 before:content-[''] group-hover:text-[color:var(--color-accent)]"
@@ -53,16 +57,18 @@ export function BlogCard({
           </Link>
         </Heading>
 
-        <p className="mt-2 flex-1 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+        <p className="mt-2.5 flex-1 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
           {post.excerpt}
         </p>
 
         <span
           aria-hidden
-          className="mt-5 inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+          className="mt-6 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
         >
           {labels.readMore}
-          <ArrowRightIcon className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
+          <span className="arrow-chip h-6 w-6">
+            <ArrowRightIcon className="h-3 w-3" />
+          </span>
         </span>
       </div>
     </article>

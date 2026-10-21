@@ -1,3 +1,4 @@
+import { brandAsset } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
 import { resolveBranding } from "@/lib/site-config";
 import { i18n } from "@/i18n-config";
@@ -19,7 +20,7 @@ export async function GET() {
   const dict = await getDictionary(i18n.defaultLocale);
   const { icons } = resolveBranding(dict);
 
-  const target = icons.ico ?? "/favicon-default.ico";
+  const target = icons.ico ?? brandAsset("/favicon-default.ico");
 
   return new Response(null, {
     // Temporary: the target changes the moment a new favicon is uploaded.

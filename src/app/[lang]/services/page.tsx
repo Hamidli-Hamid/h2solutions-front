@@ -14,12 +14,14 @@ import { getDictionary } from "@/lib/dictionaries";
 import { fetchServices } from "@/lib/api";
 import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { localeUrl, siteConfig } from "@/lib/site-config";
+import { getPageSeo } from "@/lib/content";
+import { localeUrl } from "@/lib/site-config";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
   faqJsonLd,
   itemListJsonLd,
+  mergeAdminNodes,
 } from "@/lib/jsonld";
 
 export async function generateMetadata({
@@ -42,9 +44,10 @@ export default async function ServicesHubPage({
 }: PageProps<"/[lang]/services">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  const [dict, services] = await Promise.all([
+  const [dict, services, pageSeo] = await Promise.all([
     getDictionary(lang),
     fetchServices(lang),
+    getPageSeo(lang, "services"),
   ]);
 
   const url = localeUrl(lang, "/services");
@@ -101,12 +104,13 @@ export default async function ServicesHubPage({
             </p>
           ) : (
             <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {services.map((service) => (
+              {services.map((service, index) => (
                 <li key={service.slug} className="flex">
                   <ServiceCard
                     service={service}
                     lang={lang}
                     ctaLabel={dict.common.learnMore}
+                    index={index}
                   />
                 </li>
               ))}
@@ -122,11 +126,13 @@ export default async function ServicesHubPage({
 
       <JsonLd
         id="ld-services"
-        data={
+        data={mergeAdminNodes(
           services.length > 0
             ? [collection, itemList, breadcrumb]
-            : [collection, breadcrumb]
-        }
+            : [collection, breadcrumb],
+          pageSeo?.structured_data,
+          lang,
+        )}
       />
       <JsonLd id="ld-services-faq" data={faqJsonLd(dict.services.faq.items)} />
     </div>

@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowRightIcon,
-  ArrowTopRightOnSquareIcon,
-} from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
 import { ProjectGallery } from "@/components/sections/ProjectGallery";
@@ -14,13 +11,13 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
-import { hostname } from "@/lib/format";
 import { fetchProject, fetchProjects } from "@/lib/api";
+import { shotsByImage } from "@/lib/project-shots";
 import { localePath, i18n, isLocale } from "@/i18n-config";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, twitterHandleFor } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
-import { localeUrl, siteConfig } from "@/lib/site-config";
-import { breadcrumbJsonLd, projectJsonLd } from "@/lib/jsonld";
+import { localeUrl } from "@/lib/site-config";
+import { breadcrumbJsonLd, mergeAdminNodes, projectJsonLd } from "@/lib/jsonld";
 import { resolveProjectVideo } from "@/lib/video";
 
 export async function generateStaticParams() {
@@ -37,11 +34,15 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/portfolio/[slug]">): Promise<Metadata> {
   const { lang, slug } = await params;
-  if (!isLocale(lang)) return {};
+  if (!isLocale(lang)) notFound();
   const project = await fetchProject(slug, lang);
-  if (!project) return {};
+  // Otherwise the 404 inherits the layout's canonical and hreflang (the home page's).
+  if (!project) notFound();
 
-  const template = await getPageSeo(lang, "project-detail");
+  const [template, twitterHandle] = await Promise.all([
+    getPageSeo(lang, "project-detail"),
+    twitterHandleFor(lang),
+  ]);
 
   return buildMetadata({
     lang,
@@ -51,6 +52,7 @@ export async function generateMetadata({
     ogType: "article",
     images: [project.cover_image ?? project.gallery[0]],
     seo: { ...template, ...(project.seo ?? {}) },
+    twitterHandle,
   });
 }
 
@@ -81,8 +83,10 @@ export default async function ProjectDetailPage({
   );
   const hasGallery = galleryImages.length > 0;
   const video = resolveProjectVideo(project);
-  /* The bare host is what reads as the project's domain in the meta row. */
-  const domain = project.url ? hostname(project.url) : null;
+  const facts = [
+    project.client && { label: dict.portfolio.clientLabel, value: project.client },
+    project.year && { label: dict.portfolio.yearLabel, value: String(project.year) },
+  ].filter(Boolean) as { label: string; value: string }[];
 
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: localeUrl(lang) },
@@ -106,116 +110,66 @@ export default async function ProjectDetailPage({
         title={project.title}
         subtitle={project.summary}
         actions={
-          <>
-            <Link href={localePath(lang, "/contact")} className="btn-primary">
-              {dict.hero.ctaPrimary}
-              <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                {dict.portfolio.visitSite}
-                <ArrowTopRightOnSquareIcon aria-hidden className="h-4 w-4" />
-              </a>
-            )}
-          </>
+          <Link href={localePath(lang, "/contact")} className="btn-primary">
+            {dict.hero.ctaPrimary}
+            <ArrowRightIcon aria-hidden className="h-4 w-4" />
+          </Link>
         }
       />
 
-      {(project.client || project.year || domain) && (
-        <div className="container-h2 pb-4">
-          <dl className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
-            {project.client && (
-              <div className="flex items-center gap-2">
-                <dt className="text-[color:var(--color-foreground-muted)]">
-                  {dict.portfolio.clientLabel}:
-                </dt>
-                <dd className="font-medium">{project.client}</dd>
-              </div>
-            )}
-            {project.year && (
-              <div className="flex items-center gap-2">
-                <dt className="text-[color:var(--color-foreground-muted)]">
-                  {dict.portfolio.yearLabel}:
-                </dt>
-                <dd className="font-medium">{project.year}</dd>
-              </div>
-            )}
-            {domain && (
-              <div className="flex items-center gap-2">
-                <dt className="text-[color:var(--color-foreground-muted)]">
-                  {dict.portfolio.domainLabel}:
-                </dt>
-                <dd className="font-medium">
-                  <a
-                    href={project.url ?? undefined}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
-                  >
-                    {domain}
-                    <ArrowTopRightOnSquareIcon aria-hidden className="h-3.5 w-3.5" />
-                  </a>
-                </dd>
-              </div>
-            )}
-          </dl>
+      {/* The gallery opens the page, straight under the title and wider than
+          the text container — edge to edge up to a cap, so the work leads
+          and the story about it follows underneath. */}
+      {hasGallery && (
+        <div className="mx-auto w-full max-w-[120rem] px-4 pb-4 md:px-6">
+          <ProjectGallery
+            images={galleryImages}
+            shots={shotsByImage(project)}
+            title={project.title}
+            labels={{
+              heading: dict.portfolio.galleryTitle,
+              hint: dict.portfolio.galleryHint,
+              close: dict.portfolio.galleryClose,
+              prev: dict.portfolio.galleryPrev,
+              next: dict.portfolio.galleryNext,
+            }}
+          />
         </div>
       )}
 
-      {video && (
-        <ProjectVideo
-          video={video}
-          poster={project.cover_image ?? galleryImages[0] ?? null}
-          title={project.title}
-          labels={{
-            heading: dict.portfolio.videoTitle,
-            play: dict.portfolio.videoPlay,
-          }}
-        />
-      )}
-
-      {/* Under the video: the project text with its gallery below it, and the
-          rest of the portfolio in the rail beside them. */}
+      {/* Under the gallery: the facts and the project text, with the rest of
+          the portfolio in the rail beside them. */}
       <div className="reveal">
-        <div className="container-h2 grid items-start gap-10 py-12 md:py-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
-          <div className="min-w-0">
-            <article aria-labelledby="overview-heading">
-              <h2
-                id="overview-heading"
-                className="text-2xl font-bold md:text-[1.75rem]"
-              >
-                {dict.portfolio.overviewTitle}
-              </h2>
-              {/* The text keeps the panel background the old story blocks had. */}
-              <div className="panel mt-6 p-6 md:p-8">
-                <div
-                  className="prose-tech max-w-[68ch]"
-                  /* Content comes from the admin rich editor, which stores HTML. */
-                  dangerouslySetInnerHTML={{ __html: project.body ?? "" }}
-                />
-              </div>
-            </article>
+        <div className="container-h2 grid items-start gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+          <article aria-labelledby="overview-heading" className="min-w-0">
+            <h2 id="overview-heading" className="type-h2">
+              {dict.portfolio.overviewTitle}
+            </h2>
 
-            {hasGallery && (
-              <div className="mt-12">
-                <ProjectGallery
-                  variant="stacked"
-                  images={galleryImages}
-                  title={project.title}
-                  labels={{
-                    heading: dict.portfolio.galleryTitle,
-                    hint: dict.portfolio.galleryHint,
-                    close: dict.portfolio.galleryClose,
-                  }}
-                />
-              </div>
+            {facts.length > 0 && (
+              <dl className="mt-6 grid grid-cols-2 gap-3">
+                {facts.map((fact) => (
+                  <div key={fact.label} className="panel min-w-0 px-5 py-4">
+                    <dt className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-foreground-muted)]">
+                      {fact.label}
+                    </dt>
+                    <dd className="mt-1.5 truncate font-[family-name:var(--font-display)] text-base font-semibold">
+                      {fact.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             )}
-          </div>
+
+            {/* The text keeps the panel background the old story blocks had. */}
+            <div className="panel mt-3 p-6 md:p-8">
+              <div
+                className="prose-tech max-w-[68ch]"
+                /* Content comes from the admin rich editor, which stores HTML. */
+                dangerouslySetInnerHTML={{ __html: project.body ?? "" }}
+              />
+            </div>
+          </article>
 
           {/* Heading + panel, mirroring the text column so both cards line up
               on the same edge. */}
@@ -223,7 +177,7 @@ export default async function ProjectDetailPage({
             <aside className="lg:sticky lg:top-24">
               <h2
                 id="related-projects-heading"
-                className="text-2xl font-bold md:text-[1.75rem]"
+                className="type-h2"
               >
                 {dict.portfolio.related}
               </h2>
@@ -281,12 +235,28 @@ export default async function ProjectDetailPage({
         </div>
       </div>
 
+      {video && (
+        <ProjectVideo
+          video={video}
+          poster={project.cover_image ?? galleryImages[0] ?? null}
+          title={project.title}
+          labels={{
+            heading: dict.portfolio.videoTitle,
+            play: dict.portfolio.videoPlay,
+          }}
+        />
+      )}
+
       <ProcessSteps dict={dict} />
 
       <CtaBanner lang={lang} dict={dict} className="reveal" />
       <JsonLd
         id="ld-project"
-        data={[projectJsonLd(project, lang), breadcrumb]}
+        data={mergeAdminNodes(
+          [projectJsonLd(project, lang), breadcrumb],
+          project.seo?.structured_data,
+          lang,
+        )}
       />
     </div>
   );

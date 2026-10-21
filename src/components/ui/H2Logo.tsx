@@ -1,13 +1,14 @@
+import { brandAsset, LOGO_LOCKUP } from "@/lib/brand";
+
 type Props = {
   className?: string;
-  withWordmark?: boolean;
-  /** Logo uploaded in the admin; without one the built-in mark is drawn. */
+  /** Logo uploaded in the admin; without one the brand-pack lockup is drawn. */
   logo?: string | null;
-  /** Accessible name for an uploaded logo — normally the brand name. */
+  /** Accessible name for the logo — normally the brand name. */
   alt?: string;
 };
 
-export function H2Logo({ className, withWordmark = true, logo, alt }: Props) {
+export function H2Logo({ className, logo, alt }: Props) {
   if (logo) {
     /* An uploaded logo replaces the whole lockup, mark and wordmark alike.
        Height is fixed to the header rhythm; the width follows the artwork. */
@@ -23,20 +24,28 @@ export function H2Logo({ className, withWordmark = true, logo, alt }: Props) {
     );
   }
 
+  /* Two faces of the same lockup — navy ink for light surfaces, white for
+     dark ones. Which one shows is decided by the nearest theme block (see
+     `.h2-logo-on-*` in globals.css), so the always-dark footer gets the white
+     face even on the light theme. The hidden one is `display: none`, which
+     also takes it out of the accessibility tree. Plain <img>: a vector needs
+     no optimiser. */
   return (
-    <span className={`inline-flex items-center gap-2 ${className ?? ""}`}>
-      <span
-        aria-hidden
-        className="relative inline-flex h-9 w-9 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-background-elevated)] font-[var(--font-display)] text-[color:var(--color-accent)] shadow-[var(--shadow-glow)]"
-      >
-        <span className="text-base font-bold leading-none">H</span>
-        <span className="text-[10px] font-bold leading-none translate-y-1">2</span>
-      </span>
-      {withWordmark && (
-        <span className="text-sm font-semibold tracking-wide text-[color:var(--color-foreground)]">
-          <span className="text-[color:var(--color-foreground-muted)]">Solutions</span>
-        </span>
-      )}
+    <span className={`inline-flex items-center ${className ?? ""}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={brandAsset("/brand/h2-solutions-logo-light.svg")}
+        alt={alt ?? ""}
+        {...LOGO_LOCKUP}
+        className="h2-logo-on-light h-9 w-auto sm:h-10"
+      />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={brandAsset("/brand/h2-solutions-logo-dark.svg")}
+        alt={alt ?? ""}
+        {...LOGO_LOCKUP}
+        className="h2-logo-on-dark h-9 w-auto sm:h-10"
+      />
     </span>
   );
 }

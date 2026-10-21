@@ -25,7 +25,7 @@ export function Breadcrumbs({ items, label }: Props) {
             {item.href ? (
               <Link
                 href={item.href}
-                className="transition hover:text-[color:var(--color-accent)]"
+                className="link-underline transition hover:text-[color:var(--color-accent)]"
               >
                 {item.label}
               </Link>

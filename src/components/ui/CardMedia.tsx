@@ -7,6 +7,11 @@ type Props = {
   sizes?: string;
   /** Varies the placeholder graphic so a row of cards doesn't look cloned. */
   variant?: number;
+  /**
+   * `framed` is the classic band above a card's copy; `fill` stretches the
+   * artwork over the whole card so the copy can sit on top of it.
+   */
+  layout?: "framed" | "fill";
   className?: string;
 };
 
@@ -47,6 +52,7 @@ export function CardMedia({
   alt,
   sizes = "(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw",
   variant = 0,
+  layout = "framed",
   className,
 }: Props) {
   const nodes = PLACEHOLDER_NODES[variant % PLACEHOLDER_NODES.length];
@@ -54,10 +60,13 @@ export function CardMedia({
     .map(([x, y], index) => `${index === 0 ? "M" : "L"}${x} ${y}`)
     .join(" ");
 
+  const shell =
+    layout === "fill"
+      ? "absolute inset-0 overflow-hidden"
+      : "relative aspect-16/10 overflow-hidden border-b border-[color:var(--color-border)]";
+
   return (
-    <div
-      className={`relative aspect-16/10 overflow-hidden border-b border-[color:var(--color-border)] ${className ?? ""}`}
-    >
+    <div className={`${shell} ${className ?? ""}`}>
       {src ? (
         <Image
           src={src}
@@ -65,13 +74,16 @@ export function CardMedia({
           fill
           sizes={sizes}
           loading="lazy"
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+          /* A longer, eased zoom than the old 500ms linear step — at card
+             size the movement should be felt rather than seen. */
+          className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
         />
       ) : (
         <div className="media-placeholder absolute inset-0" aria-hidden>
           <svg
             viewBox="0 0 160 100"
-            className="absolute inset-0 h-full w-full text-[color:var(--color-accent)] opacity-35"
+            preserveAspectRatio="xMidYMid slice"
+            className="absolute inset-0 h-full w-full text-[color:var(--color-accent)] opacity-35 transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
             fill="none"
             stroke="currentColor"
             strokeWidth="0.6"

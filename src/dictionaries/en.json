@@ -13,7 +13,10 @@
     "contact": "Contact",
     "menu": "Menu",
     "close": "Close",
-    "language": "Language"
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light mode",
+    "themeDark": "Dark mode"
   },
   "hero": {
     "badge": "H2 — Solutions & Growth",
@@ -130,6 +133,7 @@
     "faq": {
       "label": "Frequently asked questions",
       "title": "Questions you may have",
+      "imageAlt": "Sites built by H2 Solutions: TopdanMall, Climahome, MegaParts and Sign & Graphics on desktop and mobile",
       "items": [
         {
           "question": "How long does a project take?",
@@ -188,6 +192,7 @@
     "seoText": {
       "label": "SEO text",
       "title": "The right technology partner for digital success",
+      "imageAlt": "Next.js metadata and structured-data code beside the Alzone and Sign & Graphics sites built by H2 Solutions",
       "body": [
         "At H2 Solutions we apply current technologies and effective strategies so businesses can hold a strong position in the digital world. Web development, mobile applications, e-commerce solutions, SEO and business automation together increase the online impact of your brand.",
         "An architecture built on Next.js and Laravel gives your website both speed and durable visibility in search results. Technical SEO, structured data and GEO — optimisation for AI-driven search engines — mean your brand is found not only on Google but across AI platforms as well.",
@@ -223,6 +228,7 @@
     "title": "Services",
     "intro": "From websites and mobile apps to SEO and business automation — six core services for growing your business online.",
     "included": "What's included?",
+    "lastUpdated": "Last updated",
     "related": "Other services",
     "startTitle": "Start your project",
     "startText": "Questions about this service? Send a short brief and we'll get back to you within 24 hours.",
@@ -445,7 +451,9 @@
     "visitSite": "Visit the site",
     "related": "Other projects",
     "processTitle": "How we worked",
-    "galleryClose": "Close"
+    "galleryClose": "Close",
+    "galleryPrev": "Previous image",
+    "galleryNext": "Next image"
   },
   "blog": {
     "label": "Blog",
@@ -477,7 +485,7 @@
     "email": "info@h2solutions.az",
     "emailNote": "The fastest route — send your brief and we reply within 24 hours.",
     "phoneLabel": "Phone",
-    "phone": "+994 50 000 00 00",
+    "phone": "+994 77 717-54-54",
     "phoneNote": "Call us on weekdays between 09:00 and 18:00.",
     "whatsappLabel": "WhatsApp",
     "whatsappValue": "Send a message",
@@ -567,10 +575,10 @@
       "facebook": "https://www.facebook.com/",
       "instagram": "https://www.instagram.com/"
     },
-    "twitterHandle": "@h2solutions",
+    "twitterHandle": "",
     "addressLocality": "Baku",
     "addressCountry": "AZ",
-    "priceRange": "$$"
+    "priceRange": ""
   },
   "navigation": [
     {

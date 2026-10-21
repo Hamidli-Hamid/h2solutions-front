@@ -1,316 +1,127 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
+
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MagnifyingGlassPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+  GalleryViewer,
+  pad,
+  useGalleryViewer,
+  type GalleryViewerLabels,
+} from "@/components/ui/GalleryViewer";
+import type { ViewerShots } from "@/lib/project-shots";
 
 type Props = {
   images: string[];
   title: string;
-  labels: {
-    heading: string;
-    hint: string;
-    close: string;
-  };
-  /**
-   * `mosaic` is the full-width band; `stacked` is the narrow column that sits
-   * beside the project text, one image under the other.
-   */
-  variant?: "mosaic" | "stacked";
+  labels: GalleryViewerLabels;
+  shots?: ViewerShots;
+};
+
+/* Desktop bento, one layout per image count: the lead shot always takes two
+   rows, and the rows under it alternate wide/narrow so no two rows mirror
+   each other. Beyond six the last tile carries a "+N" badge — the viewer
+   still pages through every image. */
+const LAYOUTS: Record<number, string[]> = {
+  1: ["md:col-span-12 md:row-span-2"],
+  2: ["md:col-span-7 md:row-span-2", "md:col-span-5 md:row-span-2"],
+  3: ["md:col-span-7 md:row-span-2", "md:col-span-5", "md:col-span-5"],
+  4: ["md:col-span-5 md:row-span-2", "md:col-span-7", "md:col-span-4", "md:col-span-3"],
+  5: ["md:col-span-7 md:row-span-2", "md:col-span-5", "md:col-span-5", "md:col-span-5", "md:col-span-7"],
+  6: ["md:col-span-7 md:row-span-2", "md:col-span-5", "md:col-span-5", "md:col-span-4", "md:col-span-3", "md:col-span-5"],
 };
 
 /**
- * Every image is shown at once as an even tile grid; selecting one opens it
- * full size in a native <dialog>, which gives us Esc, focus trapping and the
- * backdrop for free — no lightbox dependency.
+ * The case-study gallery that opens the project page: every shot at once in an
+ * asymmetric bento across the full width, and the full-screen viewer behind
+ * any tile.
  */
-export function ProjectGallery({
-  images,
-  title,
-  labels,
-  variant = "mosaic",
-}: Props) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
+export function ProjectGallery({ images, title, labels, shots }: Props) {
+  const total = images.length;
+  const viewer = useGalleryViewer(total);
 
-  const move = useCallback(
-    (delta: number) =>
-      setOpenIndex((current) =>
-        current === null
-          ? current
-          : (current + delta + images.length) % images.length,
-      ),
-    [images.length],
-  );
+  const shown = images.slice(0, 6);
+  const layout = LAYOUTS[shown.length] ?? LAYOUTS[6];
+  const hiddenCount = total - shown.length;
+  /* Phones: the lead shot spans both columns, the rest pair up, and an odd
+     one out takes the full row instead of leaving a hole. */
+  const restOdd = (shown.length - 1) % 2 === 1;
 
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    if (openIndex !== null && !dialog.open) dialog.showModal();
-    if (openIndex === null && dialog.open) dialog.close();
-
-    document.body.style.overflow = openIndex !== null ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [openIndex]);
-
-  useEffect(() => {
-    if (openIndex === null || images.length < 2) return;
-
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        move(1);
-      } else if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        move(-1);
-      }
-    }
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [openIndex, images.length, move]);
-
-  if (images.length === 0) return null;
-
-  /* At most four tiles sit beside the cover; anything further is reachable
-     through the "+N" badge on the last one, which keeps the mosaic tidy for
-     any number of uploads. */
-  const visible = images.slice(1, 5);
-  const hiddenCount = images.length - 1 - visible.length;
-  /* A 2×2 block of 16:10 tiles is almost exactly as tall as a single 16:10
-     cover of double the width, so both columns line up without stretching
-     — which is what kept distorting the cover. */
-  const tileGrid = visible.length === 1 ? "grid-cols-1" : "grid-cols-2";
-
-  const header = (
-    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-3">
-      <h2 id="gallery-heading" className="text-2xl font-bold md:text-[1.75rem]">
-        {labels.heading}
-      </h2>
-      <p className="text-xs text-[color:var(--color-foreground-muted)]">
-        {labels.hint}
-      </p>
-    </div>
-  );
+  if (total === 0) return null;
 
   return (
-    <section
-      aria-labelledby="gallery-heading"
-      className={variant === "mosaic" ? "reveal" : undefined}
-    >
-      {variant === "stacked" ? (
-        <>
-          {header}
-          {/* One image under the other, below the project text. */}
-          <ul className="mt-6 flex flex-col gap-4">
-            {images.map((image, index) => (
-              <li key={image} className="flex">
-                <Tile
-                  image={image}
-                  index={index}
-                  total={images.length}
-                  title={title}
-                  onOpen={setOpenIndex}
-                  className="aspect-16/10"
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  eager={index === 0}
-                />
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <div className="container-h2 py-12 md:py-14">
-          {header}
-
-          {/* Mosaic: the cover (first image) leads at full height on the left,
-              the remaining shots sit beside it as a tile grid. */}
-          <div className="mt-6 grid items-start gap-4 lg:grid-cols-2">
-            <Tile
-              image={images[0]}
-              index={0}
-              total={images.length}
-              title={title}
-              onOpen={setOpenIndex}
-              className="aspect-16/10"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              eager
-            />
-
-            {visible.length > 0 && (
-              <ul className={`grid gap-4 ${tileGrid}`}>
-                {visible.map((image, index) => (
-                  <li key={image} className="flex">
-                    <Tile
-                      image={image}
-                      index={index + 1}
-                      total={images.length}
-                      title={title}
-                      onOpen={setOpenIndex}
-                      className="aspect-16/10"
-                      sizes="(min-width: 1024px) 25vw, 50vw"
-                      eager={index < 3}
-                      overlayCount={
-                        hiddenCount > 0 && index === visible.length - 1
-                          ? hiddenCount
-                          : 0
-                      }
-                      /* The badge tile jumps straight to the first hidden shot. */
-                      openAt={
-                        hiddenCount > 0 && index === visible.length - 1
-                          ? visible.length + 1
-                          : undefined
-                      }
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
-      )}
-
-      <dialog
-        ref={dialogRef}
-        onClose={() => setOpenIndex(null)}
-        onClick={(event) => {
-          if (event.target === dialogRef.current) setOpenIndex(null);
-        }}
-        aria-label={labels.heading}
-        className="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-[#04070d]/85 backdrop:backdrop-blur-sm"
-      >
-        {openIndex !== null && (
-          <div className="relative flex h-dvh w-screen items-center justify-center p-4 md:p-10">
-            <div className="relative max-h-full w-full max-w-6xl">
-              <Image
-                key={images[openIndex]}
-                src={images[openIndex]}
-                alt={`${title} — ${openIndex + 1}`}
-                width={1920}
-                height={1200}
-                sizes="100vw"
-                className="mx-auto h-auto max-h-[82dvh] w-auto max-w-full rounded-xl border border-[color:var(--color-border-strong)] object-contain"
-              />
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setOpenIndex(null)}
-              aria-label={labels.close}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-background)]/80 text-[color:var(--color-foreground)] backdrop-blur transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)] md:right-8 md:top-8"
-            >
-              <XMarkIcon className="h-5 w-5" />
-            </button>
-
-            {images.length > 1 && (
-              <>
-                <LightboxArrow side="left" label={labels.hint} onClick={() => move(-1)}>
-                  <ChevronLeftIcon className="h-5 w-5" />
-                </LightboxArrow>
-                <LightboxArrow side="right" label={labels.hint} onClick={() => move(1)}>
-                  <ChevronRightIcon className="h-5 w-5" />
-                </LightboxArrow>
-                <p className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-background)]/80 px-3 py-1 text-xs text-[color:var(--color-foreground-soft)] backdrop-blur">
-                  {openIndex + 1} / {images.length}
-                </p>
-              </>
-            )}
-          </div>
-        )}
-      </dialog>
-    </section>
-  );
-}
-
-function Tile({
-  image,
-  index,
-  total,
-  title,
-  onOpen,
-  className,
-  sizes,
-  eager = false,
-  overlayCount = 0,
-  openAt,
-}: {
-  image: string;
-  index: number;
-  total: number;
-  title: string;
-  onOpen: (index: number) => void;
-  className: string;
-  sizes: string;
-  eager?: boolean;
-  /** Renders a persistent "+N" badge for the images not shown as tiles. */
-  overlayCount?: number;
-  openAt?: number;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={() => onOpen(openAt ?? index)}
-      aria-label={`${title} — ${index + 1}/${total}`}
-      className={`panel panel-interactive group relative block w-full overflow-hidden p-0 ${className}`}
-    >
-      <Image
-        src={image}
-        alt={`${title} — ${index + 1}`}
-        fill
-        sizes={sizes}
-        loading={eager ? "eager" : "lazy"}
-        className="object-cover transition duration-500 group-hover:scale-[1.04]"
-      />
-      {overlayCount > 0 ? (
-        <span
-          aria-hidden
-          className="absolute inset-0 flex items-center justify-center bg-[color:var(--color-background)]/70 text-lg font-semibold text-[color:var(--color-foreground)] backdrop-blur-[2px] transition group-hover:text-[color:var(--color-accent)]"
-        >
-          +{overlayCount}
-        </span>
-      ) : (
-        <span
-          aria-hidden
-          className="absolute inset-0 flex items-center justify-center bg-[color:var(--color-background)]/55 opacity-0 backdrop-blur-[1px] transition group-hover:opacity-100 group-focus-visible:opacity-100"
-        >
-          <span className="icon-tile h-10 w-10">
-            <MagnifyingGlassPlusIcon className="h-5 w-5" />
+    <section aria-labelledby="gallery-heading">
+      <div className="mb-5 flex items-end justify-between gap-4">
+        <h2 id="gallery-heading" className="section-label">
+          {labels.heading}
+        </h2>
+        <p className="text-xs text-[color:var(--color-foreground-muted)]">
+          <span className="font-[family-name:var(--font-display)] font-semibold tabular-nums text-[color:var(--color-accent)]">
+            {pad(total)}
           </span>
-        </span>
-      )}
-    </button>
-  );
-}
+          <span className="hidden sm:inline"> · {labels.hint}</span>
+        </p>
+      </div>
 
-function LightboxArrow({
-  side,
-  label,
-  onClick,
-  children,
-}: {
-  side: "left" | "right";
-  label: string;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={label}
-      className={`absolute top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-background)]/80 text-[color:var(--color-foreground)] backdrop-blur transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)] ${
-        side === "left" ? "left-3 md:left-8" : "right-3 md:right-8"
-      }`}
-    >
-      {children}
-    </button>
+      <ul className="project-bento grid grid-cols-2 gap-2.5 md:grid-cols-12 md:gap-3.5">
+        {shown.map((image, index) => {
+          const isLead = index === 0;
+          const isLast = index === shown.length - 1;
+          const badge = isLast && hiddenCount > 0 ? hiddenCount : 0;
+          const mobile = isLead
+            ? "col-span-2 row-span-2"
+            : isLast && restOdd
+              ? "col-span-2"
+              : "";
+          return (
+            <li
+              key={image}
+              className={`rise flex ${mobile} ${layout[index]}`}
+              style={{ "--d": `${80 + index * 70}ms` } as React.CSSProperties}
+            >
+              <button
+                type="button"
+                onClick={() => viewer.show(index)}
+                aria-label={`${title} — ${index + 1}/${total}`}
+                className="bento-tile group relative block w-full overflow-hidden"
+              >
+                <Image
+                  src={image}
+                  alt={`${title} — ${index + 1}`}
+                  fill
+                  sizes={isLead ? "(min-width: 768px) 60vw, 100vw" : "(min-width: 768px) 42vw, 50vw"}
+                  priority={isLead}
+                  className="object-cover object-top transition duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.045]"
+                />
+                <span aria-hidden className="bento-shade" />
+                <span
+                  aria-hidden
+                  className="gallery-glass absolute left-2.5 top-2.5 rounded-full px-2 py-0.5 font-[family-name:var(--font-display)] text-[0.625rem] font-semibold tabular-nums tracking-wider text-[color:var(--color-foreground-soft)] md:left-3.5 md:top-3.5"
+                >
+                  {pad(index + 1)}
+                </span>
+                {badge > 0 ? (
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 flex items-center justify-center bg-[color:var(--color-background)]/65 font-[family-name:var(--font-display)] text-2xl font-semibold text-[color:var(--color-foreground)] backdrop-blur-[2px]"
+                  >
+                    +{badge}
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden
+                    className="gallery-glass absolute bottom-2.5 right-2.5 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full text-[color:var(--color-foreground)] opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 md:bottom-3.5 md:right-3.5"
+                  >
+                    <ArrowsPointingOutIcon className="h-4 w-4" />
+                  </span>
+                )}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <GalleryViewer images={images} title={title} labels={labels} viewer={viewer} shots={shots} />
+    </section>
   );
 }

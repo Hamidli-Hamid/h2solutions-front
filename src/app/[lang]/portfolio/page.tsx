@@ -12,12 +12,14 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchProjects } from "@/lib/api";
 import { localePath, isLocale } from "@/i18n-config";
-import { pageMetadata } from "@/lib/seo";
-import { localeUrl, siteConfig } from "@/lib/site-config";
+import { EMPTY_LISTING_ROBOTS, pageMetadata } from "@/lib/seo";
+import { getPageSeo } from "@/lib/content";
+import { localeUrl } from "@/lib/site-config";
 import {
   breadcrumbJsonLd,
   collectionPageJsonLd,
   itemListJsonLd,
+  mergeAdminNodes,
 } from "@/lib/jsonld";
 import { BriefcaseIcon } from "@heroicons/react/24/outline";
 
@@ -26,14 +28,21 @@ export async function generateMetadata({
 }: PageProps<"/[lang]/portfolio">): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
-  const dict = await getDictionary(lang);
+  /* The same read the page makes (deduplicated). It throws when the API
+     fails, so an outage can never pass for "no projects" and de-index the page. */
+  const [dict, projects] = await Promise.all([
+    getDictionary(lang),
+    fetchProjects(lang),
+  ]);
 
-  return pageMetadata("portfolio", {
+  const metadata = await pageMetadata("portfolio", {
     lang,
     path: "/portfolio",
     title: dict.portfolio.title,
     description: dict.portfolio.subtitle,
   });
+
+  return projects.length > 0 ? metadata : { ...metadata, robots: EMPTY_LISTING_ROBOTS };
 }
 
 export default async function PortfolioPage({
@@ -41,9 +50,10 @@ export default async function PortfolioPage({
 }: PageProps<"/[lang]/portfolio">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  const [dict, projects] = await Promise.all([
+  const [dict, projects, pageSeo] = await Promise.all([
     getDictionary(lang),
     fetchProjects(lang),
+    getPageSeo(lang, "portfolio"),
   ]);
 
   const url = localeUrl(lang, "/portfolio");
@@ -125,11 +135,13 @@ export default async function PortfolioPage({
 
       <JsonLd
         id="ld-portfolio"
-        data={
+        data={mergeAdminNodes(
           projects.length > 0
             ? [collection, itemList, breadcrumb]
-            : [collection, breadcrumb]
-        }
+            : [collection, breadcrumb],
+          pageSeo?.structured_data,
+          lang,
+        )}
       />
     </div>
   );

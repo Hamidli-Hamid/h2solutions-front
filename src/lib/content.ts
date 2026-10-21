@@ -1,7 +1,7 @@
 import "server-only";
 import { cache } from "react";
 
-import { fetchContent, type ApiContent, type ApiSeo } from "@/lib/api";
+import { fetchContent, withFallback, type ApiContent, type ApiSeo } from "@/lib/api";
 import type { Locale } from "@/i18n-config";
 
 /**
@@ -47,10 +47,14 @@ export function deepMerge<T>(base: T, override: unknown): T {
 /**
  * One request per language per render pass. Returns null when the API is
  * unreachable — every caller falls back to the bundled dictionary, so the site
- * keeps rendering if the backend is down.
+ * keeps rendering if the backend is down. This is one of the two deliberate
+ * fail-soft reads (the other is the footer's service list); `fetchContent`
+ * itself is strict, so anything that must not publish on a failed read (the
+ * sitemap) calls it directly.
  */
 export const getContent = cache(
-  async (locale: Locale): Promise<ApiContent | null> => fetchContent(locale),
+  async (locale: Locale): Promise<ApiContent | null> =>
+    withFallback(fetchContent(locale), null, `Admin content (${locale})`),
 );
 
 /** Meta overrides an editor set for one page; empty when none were set. */

@@ -1,3 +1,5 @@
+import { ViewTransition } from "react";
+
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -7,25 +9,31 @@ import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { FloatingContact } from "@/components/layout/FloatingContact";
+import { PointerGlow } from "@/components/ui/PointerGlow";
+import { RevealObserver } from "@/components/ui/RevealObserver";
+import { ThemeScript } from "@/components/layout/ThemeScript";
 import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/analytics/GoogleTagManager";
-import { getDictionary } from "@/lib/dictionaries";
+import { getAllDictionaries, getDictionary } from "@/lib/dictionaries";
 import {
   resolveBranding,
   resolveSite,
   siteConfig,
   type Branding,
 } from "@/lib/site-config";
+import { brandAsset } from "@/lib/brand";
 import { getPageSeo } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { i18n, isLocale } from "@/i18n-config";
-import { fetchServices } from "@/lib/api";
+import { fetchServices, withFallback } from "@/lib/api";
 import {
-  organizationJsonLd,
-  websiteJsonLd,
-  professionalServiceJsonLd,
+  founderAliases,
+  isProfileUrl,
+  mergeAdminNodes,
+  siteGraphJsonLd,
 } from "@/lib/jsonld";
 
 /* Body copy and the hero heading are both above the fold, so both families stay
@@ -57,10 +65,11 @@ export async function generateViewport({
   const { themeColor } = resolveBranding(dict);
 
   return {
-    /* One colour, no media split: the site renders dark in both schemes, so
-       two identical entries only told the browser the same thing twice. */
+    /* The value the document ships with, i.e. the light theme's page colour;
+       `ThemeToggle` rewrites the meta tag when the visitor switches, so the
+       browser UI follows the theme rather than the system setting. */
     themeColor,
-    colorScheme: "dark",
+    colorScheme: "light dark",
     width: "device-width",
     initialScale: 1,
   };
@@ -97,6 +106,7 @@ export async function generateMetadata({
     description: dict.meta.defaultDescription,
     seo: Object.keys(seo).length > 0 ? seo : null,
     absoluteTitle: true,
+    twitterHandle: site.twitterHandle.trim(),
   });
 
   return {
@@ -108,7 +118,12 @@ export async function generateMetadata({
       template: `%s — ${dict.meta.siteName}`,
     },
     applicationName: dict.meta.siteName,
-    authors: [{ name: site.founder, url: site.social.linkedin }],
+    authors: [
+      {
+        name: site.founder,
+        ...(isProfileUrl(site.social.linkedin) ? { url: site.social.linkedin } : {}),
+      },
+    ],
     creator: site.founder,
     publisher: dict.meta.siteName,
     category: "technology",
@@ -123,11 +138,6 @@ export async function generateMetadata({
     referrer: "origin-when-cross-origin",
     formatDetection: { telephone: false, email: false, address: false },
     ...brandedIcons(branding),
-    twitter: {
-      ...base.twitter,
-      creator: site.twitterHandle,
-      site: site.twitterHandle,
-    },
     robots: base.robots ?? {
       index: true,
       follow: true,
@@ -144,20 +154,21 @@ export async function generateMetadata({
 }
 
 /**
- * The built-in mark, as the files `scripts/generate-icons.mjs` writes into
- * `public/`. Ordered the way browsers read the list: the legacy container
+ * The built-in mark — rendered from `public/brand/h2-solutions-mark.svg` by
+ * `npm run icons`. Ordered the way browsers read the list: the legacy container
  * first, then the vector modern engines prefer, then the raster fallbacks.
  */
 const DEFAULT_ICONS: Metadata["icons"] = {
   icon: [
-    { url: "/favicon.ico", sizes: "any" },
-    { url: "/favicon.svg", type: "image/svg+xml" },
-    { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    { url: brandAsset("/favicon.ico"), sizes: "any" },
+    { url: brandAsset("/favicon.svg"), type: "image/svg+xml" },
+    { url: brandAsset("/favicon-96x96.png"), sizes: "96x96", type: "image/png" },
+    { url: brandAsset("/favicon-32x32.png"), sizes: "32x32", type: "image/png" },
+    { url: brandAsset("/favicon-16x16.png"), sizes: "16x16", type: "image/png" },
     // Google Search reads the 48px one when picking a result icon.
-    { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+    { url: brandAsset("/favicon-48x48.png"), sizes: "48x48", type: "image/png" },
   ],
-  apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  apple: [{ url: brandAsset("/apple-touch-icon.png"), sizes: "180x180", type: "image/png" }],
 };
 
 /**
@@ -200,39 +211,59 @@ export default async function LangLayout({
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
 
-  const [dict, services] = await Promise.all([
+  /* The footer's service column and `knowsAbout` are the one place in the
+     layout where a failed read is allowed to render as "no list": a page must
+     not fail because its footer could not be filled. */
+  const [dict, services, allDicts, layoutSeo] = await Promise.all([
     getDictionary(lang),
-    fetchServices(lang),
+    withFallback(fetchServices(lang), [], `Footer services (${lang})`),
+    getAllDictionaries(),
+    getPageSeo(lang, "layout"),
   ]);
+  const siteGraph = mergeAdminNodes(
+    siteGraphJsonLd({
+      dict,
+      services,
+      founderNames: founderAliases(allDicts, resolveSite(dict).founder.trim()),
+    }),
+    layoutSeo?.structured_data,
+    lang,
+  );
 
   return (
     <html
       lang={lang}
       dir="ltr"
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      /* `ThemeScript` writes `data-theme` onto this element before React
+         hydrates, so the attribute always differs from what the server sent
+         for a visitor on the dark theme. That one attribute is the whole
+         mismatch, and it is deliberate. */
+      suppressHydrationWarning
     >
       <GoogleTagManager />
       <body className="flex min-h-full flex-col bg-[color:var(--color-background)] text-[color:var(--color-foreground)]">
         <GoogleTagManagerNoScript />
+        <ThemeScript />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[color:var(--color-accent)] focus:px-4 focus:py-2 focus:font-semibold focus:text-[#001019]"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[color:var(--color-accent)] focus:px-4 focus:py-2 focus:font-semibold focus:text-[color:var(--color-on-accent)]"
         >
           {dict.common.skipToContent}
         </a>
+        <PointerGlow />
+        <RevealObserver />
         <Header lang={lang} dict={dict} />
         <main id="main-content" className="flex-1">
-          {children}
+          {/* Route changes cross-fade inside this boundary (`page` is the
+              class the transition rules in globals.css target); the header,
+              footer and floating contact outside it stay put. See
+              `experimental.viewTransition` in next.config.ts. */}
+          <ViewTransition default="page">{children}</ViewTransition>
         </main>
         <Footer lang={lang} dict={dict} services={services} />
-        <JsonLd
-          id="ld-site"
-          data={[
-            organizationJsonLd(dict, lang),
-            websiteJsonLd(dict, lang),
-            professionalServiceJsonLd(dict, lang),
-          ]}
-        />
+        <FloatingContact dict={dict} />
+        <JsonLd id="ld-site" data={siteGraph} />
       </body>
     </html>
   );

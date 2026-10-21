@@ -21,16 +21,20 @@ export const siteConfig = {
   url: siteUrl,
   brand: "H2 Solutions",
   founder: "Hamid Hamidli",
-  twitterHandle: "@h2solutions",
-  /* The share card — a static PNG (public/og/h2-card.png): the logo stacked (H2 over
+  /* No code default: a handle is an identity claim, and one nobody verified
+     tags every share card with an account that may belong to someone else.
+     Emitted only when set in the admin. */
+  twitterHandle: "",
+  /* The share card — a static PNG rendered by `npm run icons`: the logo stacked (H2 over
      "solutions") inside the centre 630x630, which is all older WhatsApp versions show as
      the thumbnail; the generated text card left only cut-off words there. Used as the
      fallback whenever a page has no artwork of its own. A new design gets a new file
-     name — WhatsApp and Facebook cache previews by image URL. `src/app/opengraph-image.tsx`
-     stays so links shared before still resolve. */
+     name — WhatsApp and Facebook cache previews by image URL (h2-card.png was the
+     pre-2026-10-21 logo; it now holds the same new card for links shared before).
+     `src/app/opengraph-image.tsx` stays so links shared before still resolve. */
   shareImage: {
-    og: "/og/h2-card.png",
-    twitter: "/og/h2-card.png",
+    og: "/og/h2-solutions-card.png",
+    twitter: "/og/h2-solutions-card.png",
     width: 1200,
     height: 630,
     type: "image/png",
@@ -38,7 +42,9 @@ export const siteConfig = {
   /* Structured-data values: read by the schema.org markup, not shown on a page. */
   addressLocality: "Baku",
   addressCountry: "AZ",
-  priceRange: "$$",
+  /* Same rule: a price band is a claim about the business, so it exists only
+     when the admin sets one. */
+  priceRange: "",
   social: {
     linkedin: "https://www.linkedin.com/in/hamidhamidli/",
     github: "https://github.com/",
@@ -174,8 +180,11 @@ export function resolveBranding(dict: BrandingSource): Branding {
     logo: branding.logo || null,
     svg: branding.faviconSvg || null,
     icons: branding.icons ?? {},
-    themeColor: branding.themeColor || "#0d1117",
-    backgroundColor: branding.backgroundColor || "#0d1117",
+    /* The light theme's page colour — what the site ships as. An admin who
+       sets these explicitly overrides them; the dark theme is a visitor
+       preference and is applied client-side, so it cannot be answered here. */
+    themeColor: branding.themeColor || "#f6f8fc",
+    backgroundColor: branding.backgroundColor || "#f6f8fc",
     appName: branding.appName || siteConfig.brand,
     appShortName: branding.appShortName || siteConfig.brand,
   };

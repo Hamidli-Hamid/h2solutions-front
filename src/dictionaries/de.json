@@ -13,7 +13,10 @@
     "contact": "Kontakt",
     "menu": "Menü",
     "close": "Schließen",
-    "language": "Sprache"
+    "language": "Sprache",
+    "theme": "Design",
+    "themeLight": "Heller Modus",
+    "themeDark": "Dunkler Modus"
   },
   "hero": {
     "badge": "H2 — Lösungen & Wachstum",
@@ -130,6 +133,7 @@
     "faq": {
       "label": "Häufige Fragen",
       "title": "Fragen, die Sie beschäftigen könnten",
+      "imageAlt": "Von H2 Solutions gebaute Websites: TopdanMall, Climahome, MegaParts und Sign & Graphics auf Desktop und Mobil",
       "items": [
         {
           "question": "Wie lange dauert ein Projekt?",
@@ -188,6 +192,7 @@
     "seoText": {
       "label": "SEO-Text",
       "title": "Der richtige Technologiepartner für digitalen Erfolg",
+      "imageAlt": "Next.js-Metadaten- und Structured-Data-Code neben den von H2 Solutions gebauten Websites Alzone und Sign & Graphics",
       "body": [
         "Bei H2 Solutions setzen wir aktuelle Technologien und wirksame Strategien ein, damit Unternehmen im digitalen Raum eine starke Position halten. Webentwicklung, mobile Anwendungen, E-Commerce-Lösungen, SEO und Prozessautomatisierung steigern gemeinsam die Online-Wirkung Ihrer Marke.",
         "Eine Architektur auf Basis von Next.js und Laravel gibt Ihrer Website sowohl Geschwindigkeit als auch dauerhafte Sichtbarkeit in den Suchergebnissen. Technisches SEO, strukturierte Daten und GEO — also Optimierung für KI-gestützte Suchsysteme — sorgen dafür, dass Ihre Marke nicht nur bei Google, sondern auch auf KI-Plattformen gefunden wird.",
@@ -223,6 +228,7 @@
     "title": "Leistungen",
     "intro": "Von Websites und Apps über SEO bis zur Prozessautomatisierung — sechs Kernleistungen für Ihr Online-Wachstum.",
     "included": "Was ist enthalten?",
+    "lastUpdated": "Zuletzt aktualisiert",
     "related": "Weitere Leistungen",
     "startTitle": "Starten Sie Ihr Projekt",
     "startText": "Fragen zu dieser Leistung? Senden Sie ein kurzes Briefing — wir melden uns innerhalb von 24 Stunden.",
@@ -445,7 +451,9 @@
     "visitSite": "Website besuchen",
     "related": "Weitere Projekte",
     "processTitle": "So haben wir gearbeitet",
-    "galleryClose": "Schließen"
+    "galleryClose": "Schließen",
+    "galleryPrev": "Vorheriges Bild",
+    "galleryNext": "Nächstes Bild"
   },
   "blog": {
     "label": "Blog",
@@ -477,7 +485,7 @@
     "email": "info@h2solutions.az",
     "emailNote": "Der schnellste Weg — senden Sie Ihr Briefing, wir antworten innerhalb von 24 Stunden.",
     "phoneLabel": "Telefon",
-    "phone": "+994 50 000 00 00",
+    "phone": "+994 77 717-54-54",
     "phoneNote": "Rufen Sie uns werktags zwischen 09:00 und 18:00 Uhr an.",
     "whatsappLabel": "WhatsApp",
     "whatsappValue": "Nachricht senden",
@@ -567,10 +575,10 @@
       "facebook": "https://www.facebook.com/",
       "instagram": "https://www.instagram.com/"
     },
-    "twitterHandle": "@h2solutions",
+    "twitterHandle": "",
     "addressLocality": "Baku",
     "addressCountry": "AZ",
-    "priceRange": "$$"
+    "priceRange": ""
   },
   "navigation": [
     {

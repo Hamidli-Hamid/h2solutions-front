@@ -13,7 +13,10 @@
     "contact": "Əlaqə",
     "menu": "Menyu",
     "close": "Bağla",
-    "language": "Dil"
+    "language": "Dil",
+    "theme": "Tema",
+    "themeLight": "İşıqlı rejim",
+    "themeDark": "Qaranlıq rejim"
   },
   "hero": {
     "badge": "H2 — Həllər & İnkişaf",
@@ -130,6 +133,7 @@
     "faq": {
       "label": "Ən çox verilən suallar",
       "title": "Sizi maraqlandıran suallar",
+      "imageAlt": "H2 Solutions-un hazırladığı saytlar: TopdanMall, Climahome, MegaParts və Sign & Graphics — desktop və mobil görünüş",
       "items": [
         {
           "question": "Layihənin hazırlanma müddəti nə qədərdir?",
@@ -188,6 +192,7 @@
     "seoText": {
       "label": "SEO mətn",
       "title": "Rəqəmsal uğur üçün doğru texnoloji tərəfdaş",
+      "imageAlt": "Next.js metadata və strukturlaşdırılmış data kodu, yanında H2 Solutions-un hazırladığı Alzone və Sign & Graphics saytları",
       "body": [
         "H2 Solutions olaraq bizneslərin rəqəmsal dünyada güclü mövqe qazanması üçün müasir texnologiyalar və effektiv strategiyalar tətbiq edirik. Veb sayt inkişafı, mobil tətbiq hazırlanması, e-ticarət həlləri, SEO və biznes avtomatlaşdırma xidmətlərimizlə markanızın onlayn təsirini artırırıq.",
         "Next.js və Laravel üzərində qurulan memarlıq saytınıza həm sürət, həm də axtarış nəticələrində dayanıqlı görünürlük qazandırır. Texniki SEO, strukturlaşdırılmış data və GEO — yəni süni intellekt əsaslı axtarış sistemləri üçün optimallaşdırma — sayəsində brendiniz yalnız Google-da deyil, AI platformalarında da tapılır.",
@@ -223,6 +228,7 @@
     "title": "Xidmətlər",
     "intro": "Veb saytdan mobil tətbiqə, SEO-dan biznes avtomatlaşdırmaya qədər — biznesinizin onlayn böyüməsi üçün altı əsas xidmət.",
     "included": "Nə daxildir?",
+    "lastUpdated": "Son yenilənmə",
     "related": "Digər xidmətlər",
     "startTitle": "Layihəyə başlayaq",
     "startText": "Bu xidmətlə bağlı sualınız var? Qısa brif göndərin, 24 saat ərzində geri dönüş edək.",
@@ -445,7 +451,9 @@
     "visitSite": "Sayta bax",
     "related": "Digər layihələr",
     "processTitle": "Necə işlədik",
-    "galleryClose": "Bağla"
+    "galleryClose": "Bağla",
+    "galleryPrev": "Əvvəlki şəkil",
+    "galleryNext": "Növbəti şəkil"
   },
   "blog": {
     "label": "Bloq",
@@ -477,7 +485,7 @@
     "email": "info@h2solutions.az",
     "emailNote": "Ən sürətli yol — brifinizi göndərin, 24 saat ərzində cavab verək.",
     "phoneLabel": "Telefon",
-    "phone": "+994 50 000 00 00",
+    "phone": "+994 77 717-54-54",
     "phoneNote": "İş günləri 09:00–18:00 arası zəng edə bilərsiniz.",
     "whatsappLabel": "WhatsApp",
     "whatsappValue": "Mesaj yazın",
@@ -567,10 +575,10 @@
       "facebook": "https://www.facebook.com/",
       "instagram": "https://www.instagram.com/"
     },
-    "twitterHandle": "@h2solutions",
+    "twitterHandle": "",
     "addressLocality": "Baku",
     "addressCountry": "AZ",
-    "priceRange": "$$"
+    "priceRange": ""
   },
   "navigation": [
     {

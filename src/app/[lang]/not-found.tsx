@@ -14,7 +14,17 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${dict.notFound.eyebrow} — ${dict.notFound.titleAccent} ${dict.notFound.title}`,
     description: dict.notFound.text,
-    robots: { index: false, follow: false },
+    /* This page renders under the locale layout, whose canonical, hreflang
+       set, share cards and `index, follow` would otherwise describe the home
+       page. `null` resets each inherited field. Robots included: Next already
+       writes `noindex` into every 404 ("Next.js automatically injects
+       `<meta name="robots" content="noindex" />` for pages that return a 404
+       status code" — file-conventions/not-found.md), so a second robots tag
+       here would only contradict it. */
+    alternates: null,
+    openGraph: null,
+    twitter: null,
+    robots: null,
   };
 }
 

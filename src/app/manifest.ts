@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { brandAsset } from "@/lib/brand";
 import { getDictionary } from "@/lib/dictionaries";
 import { resolveBranding } from "@/lib/site-config";
 import { i18n, localePath } from "@/i18n-config";
@@ -33,26 +34,32 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
         ]
       : [
           {
-            src: "/android-chrome-192x192.png",
+            src: brandAsset("/android-chrome-192x192.png"),
             sizes: "192x192",
             type: "image/png",
             purpose: "any",
           },
           {
-            src: "/android-chrome-512x512.png",
+            src: brandAsset("/android-chrome-512x512.png"),
             sizes: "512x512",
             type: "image/png",
             purpose: "any",
           },
           /* Drawn with the 20% margin Android crops into its own shape; the
-             plain 512 would lose its border to that mask. */
+             plain ones would lose their edges to that mask. */
           {
-            src: "/android-chrome-maskable-512x512.png",
+            src: brandAsset("/maskable-icon-192x192.png"),
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable",
+          },
+          {
+            src: brandAsset("/maskable-icon-512x512.png"),
             sizes: "512x512",
             type: "image/png",
             purpose: "maskable",
           },
-          { src: "/favicon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+          { src: brandAsset("/favicon.svg"), sizes: "any", type: "image/svg+xml", purpose: "any" },
         ];
 
   return {

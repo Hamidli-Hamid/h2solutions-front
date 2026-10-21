@@ -2,8 +2,9 @@ import "server-only";
 import type { Metadata } from "next";
 
 import { i18n, ogLocales, type Locale } from "@/i18n-config";
-import { localeUrl, siteConfig } from "@/lib/site-config";
+import { localeUrl, resolveSite, siteConfig } from "@/lib/site-config";
 import { getPageSeo, type PageKey } from "@/lib/content";
+import { getDictionary } from "@/lib/dictionaries";
 import type { ApiSeo } from "@/lib/api";
 
 type BuildInput = {
@@ -20,6 +21,12 @@ type BuildInput = {
   publishedTime?: string | null;
   /** Skip the "— H2 Solutions" suffix the layout appends (used by the layout itself). */
   absoluteTitle?: boolean;
+  /**
+   * `resolveSite(dict).twitterHandle` — "" when none is set. Required so no
+   * route can forget it: every route's `twitter` object replaces the layout's,
+   * so a handle added in one place only was on 6 of 42 pages.
+   */
+  twitterHandle: string;
 };
 
 /**
@@ -75,6 +82,7 @@ export function buildMetadata({
   images = [],
   publishedTime,
   absoluteTitle = false,
+  twitterHandle,
 }: BuildInput): Metadata {
   const url = localeUrl(lang, path);
   const metaTitle = seo?.title || title;
@@ -155,6 +163,7 @@ export function buildMetadata({
       title: shareTitle,
       description: ogDescription,
       images: twitterImages,
+      ...(twitterHandle ? { site: twitterHandle, creator: twitterHandle } : {}),
     },
     ...(robots && {
       robots: {
@@ -177,8 +186,28 @@ export function buildMetadata({
  */
 export async function pageMetadata(
   page: PageKey,
-  input: Omit<BuildInput, "seo">,
+  input: Omit<BuildInput, "seo" | "twitterHandle">,
 ): Promise<Metadata> {
-  const seo = await getPageSeo(input.lang, page);
-  return buildMetadata({ ...input, seo });
+  const [seo, handle] = await Promise.all([
+    getPageSeo(input.lang, page),
+    twitterHandleFor(input.lang),
+  ]);
+  return buildMetadata({ ...input, seo, twitterHandle: handle });
 }
+
+/** The site's X/Twitter handle as set in the admin; "" when none is. */
+export async function twitterHandleFor(lang: Locale): Promise<string> {
+  return resolveSite(await getDictionary(lang)).twitterHandle.trim();
+}
+
+/**
+ * Robots for a listing page that has nothing to list yet: kept out of the
+ * index but still followed, so the navigation links keep working. Status stays
+ * 200 and nothing is disallowed — the page must be fetchable for the
+ * `noindex` to be read. It lifts itself as soon as the first record exists.
+ */
+export const EMPTY_LISTING_ROBOTS: Metadata["robots"] = {
+  index: false,
+  follow: true,
+  googleBot: { index: false, follow: true },
+};

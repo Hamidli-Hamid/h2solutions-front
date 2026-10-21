@@ -12,6 +12,8 @@ import {
 import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
+import { contactNumbers, telHref } from "@/lib/format";
+import { isProfileUrl } from "@/lib/jsonld";
 
 type Props = {
   lang: Locale;
@@ -47,6 +49,11 @@ export function Footer({ lang, dict, services }: Props) {
   const site = resolveSite(dict);
   const navigation = resolveNav(dict, lang);
   const branding = resolveBranding(dict);
+  const { phone } = contactNumbers(dict.contact);
+  /* The same rule as `sameAs`: a network's homepage ("https://github.com/")
+     is not a profile, and an icon pointing at it sends visitors off to
+     nothing of ours. */
+  const socials = SOCIAL_PATHS.filter((social) => isProfileUrl(social.href(site)));
 
   /* Prefer the services published in the CMS; fall back to the core service
      list so the column is never empty. */
@@ -64,39 +71,55 @@ export function Footer({ lang, dict, services }: Props) {
   return (
     <footer
       role="contentinfo"
-      className="border-t border-[color:var(--color-border)] bg-[color:var(--color-background-elevated)]"
+      /* Always on the dark palette, like the conversion panel above it: the
+         footer is where the page lands, and a dark base is what makes it read
+         as the end rather than as one more section. In the dark theme it is
+         simply what it already was. */
+      data-theme="dark"
+      className="relative overflow-hidden border-t border-[color:var(--color-border)] bg-[color:var(--h2-footer-bg)]"
     >
-      <div className="container-h2 grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1.1fr_1.3fr] lg:gap-8">
+      {/* Gradient hairline sitting on the border, and a wide field of colour
+          bleeding up from the bottom edge so the footer reads as the end of
+          the page rather than as one more band. */}
+      <div aria-hidden className="rule-gradient absolute inset-x-0 top-0" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-[radial-gradient(60%_100%_at_50%_100%,color-mix(in_oklab,var(--color-accent-alt)_13%,transparent),transparent_70%)]"
+      />
+
+      <div className="container-h2 relative grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1.1fr_1.3fr] lg:gap-8">
         <div>
           <H2Logo logo={branding.logo} alt={site.brand} />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-[color:var(--color-foreground-soft)]">
             {dict.footer.tagline}
           </p>
-          <div className="mt-6 flex gap-2">
-            {SOCIAL_PATHS.filter((social) => social.href(site)).map((social) => (
-              <a
-                key={social.label}
-                href={social.href(site)}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] text-[color:var(--color-foreground-soft)] transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]"
-              >
-                <svg
-                  className="h-4 w-4"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden
+          {socials.length > 0 && (
+            <div className="mt-6 flex gap-2">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href(site)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-foreground-soft)] transition duration-300 hover:-translate-y-0.5 hover:border-transparent hover:bg-[image:linear-gradient(100deg,var(--h2-fill-from),var(--h2-fill-to))] hover:text-[color:var(--color-on-accent)] motion-reduce:hover:translate-y-0"
                 >
-                  <path d={social.d} />
-                </svg>
-              </a>
-            ))}
-          </div>
+                  <svg
+                    className="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden
+                  >
+                    <path d={social.d} />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
         <nav aria-label={dict.footer.navTitle}>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--color-foreground)]">
+          <h2 className="section-label">
             {dict.footer.navTitle}
           </h2>
           <ul className="mt-4 space-y-2.5 text-sm">
@@ -107,7 +130,7 @@ export function Footer({ lang, dict, services }: Props) {
                   {...(item.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
+                  className="link-underline text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
                 >
                   {item.label}
                 </Link>
@@ -117,7 +140,7 @@ export function Footer({ lang, dict, services }: Props) {
         </nav>
 
         <nav aria-label={dict.footer.servicesTitle}>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--color-foreground)]">
+          <h2 className="section-label">
             {dict.footer.servicesTitle}
           </h2>
           <ul className="mt-4 space-y-2.5 text-sm">
@@ -125,7 +148,7 @@ export function Footer({ lang, dict, services }: Props) {
               <li key={service.label}>
                 <Link
                   href={service.href}
-                  className="text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
+                  className="link-underline text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
                 >
                   {service.label}
                 </Link>
@@ -135,22 +158,24 @@ export function Footer({ lang, dict, services }: Props) {
         </nav>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--color-foreground)]">
+          <h2 className="section-label">
             {dict.footer.contactTitle}
           </h2>
           <address className="mt-4 space-y-2.5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
-            <div className="flex items-center gap-2.5">
-              <PhoneIcon
-                aria-hidden
-                className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
-              />
-              <a
-                href={`tel:${dict.contact.phone.replace(/\s+/g, "")}`}
-                className="transition hover:text-[color:var(--color-accent)]"
-              >
-                {dict.contact.phone}
-              </a>
-            </div>
+            {phone && (
+              <div className="flex items-center gap-2.5">
+                <PhoneIcon
+                  aria-hidden
+                  className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
+                />
+                <a
+                  href={telHref(phone)}
+                  className="transition hover:text-[color:var(--color-accent)]"
+                >
+                  {phone}
+                </a>
+              </div>
+            )}
             <div className="flex items-center gap-2.5">
               <EnvelopeIcon
                 aria-hidden
@@ -174,17 +199,35 @@ export function Footer({ lang, dict, services }: Props) {
         </div>
 
         <div>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--color-foreground)]">
+          <h2 className="section-label">
             {dict.footer.newsletterTitle}
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-[color:var(--color-foreground-muted)]">
             {dict.footer.newsletterText}
           </p>
-          <NewsletterForm lang={lang} dict={dict} />
+          <NewsletterForm
+            lang={lang}
+            labels={{
+              newsletterTitle: dict.footer.newsletterTitle,
+              newsletterPlaceholder: dict.footer.newsletterPlaceholder,
+              newsletterSubmit: dict.footer.newsletterSubmit,
+              newsletterSuccess: dict.footer.newsletterSuccess,
+              newsletterError: dict.footer.newsletterError,
+            }}
+          />
         </div>
       </div>
 
-      <div className="border-t border-[color:var(--color-border)]">
+      {/* Oversized wordmark bled off the bottom edge — decorative, hidden
+          from assistive technology, and clipped by the footer so it can never
+          widen the page. */}
+      <div aria-hidden className="relative select-none overflow-hidden">
+        <p className="-mb-[0.22em] translate-y-[0.18em] whitespace-nowrap px-4 text-center font-[family-name:var(--font-display)] text-[clamp(3.5rem,13vw,13rem)] font-bold leading-none tracking-[-0.05em] text-transparent [-webkit-background-clip:text] [background-clip:text] [background-image:linear-gradient(180deg,color-mix(in_oklab,var(--color-foreground)_11%,transparent),transparent_78%)]">
+          {site.brand}
+        </p>
+      </div>
+
+      <div className="relative border-t border-[color:var(--color-border)]">
         <div className="container-h2 flex flex-col items-start justify-between gap-2 py-6 text-xs text-[color:var(--color-foreground-muted)] md:flex-row md:items-center">
           <p>
             © {year} {site.brand}. {dict.footer.rights}.

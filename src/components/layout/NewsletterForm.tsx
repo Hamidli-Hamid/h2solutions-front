@@ -6,16 +6,25 @@ import { CheckCircleIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline"
 import type { Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 
+/* Only the five strings the form shows. Props of a client component are
+   serialized into every page's payload, and the whole dictionary used to ride
+   along — contact data included. */
 type Props = {
   lang: Locale;
-  dict: Dictionary;
+  labels: Pick<
+    Dictionary["footer"],
+    | "newsletterTitle"
+    | "newsletterPlaceholder"
+    | "newsletterSubmit"
+    | "newsletterSuccess"
+    | "newsletterError"
+  >;
 };
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
-export function NewsletterForm({ lang, dict }: Props) {
+export function NewsletterForm({ lang, labels: t }: Props) {
   const [state, setState] = useState<FormState>("idle");
-  const t = dict.footer;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -83,7 +92,7 @@ export function NewsletterForm({ lang, dict }: Props) {
           disabled={state === "submitting"}
           aria-label={t.newsletterSubmit}
           aria-busy={state === "submitting"}
-          className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-sm bg-[color:var(--color-accent)] text-[#001019] transition hover:bg-[color:var(--color-accent-strong)] disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-md bg-[image:linear-gradient(100deg,var(--h2-fill-from),var(--h2-fill-to))] text-[color:var(--color-on-accent)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
           <PaperAirplaneIcon aria-hidden className="h-4 w-4" />
         </button>

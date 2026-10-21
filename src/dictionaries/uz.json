@@ -13,7 +13,10 @@
     "contact": "Aloqa",
     "menu": "Menyu",
     "close": "Yopish",
-    "language": "Til"
+    "language": "Til",
+    "theme": "Mavzu",
+    "themeLight": "Yorugʻ rejim",
+    "themeDark": "Qorongʻi rejim"
   },
   "hero": {
     "badge": "H2 — Yechimlar & Oʻsish",
@@ -130,6 +133,7 @@
     "faq": {
       "label": "Koʻp beriladigan savollar",
       "title": "Sizni qiziqtiradigan savollar",
+      "imageAlt": "H2 Solutions yaratgan saytlar: TopdanMall, Climahome, MegaParts va Sign & Graphics — desktop va mobil koʻrinish",
       "items": [
         {
           "question": "Loyiha qancha vaqtda tayyor boʻladi?",
@@ -188,6 +192,7 @@
     "seoText": {
       "label": "SEO matni",
       "title": "Raqamli muvaffaqiyat uchun toʻgʻri texnologik hamkor",
+      "imageAlt": "Next.js metamaʼlumotlari va tuzilgan maʼlumotlar kodi, yonida H2 Solutions yaratgan Alzone va Sign & Graphics saytlari",
       "body": [
         "H2 Solutions sifatida bizneslar raqamli olamda mustahkam oʻrin egallashi uchun zamonaviy texnologiyalar va samarali strategiyalarni qoʻllaymiz. Veb ishlab chiqish, mobil ilovalar, elektron tijorat yechimlari, SEO va biznesni avtomatlashtirish brendingizning onlayn taʼsirini birgalikda oshiradi.",
         "Next.js va Laravel asosidagi arxitektura saytingizga ham tezlik, ham qidiruv natijalarida barqaror koʻrinish beradi. Texnik SEO, tuzilmali maʼlumot va GEO — yaʼni sunʼiy intellektga asoslangan qidiruv tizimlari uchun optimallashtirish — tufayli brendingiz nafaqat Google’da, balki SI platformalarida ham topiladi.",
@@ -223,6 +228,7 @@
     "title": "Xizmatlar",
     "intro": "Saytdan mobil ilovaga, SEO’dan biznesni avtomatlashtirishgacha — biznesingizning onlayn oʻsishi uchun oltita asosiy xizmat.",
     "included": "Nimalar kiradi?",
+    "lastUpdated": "Oxirgi yangilanish",
     "related": "Boshqa xizmatlar",
     "startTitle": "Loyihani boshlaymiz",
     "startText": "Ushbu xizmat boʻyicha savolingiz bormi? Qisqa brif yuboring, 24 soat ichida javob beramiz.",
@@ -445,7 +451,9 @@
     "visitSite": "Saytga oʻtish",
     "related": "Boshqa loyihalar",
     "processTitle": "Qanday ishladik",
-    "galleryClose": "Yopish"
+    "galleryClose": "Yopish",
+    "galleryPrev": "Oldingi rasm",
+    "galleryNext": "Keyingi rasm"
   },
   "blog": {
     "label": "Blog",
@@ -477,7 +485,7 @@
     "email": "info@h2solutions.az",
     "emailNote": "Eng tez yoʻl — brifingizni yuboring, 24 soat ichida javob beramiz.",
     "phoneLabel": "Telefon",
-    "phone": "+994 50 000 00 00",
+    "phone": "+994 77 717-54-54",
     "phoneNote": "Ish kunlari 09:00–18:00 oraligʻida qoʻngʻiroq qilishingiz mumkin.",
     "whatsappLabel": "WhatsApp",
     "whatsappValue": "Xabar yozing",
@@ -567,10 +575,10 @@
       "facebook": "https://www.facebook.com/",
       "instagram": "https://www.instagram.com/"
     },
-    "twitterHandle": "@h2solutions",
+    "twitterHandle": "",
     "addressLocality": "Baku",
     "addressCountry": "AZ",
-    "priceRange": "$$"
+    "priceRange": ""
   },
   "navigation": [
     {

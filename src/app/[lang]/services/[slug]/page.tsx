@@ -17,10 +17,37 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchService, fetchServices } from "@/lib/api";
 import { localePath, i18n, isLocale } from "@/i18n-config";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, twitterHandleFor } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
-import { localeUrl, siteConfig } from "@/lib/site-config";
-import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from "@/lib/jsonld";
+import { localeUrl } from "@/lib/site-config";
+import { contactNumbers, formatDate, telHref } from "@/lib/format";
+import {
+  breadcrumbJsonLd,
+  faqJsonLd,
+  mergeAdminNodes,
+  serviceJsonLd,
+  servicePageJsonLd,
+} from "@/lib/jsonld";
+
+/**
+ * The description is plain text from a textarea: a blank line starts a new
+ * paragraph, and a block opening with "## " carries its own H2. Nothing else
+ * is interpreted, so text written before this convention renders as it did —
+ * as paragraphs.
+ */
+function descriptionBlocks(text: string): { heading: string | null; body: string }[] {
+  return text
+    .replace(/\r\n?/g, "\n")
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .filter(Boolean)
+    .map((block) => {
+      const match = block.match(/^##\s+([^\n]+)\n?([\s\S]*)$/);
+      return match
+        ? { heading: match[1].trim(), body: match[2].trim() }
+        : { heading: null, body: block };
+    });
+}
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -36,21 +63,27 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/services/[slug]">): Promise<Metadata> {
   const { lang, slug } = await params;
-  if (!isLocale(lang)) return {};
+  if (!isLocale(lang)) notFound();
   const service = await fetchService(slug, lang);
-  if (!service) return {};
+  /* Here and not only in the page: returning `{}` let the layout's canonical,
+     hreflang and share cards (the home page's) describe the 404. */
+  if (!service) notFound();
 
   // A service carries its own overrides; the `service-detail` page row holds
   // the defaults for every service that has none.
-  const template = await getPageSeo(lang, "service-detail");
+  const [template, twitterHandle] = await Promise.all([
+    getPageSeo(lang, "service-detail"),
+    twitterHandleFor(lang),
+  ]);
 
+  // `og:type` stays the default `website`: a service page is not an article.
   return buildMetadata({
     lang,
     path: `/services/${slug}`,
     title: service.title,
     description: service.summary,
-    ogType: "article",
     seo: { ...template, ...(service.seo ?? {}) },
+    twitterHandle,
   });
 }
 
@@ -71,13 +104,29 @@ export default async function ServiceDetailPage({
   const related = allServices.filter((s) => s.slug !== slug);
   // Written per service in the admin panel; the block is skipped when empty.
   const faq = service.faq ?? [];
+  const { phone } = contactNumbers(dict.contact);
+
+  /* When the page's content last changed — the record, its SEO row or its
+     FAQs, which `lastmod` covers and `updated_at` does not. The visible line
+     and `dateModified` appear together or not at all. */
+  const modifiedAt = service.lastmod || service.updated_at || "";
+  const modifiedLabel = formatDate(modifiedAt, lang);
 
   const breadcrumb = breadcrumbJsonLd([
     { name: dict.nav.home, url: localeUrl(lang) },
     { name: dict.services.title, url: localeUrl(lang, "/services") },
     { name: service.title, url: localeUrl(lang, `/services/${slug}`) },
   ]);
-  const serviceLd = serviceJsonLd(service, dict, lang);
+  const structuredData = mergeAdminNodes(
+    [
+      serviceJsonLd(service, dict, lang),
+      ...(modifiedLabel ? [servicePageJsonLd(service, lang, modifiedAt)] : []),
+      breadcrumb,
+      ...(faq.length > 0 ? [faqJsonLd(faq)] : []),
+    ],
+    service.seo?.structured_data,
+    lang,
+  );
 
   return (
     <div className="tech-canvas">
@@ -114,14 +163,33 @@ export default async function ServiceDetailPage({
               <span aria-hidden className="icon-tile h-11 w-11">
                 <Icon name={service.icon} className="h-5 w-5" />
               </span>
-              <p className="mt-5 text-base leading-[1.85] text-[color:var(--color-foreground-soft)]">
-                {service.description}
-              </p>
+              {descriptionBlocks(service.description).map((block, index) => (
+                <section key={index} className={index === 0 ? "mt-5" : "mt-7"}>
+                  {block.heading && (
+                    <h2 className="text-lg font-semibold">{block.heading}</h2>
+                  )}
+                  {block.body && (
+                    <p
+                      className={`text-base leading-[1.85] text-[color:var(--color-foreground-soft)] ${
+                        block.heading ? "mt-3" : ""
+                      }`}
+                    >
+                      {block.body}
+                    </p>
+                  )}
+                </section>
+              ))}
+              {modifiedLabel && (
+                <p className="mt-5 border-t border-[color:var(--color-border)] pt-4 text-[0.8125rem] text-[color:var(--color-foreground-soft)]">
+                  {`${dict.services.lastUpdated}: `}
+                  <time dateTime={modifiedAt}>{modifiedLabel}</time>
+                </p>
+              )}
             </div>
 
             {service.features.length > 0 && (
               <section aria-labelledby="included-heading" className="mt-8">
-                <h2 id="included-heading" className="text-xl font-bold md:text-2xl">
+                <h2 id="included-heading" className="type-h3">
                   {dict.services.included}
                 </h2>
                 <ul className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -176,18 +244,21 @@ export default async function ServiceDetailPage({
               </Link>
 
               <address className="mt-5 space-y-2.5 border-t border-[color:var(--color-border)] pt-5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
-                <div className="flex items-center gap-2.5">
-                  <PhoneIcon
-                    aria-hidden
-                    className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
-                  />
-                  <a
-                    href={`tel:${dict.contact.phone.replace(/\s+/g, "")}`}
-                    className="transition hover:text-[color:var(--color-accent)]"
-                  >
-                    {dict.contact.phone}
-                  </a>
-                </div>
+                {/* Only a real number; the shipped placeholder is a gap, not a line. */}
+                {phone && (
+                  <div className="flex items-center gap-2.5">
+                    <PhoneIcon
+                      aria-hidden
+                      className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
+                    />
+                    <a
+                      href={telHref(phone)}
+                      className="transition hover:text-[color:var(--color-accent)]"
+                    >
+                      {phone}
+                    </a>
+                  </div>
+                )}
                 <div className="flex items-center gap-2.5">
                   <EnvelopeIcon
                     aria-hidden
@@ -250,14 +321,7 @@ export default async function ServiceDetailPage({
       <ProcessSteps dict={dict} />
 
       <CtaBanner lang={lang} dict={dict} className="reveal" />
-      <JsonLd
-        id="ld-service"
-        data={
-          faq.length > 0
-            ? [serviceLd, breadcrumb, faqJsonLd(faq)]
-            : [serviceLd, breadcrumb]
-        }
-      />
+      <JsonLd id="ld-service" data={structuredData} />
     </div>
   );
 }

@@ -3,45 +3,135 @@ import { i18n, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
 import { resolveProjectVideo } from "@/lib/video";
-import { realPhone } from "@/lib/format";
+import { contactNumbers, countryName, firstSentence } from "@/lib/format";
 
-function sanitize(value: string): string {
-  return value.replace(/</g, "\\u003c");
-}
+type Node = Record<string, unknown>;
+
+/* The site-wide entities. One id per entity, and every fact on it identical on
+   every page and in every language — a node whose `url` changed with the page
+   language was three conflicting claims about one company. */
+export const ORGANIZATION_ID = `${siteConfig.url}/#organization`;
+export const FOUNDER_ID = `${siteConfig.url}/#founder`;
+export const WEBSITE_ID = `${siteConfig.url}/#website`;
+const HOME_URL = `${siteConfig.url}/`;
 
 /**
- * `sameAs` is meant to list profiles Google can tie back to the brand. The
- * unfilled defaults in `siteConfig.social` are bare domain roots
- * ("https://github.com/"), which point at the network rather than at us — so
- * only entries carrying a path survive.
+ * `<` becomes `\u003c`, so no string can close the script element or open an
+ * HTML comment inside it (the escape the Next JSON-LD guide prescribes). The
+ * two line separators are escaped as well, for parity with how a script
+ * context has historically parsed them.
  */
-function profileUrls(social: Record<string, string>): string[] {
-  return Object.values(social).filter((href) => {
-    if (!href) return false;
-    try {
-      return new URL(href).pathname.replace(/\/+$/, "") !== "";
-    } catch {
-      return false;
-    }
-  });
+function sanitize(value: string): string {
+  return value
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 }
 
 export function jsonLdScript(payload: unknown): string {
   return sanitize(JSON.stringify(payload));
 }
 
-export function organizationJsonLd(dict: Dictionary, lang: Locale) {
-  const site = resolveSite(dict);
-  const telephone = realPhone(dict.contact.phone);
+/**
+ * A link to one account rather than to a network. The unfilled defaults are
+ * bare domain roots ("https://github.com/"), which point at the network, not
+ * at us. The footer icons and `sameAs` both ask here, so they cannot disagree.
+ */
+export function isProfileUrl(href: string | null | undefined): href is string {
+  if (!href) return false;
+  try {
+    const url = new URL(href);
+    return (
+      (url.protocol === "https:" || url.protocol === "http:") &&
+      url.pathname.replace(/\/+$/, "") !== ""
+    );
+  } catch {
+    return false;
+  }
+}
 
+export function profileUrls(social: Record<string, string>): string[] {
+  return Object.values(social).filter(isProfileUrl);
+}
+
+/** A person's LinkedIn page (`/in/…`) identifies the founder, not the company. */
+function isPersonalProfile(href: string): boolean {
+  const { hostname, pathname } = new URL(href);
+  return /(^|\.)linkedin\.com$/.test(hostname) && pathname.startsWith("/in/");
+}
+
+/**
+ * The admin's social links split by whose they are: the company's go on the
+ * Organization, a personal profile on the founder's Person node.
+ */
+export function splitProfiles(social: Record<string, string>): {
+  company: string[];
+  personal: string[];
+} {
+  const profiles = profileUrls(social);
   return {
+    company: profiles.filter((href) => !isPersonalProfile(href)),
+    personal: profiles.filter(isPersonalProfile),
+  };
+}
+
+/**
+ * What the company is, in one liftable sentence: the opening sentence of the
+ * about page's story in this language, so there is one editable source and
+ * nothing to keep in step with the backend. The site description stands in
+ * only when that copy is missing.
+ */
+export function entityDefinition(dict: Dictionary): string {
+  return firstSentence(dict.about.story) || dict.meta.defaultDescription;
+}
+
+/**
+ * Every other spelling of the founder's name the site publishes (the about
+ * page's founder card, per language) — "Həmid Həmidli" and "Hamid Hamidli" are
+ * one person, and saying so is what lets them be matched.
+ */
+export function founderAliases(dicts: Dictionary[], founder: string): string[] {
+  const names = dicts
+    .map((dict) => dict.about.founder.name.trim())
+    .filter((name) => name !== "" && name !== founder);
+  return [...new Set(names)];
+}
+
+function areaServed(countryCode: string): Node[] | null {
+  const name = countryName(countryCode);
+  return name ? [{ "@type": "Country", name }] : null;
+}
+
+type SiteGraphInput = {
+  dict: Dictionary;
+  /** This language's services; `knowsAbout` is left out when none could be read. */
+  services: ApiService[];
+  /** From `founderAliases`. */
+  founderNames: string[];
+};
+
+/**
+ * The company, its founder and the website — the `ld-site` graph every page
+ * carries. Every value comes from the admin, the site copy or `siteConfig`;
+ * nothing is filled in from a default that nobody entered (`legalName`,
+ * `priceRange` and the like appear only once the admin supplies them).
+ */
+export function siteGraphJsonLd({ dict, services, founderNames }: SiteGraphInput): Node[] {
+  const site = resolveSite(dict);
+  const { company, personal } = splitProfiles(site.social);
+  const served = areaServed(site.addressCountry);
+  const { phone } = contactNumbers(dict.contact);
+  const definition = entityDefinition(dict);
+  const knowsAbout = services.map((service) => service.title).filter(Boolean);
+  const founder = site.founder.trim();
+  const role = dict.about.founder.role.trim();
+
+  const organization: Node = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${siteConfig.url}/#organization`,
+    "@type": ["Organization", "ProfessionalService"],
+    "@id": ORGANIZATION_ID,
     name: site.brand,
-    legalName: site.brand,
-    alternateName: dict.meta.siteName,
-    url: localeUrl(lang),
+    url: HOME_URL,
     logo: {
       "@type": "ImageObject",
       url: `${siteConfig.url}/android-chrome-512x512.png`,
@@ -50,67 +140,57 @@ export function organizationJsonLd(dict: Dictionary, lang: Locale) {
     },
     image: `${siteConfig.url}/opengraph-image`,
     description: dict.meta.defaultDescription,
-    founder: {
-      "@type": "Person",
-      name: site.founder,
-      url: site.social.linkedin,
-    },
-    sameAs: profileUrls(site.social),
+    ...(definition ? { disambiguatingDescription: definition } : {}),
+    ...(dict.contact.email ? { email: dict.contact.email } : {}),
     address: {
       "@type": "PostalAddress",
       addressLocality: site.addressLocality,
       addressCountry: site.addressCountry,
     },
+    ...(served ? { areaServed: served } : {}),
+    ...(knowsAbout.length > 0 ? { knowsAbout } : {}),
+    ...(founder ? { founder: { "@id": FOUNDER_ID } } : {}),
+    ...(company.length > 0 ? { sameAs: company } : {}),
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: dict.contact.email,
+      ...(dict.contact.email ? { email: dict.contact.email } : {}),
       /* Omitted rather than published as the shipped placeholder — see
          `realPhone`. */
-      ...(telephone ? { telephone } : {}),
-      areaServed: [site.addressCountry, "Worldwide"],
-      // Kept in step with the locales the site actually ships.
-      availableLanguage: i18n.locales,
+      ...(phone ? { telephone: phone } : {}),
+      ...(served ? { areaServed: served } : {}),
+      // The working languages the about page states: the six the site ships.
+      availableLanguage: [...i18n.locales],
     },
+    ...(site.priceRange ? { priceRange: site.priceRange } : {}),
   };
-}
 
-export function websiteJsonLd(dict: Dictionary, lang: Locale) {
-  return {
+  const person: Node | null = founder
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": FOUNDER_ID,
+        name: founder,
+        ...(founderNames.length === 1 ? { alternateName: founderNames[0] } : {}),
+        ...(founderNames.length > 1 ? { alternateName: founderNames } : {}),
+        ...(role ? { jobTitle: role } : {}),
+        ...(personal.length > 0 ? { sameAs: personal } : {}),
+        worksFor: { "@id": ORGANIZATION_ID },
+      }
+    : null;
+
+  const website: Node = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${siteConfig.url}/#website`,
-    url: localeUrl(lang),
-    name: dict.meta.siteName,
-    description: dict.meta.defaultDescription,
-    inLanguage: i18n.locales,
-    publisher: { "@id": `${siteConfig.url}/#organization` },
-  };
-}
-
-export function professionalServiceJsonLd(dict: Dictionary, lang: Locale) {
-  const site = resolveSite(dict);
-  const telephone = realPhone(dict.contact.phone);
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": `${siteConfig.url}/#business`,
+    "@id": WEBSITE_ID,
+    url: HOME_URL,
     name: site.brand,
-    image: `${siteConfig.url}/opengraph-image`,
-    url: localeUrl(lang),
-    ...(telephone ? { telephone } : {}),
-    email: dict.contact.email,
-    priceRange: site.priceRange,
     description: dict.meta.defaultDescription,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: site.addressLocality,
-      addressCountry: site.addressCountry,
-    },
-    areaServed: [site.addressCountry, "Worldwide"],
-    founder: { "@type": "Person", name: site.founder },
+    inLanguage: [...i18n.locales],
+    publisher: { "@id": ORGANIZATION_ID },
   };
+
+  return person ? [organization, person, website] : [organization, website];
 }
 
 type Crumb = { name: string; url: string };
@@ -129,16 +209,27 @@ export function breadcrumbJsonLd(crumbs: Crumb[]) {
 }
 
 export function serviceJsonLd(service: ApiService, dict: Dictionary, lang: Locale) {
+  const url = localeUrl(lang, `/services/${service.slug}`);
+  const served = areaServed(resolveSite(dict).addressCountry);
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${url}#service`,
     name: service.title,
     description: service.summary,
     serviceType: service.title,
-    url: localeUrl(lang, `/services/${service.slug}`),
-    provider: { "@id": `${siteConfig.url}/#organization` },
-    areaServed: ["AZ", "Worldwide"],
-    availableLanguage: i18n.locales,
+    url,
+    provider: { "@id": ORGANIZATION_ID },
+    ...(served ? { areaServed: served } : {}),
+    /* Languages belong to the channel the service is bought through, not to
+       the Service itself (`inLanguage`/`availableLanguage` are not Service
+       properties). */
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: localeUrl(lang, "/contact"),
+      availableLanguage: [...i18n.locales],
+    },
     ...(service.features.length > 0 && {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -149,8 +240,25 @@ export function serviceJsonLd(service: ApiService, dict: Dictionary, lang: Local
         })),
       },
     }),
+  };
+}
+
+/**
+ * The service page as a page: when its content last changed. Emitted only
+ * with a real date — the caller omits it when the API has none.
+ */
+export function servicePageJsonLd(service: ApiService, lang: Locale, dateModified: string) {
+  const url = localeUrl(lang, `/services/${service.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#webpage`,
+    url,
     inLanguage: lang,
-    audience: { "@type": "BusinessAudience", audienceType: dict.about.title },
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": `${url}#service` },
+    dateModified,
   };
 }
 
@@ -214,7 +322,7 @@ export function projectJsonLd(
     ...(images.length > 0 && { image: images }),
     ...(videoNode && { video: videoNode }),
     ...(project.year && { dateCreated: String(project.year) }),
-    creator: { "@id": `${siteConfig.url}/#organization` },
+    creator: { "@id": ORGANIZATION_ID },
     ...(project.client && {
       about: { "@type": "Organization", name: project.client },
     }),
@@ -230,7 +338,7 @@ export function blogJsonLd(dict: Dictionary, lang: Locale) {
     description: dict.blog.subtitle,
     url: localeUrl(lang, "/blog"),
     inLanguage: lang,
-    publisher: { "@id": `${siteConfig.url}/#organization` },
+    publisher: { "@id": ORGANIZATION_ID },
   };
 }
 
@@ -242,9 +350,11 @@ export function blogPostingJsonLd(
     cover_image: string | null;
     published_at: string | null;
     updated_at?: string | null;
-    author?: { name: string | null };
+    author?: { name: string | null; url?: string | null };
   },
   lang: Locale,
+  /** `resolveSite(dict).founder` — a post by the founder points at `#founder`. */
+  founder: string,
 ) {
   const url = localeUrl(lang, `/blog/${post.slug}`);
 
@@ -263,11 +373,25 @@ export function blogPostingJsonLd(
       // modified the day it went up is a fabricated date either way.
       dateModified: post.updated_at || post.published_at,
     }),
-    author: post.author?.name
-      ? { "@type": "Person", name: post.author.name }
-      : { "@id": `${siteConfig.url}/#organization` },
-    publisher: { "@id": `${siteConfig.url}/#organization` },
+    author: authorNode(post.author, founder),
+    publisher: { "@id": ORGANIZATION_ID },
     isPartOf: { "@id": localeUrl(lang, "/blog#blog") },
+  };
+}
+
+function authorNode(
+  author: { name: string | null; url?: string | null } | undefined,
+  founder: string,
+): Node {
+  const name = author?.name?.trim();
+  if (!name) return { "@id": ORGANIZATION_ID };
+  if (founder && name.toLocaleLowerCase() === founder.trim().toLocaleLowerCase()) {
+    return { "@id": FOUNDER_ID };
+  }
+  return {
+    "@type": "Person",
+    name,
+    ...(isProfileUrl(author?.url) ? { url: author?.url } : {}),
   };
 }
 
@@ -291,8 +415,8 @@ export function contactPageJsonLd(dict: Dictionary, lang: Locale) {
     description: dict.contact.subtitle,
     url: localeUrl(lang, "/contact"),
     inLanguage: lang,
-    isPartOf: { "@id": `${siteConfig.url}/#website` },
-    mainEntity: { "@id": `${siteConfig.url}/#organization` },
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: { "@id": ORGANIZATION_ID },
   };
 }
 
@@ -304,7 +428,7 @@ export function aboutPageJsonLd(dict: Dictionary, lang: Locale) {
     description: dict.about.story,
     url: localeUrl(lang, "/about"),
     inLanguage: lang,
-    mainEntity: { "@id": `${siteConfig.url}/#organization` },
+    mainEntity: { "@id": ORGANIZATION_ID },
   };
 }
 
@@ -321,6 +445,82 @@ export function collectionPageJsonLd(opts: {
     description: opts.description,
     url: opts.url,
     inLanguage: opts.lang,
-    isPartOf: { "@id": `${siteConfig.url}/#website` },
+    isPartOf: { "@id": WEBSITE_ID },
   };
+}
+
+function isPlainObject(value: unknown): value is Node {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function withoutKeys(node: Node, keys: string[]): Node {
+  return Object.fromEntries(Object.entries(node).filter(([key]) => !keys.includes(key)));
+}
+
+/**
+ * The admin's JSON-LD field as a list of nodes: one node, a list, a
+ * `{"@graph": [...]}` wrapper, or any of those still encoded as a JSON string
+ * (the backend's `array` cast lets a string through). `null` when the value is
+ * none of these.
+ */
+function adminNodeList(admin: unknown): Node[] | null {
+  let value = admin;
+  if (typeof value === "string") {
+    try {
+      value = JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }
+  if (isPlainObject(value) && Array.isArray(value["@graph"])) value = value["@graph"];
+  const nodes = (Array.isArray(value) ? value : [value]).filter(isPlainObject);
+  return nodes.length > 0 ? nodes : null;
+}
+
+/**
+ * Lays the nodes typed into the admin's JSON-LD field over the generated ones.
+ * A node whose `@id` matches a generated node extends it — admin keys win,
+ * except `@id` and `@type`, which the generated node keeps — so a fact with no
+ * admin column (a founding date, a registered name) lands on the one
+ * Organization instead of creating a second. Any other node is appended. A
+ * node aimed at another language (`inLanguage` a string other than this
+ * page's) is skipped.
+ *
+ * Never throws: an unusable value is logged and ignored, and the generated
+ * graph is always what survives. Output still goes through `jsonLdScript()`.
+ */
+export function mergeAdminNodes(generated: Node[], admin: unknown, lang: Locale): Node[] {
+  if (admin === undefined || admin === null || admin === "") return generated;
+
+  try {
+    const nodes = adminNodeList(admin);
+    if (!nodes) {
+      console.warn("Ignoring admin structured_data: expected a JSON-LD node, a list of nodes or an @graph");
+      return generated;
+    }
+
+    const merged = generated.map((node) => ({ ...node }));
+    for (const node of nodes) {
+      const language = node.inLanguage;
+      if (typeof language === "string" && language !== lang) continue;
+
+      const own = withoutKeys(node, ["@context"]);
+      const id = own["@id"];
+      const index = typeof id === "string" ? merged.findIndex((item) => item["@id"] === id) : -1;
+      if (index === -1) {
+        merged.push(own);
+        continue;
+      }
+
+      const base = merged[index];
+      /* On an extension, a language tag says which pages receive it — it is
+         not a fact about the generated entity (WebSite already lists six). */
+      const extension = typeof language === "string" ? withoutKeys(own, ["inLanguage"]) : own;
+      merged[index] = { ...base, ...extension, "@id": base["@id"], "@type": base["@type"] };
+    }
+    return merged;
+  } catch (err) {
+    console.error("Admin structured_data could not be merged; publishing the generated graph:", err);
+    return generated;
+  }
 }

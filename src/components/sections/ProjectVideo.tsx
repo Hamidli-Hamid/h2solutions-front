@@ -29,7 +29,7 @@ export function ProjectVideo({ video, poster, title, labels }: Props) {
   return (
     <section aria-labelledby="video-heading" className="reveal">
       <div className="container-h2 py-10 md:py-12">
-        <h2 id="video-heading" className="text-2xl font-bold md:text-[1.75rem]">
+        <h2 id="video-heading" className="type-h2">
           {labels.heading}
         </h2>
 

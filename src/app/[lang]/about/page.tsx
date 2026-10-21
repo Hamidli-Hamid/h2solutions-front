@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { PageHeader } from "@/components/ui/PageHeader";
+import { SplitWords } from "@/components/ui/SplitWords";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { Icon } from "@/components/ui/Icon";
@@ -11,8 +12,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { localePath, isLocale } from "@/i18n-config";
 import { pageMetadata } from "@/lib/seo";
-import { localeUrl, siteConfig } from "@/lib/site-config";
-import { aboutPageJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { getPageSeo } from "@/lib/content";
+import { localeUrl } from "@/lib/site-config";
+import { aboutPageJsonLd, breadcrumbJsonLd, mergeAdminNodes } from "@/lib/jsonld";
 
 export async function generateMetadata({
   params,
@@ -32,7 +34,10 @@ export async function generateMetadata({
 export default async function AboutPage({ params }: PageProps<"/[lang]/about">) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, pageSeo] = await Promise.all([
+    getDictionary(lang),
+    getPageSeo(lang, "about"),
+  ]);
   const t = dict.about;
 
   const breadcrumb = breadcrumbJsonLd([
@@ -72,9 +77,9 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
             <p className="section-label">{t.storyLabel}</p>
             <h2
               id="about-story-heading"
-              className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+              className="type-h2 mt-4"
             >
-              {t.storyTitle}
+              <SplitWords text={t.storyTitle} />
             </h2>
 
             <div className="mt-6 space-y-4">
@@ -99,7 +104,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
             <div className="mt-5 flex items-center gap-4">
               <span
                 aria-hidden
-                className="icon-tile h-14 w-14 flex-none font-[var(--font-display)] text-lg font-bold shadow-[var(--shadow-glow)]"
+                className="icon-tile h-14 w-14 flex-none font-[family-name:var(--font-display)] text-lg font-bold shadow-[var(--shadow-glow)]"
               >
                 H2
               </span>
@@ -151,9 +156,9 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
           <p className="section-label">{t.commitments.label}</p>
           <h2
             id="about-commitments-heading"
-            className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+            className="type-h2 mt-4"
           >
-            {t.commitments.title}
+            <SplitWords text={t.commitments.title} />
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-[color:var(--color-foreground-soft)] md:text-base">
             {t.commitments.subtitle}
@@ -166,7 +171,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                 key={item.label}
                 className="border-t border-[color:var(--color-border)] p-6 first:border-t-0 md:p-7 sm:[&:nth-child(-n+2)]:border-t-0 sm:[&:nth-child(2n)]:border-l lg:[&:nth-child(-n+4)]:border-t-0 lg:[&:nth-child(n+2)]:border-l"
               >
-                <dt className="font-[var(--font-display)] text-2xl font-bold text-[color:var(--color-accent)] md:text-[1.75rem]">
+                <dt className="accent-text font-[family-name:var(--font-display)] text-[1.75rem] font-bold leading-none md:text-[2rem]">
                   {item.value}
                 </dt>
                 <dd className="mt-2 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
@@ -184,9 +189,9 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
           <p className="section-label">{t.valuesLabel}</p>
           <h2
             id="about-values-heading"
-            className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+            className="type-h2 mt-4"
           >
-            {t.valuesTitle}
+            <SplitWords text={t.valuesTitle} />
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-[color:var(--color-foreground-soft)] md:text-base">
             {t.valuesSubtitle}
@@ -201,7 +206,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                   </span>
                   <span
                     aria-hidden
-                    className="font-[var(--font-display)] text-sm font-bold tracking-wider text-[color:var(--color-foreground-muted)]"
+                    className="font-[family-name:var(--font-display)] text-sm font-bold tracking-wider text-[color:var(--color-foreground-muted)]"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -222,9 +227,9 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
           <p className="section-label">{t.stack.label}</p>
           <h2
             id="about-stack-heading"
-            className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+            className="type-h2 mt-4"
           >
-            {t.stack.title}
+            <SplitWords text={t.stack.title} />
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-[color:var(--color-foreground-soft)] md:text-base">
             {t.stack.subtitle}
@@ -261,7 +266,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
           <p className="section-label">{t.audience.label}</p>
           <h2
             id="about-audience-heading"
-            className="mt-3 text-2xl font-bold md:text-[1.75rem]"
+            className="type-h2 mt-4"
           >
             {t.audience.title}
           </h2>
@@ -293,7 +298,14 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
       <ProcessSteps dict={dict} />
       <CtaBanner lang={lang} dict={dict} className="reveal" />
 
-      <JsonLd id="ld-about" data={[aboutPageJsonLd(dict, lang), breadcrumb]} />
+      <JsonLd
+        id="ld-about"
+        data={mergeAdminNodes(
+          [aboutPageJsonLd(dict, lang), breadcrumb],
+          pageSeo?.structured_data,
+          lang,
+        )}
+      />
     </div>
   );
 }
