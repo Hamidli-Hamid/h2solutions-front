@@ -155,6 +155,14 @@
         {
           "question": "Bokudan tashqaridagi kompaniyalar bilan ishlaysizmi?",
           "answer": "Ha. Biz Bokuda joylashganmiz, lekin viloyatlar va xorijdagi mijozlar bilan ham masofadan ishlaymiz: maslahat va uchrashuvlar onlayn oʻtadi, ishni esa ozarbayjon, ingliz, rus, nemis, qozoq va oʻzbek tillarida olib boramiz."
+        },
+        {
+          "question": "Kichik biznes va startaplar bilan ham ishlaysizmi?",
+          "answer": "Ha. Asosiy mijozlarimiz kichik va oʻrta bizneslardir. Startaplar uchun bozorga tez chiqib, gʻoyani sinab koʻrish imkonini beradigan birinchi versiyani (MVP) quramiz: avval eng muhim funksiyalar, qolganlari esa foydalanuvchilarning real xatti-harakatiga qarab keyingi bosqichlarda."
+        },
+        {
+          "question": "Sayt ishga tushgandan keyin natijani qanday oʻlchaysiz?",
+          "answer": "Sayt bilan birga analitikani sozlaymiz: har bir sahifadan qancha murojaat, qoʻngʻiroq va buyurtma kelayotganini, tashrifchilar saytni qayerda tark etayotganini koʻrasiz. Google Search Console ulanganda sayt qaysi soʻrovlar boʻyicha koʻrsatilayotgani ham koʻrinadi. Doimiy analitika va hisobotlar oylik paket doirasida davom etadi."
         }
       ]
     },
@@ -260,6 +268,14 @@
         {
           "question": "Topshirilgandan soʻng loyiha kimga tegishli boʻladi?",
           "answer": "Sizga. Barcha kod, domen, hosting va admin panel kirishlarini toʻliq topshiramiz. Hujjatlar va boshqaruv boʻyicha oʻquv ham shunga kiradi."
+        },
+        {
+          "question": "Sayt narxini birinchi javobdayoq taxminan ayta olasizmi?",
+          "answer": "Ha. Brifda asosiy maʼlumotlar — kompaniyangiz, kerakli xizmat, loyiha maqsadi va taxminiy byudjet — boʻlsa, birinchi javobimizda taxminiy byudjet, muddat va mos texnik yechimni koʻrsatamiz. Aniq va qatʼiy narx maslahatdan keyin yozma taklifda keladi."
+        },
+        {
+          "question": "Oylik qoʻllab-quvvatlash paketlariga nimalar kiradi?",
+          "answer": "Topshirgandan keyingi birinchi oy texnik yordam bepul. Soʻng ish oylik paket bilan davom etadi: texnik yordam va yangilanishlar, analitika va hisobotlar, kontent, doimiy SEO va yangi funksiyalar. Paketga aynan nimalar kirishini birga belgilaymiz."
         }
       ]
     },
@@ -564,6 +580,18 @@
         {
           "question": "Maslahat haqiqatan ham bepulmi?",
           "answer": "Ha. Birinchi 30 daqiqalik onlayn uchrashuv hech qanday majburiyat yuklamaydi: maqsadlaringiz, texnik talablar va mumkin boʻlgan yechimlarni muhokama qilamiz, soʻng yozma taklif yuboramiz — qaror sizniki."
+        },
+        {
+          "question": "Murojaatga qanchalik tez javob berasiz?",
+          "answer": "Yozma murojaatlarga 24 soat ichida javob beramiz. Telefon orqali 09:00–18:00 (GMT+4) oraligʻida qoʻngʻiroq qilishingiz mumkin. Xabaringizda biror narsa yetishmasa, javob bilan birga bir nechta aniqlashtiruvchi savol yuboramiz."
+        },
+        {
+          "question": "Shartnoma tuzasizmi?",
+          "answer": "Ha. Ish hajmi, narx, bosqichlar, toʻlov jadvali va topshirish shartlari shartnomada yoziladi. Odatda ishni shartnoma imzolangandan keyin 3–5 ish kuni ichida boshlaymiz."
+        },
+        {
+          "question": "Qaysi tilda yozish mumkin?",
+          "answer": "Ozarbayjon, ingliz, rus, nemis, qozoq yoki oʻzbek tillarida — sizga qaysi biri qulay boʻlsa. Maslahat va yozishmalarni ham shu tilda olib boramiz."
         }
       ]
     }

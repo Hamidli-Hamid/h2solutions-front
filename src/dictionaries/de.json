@@ -155,6 +155,14 @@
         {
           "question": "Arbeiten Sie auch mit Unternehmen außerhalb von Baku?",
           "answer": "Ja. Wir sitzen in Baku, arbeiten aber auch remote mit Kunden aus den Regionen und dem Ausland: Beratung und Termine finden online statt, und wir arbeiten auf Aserbaidschanisch, Englisch, Russisch, Deutsch, Kasachisch und Usbekisch."
+        },
+        {
+          "question": "Arbeiten Sie auch mit kleinen Unternehmen und Start-ups?",
+          "answer": "Ja. Unsere Kunden sind überwiegend kleine und mittlere Unternehmen. Für Start-ups bauen wir eine erste Version (MVP), die schnell auf den Markt kommt und getestet werden kann: zuerst die wichtigsten Funktionen, alles Weitere in späteren Phasen – je nachdem, wie echte Nutzer das Produkt verwenden."
+        },
+        {
+          "question": "Wie messen Sie die Ergebnisse nach dem Launch?",
+          "answer": "Zusammen mit der Website richten wir die Analyse ein: Sie sehen, wie viele Anfragen, Anrufe und Bestellungen jede Seite bringt und wo Besucher die Website verlassen. Sobald die Google Search Console verbunden ist, sehen Sie auch, für welche Suchanfragen die Website angezeigt wird. Laufende Analyse und Berichte gibt es im Rahmen eines Monatspakets."
         }
       ]
     },
@@ -260,6 +268,14 @@
         {
           "question": "Wem gehört das Projekt nach der Übergabe?",
           "answer": "Ihnen. Wir übergeben Code, Domain, Hosting und alle Admin-Zugänge vollständig. Dokumentation und eine Einweisung gehören dazu."
+        },
+        {
+          "question": "Können Sie schon in der ersten Antwort einen ungefähren Preis für eine Website nennen?",
+          "answer": "Ja. Enthält Ihr Briefing das Wesentliche – Ihr Unternehmen, die gewünschte Leistung, das Projektziel und ein ungefähres Budget –, nennen wir in der ersten Antwort ein geschätztes Budget, den Zeitrahmen und einen passenden technischen Ansatz. Den genauen Festpreis erhalten Sie nach der Beratung im schriftlichen Angebot."
+        },
+        {
+          "question": "Was ist in den monatlichen Support-Paketen enthalten?",
+          "answer": "Im ersten Monat nach der Übergabe ist der technische Support kostenlos. Danach geht die Arbeit in einem Monatspaket weiter: technischer Support und Updates, Analyse und Berichte, Inhalte, laufendes SEO und neue Funktionen. Was das Paket umfasst, legen wir gemeinsam fest."
         }
       ]
     },
@@ -564,6 +580,18 @@
         {
           "question": "Ist die Beratung wirklich kostenlos?",
           "answer": "Ja. Das erste 30-minütige Online-Gespräch ist unverbindlich: Wir besprechen Ihre Ziele, die technischen Anforderungen und mögliche Lösungen und schicken Ihnen danach ein schriftliches Angebot — die Entscheidung liegt bei Ihnen."
+        },
+        {
+          "question": "Wie schnell antworten Sie auf eine Anfrage?",
+          "answer": "Auf schriftliche Anfragen antworten wir innerhalb von 24 Stunden. Telefonisch erreichen Sie uns zwischen 09:00 und 18:00 Uhr (GMT+4). Fehlt in Ihrer Nachricht etwas, schicken wir mit der Antwort ein paar Rückfragen."
+        },
+        {
+          "question": "Schließen Sie einen Vertrag ab?",
+          "answer": "Ja. Umfang, Preis, Phasen, Zahlungsplan und Übergabebedingungen werden im Vertrag festgehalten. In der Regel beginnen wir innerhalb von 3–5 Werktagen nach der Unterzeichnung."
+        },
+        {
+          "question": "In welcher Sprache kann ich schreiben?",
+          "answer": "Auf Aserbaidschanisch, Englisch, Russisch, Deutsch, Kasachisch oder Usbekisch – wie es Ihnen lieber ist. Beratung und Korrespondenz führen wir in derselben Sprache."
         }
       ]
     }

@@ -155,6 +155,14 @@
         {
           "question": "Bakıdan kənarda olan şirkətlərlə işləyirsiniz?",
           "answer": "Bəli. Bakıda yerləşirik, amma regionlardan və xaricdən olan müştərilərlə də uzaqdan işləyirik: konsultasiya və görüşlər onlayn keçir, işi isə AZ, EN, RU, DE, KK və UZ dillərində aparırıq."
+        },
+        {
+          "question": "Kiçik biznes və startaplarla da işləyirsiniz?",
+          "answer": "Bəli. Əsas müştərilərimiz kiçik və orta bizneslərdir. Startaplar üçün ilk versiyanı (MVP) tez bazara çıxarıb sınamağa imkan verən həll qururuq: əvvəlcə ən vacib funksiyalar, qalanı isə real istifadəçi davranışına baxıb sonrakı mərhələlərdə."
+        },
+        {
+          "question": "Sayt açılandan sonra nəticəni necə ölçürsünüz?",
+          "answer": "Saytla birlikdə analitika qururuq: hansı səhifədən neçə müraciət, zəng və sifariş gəldiyini, ziyarətçinin harada saytı tərk etdiyini görürsünüz. Google Search Console qoşulanda saytın hansı sorğularda göstərildiyi də görünür. Davamlı analitika və hesabat aylıq paketlərlə davam edir."
         }
       ]
     },
@@ -260,6 +268,14 @@
         {
           "question": "Təhvildən sonra layihə kimə məxsus olur?",
           "answer": "Sizə. Bütün kodu, domen, hosting və admin panel girişlərini tam təhvil veririk. Sənədləşmə və idarəetmə üzrə təlim də buraya daxildir."
+        },
+        {
+          "question": "Sayt hazırlanması qiymətləri haqqında ilk cavabda təxmini rəqəm deyə bilərsiniz?",
+          "answer": "Bəli. Brifdə əsas məlumatları — şirkətinizi, lazım olan xidməti, layihənin məqsədini və təxmini büdcəni — yazsanız, ilk cavabımızda təxmini büdcəni, müddəti və uyğun texniki həlli göstəririk. Dəqiq və sabit qiymət konsultasiyadan sonra yazılı təklifdə gəlir."
+        },
+        {
+          "question": "Aylıq dəstək paketlərinə nə daxildir?",
+          "answer": "Təhvildən sonrakı bir ay texniki dəstək pulsuzdur. Sonra iş aylıq paketlə davam edir: texniki dəstək və yeniləmələr, analitika və hesabat, məzmun, davamlı SEO və yeni funksiyalar. Paketə hansı işlərin daxil olacağını birlikdə müəyyən edirik."
         }
       ]
     },
@@ -564,6 +580,18 @@
         {
           "question": "Konsultasiya həqiqətən pulsuzdur?",
           "answer": "Bəli. İlk 30 dəqiqəlik onlayn görüş heç bir öhdəlik yaratmır: məqsədlərinizi, texniki tələbləri və mümkün həll yollarını müzakirə edirik, sonra yazılı təklif göndəririk — qərar sizindir."
+        },
+        {
+          "question": "Müraciətə nə qədər tez cavab verirsiniz?",
+          "answer": "Yazılı müraciətlərə 24 saat ərzində cavab veririk. Telefonla 09:00–18:00 (GMT+4) arası zəng edə bilərsiniz. Mesajınızda nəsə çatışmırsa, cavabla birlikdə bir neçə dəqiqləşdirici sual göndəririk."
+        },
+        {
+          "question": "Müqavilə bağlayırsınız?",
+          "answer": "Bəli. İş həcmi, qiymət, mərhələlər, ödəniş qrafiki və təhvil şərtləri müqavilədə yazılır. İşə adətən müqavilə imzalanandan sonra 3–5 iş günü ərzində başlayırıq."
+        },
+        {
+          "question": "Hansı dildə yazmaq olar?",
+          "answer": "Azərbaycan, ingilis, rus, alman, qazax və özbək dillərində — sizə hansı rahatdırsa. Konsultasiyanı və yazışmanı da həmin dildə aparırıq."
         }
       ]
     }

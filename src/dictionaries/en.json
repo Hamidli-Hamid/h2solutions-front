@@ -155,6 +155,14 @@
         {
           "question": "Do you work with companies outside Baku?",
           "answer": "Yes. We are based in Baku but also work remotely with clients from the regions and abroad: consultations and meetings take place online, and we work in Azerbaijani, English, Russian, German, Kazakh and Uzbek."
+        },
+        {
+          "question": "Do you work with small businesses and startups?",
+          "answer": "Yes. Most of our clients are small and mid-sized businesses. For startups we build a first version (MVP) that gets to market quickly so the idea can be tested: the most important features first, the rest in later stages based on how real users behave."
+        },
+        {
+          "question": "How do you measure results after launch?",
+          "answer": "We set up analytics together with the site, so you can see how many enquiries, calls and orders each page brings and where visitors leave. Once Google Search Console is connected, you also see which searches the site appears for. Ongoing analytics and reporting continue under a monthly package."
         }
       ]
     },
@@ -260,6 +268,14 @@
         {
           "question": "Who owns the project after delivery?",
           "answer": "You do. All code, the domain, hosting and admin access are handed over in full, together with documentation and a training session."
+        },
+        {
+          "question": "Can you give a rough price for a website in your first reply?",
+          "answer": "Yes. If your brief covers the basics — your company, the service you need, the project goal and a rough budget — our first reply includes an estimated budget, timeline and a suitable technical approach. The exact fixed price follows in a written proposal after the consultation."
+        },
+        {
+          "question": "What do the monthly support packages include?",
+          "answer": "Technical support is free for the first month after handover. After that, work continues under a monthly package: technical support and updates, analytics and reporting, content, ongoing SEO and new features. We agree together which of these the package covers."
         }
       ]
     },
@@ -564,6 +580,18 @@
         {
           "question": "Is the consultation really free?",
           "answer": "Yes. The first 30-minute online call comes with no obligation: we discuss your goals, the technical requirements and possible solutions, then send a written proposal — the decision is yours."
+        },
+        {
+          "question": "How quickly do you reply?",
+          "answer": "We reply to written enquiries within 24 hours. You can call us between 09:00 and 18:00 (GMT+4). If something is missing from your message, we send a few clarifying questions with our reply."
+        },
+        {
+          "question": "Do you sign a contract?",
+          "answer": "Yes. The scope, price, stages, payment schedule and handover terms are set out in the contract. We usually start within 3–5 business days of signing."
+        },
+        {
+          "question": "Which languages can I write in?",
+          "answer": "Azerbaijani, English, Russian, German, Kazakh or Uzbek — whichever suits you. We hold the consultation and the correspondence in the same language."
         }
       ]
     }
