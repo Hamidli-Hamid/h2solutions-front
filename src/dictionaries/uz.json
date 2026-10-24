@@ -137,16 +137,8 @@
           "answer": "Korporativ sayt odatda 3–5 haftada tayyor boʻladi. Elektron tijorat va maxsus platformalar 6–12 hafta oladi. Aniq muddatni talablar belgilangach yozma kalendar rejada tasdiqlaymiz."
         },
         {
-          "question": "Loyiha tugagach yordam berasizmi?",
-          "answer": "Ha. Topshirgandan keyin bir oy bepul texnik yordam koʻrsatamiz. Undan soʻng oylik qoʻllab-quvvatlash va rivojlantirish paketlarini taklif qilamiz."
-        },
-        {
-          "question": "Toʻlov qanday amalga oshiriladi?",
-          "answer": "Toʻlov bosqichlarga boʻlinadi: boshlangʻich avans, oraliq bosqich va topshirish paytidagi yakuniy toʻlov. Barcha shartlarni oldindan shartnomada yozamiz."
-        },
-        {
-          "question": "Hosting va domenni siz taʼminlaysizmi?",
-          "answer": "Ha. Loyihaga mos hosting va domenni oʻzimiz tanlaymiz. Oʻrnatish, SSL sertifikati va koʻchirish ishlarini ham toʻliq oʻz zimmamizga olamiz."
+          "question": "Saytga qanday buyurtma beriladi?",
+          "answer": "Telefon, WhatsApp yoki elektron pochta orqali qisqacha yozishingiz kifoya: biznesingiz, kerakli xizmat va taxminiy byudjet. 24 soat ichida javob beramiz va 30 daqiqalik bepul onlayn maslahat belgilaymiz. Soʻng ish hajmi, narx va muddatlarni yozma taklifda yuboramiz."
         },
         {
           "question": "Saytim SEO uchun optimallashtiriladimi?",
@@ -155,6 +147,14 @@
         {
           "question": "Sayt telefonda ham yaxshi ishlaydimi?",
           "answer": "Ha. Barcha loyihalar mobile-first tamoyili asosida quriladi va telefon, planshet hamda kompyuter ekranlarida alohida sinovdan oʻtkaziladi."
+        },
+        {
+          "question": "Qaysi sohalarda loyihalaringiz bor?",
+          "answer": "Portfoliomizda beshta loyiha bor: Climahome (isitish va sovutish tizimlari), Alzone (isitish, santexnika va quvur tizimlari) va MegaParts (avtomobil ehtiyot qismlari) internet-doʻkonlari, Sign & Graphics bosma va reklama xizmatlari platformasi hamda TopdanMall ulgurji savdo eʼlonlari platformasi. Har bir loyiha qanday qurilgani uning sahifasida koʻrsatilgan."
+        },
+        {
+          "question": "Bokudan tashqaridagi kompaniyalar bilan ishlaysizmi?",
+          "answer": "Ha. Biz Bokuda joylashganmiz, lekin viloyatlar va xorijdagi mijozlar bilan ham masofadan ishlaymiz: maslahat va uchrashuvlar onlayn oʻtadi, ishni esa ozarbayjon, ingliz, rus, nemis, qozoq va oʻzbek tillarida olib boramiz."
         }
       ]
     },
@@ -223,10 +223,12 @@
   },
   "services": {
     "title": "Xizmatlar",
+    "heading": "Xizmatlar: saytlar, internet-doʻkonlar, mobil ilovalar va SEO",
     "intro": "Sayt yaratishdan mobil ilovagacha, SEO-dan biznesni avtomatlashtirishgacha — biznesingiz internetda oʻsishi uchun oltita xizmat.",
     "included": "Nimalar kiradi?",
     "lastUpdated": "Oxirgi yangilanish",
     "related": "Boshqa xizmatlar",
+    "projectsTitle": "Ushbu xizmat doirasida qurgan loyihalarimiz",
     "startTitle": "Loyihani boshlaymiz",
     "startText": "Shu xizmat boʻyicha savolingiz bormi? Qisqa brif yuboring, 24 soat ichida javob beramiz.",
     "empty": "Xizmatlar tez orada qoʻshiladi.",
@@ -444,6 +446,7 @@
     "galleryHint": "Kattalashtirish uchun rasmni bosing",
     "clientLabel": "Mijoz",
     "yearLabel": "Yil",
+    "serviceLabel": "Xizmat",
     "domainLabel": "Domen",
     "visitSite": "Saytga oʻtish",
     "related": "Boshqa loyihalar",
@@ -537,6 +540,32 @@
       "emailCta": "Xat yozish",
       "whatsappCta": "WhatsApp orqali yozish",
       "linkedin": "LinkedIn’da bogʻlanish"
+    },
+    "faq": {
+      "label": "Koʻp beriladigan savollar",
+      "title": "Buyurtma va hamkorlik haqida savollar",
+      "items": [
+        {
+          "question": "Toʻlov qanday amalga oshiriladi?",
+          "answer": "Toʻlov bosqichlarga boʻlinadi: boshlangʻich avans, oraliq bosqich va topshirish paytidagi yakuniy toʻlov. Barcha shartlarni oldindan shartnomada yozamiz."
+        },
+        {
+          "question": "Hosting va domenni siz taʼminlaysizmi?",
+          "answer": "Ha. Loyihaga mos hosting va domenni oʻzimiz tanlaymiz. Oʻrnatish, SSL sertifikati va koʻchirish ishlarini ham toʻliq oʻz zimmamizga olamiz."
+        },
+        {
+          "question": "Loyiha tugagach yordam berasizmi?",
+          "answer": "Ha. Topshirgandan keyin bir oy bepul texnik yordam koʻrsatamiz. Undan soʻng oylik qoʻllab-quvvatlash va rivojlantirish paketlarini taklif qilamiz."
+        },
+        {
+          "question": "Sayt buyurtma qilish uchun tayyor texnik topshiriq kerakmi?",
+          "answer": "Yoʻq. Kompaniyangiz, kerakli xizmat, loyiha maqsadi, taxminiy byudjet va sizga yoqqan namunalar yetarli. Qolganini bepul maslahatda birga aniqlashtiramiz, ish hajmini esa yozma taklifda tavsiflaymiz."
+        },
+        {
+          "question": "Maslahat haqiqatan ham bepulmi?",
+          "answer": "Ha. Birinchi 30 daqiqalik onlayn uchrashuv hech qanday majburiyat yuklamaydi: maqsadlaringiz, texnik talablar va mumkin boʻlgan yechimlarni muhokama qilamiz, soʻng yozma taklif yuboramiz — qaror sizniki."
+        }
+      ]
     }
   },
   "footer": {

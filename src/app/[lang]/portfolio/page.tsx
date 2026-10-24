@@ -130,7 +130,7 @@ export default async function PortfolioPage({
         </div>
       </section>
 
-      <ProcessSteps dict={dict} />
+      <ProcessSteps variant="compact" dict={dict} lang={lang} />
       <CtaBanner lang={lang} dict={dict} className="reveal" />
 
       <JsonLd

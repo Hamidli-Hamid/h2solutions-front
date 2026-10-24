@@ -32,10 +32,10 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   ]);
 
   /* Section ordinals count only what is on the page, so hiding an empty
-     preview does not leave "02" as the first number. */
+     preview does not leave "02" as the first number. The process strip is a
+     pointer to /services, not a numbered section, so it takes none. */
   const projectsIndex = 1;
-  const processIndex = projects.some((p) => p.show_on_home) ? projectsIndex + 1 : projectsIndex;
-  const faqIndex = processIndex + 1;
+  const faqIndex = projects.some((p) => p.show_on_home) ? projectsIndex + 1 : projectsIndex;
   const blogIndex = faqIndex + 1;
 
   const serviceList = itemListJsonLd(
@@ -51,7 +51,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     <div className="tech-canvas">
       <Hero lang={lang} dict={dict} services={services} />
       <ProjectsShowcase lang={lang} dict={dict} projects={projects} index={projectsIndex} />
-      <ProcessSteps dict={dict} index={processIndex} />
+      <ProcessSteps variant="compact" dict={dict} lang={lang} />
       <FaqAccordion
         content={dict.home.faq}
         index={faqIndex}

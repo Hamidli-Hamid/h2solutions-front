@@ -4,10 +4,10 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { CardLink } from "@/components/ui/CardLink";
 import { CardMedia } from "@/components/ui/CardMedia";
 import { localePath, type Locale } from "@/i18n-config";
-import type { ApiProject } from "@/lib/api";
+import type { ApiProjectSummary } from "@/lib/api";
 
 type Props = {
-  project: ApiProject;
+  project: ApiProjectSummary;
   lang: Locale;
   ctaLabel: string;
   variant?: number;

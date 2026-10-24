@@ -86,14 +86,26 @@ export function entityDefinition(dict: Dictionary): string {
 }
 
 /**
- * Every other spelling of the founder's name the site publishes (the about
- * page's founder card, per language) — "Həmid Həmidli" and "Hamid Hamidli" are
- * one person, and saying so is what lets them be matched.
+ * The founder's name as this language spells it: the about page's founder
+ * card, with the site-wide value only when the card is empty. The author
+ * meta, the footer credit and the Person node all read it, so an Azerbaijani
+ * page no longer names "Hamid Hamidli" next to a card that says "Həmid Həmidli".
  */
-export function founderAliases(dicts: Dictionary[], founder: string): string[] {
-  const names = dicts
-    .map((dict) => dict.about.founder.name.trim())
-    .filter((name) => name !== "" && name !== founder);
+export function founderName(dict: Dictionary): string {
+  return dict.about.founder.name.trim() || resolveSite(dict).founder.trim();
+}
+
+/**
+ * Every other spelling of the founder's name the site publishes (the founder
+ * card in each language and the site-wide value), without the one this page
+ * uses as `name` — "Həmid Həmidli" and "Hamid Hamidli" are one person, and
+ * saying so is what lets the per-language names be matched to one entity.
+ */
+export function founderAliases(dicts: Dictionary[], chosen: string): string[] {
+  const names = [
+    ...dicts.map((dict) => dict.about.founder.name.trim()),
+    ...dicts.map((dict) => resolveSite(dict).founder.trim()),
+  ].filter((name) => name !== "" && name !== chosen);
   return [...new Set(names)];
 }
 
@@ -123,7 +135,7 @@ export function siteGraphJsonLd({ dict, services, founderNames }: SiteGraphInput
   const { phone } = contactNumbers(dict.contact);
   const definition = entityDefinition(dict);
   const knowsAbout = services.map((service) => service.title).filter(Boolean);
-  const founder = site.founder.trim();
+  const founder = founderName(dict);
   const role = dict.about.founder.role.trim();
 
   const organization: Node = {
@@ -142,6 +154,8 @@ export function siteGraphJsonLd({ dict, services, founderNames }: SiteGraphInput
     description: dict.meta.defaultDescription,
     ...(definition ? { disambiguatingDescription: definition } : {}),
     ...(dict.contact.email ? { email: dict.contact.email } : {}),
+    // The same real number the contactPoint carries; omitted with it.
+    ...(phone ? { telephone: phone } : {}),
     address: {
       "@type": "PostalAddress",
       addressLocality: site.addressLocality,

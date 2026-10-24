@@ -25,6 +25,7 @@ import { contactNumbers, telHref, whatsappHref } from "@/lib/format";
 import {
   breadcrumbJsonLd,
   contactPageJsonLd,
+  faqJsonLd,
   isProfileUrl,
   mergeAdminNodes,
 } from "@/lib/jsonld";
@@ -313,8 +314,9 @@ export default async function ContactPage({
         </div>
       </section>
 
-      {/* The homepage FAQ answers the questions that used to arrive through the form. */}
-      <FaqAccordion content={dict.home.faq} />
+      {/* Its own questions (ordering, payment, hosting, support): repeating the
+          homepage's six made the two pages compete for the same answers. */}
+      {t.faq.items.length > 0 && <FaqAccordion content={t.faq} />}
 
       {/* DIRECT — closing band; every action here leaves the site, none loops back. */}
       <section aria-labelledby="contact-direct-heading" className="reveal">
@@ -382,6 +384,9 @@ export default async function ContactPage({
           lang,
         )}
       />
+      {t.faq.items.length > 0 && (
+        <JsonLd id="ld-contact-faq" data={faqJsonLd(t.faq.items)} />
+      )}
     </div>
   );
 }

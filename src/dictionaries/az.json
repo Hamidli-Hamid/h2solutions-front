@@ -137,16 +137,8 @@
           "answer": "Korporativ sayt adətən 3–5 həftə, e-ticarət və fərdi platformalar 6–12 həftə çəkir. Tələblər aydınlaşandan sonra dəqiq müddəti yazılı təqvim planı ilə təsdiqləyirik."
         },
         {
-          "question": "Layihə bitəndən sonra dəstək verirsiniz?",
-          "answer": "Bəli. Təhvildən sonra bir ay pulsuz texniki dəstək göstəririk. Sonrası üçün aylıq dəstək və inkişaf paketlərimiz var."
-        },
-        {
-          "question": "Ödəniş necə aparılır?",
-          "answer": "Ödəniş mərhələlərə bölünür: başlanğıcda avans, aralıq mərhələdə növbəti hissə, təhvildə yekun ödəniş. Bütün şərtlər əvvəlcədən müqavilədə yazılır."
-        },
-        {
-          "question": "Hosting və domeni də siz həll edirsiniz?",
-          "answer": "Bəli. Layihəyə uyğun hosting və domeni biz seçirik, quraşdırmanı, SSL sertifikatını və köçürməni də öz üzərimizə götürürük."
+          "question": "Sayt sifarişi necə verilir?",
+          "answer": "Telefon, WhatsApp və ya e-poçtla qısa yazmağınız kifayətdir: biznesiniz, lazım olan xidmət və təxmini büdcə. 24 saat ərzində cavab verir, 30 dəqiqəlik pulsuz onlayn konsultasiya təyin edirik. Sonra iş həcmini, qiyməti və təqvimi yazılı təklifdə göndəririk."
         },
         {
           "question": "Sayt SEO üçün hazır təhvil verilir?",
@@ -155,6 +147,14 @@
         {
           "question": "Sayt telefonda yaxşı işləyəcək?",
           "answer": "Bəli. Bütün layihələri əvvəlcə telefon üçün qururuq, sonra telefon, planşet və masaüstü ekranlarda ayrıca yoxlayırıq."
+        },
+        {
+          "question": "Hansı sahələrdə layihələriniz var?",
+          "answer": "Portfoliomuzda beş layihə var: Climahome (istilik və soyutma sistemləri), Alzone (istilik, santexnika və boru sistemləri) və MegaParts (avtomobil ehtiyat hissələri) onlayn mağazaları, çap və reklam xidmətləri platforması Sign & Graphics və topdan alış-veriş elanları platforması TopdanMall. Hər birinin necə qurulduğu layihə səhifəsində göstərilib."
+        },
+        {
+          "question": "Bakıdan kənarda olan şirkətlərlə işləyirsiniz?",
+          "answer": "Bəli. Bakıda yerləşirik, amma regionlardan və xaricdən olan müştərilərlə də uzaqdan işləyirik: konsultasiya və görüşlər onlayn keçir, işi isə AZ, EN, RU, DE, KK və UZ dillərində aparırıq."
         }
       ]
     },
@@ -191,7 +191,7 @@
       "title": "Bakıda veb sayt hazırlanması və SEO xidməti",
       "imageAlt": "Next.js metadata və strukturlaşdırılmış data kodu, yanında H2 Solutions-un hazırladığı Alzone və Sign & Graphics saytları",
       "body": [
-        "H2 Solutions Bakıda şirkətlər üçün veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və UI/UX dizaynla məşğul olan texniki agentlikdir. Bir komanda həm qurur, həm də qurduğunun nəticəsinə baxır: sayt neçə müraciət gətirir, hansı səhifə satır, müştəri harada itir.",
+        "H2 Solutions Bakıda şirkətlər üçün veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və UI/UX dizaynla məşğul olan texniki agentlikdir. Bir komanda həm qurur, həm də qurduğunun nəticəsinə baxır: sayt neçə müraciət gətirir, hansı səhifə satır, müştəri harada itir. Saytların hazırlanmasını sıfırdan — analizdən koda qədər — öz komandamızla görürük; hazır konstruktorla sayt yaratmaq əvəzinə biznesinizə uyğun sistem qururuq.",
         "Saytlarımız Next.js və Laravel üzərində qurulur, ona görə səhifələr tez açılır və Google onları rahat oxuyur. Texniki SEO və strukturlaşdırılmış data hər layihənin içindədir. GEO — yəni ChatGPT, Gemini kimi süni intellekt axtarışı üçün optimallaşdırma — isə brendinizin təkcə Google-da yox, AI cavablarında da görünməsi üçün aparılır.",
         "Hər layihəyə uzunmüddətli iş kimi baxırıq. Analizdən dizayna, koddan təhvildən sonrakı dəstəyə qədər yanınızda oluruq — sayt açılan gün iş bitmir, başlayır."
       ]
@@ -223,10 +223,12 @@
   },
   "services": {
     "title": "Xidmətlər",
+    "heading": "Xidmətlər: sayt, onlayn mağaza, mobil tətbiq və SEO",
     "intro": "Veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və dizayn — altı xidmət, bir komanda.",
     "included": "Nə daxildir?",
     "lastUpdated": "Son yenilənmə",
     "related": "Digər xidmətlər",
+    "projectsTitle": "Bu xidmətlə qurduğumuz layihələr",
     "startTitle": "Layihəyə başlayaq",
     "startText": "Bu xidmətlə bağlı sualınız var? Qısa brif göndərin, 24 saat ərzində cavab verək.",
     "empty": "Xidmətlər tezliklə əlavə olunacaq.",
@@ -279,9 +281,9 @@
     "storyLabel": "Hekayəmiz",
     "storyTitle": "Təkcə gözəl görünən yox, işləyən saytlar",
     "storyParagraphs": [
-      "H2 Solutions Bakıda yerləşən texniki agentlikdir: kiçik və orta bizneslər üçün sayt, onlayn mağaza və biznes proqramları qururuq. Adımızdakı «H2» iki sadə öhdəlikdir — yüksək keyfiyyət və yüksəklik: hər layihəni olduğu yerdən bir pillə yuxarı qaldırmaq.",
+      "H2 Solutions Bakıda yerləşən texniki agentlik və veb studiyadır: kiçik və orta bizneslər üçün sayt, onlayn mağaza və biznes proqramları qururuq. Adımızdakı «H2» iki sadə öhdəlikdir — yüksək keyfiyyət və yüksəklik: hər layihəni olduğu yerdən bir pillə yuxarı qaldırmaq.",
       "Hər şey bir sualdan başladı: niyə bu qədər sayt gözəl görünür, amma müştəri gətirmir? Səbəbi onda gördük ki, biznes məntiqi ilə texniki icra ayrı-ayrı düşünülür. Ona görə işə dizayndan yox, sizin hədəfinizdən, rəqiblərinizdən və insanların real axtardığından başlayırıq.",
-      "Bu gün Next.js və Laravel üzərində korporativ saytlar, e-ticarət platformaları, SEO/GEO və biznes avtomatlaşdırma layihələri görürük. Təhvildən sonra da yanınızdayıq: ölçür, öyrənir, növbəti addımı birlikdə planlaşdırırıq."
+      "Bu gün Next.js və Laravel üzərində korporativ saytlar, e-ticarət platformaları, SEO/GEO və biznes avtomatlaşdırma layihələri görürük. Portfoliomuzda beş işlək layihə var: üç onlayn mağaza (Climahome, Alzone, MegaParts), çap və reklam platforması Sign & Graphics və topdan elan platforması TopdanMall; Alzone kataloqunda 1 800-dən çox məhsul var. Təhvildən sonra da yanınızdayıq: ölçür, öyrənir, növbəti addımı birlikdə planlaşdırırıq."
     ],
     "founder": {
       "label": "Təsisçi",
@@ -434,7 +436,7 @@
   },
   "portfolio": {
     "title": "Layihələrimiz",
-    "subtitle": "Real bizneslər üçün qurduğumuz layihələr: problem nə idi, nə etdik, nə alındı.",
+    "subtitle": "Real bizneslər üçün qurduğumuz layihələr — e-ticarət, avtomobil ehtiyat hissələri, çap-reklam və topdan ticarət: problem nə idi, nə etdik, nə alındı.",
     "empty": "Layihələr tezliklə əlavə olunacaq.",
     "viewCase": "Layihəyə bax",
     "overviewTitle": "Layihə haqqında",
@@ -444,6 +446,7 @@
     "galleryHint": "Şəklə klikləyib böyüdün",
     "clientLabel": "Müştəri",
     "yearLabel": "İl",
+    "serviceLabel": "Xidmət",
     "domainLabel": "Domen",
     "visitSite": "Sayta bax",
     "related": "Digər layihələr",
@@ -537,6 +540,32 @@
       "emailCta": "E-poçt yaz",
       "whatsappCta": "WhatsApp-da yaz",
       "linkedin": "LinkedIn-də əlaqə saxla"
+    },
+    "faq": {
+      "label": "Ən çox verilən suallar",
+      "title": "Sifariş və əməkdaşlıq haqqında suallar",
+      "items": [
+        {
+          "question": "Ödəniş necə aparılır?",
+          "answer": "Ödəniş mərhələlərə bölünür: başlanğıcda avans, aralıq mərhələdə növbəti hissə, təhvildə yekun ödəniş. Bütün şərtlər əvvəlcədən müqavilədə yazılır."
+        },
+        {
+          "question": "Hosting və domeni də siz həll edirsiniz?",
+          "answer": "Bəli. Layihəyə uyğun hosting və domeni biz seçirik, quraşdırmanı, SSL sertifikatını və köçürməni də öz üzərimizə götürürük."
+        },
+        {
+          "question": "Layihə bitəndən sonra dəstək verirsiniz?",
+          "answer": "Bəli. Təhvildən sonra bir ay pulsuz texniki dəstək göstəririk. Sonrası üçün aylıq dəstək və inkişaf paketlərimiz var."
+        },
+        {
+          "question": "Sayt sifarişi üçün hazır texniki tapşırıq lazımdır?",
+          "answer": "Xeyr. Şirkətiniz, lazım olan xidmət, layihənin məqsədi, təxmini büdcə və bəyəndiyiniz nümunələr kifayətdir. Qalanını pulsuz konsultasiyada birlikdə dəqiqləşdiririk, iş həcmini isə yazılı təklifdə təsvir edirik."
+        },
+        {
+          "question": "Konsultasiya həqiqətən pulsuzdur?",
+          "answer": "Bəli. İlk 30 dəqiqəlik onlayn görüş heç bir öhdəlik yaratmır: məqsədlərinizi, texniki tələbləri və mümkün həll yollarını müzakirə edirik, sonra yazılı təklif göndəririk — qərar sizindir."
+        }
+      ]
     }
   },
   "footer": {

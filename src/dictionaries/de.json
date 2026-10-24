@@ -137,16 +137,8 @@
           "answer": "Eine Unternehmenswebsite ist in der Regel in 3–5 Wochen fertig. Onlineshops und individuelle Plattformen brauchen 6–12 Wochen. Den genauen Zeitplan halten wir schriftlich fest, sobald die Anforderungen geklärt sind."
         },
         {
-          "question": "Bieten Sie Support nach dem Launch?",
-          "answer": "Ja. Zur Übergabe gehört ein Monat kostenloser technischer Support. Danach können Sie monatliche Support- und Wachstumspakete buchen."
-        },
-        {
-          "question": "Wie läuft die Bezahlung ab?",
-          "answer": "Sie zahlen in Etappen: eine Anzahlung, eine Zwischenzahlung und den Rest bei der Übergabe. Alle Bedingungen stehen vorab im Vertrag."
-        },
-        {
-          "question": "Kümmern Sie sich um Hosting und Domain?",
-          "answer": "Ja. Wir suchen das passende Hosting und die Domain aus. Einrichtung, SSL-Zertifikat und Umzug übernehmen wir komplett."
+          "question": "Wie beauftrage ich eine Website?",
+          "answer": "Eine kurze Nachricht per Telefon, WhatsApp oder E-Mail genügt: Ihr Geschäft, die gewünschte Leistung und ein ungefähres Budget. Wir antworten innerhalb von 24 Stunden und vereinbaren ein kostenloses 30-minütiges Online-Gespräch. Danach erhalten Sie Umfang, Preis und Zeitplan als schriftliches Angebot."
         },
         {
           "question": "Wird meine Website für SEO optimiert?",
@@ -155,6 +147,14 @@
         {
           "question": "Funktioniert die Website auch auf dem Smartphone?",
           "answer": "Ja. Wir entwickeln jedes Projekt mobile-first und testen es getrennt auf Smartphone, Tablet und Desktop."
+        },
+        {
+          "question": "In welchen Branchen haben Sie Projekte umgesetzt?",
+          "answer": "Unser Portfolio umfasst fünf Projekte: die Onlineshops Climahome (Heiz- und Kühlsysteme), Alzone (Heizung, Sanitär und Rohrsysteme) und MegaParts (Autoersatzteile), die Druck- und Werbeplattform Sign & Graphics sowie die Großhandels-Anzeigenplattform TopdanMall. Wie jedes Projekt gebaut wurde, zeigt die jeweilige Projektseite."
+        },
+        {
+          "question": "Arbeiten Sie auch mit Unternehmen außerhalb von Baku?",
+          "answer": "Ja. Wir sitzen in Baku, arbeiten aber auch remote mit Kunden aus den Regionen und dem Ausland: Beratung und Termine finden online statt, und wir arbeiten auf Aserbaidschanisch, Englisch, Russisch, Deutsch, Kasachisch und Usbekisch."
         }
       ]
     },
@@ -223,10 +223,12 @@
   },
   "services": {
     "title": "Leistungen",
+    "heading": "Leistungen: Websites, Onlineshops, mobile Apps und SEO",
     "intro": "Sechs Leistungen für Ihren Auftritt im Netz: Website, Onlineshop, App, Unternehmenssoftware, SEO und GEO, UI/UX-Design und Branding.",
     "included": "Was ist enthalten?",
     "lastUpdated": "Zuletzt aktualisiert",
     "related": "Weitere Leistungen",
+    "projectsTitle": "Projekte, die wir mit dieser Leistung umgesetzt haben",
     "startTitle": "Starten Sie Ihr Projekt",
     "startText": "Fragen zu dieser Leistung? Schicken Sie uns ein kurzes Briefing – wir melden uns innerhalb von 24 Stunden.",
     "empty": "Leistungen werden in Kürze ergänzt.",
@@ -444,6 +446,7 @@
     "galleryHint": "Zum Vergrößern auf ein Bild klicken",
     "clientLabel": "Kunde",
     "yearLabel": "Jahr",
+    "serviceLabel": "Leistung",
     "domainLabel": "Domain",
     "visitSite": "Website besuchen",
     "related": "Weitere Projekte",
@@ -537,6 +540,32 @@
       "emailCta": "E-Mail schreiben",
       "whatsappCta": "Über WhatsApp schreiben",
       "linkedin": "Auf LinkedIn vernetzen"
+    },
+    "faq": {
+      "label": "Häufige Fragen",
+      "title": "Fragen zu Auftrag und Zusammenarbeit",
+      "items": [
+        {
+          "question": "Wie läuft die Bezahlung ab?",
+          "answer": "Sie zahlen in Etappen: eine Anzahlung, eine Zwischenzahlung und den Rest bei der Übergabe. Alle Bedingungen stehen vorab im Vertrag."
+        },
+        {
+          "question": "Kümmern Sie sich um Hosting und Domain?",
+          "answer": "Ja. Wir suchen das passende Hosting und die Domain aus. Einrichtung, SSL-Zertifikat und Umzug übernehmen wir komplett."
+        },
+        {
+          "question": "Bieten Sie Support nach dem Launch?",
+          "answer": "Ja. Zur Übergabe gehört ein Monat kostenloser technischer Support. Danach können Sie monatliche Support- und Wachstumspakete buchen."
+        },
+        {
+          "question": "Brauche ich ein fertiges Lastenheft, um eine Website zu beauftragen?",
+          "answer": "Nein. Es reicht, wenn Sie uns Ihr Unternehmen, die gewünschte Leistung, das Projektziel, ein ungefähres Budget und einige Beispiele nennen, die Ihnen gefallen. Den Rest klären wir gemeinsam im kostenlosen Beratungsgespräch, den Umfang halten wir im schriftlichen Angebot fest."
+        },
+        {
+          "question": "Ist die Beratung wirklich kostenlos?",
+          "answer": "Ja. Das erste 30-minütige Online-Gespräch ist unverbindlich: Wir besprechen Ihre Ziele, die technischen Anforderungen und mögliche Lösungen und schicken Ihnen danach ein schriftliches Angebot — die Entscheidung liegt bei Ihnen."
+        }
+      ]
     }
   },
   "footer": {

@@ -81,7 +81,8 @@ export default async function ServicesHubPage({
           ],
         }}
         eyebrow={dict.meta.siteName}
-        title={dict.services.title}
+        /* The descriptive H1; the short title stays the breadcrumb, list and meta name. */
+        title={dict.services.heading || dict.services.title}
         subtitle={dict.services.intro}
         actions={
           <>

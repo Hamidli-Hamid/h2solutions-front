@@ -13,7 +13,7 @@ import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
 import { contactNumbers, telHref } from "@/lib/format";
-import { isProfileUrl } from "@/lib/jsonld";
+import { founderName, isProfileUrl } from "@/lib/jsonld";
 
 type Props = {
   lang: Locale;
@@ -119,9 +119,9 @@ export function Footer({ lang, dict, services }: Props) {
         </div>
 
         <nav aria-label={dict.footer.navTitle}>
-          <h2 className="section-label">
+          <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.navTitle}
-          </h2>
+          </p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {navigation.map((item) => (
               <li key={item.key}>
@@ -140,9 +140,9 @@ export function Footer({ lang, dict, services }: Props) {
         </nav>
 
         <nav aria-label={dict.footer.servicesTitle}>
-          <h2 className="section-label">
+          <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.servicesTitle}
-          </h2>
+          </p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {serviceLinks.map((service) => (
               <li key={service.label}>
@@ -158,9 +158,9 @@ export function Footer({ lang, dict, services }: Props) {
         </nav>
 
         <div>
-          <h2 className="section-label">
+          <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.contactTitle}
-          </h2>
+          </p>
           <address className="mt-4 space-y-2.5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
             {phone && (
               <div className="flex items-center gap-2.5">
@@ -199,9 +199,9 @@ export function Footer({ lang, dict, services }: Props) {
         </div>
 
         <div>
-          <h2 className="section-label">
+          <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.newsletterTitle}
-          </h2>
+          </p>
           <p className="mt-4 text-sm leading-relaxed text-[color:var(--color-foreground-muted)]">
             {dict.footer.newsletterText}
           </p>
@@ -235,7 +235,7 @@ export function Footer({ lang, dict, services }: Props) {
           <p>
             {dict.footer.madeWith}{" "}
             <span className="text-[color:var(--color-foreground)]">
-              {site.founder}
+              {founderName(dict)}
             </span>
           </p>
         </div>

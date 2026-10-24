@@ -30,6 +30,7 @@ import { i18n, isLocale } from "@/i18n-config";
 import { fetchServices, withFallback } from "@/lib/api";
 import {
   founderAliases,
+  founderName,
   isProfileUrl,
   mergeAdminNodes,
   siteGraphJsonLd,
@@ -96,6 +97,7 @@ export async function generateMetadata({
   const seo = { ...layoutSeo, ...homeSeo };
 
   const defaultTitle = `${dict.meta.siteName} — ${dict.meta.tagline}`;
+  const founder = founderName(dict);
 
   const base = buildMetadata({
     lang,
@@ -118,11 +120,11 @@ export async function generateMetadata({
     applicationName: dict.meta.siteName,
     authors: [
       {
-        name: site.founder,
+        name: founder,
         ...(isProfileUrl(site.social.linkedin) ? { url: site.social.linkedin } : {}),
       },
     ],
-    creator: site.founder,
+    creator: founder,
     publisher: dict.meta.siteName,
     category: "technology",
     /* Ownership proofs for the webmaster consoles. They have to stay on every
@@ -222,7 +224,7 @@ export default async function LangLayout({
     siteGraphJsonLd({
       dict,
       services,
-      founderNames: founderAliases(allDicts, resolveSite(dict).founder.trim()),
+      founderNames: founderAliases(allDicts, founderName(dict)),
     }),
     layoutSeo?.structured_data,
     lang,

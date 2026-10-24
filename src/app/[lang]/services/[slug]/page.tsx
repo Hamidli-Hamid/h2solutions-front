@@ -10,12 +10,13 @@ import {
 
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Icon } from "@/components/ui/Icon";
+import { ProjectCard } from "@/components/ui/ProjectCard";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { FaqAccordion } from "@/components/sections/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
-import { fetchService, fetchServices } from "@/lib/api";
+import { fetchService, fetchServices, serviceProjects } from "@/lib/api";
 import { localePath, i18n, isLocale } from "@/i18n-config";
 import { buildMetadata, twitterHandleFor } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
@@ -104,6 +105,8 @@ export default async function ServiceDetailPage({
   const related = allServices.filter((s) => s.slug !== slug);
   // Written per service in the admin panel; the block is skipped when empty.
   const faq = service.faq ?? [];
+  // Cases mapped to this service in the admin; no mapping, no block.
+  const cases = serviceProjects(service);
   const { phone } = contactNumbers(dict.contact);
 
   /* When the page's content last changed — the record, its SEO row or its
@@ -317,6 +320,31 @@ export default async function ServiceDetailPage({
           </aside>
         </div>
       </article>
+
+      {/* Links to our own case pages only — never to the client's site. */}
+      {cases.length > 0 && (
+        <section aria-labelledby="service-projects-heading" className="reveal">
+          <div className="container-h2 pb-12 md:pb-14">
+            <h2 id="service-projects-heading" className="type-h2">
+              {dict.services.projectsTitle}
+            </h2>
+            <ul className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {cases.map((project, index) => (
+                <li key={project.slug} className="flex">
+                  <ProjectCard
+                    project={project}
+                    lang={lang}
+                    ctaLabel={dict.portfolio.viewCase}
+                    variant={index}
+                    headingLevel="h3"
+                    sizes="(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <ProcessSteps dict={dict} />
 

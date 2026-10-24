@@ -1,18 +1,41 @@
+import Link from "next/link";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 
-type Props = {
-  dict: Dictionary;
-  /** Ordinal beside the label; the home page passes its own when a section before it is hidden. */
-  index?: number;
-};
+type Props =
+  | {
+      variant?: "full";
+      dict: Dictionary;
+      /** Ordinal beside the label; the home page passes its own when a section before it is hidden. */
+      index?: number;
+    }
+  | {
+      /** One band row of step names linking to the full block on /services. */
+      variant: "compact";
+      dict: Dictionary;
+      lang: Locale;
+    };
 
-export function ProcessSteps({ dict, index = 2 }: Props) {
+export function ProcessSteps(props: Props) {
+  if (props.variant === "compact") {
+    return <ProcessStrip dict={props.dict} lang={props.lang} />;
+  }
+
+  const { dict, index = 2 } = props;
   const t = dict.home.process;
 
   return (
-    <section aria-labelledby="process-heading" className="band reveal">
+    <section
+      id="process"
+      aria-labelledby="process-heading"
+      /* The compact strip on other pages links here; the margin keeps the
+         heading clear of the sticky header after the jump. */
+      className="band reveal scroll-mt-24"
+    >
       <div className="container-h2 py-14 md:py-20">
         <SectionHeading
           id="process-heading"
@@ -72,6 +95,45 @@ export function ProcessSteps({ dict, index = 2 }: Props) {
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * The process everywhere except /services: the five step names in one row and
+ * a link to the block that explains them. The full section (an H2 and five
+ * H3s) on four pages was four copies of one block to a crawler, so it lives on
+ * /services only and the other pages point at it. No heading and no ordinal —
+ * it is a pointer, not a section of its own.
+ */
+function ProcessStrip({ dict, lang }: { dict: Dictionary; lang: Locale }) {
+  const t = dict.home.process;
+
+  return (
+    <section aria-label={t.label} className="band reveal">
+      <div className="container-h2 flex flex-col gap-5 py-8 md:py-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+        <ol className="flex flex-wrap gap-2">
+          {t.steps.map((step, position) => (
+            <li key={step.title} className="chip">
+              <span
+                aria-hidden
+                className="font-[family-name:var(--font-display)] font-bold tracking-[0.12em] text-[color:var(--color-accent)]"
+              >
+                {String(position + 1).padStart(2, "0")}
+              </span>
+              {step.title}
+            </li>
+          ))}
+        </ol>
+
+        <Link
+          href={`${localePath(lang, "/services")}#process`}
+          className="inline-flex flex-none items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+        >
+          {t.title}
+          <ArrowRightIcon aria-hidden className="h-4 w-4" />
+        </Link>
       </div>
     </section>
   );

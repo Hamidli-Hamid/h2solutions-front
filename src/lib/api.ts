@@ -44,6 +44,11 @@ export type ApiService = {
   features: string[];
   /** Questions written for this one service; empty when none were filled in. */
   faq?: { question: string; answer: string }[];
+  /**
+   * Cases that demonstrate this service (detail endpoint only, at most six).
+   * Optional: absent until the backend serves it, and absent means no block.
+   */
+  projects?: ApiProjectSummary[];
   sort_order: number;
   updated_at?: string | null;
   /** Newest edit across the record and what the page renders with it (SEO row, FAQs). */
@@ -57,6 +62,8 @@ export type ApiProject = {
   client: string | null;
   year: number | null;
   url: string | null;
+  /** Slug of the primary service this case demonstrates; optional, may be unset. */
+  service_slug?: string | null;
   /** Ticked in the admin: the home page shows these, in the API's (admin) order. */
   show_on_home?: boolean;
   cover_image: string | null;
@@ -77,6 +84,15 @@ export type ApiProject = {
   lastmod?: string | null;
   seo?: ApiSeo;
 };
+
+/**
+ * What a project card shows. The client's own `url` is deliberately not part
+ * of it: no card may link a visitor out to a client's site.
+ */
+export type ApiProjectSummary = Pick<
+  ApiProject,
+  "slug" | "title" | "summary" | "cover_image" | "client" | "year"
+>;
 
 export type ApiBlogPost = {
   id: number;
@@ -246,6 +262,36 @@ export async function fetchService(
   locale: Locale,
 ): Promise<ApiService | null> {
   return readOne<ApiService>(`/services/${encodeURIComponent(slug)}`, locale);
+}
+
+/**
+ * The cases mapped to a service, normalised for a card. The field is optional
+ * and new, so a missing or malformed value is "no cases" rather than a broken
+ * page, and an entry without a slug or a title is dropped instead of becoming
+ * a dead card.
+ */
+export function serviceProjects(service: ApiService): ApiProjectSummary[] {
+  const list: unknown = service.projects;
+  if (!Array.isArray(list)) return [];
+
+  return list
+    .filter(
+      (item): item is Record<string, unknown> =>
+        isRecord(item) &&
+        typeof item.slug === "string" &&
+        item.slug !== "" &&
+        typeof item.title === "string" &&
+        item.title !== "",
+    )
+    .slice(0, 6)
+    .map((item) => ({
+      slug: item.slug as string,
+      title: item.title as string,
+      summary: typeof item.summary === "string" ? item.summary : "",
+      cover_image: typeof item.cover_image === "string" && item.cover_image ? item.cover_image : null,
+      client: typeof item.client === "string" && item.client ? item.client : null,
+      year: typeof item.year === "number" && Number.isFinite(item.year) ? item.year : null,
+    }));
 }
 
 export async function fetchProjects(locale: Locale, options?: ReadOptions): Promise<ApiProject[]> {

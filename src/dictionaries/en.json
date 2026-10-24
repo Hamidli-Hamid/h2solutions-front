@@ -137,16 +137,8 @@
           "answer": "A corporate website usually takes 3–5 weeks. Ecommerce and custom platforms take 6–12 weeks. Once the requirements are set, we confirm the exact timeline in a written schedule."
         },
         {
-          "question": "Do you provide support after launch?",
-          "answer": "Yes. Delivery includes one month of free technical support. After that you can choose an optional monthly support and growth package."
-        },
-        {
-          "question": "How does payment work?",
-          "answer": "In milestones: an initial deposit, an interim payment and a final payment on delivery. All terms are agreed upfront in the contract."
-        },
-        {
-          "question": "Do you handle hosting and domains?",
-          "answer": "Yes. We choose hosting and a domain that fit the project and take care of setup, SSL certificates and migration from start to finish."
+          "question": "How do I order a website?",
+          "answer": "A short message by phone, WhatsApp or email is enough: your business, the service you need and a rough budget. We reply within 24 hours and set up a free 30-minute online consultation. Then we send the scope, price and timeline in a written proposal."
         },
         {
           "question": "Will my site be optimized for SEO?",
@@ -155,6 +147,14 @@
         {
           "question": "Will the site work well on phones?",
           "answer": "Yes. All projects are built mobile-first and tested separately on phone, tablet and desktop screens."
+        },
+        {
+          "question": "Which industries have you worked in?",
+          "answer": "Our portfolio has five projects: the online stores Climahome (heating and cooling systems), Alzone (heating, plumbing and pipe systems) and MegaParts (car parts), the printing and advertising platform Sign & Graphics, and the wholesale listings platform TopdanMall. Each case page shows how the project was built."
+        },
+        {
+          "question": "Do you work with companies outside Baku?",
+          "answer": "Yes. We are based in Baku but also work remotely with clients from the regions and abroad: consultations and meetings take place online, and we work in Azerbaijani, English, Russian, German, Kazakh and Uzbek."
         }
       ]
     },
@@ -223,10 +223,12 @@
   },
   "services": {
     "title": "Services",
+    "heading": "Services: websites, online stores, mobile apps and SEO",
     "intro": "Six services for growing your business online: websites, ecommerce, mobile apps, business software, SEO and design.",
     "included": "What's included?",
     "lastUpdated": "Last updated",
     "related": "Other services",
+    "projectsTitle": "Projects we built with this service",
     "startTitle": "Start your project",
     "startText": "Questions about this service? Send a short brief and we will reply within 24 hours.",
     "empty": "Services will be added shortly.",
@@ -444,6 +446,7 @@
     "galleryHint": "Click an image to enlarge",
     "clientLabel": "Client",
     "yearLabel": "Year",
+    "serviceLabel": "Service",
     "domainLabel": "Domain",
     "visitSite": "Visit the site",
     "related": "Other projects",
@@ -537,6 +540,32 @@
       "emailCta": "Write an email",
       "whatsappCta": "Message on WhatsApp",
       "linkedin": "Connect on LinkedIn"
+    },
+    "faq": {
+      "label": "Frequently asked questions",
+      "title": "Questions about ordering and working with us",
+      "items": [
+        {
+          "question": "How does payment work?",
+          "answer": "In milestones: an initial deposit, an interim payment and a final payment on delivery. All terms are agreed upfront in the contract."
+        },
+        {
+          "question": "Do you handle hosting and domains?",
+          "answer": "Yes. We choose hosting and a domain that fit the project and take care of setup, SSL certificates and migration from start to finish."
+        },
+        {
+          "question": "Do you provide support after launch?",
+          "answer": "Yes. Delivery includes one month of free technical support. After that you can choose an optional monthly support and growth package."
+        },
+        {
+          "question": "Do I need a technical specification to order a website?",
+          "answer": "No. Your company, the service you need, the project goal, a rough budget and a few examples you like are enough. We work out the rest together in the free consultation and describe the scope in a written proposal."
+        },
+        {
+          "question": "Is the consultation really free?",
+          "answer": "Yes. The first 30-minute online call comes with no obligation: we discuss your goals, the technical requirements and possible solutions, then send a written proposal — the decision is yours."
+        }
+      ]
     }
   },
   "footer": {

@@ -11,7 +11,7 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { ProcessSteps } from "@/components/sections/ProcessSteps";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
-import { fetchProject, fetchProjects } from "@/lib/api";
+import { fetchProject, fetchProjects, fetchServices, withFallback } from "@/lib/api";
 import { shotsByImage } from "@/lib/project-shots";
 import { localePath, i18n, isLocale } from "@/i18n-config";
 import { buildMetadata, twitterHandleFor } from "@/lib/seo";
@@ -62,13 +62,21 @@ export default async function ProjectDetailPage({
   const { lang, slug } = await params;
   if (!isLocale(lang)) notFound();
 
-  const [dict, project, allProjects] = await Promise.all([
+  /* The services list is the layout's own read (deduplicated); it only names
+     the chip, so a failed read hides the chip instead of failing the page. */
+  const [dict, project, allProjects, services] = await Promise.all([
     getDictionary(lang),
     fetchProject(slug, lang),
     fetchProjects(lang),
+    withFallback(fetchServices(lang), [], `Case service chip (${lang})`),
   ]);
 
   if (!project) notFound();
+
+  /* Shown only for a published service, so the chip never links to a 404. */
+  const service = project.service_slug
+    ? services.find((item) => item.slug === project.service_slug && item.title)
+    : undefined;
 
   /* The rail beside the text lists the rest of the portfolio. */
   const related = allProjects.filter((item) => item.slug !== slug).slice(0, 5);
@@ -110,10 +118,21 @@ export default async function ProjectDetailPage({
         title={project.title}
         subtitle={project.summary}
         actions={
-          <Link href={localePath(lang, "/contact")} className="btn-primary">
-            {dict.hero.ctaPrimary}
-            <ArrowRightIcon aria-hidden className="h-4 w-4" />
-          </Link>
+          <>
+            <Link href={localePath(lang, "/contact")} className="btn-primary">
+              {dict.hero.ctaPrimary}
+              <ArrowRightIcon aria-hidden className="h-4 w-4" />
+            </Link>
+            {service && (
+              <Link
+                href={localePath(lang, `/services/${service.slug}`)}
+                className="chip self-center transition hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]"
+              >
+                {dict.portfolio.serviceLabel}:{" "}
+                <span className="text-[color:var(--color-foreground)]">{service.title}</span>
+              </Link>
+            )}
+          </>
         }
       />
 
