@@ -266,7 +266,7 @@ export default async function ProjectDetailPage({
         />
       )}
 
-      <ProcessSteps dict={dict} />
+      <ProcessSteps variant="compact" dict={dict} lang={lang} />
 
       <CtaBanner lang={lang} dict={dict} className="reveal" />
       <JsonLd

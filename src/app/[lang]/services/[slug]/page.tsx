@@ -346,7 +346,7 @@ export default async function ServiceDetailPage({
         </section>
       )}
 
-      <ProcessSteps dict={dict} />
+      <ProcessSteps variant="compact" dict={dict} lang={lang} />
 
       <CtaBanner lang={lang} dict={dict} className="reveal" />
       <JsonLd id="ld-service" data={structuredData} />
