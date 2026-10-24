@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "H2 Solutions",
-    "tagline": "Biznesingiz raqamli kuchi uchun zamonaviy veb-yechimlar va SEO",
-    "defaultDescription": "H2 Solutions — Next.js va Laravel asosidagi zamonaviy korporativ saytlar, SEO optimizatsiyasi va IT konsalting. Hamid Hamidli brendi ostida shaxsiy yondashuv va oʻlchanadigan natijalar."
+    "tagline": "Bokudagi IT kompaniya: sayt, internet-doʻkon, mobil ilova, SEO",
+    "defaultDescription": "H2 Solutions — Bokudagi IT kompaniya. Next.js va Laravel asosida sayt, internet-doʻkon, mobil ilova va biznes dasturlari yaratamiz, SEO va GEO, UI/UX dizayn hamda brending bilan shugʻullanamiz. Hamid Hamidli brendi ostida shaxsiy yondashuv va oʻlchanadigan natija."
   },
   "nav": {
     "home": "Bosh sahifa",
@@ -17,9 +17,9 @@
   },
   "hero": {
     "badge": "H2 — Yechimlar & Oʻsish",
-    "title": "Raqamli oʻsish uchun texnik hamkor",
-    "titleAccent": "texnik hamkor",
-    "subtitle": "Next.js va Laravel asosida qurilgan oʻta tez, SEO-ga yoʻnaltirilgan saytlar — biznesingizning onlayn oʻsishi uchun mustahkam texnik poydevor.",
+    "title": "Biznesingizga ishlaydigan sayt va dasturlar",
+    "titleAccent": "sayt va dasturlar",
+    "subtitle": "Next.js va Laravel asosida tez ochiladigan, Google-da topiladigan sayt, internet-doʻkon va ilovalar quramiz. Maqsad bitta — sizga murojaat va savdo kelishi.",
     "ctaPrimary": "Loyihani muhokama qilamiz",
     "ctaSecondary": "Ishlarimizni koʻrish",
     "servicesTitle": "Asosiy xizmatlarimiz",
@@ -31,37 +31,37 @@
     "services": [
       {
         "slug": "web-development",
-        "name": "Veb-saytlar",
-        "description": "Zamonaviy, tez va SEO-ga tayyor korporativ hamda biznes saytlar.",
+        "name": "Sayt yaratish",
+        "description": "Korporativ sayt, biznes sayti va landing page — murojaat keltirishi uchun quramiz.",
         "icon": "heroicon-o-computer-desktop"
       },
       {
         "slug": "mobile-apps",
-        "name": "Mobil ilovalar",
-        "description": "iOS va Android platformalari uchun qulay ilovalar.",
+        "name": "Internet-doʻkon ochish",
+        "description": "Internet-doʻkon, B2B platforma va marketpleys — savdo jarayoningizga moslab.",
         "icon": "heroicon-o-device-phone-mobile"
       },
       {
         "slug": "e-commerce",
-        "name": "Elektron tijorat",
+        "name": "Mobil ilova yaratish",
         "description": "Savdoyingizni oshiradigan xavfsiz va moslashuvchan onlayn doʻkon yechimlari.",
         "icon": "heroicon-o-shopping-bag"
       },
       {
         "slug": "seo-optimization",
-        "name": "SEO xizmati",
-        "description": "Qidiruv tizimlaridagi koʻrinishingizni oshiradigan samarali SEO strategiyalari.",
+        "name": "Biznesni avtomatlashtirish",
+        "description": "POS, ombor, CRM va ERP — ish tartibingizga moslab yoziladigan dasturlar.",
         "icon": "heroicon-o-magnifying-glass"
       },
       {
         "slug": "business-automation",
-        "name": "Biznesni avtomatlashtirish",
-        "description": "Jarayonlaringizni avtomatlashtiring, vaqt va resursni tejang.",
+        "name": "SEO va GEO xizmati",
+        "description": "Google-da va AI qidiruvida topilish uchun har oy oʻlchanadigan ish.",
         "icon": "heroicon-o-cog-6-tooth"
       },
       {
         "slug": "geo-ai-seo",
-        "name": "GEO (SI uchun SEO)",
+        "name": "Dizayn va brending",
         "description": "Brendingizni sunʼiy intellekt platformalarida koʻproq koʻrinadigan qiling.",
         "icon": "heroicon-o-viewfinder-circle"
       }
@@ -70,7 +70,7 @@
   "home": {
     "projects": {
       "label": "Loyihalarimiz",
-      "title": "Faxrlanadigan tanlangan ishlarimiz",
+      "title": "Ishlab turgan loyihalarimiz",
       "viewAll": "Barcha loyihalar",
       "viewCase": "Keysni koʻrish",
       "samples": [
@@ -94,38 +94,38 @@
     },
     "process": {
       "label": "Ish jarayonimiz",
-      "title": "Muvaffaqiyatli loyihaga eltuvchi yoʻl",
+      "title": "Loyiha gʻoyadan ishga tushguncha",
       "steps": [
         {
           "title": "Tahlil va rejalashtirish",
-          "description": "Talablaringizni tahlil qilib, loyihangizga eng mos strategiyani belgilaymiz.",
+          "description": "Talablaringizni oʻrganamiz va loyihaga mos ish rejasini tuzamiz.",
           "icon": "heroicon-o-clipboard-document-list"
         },
         {
           "title": "Dizayn va UX/UI",
-          "description": "Zamonaviy, qulay va samarali dizayn konsepsiyasini tayyorlaymiz.",
+          "description": "Mijozingizga qulay va tushunarli dizayn konsepsiyasini tayyorlaymiz.",
           "icon": "heroicon-o-pencil-square"
         },
         {
           "title": "Ishlab chiqish",
-          "description": "Toza kod, zamonaviy texnologiyalar va yuqori unumdorlik bilan mahsulotni amalga oshiramiz.",
+          "description": "Toza kod yozamiz, mahsulot tez va barqaror ishlashiga eʼtibor beramiz.",
           "icon": "heroicon-o-code-bracket"
         },
         {
           "title": "Sinov va optimallashtirish",
-          "description": "Sifat nazorati va optimallashtirish loyihani ishga tushirishga tayyorlaydi.",
+          "description": "Sifatni tekshiramiz, tezlikni sozlaymiz va loyihani ishga tushirishga tayyorlaymiz.",
           "icon": "heroicon-o-rocket-launch"
         },
         {
           "title": "Qoʻllab-quvvatlash va oʻsish",
-          "description": "Loyiha ishga tushgach ham yoningizdamiz va oʻsishingizga hissa qoʻshamiz.",
+          "description": "Loyiha ishga tushgach ham yoningizdamiz: kuzatamiz, yangilaymiz, rivojlantiramiz.",
           "icon": "heroicon-o-paper-airplane"
         }
       ]
     },
     "cta": {
       "title": "Loyihangizni boshlaymiz",
-      "subtitle": "Gʻoyangizni haqiqatga aylantiraylik. Jamoamiz siz bilan birga ishlashga tayyor."
+      "subtitle": "Gʻoyangizni aytib bering — qanday amalga oshirishni birga rejalashtiramiz."
     },
     "faq": {
       "label": "Koʻp beriladigan savollar",
@@ -134,27 +134,27 @@
       "items": [
         {
           "question": "Loyiha qancha vaqtda tayyor boʻladi?",
-          "answer": "Korporativ sayt odatda 3–5 hafta, elektron tijorat va maxsus platformalar esa 6–12 hafta oladi. Aniq muddat talablar belgilangach yozma kalendar reja bilan tasdiqlanadi."
+          "answer": "Korporativ sayt odatda 3–5 haftada tayyor boʻladi. Elektron tijorat va maxsus platformalar 6–12 hafta oladi. Aniq muddatni talablar belgilangach yozma kalendar rejada tasdiqlaymiz."
         },
         {
-          "question": "Loyiha tugagach qoʻllab-quvvatlaysizmi?",
-          "answer": "Ha. Topshirgandan soʻng bir oy bepul texnik yordam, keyin esa oylik qoʻllab-quvvatlash va rivojlantirish paketlari taklif etiladi."
+          "question": "Loyiha tugagach yordam berasizmi?",
+          "answer": "Ha. Topshirgandan keyin bir oy bepul texnik yordam koʻrsatamiz. Undan soʻng oylik qoʻllab-quvvatlash va rivojlantirish paketlarini taklif qilamiz."
         },
         {
           "question": "Toʻlov qanday amalga oshiriladi?",
-          "answer": "Toʻlov bosqichlarga boʻlinadi: boshlangʻich avans, oraliq bosqich va topshirish paytidagi yakuniy toʻlov. Barcha shartlar oldindan shartnomada belgilanadi."
+          "answer": "Toʻlov bosqichlarga boʻlinadi: boshlangʻich avans, oraliq bosqich va topshirish paytidagi yakuniy toʻlov. Barcha shartlarni oldindan shartnomada yozamiz."
         },
         {
           "question": "Hosting va domenni siz taʼminlaysizmi?",
-          "answer": "Ha. Loyihaga mos hosting va domenni oʻzimiz tanlaymiz; oʻrnatish, SSL sertifikati va koʻchirish jarayonini toʻliq oʻz zimmamizga olamiz."
+          "answer": "Ha. Loyihaga mos hosting va domenni oʻzimiz tanlaymiz. Oʻrnatish, SSL sertifikati va koʻchirish ishlarini ham toʻliq oʻz zimmamizga olamiz."
         },
         {
           "question": "Saytim SEO uchun optimallashtiriladimi?",
-          "answer": "Har bir loyiha texnik SEO bilan birga topshiriladi: semantik HTML, tezlikni optimallashtirish, metamaʼlumotlar, tuzilmali maʼlumot va avtomatik sitemap."
+          "answer": "Ha, har bir loyiha texnik SEO bilan birga topshiriladi. Bunga semantik HTML, tezlikni optimallashtirish, metamaʼlumotlar, tuzilmali maʼlumot va avtomatik sitemap kiradi."
         },
         {
-          "question": "Mobil moslik kafolatlanadimi?",
-          "answer": "Barcha loyihalar mobile-first tamoyili asosida quriladi va telefon, planshet hamda kompyuter ekranlarida alohida sinovdan oʻtkaziladi."
+          "question": "Sayt telefonda ham yaxshi ishlaydimi?",
+          "answer": "Ha. Barcha loyihalar mobile-first tamoyili asosida quriladi va telefon, planshet hamda kompyuter ekranlarida alohida sinovdan oʻtkaziladi."
         }
       ]
     },
@@ -187,48 +187,48 @@
       ]
     },
     "seoText": {
-      "label": "SEO matni",
-      "title": "Raqamli muvaffaqiyat uchun toʻgʻri texnologik hamkor",
+      "label": "Qisqacha",
+      "title": "Sayt yaratishdan SEOgacha — bitta IT kompaniyada",
       "imageAlt": "Next.js metamaʼlumotlari va tuzilgan maʼlumotlar kodi, yonida H2 Solutions yaratgan Alzone va Sign & Graphics saytlari",
       "body": [
-        "H2 Solutions sifatida bizneslar raqamli olamda mustahkam oʻrin egallashi uchun zamonaviy texnologiyalar va samarali strategiyalarni qoʻllaymiz. Veb ishlab chiqish, mobil ilovalar, elektron tijorat yechimlari, SEO va biznesni avtomatlashtirish brendingizning onlayn taʼsirini birgalikda oshiradi.",
-        "Next.js va Laravel asosidagi arxitektura saytingizga ham tezlik, ham qidiruv natijalarida barqaror koʻrinish beradi. Texnik SEO, tuzilmali maʼlumot va GEO — yaʼni sunʼiy intellektga asoslangan qidiruv tizimlari uchun optimallashtirish — tufayli brendingiz nafaqat Google’da, balki SI platformalarida ham topiladi.",
-        "Har bir loyihaga uzoq muddatli hamkorlik sifatida qaraymiz: tahlildan dizaynga, koddan doimiy qoʻllab-quvvatlashgacha barcha bosqichlarda biznesingiz muvaffaqiyatiga hissa qoʻshamiz."
+        "H2 Solutions — Bokuda joylashgan IT kompaniya. Oltita yoʻnalishda ishlaymiz: sayt yaratish, internet-doʻkon, mobil ilova, biznesni avtomatlashtirish, SEO va GEO hamda UI/UX dizayn va brending. Bularning hammasi bitta maqsadga xizmat qiladi: mijoz sizni internetda topsin va sizga murojaat qilsin.",
+        "Saytlarni Next.js va Laravel asosida quramiz, shuning uchun ular tez ochiladi va qidiruv tizimlari ularni muammosiz oʻqiydi. Texnik SEO va tuzilmali maʼlumot har bir loyihaga kiradi. GEO esa saytni sunʼiy intellektga asoslangan qidiruv tizimlariga moslaydi — maqsad brendingiz nafaqat Google-da, balki AI javoblarida ham topilishi.",
+        "Har bir loyihaga uzoq muddatli hamkorlik sifatida qaraymiz. Tahlildan dizayngacha, koddan doimiy qoʻllab-quvvatlashgacha har bosqichda yoningizda boʻlamiz."
       ]
     }
   },
   "usp": {
     "label": "Ustunliklarimiz",
     "title": "Nega H2 Solutions?",
-    "subtitle": "Raqamli yondashuvimiz tayanadigan uchta ustun:",
+    "subtitle": "Ishimiz uchta oddiy qoidaga tayanadi:",
     "items": [
       {
         "title": "Oʻz vaqtida topshirish",
-        "description": "Kelishilgan sanada topshiramiz va nima tayyor boʻlganini har hafta koʻrsatamiz — loyiha siz uchun qora quti emas."
+        "description": "Kelishilgan sanada topshiramiz. Har hafta nima tayyor boʻlganini koʻrsatamiz, shuning uchun loyiha siz uchun qora quti boʻlmaydi."
       },
       {
         "title": "Oʻlchanadigan natija",
-        "description": "Maqsad chiroyli sayt emas, murojaat va savdo. Nima ishlayotganini raqamlar bilan kuzatib, hisobotini siz bilan boʻlishamiz."
+        "description": "Maqsad chiroyli sayt emas, murojaat va savdo. Nima ishlayotganini raqamlarda kuzatamiz va hisobotini sizga koʻrsatamiz."
       },
       {
         "title": "Shaxsiy hamkorlik",
-        "description": "Shablon emas — har bir yechim biznesingizga moslab quriladi. Har bir mijoz bilan yakkama-yakka ishlaymiz."
+        "description": "Shablon ishlatmaymiz: har bir yechim biznesingizga moslab quriladi. Har bir mijoz bilan yakkama-yakka ishlaymiz."
       }
     ]
   },
   "servicesPreview": {
     "title": "Xizmatlarimiz",
-    "subtitle": "Kodning birinchi satridan barqaror oʻsishgacha — toʻliq siklni qamrab olamiz.",
+    "subtitle": "Sayt yaratishdan SEO va dizayngacha — oltita xizmat, hammasi bitta jamoada.",
     "viewAll": "Barcha xizmatlar"
   },
   "services": {
     "title": "Xizmatlar",
-    "intro": "Saytdan mobil ilovaga, SEO’dan biznesni avtomatlashtirishgacha — biznesingizning onlayn oʻsishi uchun oltita asosiy xizmat.",
+    "intro": "Sayt yaratishdan mobil ilovagacha, SEO-dan biznesni avtomatlashtirishgacha — biznesingiz internetda oʻsishi uchun oltita xizmat.",
     "included": "Nimalar kiradi?",
     "lastUpdated": "Oxirgi yangilanish",
     "related": "Boshqa xizmatlar",
     "startTitle": "Loyihani boshlaymiz",
-    "startText": "Ushbu xizmat boʻyicha savolingiz bormi? Qisqa brif yuboring, 24 soat ichida javob beramiz.",
+    "startText": "Shu xizmat boʻyicha savolingiz bormi? Qisqa brif yuboring, 24 soat ichida javob beramiz.",
     "empty": "Xizmatlar tez orada qoʻshiladi.",
     "faqTitle": "Ushbu xizmat haqidagi savollar",
     "faq": {
@@ -237,37 +237,37 @@
       "items": [
         {
           "question": "Bizga qaysi xizmat mos kelishini qanday bilamiz?",
-          "answer": "Bepul dastlabki maslahatda biznes maqsadingiz, mavjud raqamli infratuzilmangiz va byudjetingiz baholanadi. Natijada qaysi xizmatlar qanday ketma-ketlikda kerakligi yozma taklif sifatida taqdim etiladi."
+          "answer": "Buni bepul dastlabki maslahatda aniqlaymiz. Biznes maqsadingiz, mavjud raqamli infratuzilmangiz va byudjetingizni birga koʻrib chiqamiz. Soʻng qaysi xizmatlar qanday ketma-ketlikda kerakligini yozma taklifda beramiz."
         },
         {
           "question": "Bir nechta xizmatni birga buyurtma qilish mumkinmi?",
-          "answer": "Ha. Sayt, mobil ilova, SEO va avtomatlashtirishni yagona loyiha sifatida rejalashtirish mumkin — bu integratsiyani osonlashtiradi va umumiy byudjetni tejaydi."
+          "answer": "Ha. Sayt, mobil ilova, SEO va avtomatlashtirishni yagona loyiha sifatida rejalashtirish mumkin. Bu integratsiyani osonlashtiradi va umumiy byudjetni tejaydi."
         },
         {
           "question": "Bizda sayt bor — uni noldan qayta qurish kerakmi?",
-          "answer": "Shart emas. Avval texnik audit oʻtkazamiz; koʻpincha tezlik, SEO va dizaynni yaxshilash kifoya qiladi. Toʻliq qayta qurish faqat texnologiya eskirgan holatda tavsiya etiladi."
+          "answer": "Shart emas. Avval texnik audit oʻtkazamiz. Koʻpincha tezlik, SEO va dizaynni yaxshilash kifoya qiladi. Toʻliq qayta qurishni faqat texnologiya eskirgan boʻlsa tavsiya qilamiz."
         },
         {
           "question": "Xizmat narxi qanday belgilanadi?",
-          "answer": "Narx funksional hajmi, integratsiyalar va tillar soniga bogʻliq. Brif asosida qatʼiy narxli taklif tayyorlaymiz — loyiha davomida kelishilmagan qoʻshimcha xarajat chiqmaydi."
+          "answer": "Narx funksiyalar hajmiga, integratsiyalarga va tillar soniga bogʻliq. Brif asosida qatʼiy narxli taklif tayyorlaymiz, shuning uchun loyiha davomida kelishilmagan qoʻshimcha xarajat chiqmaydi."
         },
         {
           "question": "Ishni qachon boshlay olasiz?",
-          "answer": "Odatda shartnoma imzolangach 3–5 ish kuni ichida. Shoshilinch loyihalar uchun parallel ishlaydigan jamoa ajratamiz."
+          "answer": "Odatda shartnoma imzolangach 3–5 ish kuni ichida boshlaymiz. Shoshilinch loyihalar uchun parallel ishlaydigan jamoa ajratamiz."
         },
         {
           "question": "Topshirilgandan soʻng loyiha kimga tegishli boʻladi?",
-          "answer": "Sizga. Barcha kod, domen, hosting va admin panel kirishlari toʻliq topshiriladi; hujjatlar va boshqaruv boʻyicha oʻquv ham shunga kiradi."
+          "answer": "Sizga. Barcha kod, domen, hosting va admin panel kirishlarini toʻliq topshiramiz. Hujjatlar va boshqaruv boʻyicha oʻquv ham shunga kiradi."
         }
       ]
     },
     "seoText": {
-      "label": "SEO matni",
-      "title": "Yagona hamkor boshqaradigan raqamli xizmatlar",
+      "label": "Qanday ishlaymiz",
+      "title": "Barcha xizmatlar — bitta jamoadan",
       "body": [
-        "H2 Solutions veb ishlab chiqish, mobil ilovalar, elektron tijorat, SEO va biznesni avtomatlashtirish xizmatlarini bitta tom ostida birlashtiradi. Bir nechta yetkazib beruvchini muvofiqlashtirish oʻrniga tizimning butun tuzilishini — maʼlumotlar bazasidan mijozingiz koʻradigan interfeysgacha — biladigan bitta jamoa bilan ishlaysiz.",
-        "Barcha xizmatlar bir xil muhandislik standartiga asoslanadi: Next.js va Laravel arxitekturasi, mobile-first interfeyslar, oʻlchanadigan sahifa tezligi, texnik SEO va tuzilmali maʼlumot. Shu sababli biz topshirgan sayt ishga tushgandan keyin ham tez ishlaydi, qidiruv natijalarida koʻrinadi va sunʼiy intellektga asoslangan qidiruv uchun ham mos keladi.",
-        "Ishimiz topshirish bilan tugamaydi. Analitika, kontent, doimiy SEO va yangi funksiyalarni ishlab chiqish oylik paketlar orqali davom etadi — raqamli mahsulotingiz biznesingiz surʼati bilan hamqadam boʻladi."
+        "H2 Solutions oltita xizmatni bitta jamoada birlashtiradi: sayt yaratish, internet-doʻkon, mobil ilova, biznes dasturlari, SEO va GEO, UI/UX dizayn va brending. Bir nechta pudratchini muvofiqlashtirishingizga hojat qolmaydi. Tizimning butun tuzilishini — maʼlumotlar bazasidan mijozingiz koʻradigan interfeysgacha — biladigan odamlar bilan ishlaysiz.",
+        "Barcha xizmatlar bir xil muhandislik standartiga tayanadi: Next.js va Laravel arxitekturasi, mobile-first interfeyslar, oʻlchanadigan sahifa tezligi, texnik SEO va tuzilmali maʼlumot. Shu sababli biz topshirgan sayt ishga tushgandan keyin ham tez ishlaydi, qidiruv tizimlari uni muammosiz oʻqiydi va u sunʼiy intellektga asoslangan qidiruvga ham mos keladi.",
+        "Ishimiz topshirish bilan tugamaydi. Analitika, kontent, doimiy SEO va yangi funksiyalar ustidagi ish oylik paketlar orqali davom etadi. Shunda raqamli mahsulotingiz biznesingiz bilan birga oʻsadi."
       ]
     }
   },
@@ -275,19 +275,19 @@
     "label": "Biz haqimizda",
     "title": "H2 Solutions haqida",
     "subtitle": "Bitta brend, bitta majburiyat: sifat va balandlik.",
-    "story": "H2 Solutions — Hamid Hamidli texnik perfeksionizm va biznes natijalari asosida qurgan agentlik. Har bir loyihaga tadbirkor koʻzi bilan qaraymiz: shunchaki ishlaydigan emas, daromad keltiradigan yechimlar quramiz.",
+    "story": "H2 Solutions — Hamid Hamidli texnik puxtalik va biznes natijasi asosida qurgan agentlik. Har bir loyihaga tadbirkor koʻzi bilan qaraymiz: yechim shunchaki ishlashi kam, u daromad keltirishi kerak.",
     "storyLabel": "Tariximiz",
     "storyTitle": "Chiroyli koʻrinadigan emas, natija beradigan raqamli yechimlar",
     "storyParagraphs": [
-      "H2 Solutions — Bokuda joylashgan texnik agentlik: kichik va oʻrta biznesning onlayn poydevorini quramiz. Nomimizdagi «H2» ikkita oddiy majburiyatni bildiradi — yuqori sifat va balandlik: har bir loyihani boshlangʻich darajasidan bir pogʻona yuqoriga koʻtarish.",
-      "Hammasi bitta savoldan boshlandi: nega koʻplab saytlar chiroyli koʻrinadi, ammo mijoz keltirmaydi? Sababini biznes mantigʻi bilan texnik ijroning bir-biridan ayri rejalashtirilishida koʻrdik. Shu bois ishni dizayndan emas, sizning maqsadingiz, raqobatchilaringiz va haqiqiy qidiruv talabidan boshlaymiz.",
-      "Bugun Next.js va Laravel asosida korporativ saytlar, elektron tijorat platformalari, SEO/GEO va biznesni avtomatlashtirish loyihalarini amalga oshiramiz. Topshirgandan keyin ham yoningizdamiz: oʻlchaymiz, oʻrganamiz va keyingi qadamni birga rejalashtiramiz."
+      "H2 Solutions — Bokuda joylashgan texnik agentlik. Kichik va oʻrta biznesning onlayn poydevorini quramiz. Nomimizdagi «H2» ikkita oddiy majburiyatni bildiradi: yuqori sifat va balandlik, yaʼni har bir loyihani boshlangʻich darajasidan bir pogʻona yuqoriga koʻtarish.",
+      "Hammasi bitta savoldan boshlandi: nega koʻp saytlar chiroyli koʻrinadi-yu, mijoz keltirmaydi? Sababini biznes mantigʻi bilan texnik ijro alohida-alohida rejalashtirilishida koʻrdik. Shu bois ishni dizayndan emas, sizning maqsadingiz, raqobatchilaringiz va odamlar haqiqatda nimani qidirayotganidan boshlaymiz.",
+      "Bugun Next.js va Laravel asosida korporativ saytlar va elektron tijorat platformalarini quramiz, SEO/GEO va biznesni avtomatlashtirish loyihalarini yuritamiz. Topshirgandan keyin ham yoningizdamiz: oʻlchaymiz, oʻrganamiz va keyingi qadamni birga rejalashtiramiz."
     ],
     "founder": {
       "label": "Asoschi",
       "name": "Hamid Hamidli",
       "role": "Asoschi",
-      "quote": "Kod biznes maqsadiga xizmat qilgandagina qiymat kasb etadi. Shu sababli har bir loyihada avval natijani, keyin texnologiyani tanlaymiz."
+      "quote": "Kod biznes maqsadiga xizmat qilgandagina qiymatga ega. Shuning uchun har bir loyihada avval natijani, keyin texnologiyani tanlaymiz."
     },
     "facts": [
       {
@@ -332,33 +332,33 @@
     },
     "valuesLabel": "Tamoyillar",
     "valuesTitle": "Qadriyatlarimiz",
-    "valuesSubtitle": "Bu toʻrt tamoyil hamma narsani belgilaydi — qabul qiladigan loyihamizdan kundalik muloqotimizgacha.",
+    "valuesSubtitle": "Qaysi loyihani olishimizdan kundalik muloqotgacha — hammasini shu toʻrt tamoyil belgilaydi.",
     "values": [
       {
         "title": "Shaffoflik",
-        "description": "Har bir jarayon va qarorning sababini tushuntiramiz. Narx, muddat va risklar oldindan yozma kelishiladi.",
+        "description": "Har bir qaror va jarayonning sababini tushuntiramiz. Narx, muddat va risklarni oldindan yozma kelishamiz.",
         "icon": "heroicon-o-eye"
       },
       {
         "title": "Texnik mahorat",
-        "description": "Soha standartidan bir qadam oldinda — yangi texnologiyalarni erta, ammo oʻzimiz sinab koʻrgandan keyingina qoʻllaymiz.",
+        "description": "Yangi texnologiyalarni erta qoʻllaymiz, lekin faqat oʻzimiz sinab koʻrgandan keyin.",
         "icon": "heroicon-o-cpu-chip"
       },
       {
         "title": "Vaqtni hurmat qilish",
-        "description": "Kelishilgan sanaga sodiqmiz. Kechikish xavfi tugʻilsa, oxirgi kuni emas, birinchi kuni xabar beramiz.",
+        "description": "Kelishilgan sanaga amal qilamiz. Kechikish xavfi tugʻilsa, oxirgi kuni emas, birinchi kuni xabar beramiz.",
         "icon": "heroicon-o-clock"
       },
       {
         "title": "Uzoq muddatli hamkorlik",
-        "description": "Loyihani topshirib, gʻoyib boʻlmaymiz — natijani kuzatamiz, mahsulotni yaxshilaymiz va siz bilan birga oʻsamiz.",
+        "description": "Loyihani topshirib, gʻoyib boʻlmaymiz. Natijani kuzatamiz, mahsulotni yaxshilaymiz va siz bilan birga oʻsamiz.",
         "icon": "heroicon-o-users"
       }
     ],
     "stack": {
       "label": "Texnologiya",
       "title": "Ishlaydigan texnologiyalar toʻplami",
-      "subtitle": "Shablon va tayyor konstruktor emas — har bir yechim tez, ochiq kodli va yillar davomida qoʻllab-quvvatlanadigan texnologiyalarga tayanadi.",
+      "subtitle": "Shablon va tayyor konstruktor ishlatmaymiz. Har bir yechim tez, ochiq kodli va yillar davomida qoʻllab-quvvatlanadigan texnologiyalarga tayanadi.",
       "groups": [
         {
           "title": "Frontend",
@@ -407,16 +407,16 @@
     "audience": {
       "label": "Kim bilan ishlaymiz",
       "title": "Bizga eng mos keladigan bizneslar",
-      "subtitle": "Har bir loyihani qabul qilavermaymiz. Quyidagi hollarda hamkorlik ikkala tomon uchun ham eng yaxshi natija beradi.",
+      "subtitle": "Har qanday loyihani olavermaymiz. Quyidagi hollarda hamkorlik ikkala tomonga ham eng yaxshi natija beradi.",
       "items": [
         {
           "title": "Korporativ bizneslar",
-          "description": "Brendini onlayn toʻgʻri taqdim etish, ishonch qozonish va savdo jamoasiga sifatli murojaat keltirishni istagan kompaniyalar.",
+          "description": "Brendini internetda toʻgʻri koʻrsatish, ishonch qozonish va savdo jamoasiga sifatli murojaat keltirishni istagan kompaniyalar.",
           "icon": "heroicon-o-building-office-2"
         },
         {
           "title": "Elektron tijorat va chakana savdo",
-          "description": "Onlayn savdosini oshirish, buyurtma va ombor jarayonlarini soddalashtirishni istagan doʻkonlar.",
+          "description": "Onlayn savdoni oshirish, buyurtma va ombor ishlarini soddalashtirishni istagan doʻkonlar.",
           "icon": "heroicon-o-shopping-bag"
         },
         {
@@ -434,7 +434,7 @@
   },
   "portfolio": {
     "title": "Loyihalarimiz",
-    "subtitle": "Haqiqiy bizneslar, haqiqiy natijalar. Muammo → Yechim → Natija tuzilmasidagi hikoyalar.",
+    "subtitle": "Haqiqiy bizneslar uchun qilingan ishlar. Har biri uch qismda: muammo, yechim, natija.",
     "empty": "Loyihalar tez orada qoʻshiladi.",
     "viewCase": "Loyihani koʻrish",
     "overviewTitle": "Loyiha haqida",
@@ -455,7 +455,7 @@
   "blog": {
     "label": "Blog",
     "title": "Blog",
-    "subtitle": "Veb ishlab chiqish, SEO va raqamli biznes haqida ekspert fikrlari.",
+    "subtitle": "Sayt yaratish, SEO va onlayn biznes haqida amaliy maqolalar.",
     "empty": "Yangi maqolalar tez orada...",
     "emptyCta": "Biz bilan bogʻlaning",
     "readMore": "Batafsil oʻqish",
@@ -477,7 +477,7 @@
     "subtitle": "Loyihangiz haqida gaplashaylik. 24 soat ichida javob beramiz.",
     "infoTitle": "Bevosita aloqa",
     "infoHeading": "Oʻzingizga qulay kanalni tanlang",
-    "infoSubtitle": "Forma toʻldirish shart emas — quyidagi kanallardan biri orqali bevosita yozing yoki qoʻngʻiroq qiling.",
+    "infoSubtitle": "Forma toʻldirish shart emas. Quyidagi kanallardan biri orqali toʻgʻridan-toʻgʻri yozing yoki qoʻngʻiroq qiling.",
     "emailLabel": "Elektron pochta",
     "email": "info@h2solutions.az",
     "emailNote": "Eng tez yoʻl — brifingizni yuboring, 24 soat ichida javob beramiz.",
@@ -499,10 +499,10 @@
     "brief": {
       "label": "Brif",
       "title": "Yozganda shularni koʻrsating",
-      "text": "Bu tafsilotlar birinchi javobimizni aniq qiladi: taxminiy byudjet, muddat va mos texnik yechim.",
+      "text": "Shu tafsilotlar boʻlsa, birinchi javobimiz aniq chiqadi: taxminiy byudjet, muddat va mos texnik yechim.",
       "items": [
         "Kompaniyangiz va faoliyat sohangiz",
-        "Kerakli xizmat: sayt, mobil ilova, elektron tijorat, SEO yoki avtomatlashtirish",
+        "Kerakli xizmat: sayt, internet-doʻkon, mobil ilova, biznes dasturi, SEO va GEO yoki dizayn va brending",
         "Loyihaning asosiy maqsadi va muvaffaqiyatni qanday oʻlchaysiz",
         "Taxminiy byudjet doirasi va istalgan boshlanish sanasi",
         "Hozirgi saytingiz, namuna havolalar yoki raqobatchi misollari"
@@ -512,11 +512,11 @@
     "next": {
       "label": "Keyingi qadamlar",
       "title": "Yozganingizdan keyin nima boʻladi",
-      "subtitle": "Qisqa va shaffof jarayon — uzun soʻrovnomalar va kutish yoʻq.",
+      "subtitle": "Jarayon qisqa va shaffof: uzun soʻrovnoma ham, uzoq kutish ham yoʻq.",
       "steps": [
         {
           "title": "Murojaatingizni koʻrib chiqamiz",
-          "description": "Xabaringizni 24 soat ichida oʻqiymiz va biror maʼlumot yetishmasa, bir nechta aniqlashtiruvchi savol yuboramiz.",
+          "description": "Xabaringizni 24 soat ichida oʻqiymiz. Biror maʼlumot yetishmasa, bir nechta aniqlashtiruvchi savol yuboramiz.",
           "icon": "heroicon-o-inbox-arrow-down"
         },
         {
@@ -526,7 +526,7 @@
         },
         {
           "title": "Taklif va kalendar reja",
-          "description": "Ish hajmi, narx va bosqichli reja yozma taklif shaklida taqdim etiladi — qaror sizniki.",
+          "description": "Ish hajmi, narx va bosqichli rejani yozma taklif qilib yuboramiz. Qaror sizniki.",
           "icon": "heroicon-o-document-check"
         }
       ]
@@ -540,14 +540,14 @@
     }
   },
   "footer": {
-    "tagline": "Biz biznesning raqamlashuviga yordam beradigan texnologik yechimlar va innovatsion mahsulotlar yaratamiz.",
+    "tagline": "Sayt, internet-doʻkon, mobil ilova va biznes dasturlarini quramiz, ularni qidiruvda topiladigan qilamiz.",
     "navTitle": "Tezkor havolalar",
     "servicesTitle": "Xizmatlarimiz",
     "contactTitle": "Aloqa",
     "rights": "Barcha huquqlar himoyalangan",
     "madeWith": "Mehr bilan qurilgan —",
     "newsletterTitle": "Yangiliklar xabarnomasi",
-    "newsletterText": "Yangiliklar va foydali maʼlumotlarga obuna boʻling.",
+    "newsletterText": "Yangi maqola va foydali maslahatlarga obuna boʻling.",
     "newsletterPlaceholder": "Elektron pochta manzilingiz",
     "newsletterSubmit": "Obuna boʻlish",
     "newsletterSuccess": "Obunangiz qayd etildi. Rahmat!",

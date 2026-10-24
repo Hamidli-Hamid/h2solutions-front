@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "H2 Solutions",
-    "tagline": "Müasir veb həllər və SEO ilə biznesinizin rəqəmsal gücü",
-    "defaultDescription": "H2 Solutions — Next.js və Laravel ilə müasir korporativ saytlar, SEO optimizasiyası və IT konsaltinq. Həmid Həmidli brendi altında fərdi yanaşma və ölçülə bilən nəticələr."
+    "tagline": "Bakıda sayt, onlayn mağaza və SEO xidməti",
+    "defaultDescription": "H2 Solutions Bakıda veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və dizaynla məşğuldur. Qiymət əvvəlcədən sabit, nəticə ölçülür."
   },
   "nav": {
     "home": "Ana səhifə",
@@ -17,28 +17,28 @@
   },
   "hero": {
     "badge": "H2 — Həllər & İnkişaf",
-    "title": "Rəqəmsal böyümə üçün texniki tərəfdaş",
-    "titleAccent": "texniki tərəfdaş",
-    "subtitle": "Next.js və Laravel üzərində qurulmuş ultra sürətli, SEO-yönümlü saytlar — biznesinizin onlayn böyüməsi üçün dayanıqlı texniki bünövrə.",
+    "title": "Biznesinizə müştəri gətirən saytlar qururuq",
+    "titleAccent": "müştəri gətirən saytlar",
+    "subtitle": "Veb sayt hazırlanması, onlayn mağaza, mobil tətbiq və SEO — hamısı bir komandada. Saytlarımız Next.js və Laravel üzərində qurulur: tez açılır, Google-da tapılır.",
     "ctaPrimary": "Layihə müzakirə edək",
     "ctaSecondary": "İşlərimizə bax",
     "servicesTitle": "Əsas xidmətlərimiz",
     "proofPoints": [
       "Vaxtında təhvil",
-      "Ölçülə bilən nəticə",
+      "Ölçülən nəticə",
       "Fərdi yanaşma"
     ],
     "services": [
       {
         "slug": "web-development",
         "name": "Veb saytlar",
-        "description": "Müasir, sürətli və SEO-ya uyğun korporativ və biznes saytlar.",
+        "description": "Korporativ sayt, biznes saytı və landing page — müraciət gətirsin deyə qurulur.",
         "icon": "heroicon-o-computer-desktop"
       },
       {
         "slug": "mobile-apps",
         "name": "Mobil tətbiqlər",
-        "description": "iOS və Android platformaları üçün istifadəçi dostu tətbiqlər.",
+        "description": "Onlayn mağaza, B2B platforma və marketplace — sizin satışınıza görə qurulur.",
         "icon": "heroicon-o-device-phone-mobile"
       },
       {
@@ -50,7 +50,7 @@
       {
         "slug": "seo-optimization",
         "name": "SEO xidməti",
-        "description": "Axtarış motorlarında görünürlüyünüzü artıran effektiv SEO strategiyaları.",
+        "description": "CRM, ERP, anbar və satış proqramı — sizin iş qaydanıza görə yazılır.",
         "icon": "heroicon-o-magnifying-glass"
       },
       {
@@ -70,7 +70,7 @@
   "home": {
     "projects": {
       "label": "Layihələrimiz",
-      "title": "Layihələrimizdən nümunələr",
+      "title": "Qurduğumuz layihələrdən nümunələr",
       "viewAll": "Bütün layihələr",
       "viewCase": "Baxış keçirin",
       "samples": [
@@ -94,38 +94,38 @@
     },
     "process": {
       "label": "İş prosesimiz",
-      "title": "Layihənizin uğur yolu",
+      "title": "Layihə addım-addım necə gedir",
       "steps": [
         {
-          "title": "Analiz & Planlama",
-          "description": "Tələblərinizi analiz edir, layihəniz üçün ən uyğun strategiyanı müəyyənləşdiririk.",
+          "title": "Analiz və plan",
+          "description": "Biznesinizi, müştərinizi və rəqiblərinizi öyrənir, layihənin planını birlikdə qururuq.",
           "icon": "heroicon-o-clipboard-document-list"
         },
         {
-          "title": "Dizayn & UX/UI",
-          "description": "İstifadəçi dostu, müasir və effektiv dizayn konsepsiyası hazırlayırıq.",
+          "title": "Dizayn və UX/UI",
+          "description": "Səhifələrin quruluşunu və görünüşünü hazırlayırıq — kod yazılmazdan əvvəl nəticəni görürsünüz.",
           "icon": "heroicon-o-pencil-square"
         },
         {
-          "title": "İnkişaf",
-          "description": "Təmiz kod, ən yeni texnologiyalar və yüksək performansla layihəni həyata keçiririk.",
+          "title": "Proqramlaşdırma",
+          "description": "Təsdiqlənmiş dizaynı işlək məhsula çeviririk: təmiz kod, sürətli səhifələr, rahat admin panel.",
           "icon": "heroicon-o-code-bracket"
         },
         {
-          "title": "Test & Optimallaşdırma",
-          "description": "Keyfiyyət təminatı və optimallaşdırma ilə layihəni yayıma hazır edirik.",
+          "title": "Test və optimallaşdırma",
+          "description": "Hər şeyi telefonda və kompüterdə yoxlayır, sürəti və SEO-nu tənzimləyib yayıma hazırlayırıq.",
           "icon": "heroicon-o-rocket-launch"
         },
         {
-          "title": "Dəstək & İnkişaf",
-          "description": "Layihəniz yayımlandıqdan sonra da dəstək olur və böyüməyinizə töhfə veririk.",
+          "title": "Dəstək və inkişaf",
+          "description": "Yayımdan sonra da yanınızdayıq: nəticəni izləyir, yeni imkanlar əlavə edirik.",
           "icon": "heroicon-o-paper-airplane"
         }
       ]
     },
     "cta": {
-      "title": "Layihənizi başlayaq",
-      "subtitle": "Fikrinizi reallığa çevirək. Komandamız sizinlə birlikdə işləməyə hazırdır."
+      "title": "Layihənizə başlayaq",
+      "subtitle": "Nə qurmaq istədiyinizi yazın — 24 saat ərzində cavab verək və növbəti addımı birlikdə planlaşdıraq."
     },
     "faq": {
       "label": "Ən çox verilən suallar",
@@ -133,28 +133,28 @@
       "imageAlt": "H2 Solutions-un hazırladığı saytlar: TopdanMall, Climahome, MegaParts və Sign & Graphics — desktop və mobil görünüş",
       "items": [
         {
-          "question": "Layihənin hazırlanma müddəti nə qədərdir?",
-          "answer": "Korporativ sayt adətən 3–5 həftə, e-ticarət və fərdi platformalar isə 6–12 həftə çəkir. Dəqiq müddət tələblər müəyyənləşdikdən sonra yazılı təqvim planı ilə təsdiqlənir."
+          "question": "Layihə nə qədər vaxta hazır olur?",
+          "answer": "Korporativ sayt adətən 3–5 həftə, e-ticarət və fərdi platformalar 6–12 həftə çəkir. Tələblər aydınlaşandan sonra dəqiq müddəti yazılı təqvim planı ilə təsdiqləyirik."
         },
         {
-          "question": "Layihə bitdikdən sonra dəstək verirsinizmi?",
-          "answer": "Bəli. Təhvildən sonra bir ay pulsuz texniki dəstək, sonrasında isə aylıq dəstək və inkişaf paketləri təklif edirik."
+          "question": "Layihə bitəndən sonra dəstək verirsiniz?",
+          "answer": "Bəli. Təhvildən sonra bir ay pulsuz texniki dəstək göstəririk. Sonrası üçün aylıq dəstək və inkişaf paketlərimiz var."
         },
         {
-          "question": "Ödəniş necə həyata keçirilir?",
-          "answer": "Ödəniş mərhələlərə bölünür: başlanğıc avans, aralıq mərhələ və təhvil zamanı yekun ödəniş. Bütün şərtlər müqavilədə əvvəlcədən qeyd olunur."
+          "question": "Ödəniş necə aparılır?",
+          "answer": "Ödəniş mərhələlərə bölünür: başlanğıcda avans, aralıq mərhələdə növbəti hissə, təhvildə yekun ödəniş. Bütün şərtlər əvvəlcədən müqavilədə yazılır."
         },
         {
-          "question": "Hosting və domen təminatını siz edirsiniz?",
-          "answer": "Bəli. Layihəyə uyğun hosting və domen seçimini biz edirik; quraşdırma, SSL sertifikatı və köçürmə prosesini tam öz üzərimizə götürürük."
+          "question": "Hosting və domeni də siz həll edirsiniz?",
+          "answer": "Bəli. Layihəyə uyğun hosting və domeni biz seçirik, quraşdırmanı, SSL sertifikatını və köçürməni də öz üzərimizə götürürük."
         },
         {
-          "question": "Saytım SEO üçün optimallaşdırılırmı?",
-          "answer": "Hər layihə texniki SEO ilə birlikdə təhvil verilir: semantik HTML, sürət optimizasiyası, metaməlumatlar, strukturlaşdırılmış data və avtomatik sitemap."
+          "question": "Sayt SEO üçün hazır təhvil verilir?",
+          "answer": "Bəli, hər layihəni texniki SEO ilə birlikdə təhvil veririk: semantik HTML, sürət optimizasiyası, metaməlumatlar, strukturlaşdırılmış data və avtomatik sitemap."
         },
         {
-          "question": "Mobil uyğunluq təmin olunurmu?",
-          "answer": "Bütün layihələr mobil-öncə prinsipi ilə qurulur və telefon, planşet, masaüstü ekranlarda ayrıca test edilir."
+          "question": "Sayt telefonda yaxşı işləyəcək?",
+          "answer": "Bəli. Bütün layihələri əvvəlcə telefon üçün qururuq, sonra telefon, planşet və masaüstü ekranlarda ayrıca yoxlayırıq."
         }
       ]
     },
@@ -187,48 +187,48 @@
       ]
     },
     "seoText": {
-      "label": "SEO mətn",
-      "title": "Rəqəmsal uğur üçün doğru texnoloji tərəfdaş",
+      "label": "Qısaca",
+      "title": "Bakıda veb sayt hazırlanması və SEO xidməti",
       "imageAlt": "Next.js metadata və strukturlaşdırılmış data kodu, yanında H2 Solutions-un hazırladığı Alzone və Sign & Graphics saytları",
       "body": [
-        "H2 Solutions olaraq bizneslərin rəqəmsal dünyada güclü mövqe qazanması üçün müasir texnologiyalar və effektiv strategiyalar tətbiq edirik. Veb sayt inkişafı, mobil tətbiq hazırlanması, e-ticarət həlləri, SEO və biznes avtomatlaşdırma xidmətlərimizlə markanızın onlayn təsirini artırırıq.",
-        "Next.js və Laravel üzərində qurulan memarlıq saytınıza həm sürət, həm də axtarış nəticələrində dayanıqlı görünürlük qazandırır. Texniki SEO, strukturlaşdırılmış data və GEO — yəni süni intellekt əsaslı axtarış sistemləri üçün optimallaşdırma — sayəsində brendiniz yalnız Google-da deyil, AI platformalarında da tapılır.",
-        "Hər layihəyə uzunmüddətli tərəfdaşlıq kimi baxırıq: analizdən dizayna, koddan davamlı dəstəyə qədər bütün mərhələlərdə biznesinizin uğuruna töhfə veririk."
+        "H2 Solutions Bakıda şirkətlər üçün veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və UI/UX dizaynla məşğul olan texniki agentlikdir. Bir komanda həm qurur, həm də qurduğunun nəticəsinə baxır: sayt neçə müraciət gətirir, hansı səhifə satır, müştəri harada itir.",
+        "Saytlarımız Next.js və Laravel üzərində qurulur, ona görə səhifələr tez açılır və Google onları rahat oxuyur. Texniki SEO və strukturlaşdırılmış data hər layihənin içindədir. GEO — yəni ChatGPT, Gemini kimi süni intellekt axtarışı üçün optimallaşdırma — isə brendinizin təkcə Google-da yox, AI cavablarında da görünməsi üçün aparılır.",
+        "Hər layihəyə uzunmüddətli iş kimi baxırıq. Analizdən dizayna, koddan təhvildən sonrakı dəstəyə qədər yanınızda oluruq — sayt açılan gün iş bitmir, başlayır."
       ]
     }
   },
   "usp": {
     "label": "Üstünlüklərimiz",
     "title": "Niyə H2 Solutions?",
-    "subtitle": "Üç sütun üzərində qurulan rəqəmsal yanaşma:",
+    "subtitle": "Hər layihədə dəyişməyən üç qayda:",
     "items": [
       {
         "title": "Vaxtında təhvil",
-        "description": "Razılaşdırılmış tarixdə təhvil veririk və hər həftə nəyin hazır olduğunu görürsünüz — layihə sizin üçün qaranlıq qutu deyil."
+        "description": "Tarixi əvvəlcədən razılaşdırırıq və ona əməl edirik. Hər həftə nəyin hazır olduğunu görürsünüz — layihə sizin üçün qapalı qutu olmur."
       },
       {
-        "title": "Ölçülə bilən nəticə",
-        "description": "Məqsəd sadəcə gözəl sayt deyil, müraciət və satışdır. Nəyin işlədiyini rəqəmlərlə izləyir, hesabatı sizinlə bölüşürük."
+        "title": "Ölçülən nəticə",
+        "description": "Gözəl sayt hələ nəticə deyil. Nəticə müraciət və satışdır: nəyin işlədiyini rəqəmlərlə izləyir, hesabatı sizinlə bölüşürük."
       },
       {
         "title": "Fərdi yanaşma",
-        "description": "Şablon deyil — biznesinizin xüsusi tələblərinə görə qurulan həllər. Hər müştəri ilə bir-bir işləyirik."
+        "description": "Hazır şablonu sizə uyğunlaşdırmırıq — həlli biznesinizin tələbinə görə qururuq. Hər müştəri ilə ayrıca işləyirik."
       }
     ]
   },
   "servicesPreview": {
     "title": "Xidmətlərimiz",
-    "subtitle": "Veb saytdan davamlı böyüməyə qədər tam dövrü əhatə edirik.",
+    "subtitle": "Saytın qurulmasından Google-da tapılmasına qədər bütün işi bir komanda görür.",
     "viewAll": "Bütün xidmətlər"
   },
   "services": {
     "title": "Xidmətlər",
-    "intro": "Veb saytdan mobil tətbiqə, SEO-dan biznes avtomatlaşdırmaya qədər — biznesinizin onlayn böyüməsi üçün altı əsas xidmət.",
+    "intro": "Veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və dizayn — altı xidmət, bir komanda.",
     "included": "Nə daxildir?",
     "lastUpdated": "Son yenilənmə",
     "related": "Digər xidmətlər",
     "startTitle": "Layihəyə başlayaq",
-    "startText": "Bu xidmətlə bağlı sualınız var? Qısa brif göndərin, 24 saat ərzində geri dönüş edək.",
+    "startText": "Bu xidmətlə bağlı sualınız var? Qısa brif göndərin, 24 saat ərzində cavab verək.",
     "empty": "Xidmətlər tezliklə əlavə olunacaq.",
     "faqTitle": "Bu xidmət haqqında suallar",
     "faq": {
@@ -236,52 +236,52 @@
       "title": "Layihəyə başlamazdan əvvəl soruşulanlar",
       "items": [
         {
-          "question": "Hansı xidmətin bizə uyğun olduğunu necə müəyyən edək?",
-          "answer": "Pulsuz ilkin konsultasiyada biznes məqsədinizi, mövcud rəqəmsal infrastrukturunuzu və büdcənizi dəyərləndiririk. Nəticədə hansı xidmətlərin hansı ardıcıllıqla daha çox fayda verəcəyi yazılı təklif şəklində təqdim olunur."
+          "question": "Bizə hansı xidmət lazım olduğunu necə bilək?",
+          "answer": "Pulsuz ilkin konsultasiyada məqsədinizə, hazırda nəyiniz olduğuna və büdcənizə baxırıq. Sonda hansı xidmətin hansı ardıcıllıqla daha çox fayda verəcəyini yazılı təklifdə göstəririk."
         },
         {
-          "question": "Bir neçə xidməti birlikdə sifariş etmək mümkündürmü?",
-          "answer": "Bəli. Veb sayt, mobil tətbiq, SEO və avtomatlaşdırma vahid layihə kimi planlaşdırıla bilər — bu həm inteqrasiyanı asanlaşdırır, həm də ümumi büdcəyə qənaət edir."
+          "question": "Bir neçə xidməti birlikdə sifariş etmək olar?",
+          "answer": "Bəli. Veb sayt, mobil tətbiq, SEO və avtomatlaşdırmanı vahid layihə kimi planlaşdırmaq olar. Belə olanda hissələr bir-birinə rahat bağlanır və ümumi büdcəyə qənaət edirsiniz."
         },
         {
-          "question": "Mövcud saytımız var — onu sıfırdan yenidən qurmaq lazımdırmı?",
-          "answer": "Mütləq deyil. Əvvəlcə mövcud sistemin texniki auditini aparırıq; çox vaxt sürət, SEO və dizayn təkmilləşdirmələri kifayət edir. Tam yenidən qurulma yalnız texnologiya köhnəldikdə tövsiyə olunur."
+          "question": "Saytımız var — onu sıfırdan yenidən qurmaq lazımdır?",
+          "answer": "Mütləq yox. Əvvəlcə mövcud saytın texniki auditini aparırıq. Çox vaxt sürəti, SEO-nu və dizaynı yaxşılaşdırmaq kifayət edir. Sıfırdan qurmağı yalnız texnologiya köhnələndə tövsiyə edirik."
         },
         {
           "question": "Xidmətlərin qiyməti necə formalaşır?",
-          "answer": "Qiymət funksionallığın həcmindən, inteqrasiyalardan və dil sayından asılıdır. Brif əsasında sabit qiymətli təklif hazırlayırıq — layihə gedişində razılaşdırılmamış əlavə xərc çıxmır."
+          "answer": "Qiymət funksiyaların həcmindən, inteqrasiyalardan və dil sayından asılıdır. Brif əsasında sabit qiymətli təklif hazırlayırıq — iş gedişində razılaşdırılmamış əlavə xərc çıxmır."
         },
         {
           "question": "İşə nə vaxt başlaya bilərsiniz?",
-          "answer": "Adətən müqavilə imzalandıqdan sonra 3–5 iş günü ərzində. Təcili layihələr üçün paralel işləyən komanda resursu ayırırıq."
+          "answer": "Adətən müqavilə imzalanandan sonra 3–5 iş günü ərzində. Təcili layihələr üçün paralel işləyən komanda ayırırıq."
         },
         {
           "question": "Təhvildən sonra layihə kimə məxsus olur?",
-          "answer": "Sizə. Bütün kod, domen, hosting və admin panel girişləri tam şəkildə təhvil verilir; sənədləşmə və idarəetmə üzrə təlim də buraya daxildir."
+          "answer": "Sizə. Bütün kodu, domen, hosting və admin panel girişlərini tam təhvil veririk. Sənədləşmə və idarəetmə üzrə təlim də buraya daxildir."
         }
       ]
     },
     "seoText": {
-      "label": "SEO mətn",
-      "title": "Bir tərəfdaşdan idarə olunan rəqəmsal xidmətlər",
+      "label": "Necə işləyirik",
+      "title": "Sayt, mağaza, tətbiq və SEO — bir komandadan",
       "body": [
-        "H2 Solutions veb sayt hazırlanması, mobil tətbiqlər, e-ticarət, SEO və biznes avtomatlaşdırma xidmətlərini vahid çətir altında birləşdirir. Bir neçə fərqli təchizatçını əlaqələndirmək əvəzinə sistemin bütövünü — verilənlər bazasından müştərinizin gördüyü interfeysə qədər — tanıyan bir komanda ilə işləyirsiniz.",
-        "Bütün xidmətlər eyni mühəndislik standartı üzərində qurulur: Next.js və Laravel memarlığı, mobile-first interfeyslər, ölçülə bilən səhifə sürəti, texniki SEO və strukturlaşdırılmış data. Buna görə təhvil verdiyimiz sayt istifadəyə verildikdən sonra da sürətli qalır, axtarış nəticələrində görünür və süni intellekt əsaslı axtarış sistemləri üçün də uyğun işləyir.",
-        "İşimiz təhvil ilə bitmir. Analitika, kontent, davamlı SEO və yeni funksionallıqların inkişafı aylıq paketlərlə davam edir ki, rəqəmsal məhsulunuz biznesinizin templi ilə ayaqlaşsın."
+        "H2 Solutions veb sayt hazırlanması, onlayn mağaza, mobil tətbiq, biznes proqramları, SEO və UI/UX dizaynı bir yerdə təklif edir. Bir neçə icraçını bir-biri ilə əlaqələndirmək əvəzinə bir komanda ilə işləyirsiniz — sistemi verilənlər bazasından müştərinizin gördüyü ekrana qədər tanıyan komanda ilə.",
+        "Bütün xidmətlər eyni standartla görülür: Next.js və Laravel, əvvəlcə telefon üçün qurulan interfeys, ölçülən səhifə sürəti, texniki SEO və strukturlaşdırılmış data. Ona görə təhvil verdiyimiz sayt istifadəyə veriləndən sonra da sürətli qalır, axtarış nəticələrində görünür və süni intellekt əsaslı axtarış sistemləri üçün də oxunaqlı olur.",
+        "İş təhvillə bitmir. Analitika, məzmun, davamlı SEO və yeni funksiyalar aylıq paketlərlə davam edir ki, saytınız biznesinizin tempindən geri qalmasın."
       ]
     }
   },
   "about": {
     "label": "Haqqımızda",
     "title": "H2 Solutions haqqında",
-    "subtitle": "Bir brend, bir öhdəlik: keyfiyyət və yüksəklik.",
-    "story": "H2 Solutions — Həmid Həmidlinin texniki perfeksionizm və biznes nəticələri üzərində qurduğu agentlikdir. Hər layihəyə sahibkar gözü ilə yanaşırıq: yalnız işləyən deyil, gəlir gətirən həllər qururuq.",
+    "subtitle": "İki öhdəliyimiz var: yüksək keyfiyyət və hər layihəni bir pillə yuxarı qaldırmaq.",
+    "story": "H2 Solutions Həmid Həmidlinin qurduğu texniki agentlikdir. İki şeyə eyni ciddiyyətlə baxırıq: kodun keyfiyyətinə və biznesin nəticəsinə. Hər layihəyə sahibkar gözü ilə yanaşır, təkcə işləyən yox, gəlir gətirən həllər qururuq.",
     "storyLabel": "Hekayəmiz",
-    "storyTitle": "Gözəl görünən deyil, işləyən rəqəmsal həllər",
+    "storyTitle": "Təkcə gözəl görünən yox, işləyən saytlar",
     "storyParagraphs": [
-      "H2 Solutions Bakıda yerləşən texniki agentlikdir: kiçik və orta bizneslərin onlayn bünövrəsini qururuq. Adımızdakı «H2» iki sadə öhdəliyi bildirir — yüksək keyfiyyət və yüksəklik: hər layihəni olduğu yerdən bir pillə yuxarı qaldırmaq.",
-      "Hər şey bir sualdan başladı: niyə bu qədər sayt gözəl görünür, amma müştəri gətirmir? Səbəbi biznes məntiqi ilə texniki icranın bir-birindən ayrı düşünülməsində gördük. Ona görə işə dizayndan yox, sizin hədəfinizdən, rəqiblərinizdən və real axtarış tələbindən başlayırıq.",
-      "Bu gün Next.js və Laravel üzərində korporativ saytlar, e-ticarət platformaları, SEO/GEO və biznes avtomatlaşdırma layihələri həyata keçiririk. Təhvildən sonra da yanınızdayıq: ölçür, öyrənir və növbəti addımı birlikdə planlaşdırırıq."
+      "H2 Solutions Bakıda yerləşən texniki agentlikdir: kiçik və orta bizneslər üçün sayt, onlayn mağaza və biznes proqramları qururuq. Adımızdakı «H2» iki sadə öhdəlikdir — yüksək keyfiyyət və yüksəklik: hər layihəni olduğu yerdən bir pillə yuxarı qaldırmaq.",
+      "Hər şey bir sualdan başladı: niyə bu qədər sayt gözəl görünür, amma müştəri gətirmir? Səbəbi onda gördük ki, biznes məntiqi ilə texniki icra ayrı-ayrı düşünülür. Ona görə işə dizayndan yox, sizin hədəfinizdən, rəqiblərinizdən və insanların real axtardığından başlayırıq.",
+      "Bu gün Next.js və Laravel üzərində korporativ saytlar, e-ticarət platformaları, SEO/GEO və biznes avtomatlaşdırma layihələri görürük. Təhvildən sonra da yanınızdayıq: ölçür, öyrənir, növbəti addımı birlikdə planlaşdırırıq."
     ],
     "founder": {
       "label": "Təsisçi",
@@ -332,33 +332,33 @@
     },
     "valuesLabel": "Prinsiplər",
     "valuesTitle": "Dəyərlərimiz",
-    "valuesSubtitle": "Bu dörd prinsip layihə seçimimizdən tutmuş gündəlik ünsiyyətimizə qədər hər şeyi müəyyən edir.",
+    "valuesSubtitle": "Hansı layihəni götürəcəyimizdən sizinlə necə danışacağımıza qədər hər şeyi bu dörd prinsip müəyyən edir.",
     "values": [
       {
         "title": "Şəffaflıq",
-        "description": "Hər prosesin və qərarın arxasındakı səbəbi izah edirik. Qiymət, müddət və risklər əvvəlcədən yazılı şəkildə bəllidir.",
+        "description": "Hər qərarın səbəbini izah edirik. Qiyməti, müddəti və riskləri əvvəlcədən, yazılı şəkildə bilirsiniz.",
         "icon": "heroicon-o-eye"
       },
       {
-        "title": "Texniki bənzərsizlik",
-        "description": "Sənaye standartlarından bir addım öndə — yeni texnologiyaları erkən, amma sınaqdan keçirdikdən sonra tətbiq edirik.",
+        "title": "Texniki keyfiyyət",
+        "description": "Yeni texnologiyanı erkən götürürük, amma layihənizə yalnız özümüz sınaqdan keçirəndən sonra tətbiq edirik.",
         "icon": "heroicon-o-cpu-chip"
       },
       {
         "title": "Vaxta hörmət",
-        "description": "Razılaşdırılmış tarixə sadiqik. Gecikmə riski yaranarsa, son gün yox, ilk gün xəbər veririk.",
+        "description": "Razılaşdırılmış tarixə əməl edirik. Gecikmə riski yaransa, son gün yox, elə ilk gün xəbər veririk.",
         "icon": "heroicon-o-clock"
       },
       {
-        "title": "Uzun müddətli tərəfdaşlıq",
-        "description": "Layihəni təhvil verib unutmuruq — nəticəni izləyir, saytı inkişaf etdirir və birgə böyüyürük.",
+        "title": "Uzunmüddətli tərəfdaşlıq",
+        "description": "Layihəni təhvil verib unutmuruq: nəticəni izləyir, saytı inkişaf etdirir, sizinlə birlikdə böyüyürük.",
         "icon": "heroicon-o-users"
       }
     ],
     "stack": {
       "label": "Texnologiya",
-      "title": "İşlədiyimiz texnologiya yığını",
-      "subtitle": "Şablon və hazır konstruktor deyil — hər həll uzun müddət saxlanıla bilən, açıq mənbəli və sürətli texnologiyalar üzərində qurulur.",
+      "title": "İşlədiyimiz texnologiyalar",
+      "subtitle": "Şablon və hazır konstruktor işlətmirik. Hər həlli illərlə saxlamaq mümkün olan, açıq mənbəli və sürətli texnologiyalar üzərində qururuq.",
       "groups": [
         {
           "title": "Frontend",
@@ -406,27 +406,27 @@
     },
     "audience": {
       "label": "Kimlərlə işləyirik",
-      "title": "Bizə ən çox uyğun gələn bizneslər",
-      "subtitle": "Hər layihəni götürmürük. Aşağıdakı hallarda əməkdaşlıq həm sizin, həm bizim üçün ən yaxşı nəticəni verir.",
+      "title": "Kimlərlə daha yaxşı nəticə alırıq",
+      "subtitle": "Hər layihəni götürmürük. Aşağıdakı hallarda birgə iş həm sizə, həm bizə ən yaxşı nəticəni verir.",
       "items": [
         {
           "title": "Korporativ bizneslər",
-          "description": "Brendini onlayn düzgün təmsil etmək, etibar qazanmaq və satış komandasına keyfiyyətli müraciət gətirmək istəyən şirkətlər.",
+          "description": "Brendini internetdə düzgün tanıtmaq, etibar qazanmaq və satış komandasına keyfiyyətli müraciət gətirmək istəyən şirkətlər.",
           "icon": "heroicon-o-building-office-2"
         },
         {
           "title": "E-ticarət və pərakəndə",
-          "description": "Onlayn satışını artırmaq, sifariş axınını və anbar prosesini sadələşdirmək istəyən mağazalar.",
+          "description": "Onlayn satışını artırmaq, sifariş axınını və anbar işini sadələşdirmək istəyən mağazalar.",
           "icon": "heroicon-o-shopping-bag"
         },
         {
           "title": "Startaplar",
-          "description": "İlk məhsulunu (MVP) sürətlə bazara çıxarmaq, sınaqdan keçirmək və investora göstərmək istəyən komandalar.",
+          "description": "İlk məhsulunu (MVP) tez bazara çıxarıb sınamaq və investora göstərmək istəyən komandalar.",
           "icon": "heroicon-o-rocket-launch"
         },
         {
-          "title": "Lokal xidmət sahibkarları",
-          "description": "Bakı və regionlarda axtarışdan müraciət almaq istəyən klinika, salon, servis mərkəzi və studiyalar.",
+          "title": "Yerli xidmət biznesləri",
+          "description": "Bakıda və regionlarda axtarışdan müraciət almaq istəyən klinika, salon, servis mərkəzi və studiyalar.",
           "icon": "heroicon-o-map-pin"
         }
       ]
@@ -434,7 +434,7 @@
   },
   "portfolio": {
     "title": "Layihələrimiz",
-    "subtitle": "Real bizneslər, real nəticələr. Problem → Həll → Nəticə strukturunda hekayələr.",
+    "subtitle": "Real bizneslər üçün qurduğumuz layihələr: problem nə idi, nə etdik, nə alındı.",
     "empty": "Layihələr tezliklə əlavə olunacaq.",
     "viewCase": "Layihəyə bax",
     "overviewTitle": "Layihə haqqında",
@@ -455,7 +455,7 @@
   "blog": {
     "label": "Bloq",
     "title": "Bloq",
-    "subtitle": "Veb inkişaf, SEO və rəqəmsal biznes haqqında ekspert rəyləri.",
+    "subtitle": "Sayt hazırlanması, SEO və onlayn satış haqqında praktik yazılar.",
     "empty": "Tezliklə yeni məqalələr...",
     "emptyCta": "Bizimlə əlaqə saxlayın",
     "readMore": "Davamını oxu",
@@ -469,15 +469,15 @@
     "backToList": "Bütün məqalələrə qayıt",
     "tocTitle": "Məqalədə",
     "helpTitle": "Bu mövzuda kömək lazımdır?",
-    "helpText": "Saytınızı birlikdə nəzərdən keçirək və nədən başlamağın lazım olduğunu deyək."
+    "helpText": "Saytınıza birlikdə baxaq və nədən başlamaq lazım olduğunu deyək."
   },
   "contact": {
     "label": "Bizimlə əlaqə",
     "title": "Əlaqə",
-    "subtitle": "Layihənizi danışaq. 24 saat içində geri qayıdırıq.",
+    "subtitle": "Layihənizdən danışaq: telefon, WhatsApp və ya e-poçt. 24 saat ərzində cavab veririk.",
     "infoTitle": "Birbaşa əlaqə",
-    "infoHeading": "Sizə uyğun kanalı seçin",
-    "infoSubtitle": "Forma doldurmağa ehtiyac yoxdur — aşağıdakı kanallardan biri ilə birbaşa yazın və ya zəng edin.",
+    "infoHeading": "Sizə rahat olan yolu seçin",
+    "infoSubtitle": "Forma doldurmağa ehtiyac yoxdur — birbaşa yazın və ya zəng edin.",
     "emailLabel": "E-poçt",
     "email": "info@h2solutions.az",
     "emailNote": "Ən sürətli yol — brifinizi göndərin, 24 saat ərzində cavab verək.",
@@ -498,35 +498,35 @@
     "mailSubject": "Yeni layihə sorğusu",
     "brief": {
       "label": "Brif",
-      "title": "Yazarkən bunları qeyd edin",
-      "text": "Bu detallar ilk cavabımızı konkret edir: təxmini büdcə, müddət və uyğun texniki həll.",
+      "title": "Yazanda bunları qeyd edin",
+      "text": "Bunları bilsək, ilk cavabımız konkret olar: təxmini büdcə, müddət və uyğun texniki həll.",
       "items": [
         "Şirkətiniz və fəaliyyət sahəniz",
-        "Maraqlandığınız xidmət: sayt, mobil tətbiq, e-ticarət, SEO və ya avtomatlaşdırma",
-        "Layihənin əsas məqsədi və uğur meyarınız",
-        "Təxmini büdcə aralığı və istənilən başlama tarixi",
-        "Mövcud sayt, referans linklər və ya rəqib nümunələri"
+        "Sizə lazım olan xidmət: sayt, onlayn mağaza, mobil tətbiq, biznes proqramı, SEO və ya dizayn",
+        "Layihənin əsas məqsədi: ondan nə gözləyirsiniz",
+        "Təxmini büdcə və nə vaxt başlamaq istədiyiniz",
+        "Mövcud saytınız, bəyəndiyiniz saytlar və ya rəqiblərdən nümunələr"
       ],
       "cta": "Brifi e-poçtla göndər"
     },
     "next": {
       "label": "Növbəti addımlar",
-      "title": "Yazdıqdan sonra nə baş verir",
-      "subtitle": "Şəffaf və qısa proses — uzun anketlər və gözləmə yoxdur.",
+      "title": "Yazandan sonra nə olur",
+      "subtitle": "Üç qısa addım — uzun anket və gözləmə yoxdur.",
       "steps": [
         {
-          "title": "Müraciəti nəzərdən keçiririk",
-          "description": "Mesajınızı 24 saat ərzində oxuyur, çatışmayan detallar üçün bir neçə dəqiqləşdirici sual göndəririk.",
+          "title": "Müraciətinizi oxuyuruq",
+          "description": "Mesajınızı 24 saat ərzində oxuyuruq. Nəsə çatışmırsa, bir neçə dəqiqləşdirici sual göndəririk.",
           "icon": "heroicon-o-inbox-arrow-down"
         },
         {
           "title": "Pulsuz konsultasiya",
-          "description": "30 dəqiqəlik onlayn görüşdə məqsədləri, texniki tələbləri və mümkün həll variantlarını müzakirə edirik.",
+          "description": "30 dəqiqəlik onlayn görüşdə məqsədlərinizi, texniki tələbləri və mümkün həll yollarını müzakirə edirik.",
           "icon": "heroicon-o-chat-bubble-left-right"
         },
         {
           "title": "Təklif və təqvim planı",
-          "description": "İş həcmi, qiymət və mərhələli təqvim yazılı təklif şəklində təqdim olunur — qərar sizindir.",
+          "description": "İş həcmini, qiyməti və mərhələli təqvimi yazılı təklifdə göndəririk — qərar sizindir.",
           "icon": "heroicon-o-document-check"
         }
       ]
@@ -540,14 +540,14 @@
     }
   },
   "footer": {
-    "tagline": "Biz bizneslərin rəqəmsallaşmasına dəstək olan texnoloji həllər və innovativ məhsullar yaradırıq.",
+    "tagline": "Bakıda sayt, onlayn mağaza, mobil tətbiq və biznes proqramları qururuq. Sonra onların Google-da tapılmasına baxırıq.",
     "navTitle": "Sürətli keçidlər",
     "servicesTitle": "Xidmətlərimiz",
     "contactTitle": "Əlaqə",
     "rights": "Bütün hüquqlar qorunur",
     "madeWith": "Sevgi ilə qurulub —",
     "newsletterTitle": "Bülleten",
-    "newsletterText": "Yeniliklər və faydalı məlumatlar üçün abunə olun.",
+    "newsletterText": "Sayt, SEO və onlayn satış haqqında yeni yazılardan xəbərdar olun.",
     "newsletterPlaceholder": "E-poçt ünvanınız",
     "newsletterSubmit": "Abunə ol",
     "newsletterSuccess": "Abunəliyiniz qeydə alındı. Təşəkkür edirik!",

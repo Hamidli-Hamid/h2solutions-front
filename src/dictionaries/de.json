@@ -1,8 +1,8 @@
 {
   "meta": {
     "siteName": "H2 Solutions",
-    "tagline": "Moderne Weblösungen und SEO für die digitale Stärke Ihres Unternehmens",
-    "defaultDescription": "H2 Solutions — moderne Unternehmenswebsites mit Next.js und Laravel, SEO-Optimierung und IT-Beratung. Persönliche Betreuung und messbare Ergebnisse unter der Marke Hamid Hamidli."
+    "tagline": "Websites, Onlineshops, Apps und SEO – gebaut, damit Anfragen kommen",
+    "defaultDescription": "H2 Solutions ist eine Webagentur aus Baku: Websites, Onlineshops, Apps, Unternehmenssoftware, SEO und GEO, UI/UX-Design und Branding. Persönliche Betreuung, messbare Arbeit – gegründet von Hamid Hamidli."
   },
   "nav": {
     "home": "Startseite",
@@ -17,9 +17,9 @@
   },
   "hero": {
     "badge": "H2 — Lösungen & Wachstum",
-    "title": "Technischer Partner für digitales Wachstum",
-    "titleAccent": "für digitales Wachstum",
-    "subtitle": "Ultraschnelle, SEO-orientierte Websites auf Basis von Next.js und Laravel — ein belastbares technisches Fundament für Ihr Online-Wachstum.",
+    "title": "Webagentur aus Baku für Website, Shop und App",
+    "titleAccent": "für Website, Shop und App",
+    "subtitle": "Wir bauen schnelle Websites, Onlineshops und Apps mit Next.js und Laravel – technisch sauber, bei Google auffindbar und auf Anfragen ausgelegt.",
     "ctaPrimary": "Projekt besprechen",
     "ctaSecondary": "Arbeiten ansehen",
     "servicesTitle": "Unsere Kernleistungen",
@@ -31,14 +31,14 @@
     "services": [
       {
         "slug": "web-development",
-        "name": "Websites",
-        "description": "Moderne, schnelle und SEO-fähige Unternehmens- und Business-Websites.",
+        "name": "Website erstellen lassen",
+        "description": "Firmenwebsite, Business-Website und Landingpage – gebaut, um Anfragen zu bringen.",
         "icon": "heroicon-o-computer-desktop"
       },
       {
         "slug": "mobile-apps",
-        "name": "Mobile Apps",
-        "description": "Benutzerfreundliche Anwendungen für iOS und Android.",
+        "name": "Onlineshop & E-Commerce",
+        "description": "Onlineshop, B2B-Shop und Marktplatz – passend zu Ihrem Vertrieb gebaut.",
         "icon": "heroicon-o-device-phone-mobile"
       },
       {
@@ -49,20 +49,20 @@
       },
       {
         "slug": "seo-optimization",
-        "name": "SEO-Service",
+        "name": "Individuelle Software",
         "description": "Wirksame SEO-Strategien, die Ihre Sichtbarkeit in Suchmaschinen erhöhen.",
         "icon": "heroicon-o-magnifying-glass"
       },
       {
         "slug": "business-automation",
         "name": "Prozessautomatisierung",
-        "description": "Automatisieren Sie Ihre Abläufe und sparen Sie Zeit und Ressourcen.",
+        "description": "Messbare, laufende Arbeit für Ihre Sichtbarkeit bei Google und in der KI-Suche.",
         "icon": "heroicon-o-cog-6-tooth"
       },
       {
         "slug": "geo-ai-seo",
         "name": "GEO (SEO für KI)",
-        "description": "Machen Sie Ihre Marke auf KI-gestützten Plattformen sichtbarer.",
+        "description": "Bequeme Oberfläche, Logo und ein Corporate Design, das überall wiedererkannt wird.",
         "icon": "heroicon-o-viewfinder-circle"
       }
     ]
@@ -70,7 +70,7 @@
   "home": {
     "projects": {
       "label": "Unsere Projekte",
-      "title": "Ausgewählte Arbeiten, auf die wir stolz sind",
+      "title": "Ausgewählte Arbeiten aus unseren Projekten",
       "viewAll": "Alle Projekte",
       "viewCase": "Case ansehen",
       "samples": [
@@ -94,67 +94,67 @@
     },
     "process": {
       "label": "Unser Vorgehen",
-      "title": "Der Weg zu einem erfolgreichen Projekt",
+      "title": "So läuft ein Projekt mit uns ab",
       "steps": [
         {
           "title": "Analyse & Planung",
-          "description": "Wir analysieren Ihre Anforderungen und definieren die Strategie, die zu Ihrem Projekt passt.",
+          "description": "Wir klären, was Sie erreichen wollen, und legen fest, wie das Projekt dorthin kommt.",
           "icon": "heroicon-o-clipboard-document-list"
         },
         {
           "title": "Design & UX/UI",
-          "description": "Wir entwickeln ein modernes, benutzerfreundliches und wirksames Designkonzept.",
+          "description": "Wir entwerfen eine Oberfläche, in der sich Ihre Besucher sofort zurechtfinden.",
           "icon": "heroicon-o-pencil-square"
         },
         {
           "title": "Entwicklung",
-          "description": "Wir setzen das Produkt mit sauberem Code, aktuellen Technologien und hoher Performance um.",
+          "description": "Wir programmieren Ihr Produkt mit sauberem Code und achten auf kurze Ladezeiten.",
           "icon": "heroicon-o-code-bracket"
         },
         {
           "title": "Test & Optimierung",
-          "description": "Qualitätssicherung und Optimierung machen das Projekt startklar.",
+          "description": "Wir testen gründlich und bessern nach, bis alles bereit für den Start ist.",
           "icon": "heroicon-o-rocket-launch"
         },
         {
           "title": "Support & Wachstum",
-          "description": "Auch nach dem Launch bleiben wir an Bord und tragen zu Ihrem Wachstum bei.",
+          "description": "Nach dem Launch bleiben wir dabei und helfen Ihnen, weiter zu wachsen.",
           "icon": "heroicon-o-paper-airplane"
         }
       ]
     },
     "cta": {
       "title": "Starten wir Ihr Projekt",
-      "subtitle": "Machen wir aus Ihrer Idee Realität. Unser Team ist bereit, mit Ihnen zu arbeiten."
+      "subtitle": "Erzählen Sie uns von Ihrer Idee. Wir sagen Ihnen, wie daraus ein Projekt wird."
     },
     "faq": {
       "label": "Häufige Fragen",
-      "title": "Fragen, die Sie beschäftigen könnten",
+      "title": "Was Kunden uns am häufigsten fragen",
       "imageAlt": "Von H2 Solutions gebaute Websites: TopdanMall, Climahome, MegaParts und Sign & Graphics auf Desktop und Mobil",
       "items": [
         {
           "question": "Wie lange dauert ein Projekt?",
-          "answer": "Eine Unternehmenswebsite dauert in der Regel 3–5 Wochen, E-Commerce- und individuelle Plattformen 6–12 Wochen. Der genaue Zeitrahmen wird nach Klärung der Anforderungen schriftlich festgehalten."
+          "answer": "Eine Unternehmenswebsite ist in der Regel in 3–5 Wochen fertig. Onlineshops und individuelle Plattformen brauchen 6–12 Wochen. Den genauen Zeitplan halten wir schriftlich fest, sobald die Anforderungen geklärt sind."
         },
         {
           "question": "Bieten Sie Support nach dem Launch?",
-          "answer": "Ja. Zur Übergabe gehört ein Monat kostenloser technischer Support, danach sind monatliche Support- und Wachstumspakete möglich."
+          "answer": "Ja. Zur Übergabe gehört ein Monat kostenloser technischer Support. Danach können Sie monatliche Support- und Wachstumspakete buchen."
         },
         {
           "question": "Wie läuft die Bezahlung ab?",
-          "answer": "Die Zahlung erfolgt in Etappen: Anzahlung, Zwischenzahlung und Restzahlung bei Übergabe. Alle Bedingungen werden vorab im Vertrag festgelegt."
+          "answer": "Sie zahlen in Etappen: eine Anzahlung, eine Zwischenzahlung und den Rest bei der Übergabe. Alle Bedingungen stehen vorab im Vertrag."
         },
         {
           "question": "Kümmern Sie sich um Hosting und Domain?",
-          "answer": "Ja. Wir wählen passendes Hosting und Domains aus und übernehmen Einrichtung, SSL-Zertifikate und Migration vollständig."
+          "answer": "Ja. Wir suchen das passende Hosting und die Domain aus. Einrichtung, SSL-Zertifikat und Umzug übernehmen wir komplett."
         },
         {
           "question": "Wird meine Website für SEO optimiert?",
-          "answer": "Jedes Projekt wird mit technischem SEO übergeben: semantisches HTML, Performance-Optimierung, Metadaten, strukturierte Daten und automatische Sitemap."
+          "answer": "Ja. Technisches SEO gehört bei jedem Projekt zur Übergabe: semantisches HTML, kurze Ladezeiten, Metadaten, strukturierte Daten und eine automatische Sitemap."
         },
         {
-          "question": "Ist die mobile Darstellung garantiert?",
-          "answer": "Alle Projekte werden mobile-first entwickelt und auf Smartphone, Tablet und Desktop separat getestet."
+          "question": "Funktioniert die Website auch auf dem Smartphone?",
+          "answer": "Ja. Wir entwickeln jedes Projekt mobile-first und testen es getrennt auf Smartphone, Tablet und Desktop."
         }
       ]
     },
@@ -187,48 +187,48 @@
       ]
     },
     "seoText": {
-      "label": "SEO-Text",
-      "title": "Der richtige Technologiepartner für digitalen Erfolg",
+      "label": "Kurz gesagt",
+      "title": "Ihr Technikpartner vom ersten Entwurf bis zum Betrieb",
       "imageAlt": "Next.js-Metadaten- und Structured-Data-Code neben den von H2 Solutions gebauten Websites Alzone und Sign & Graphics",
       "body": [
-        "Bei H2 Solutions setzen wir aktuelle Technologien und wirksame Strategien ein, damit Unternehmen im digitalen Raum eine starke Position halten. Webentwicklung, mobile Anwendungen, E-Commerce-Lösungen, SEO und Prozessautomatisierung steigern gemeinsam die Online-Wirkung Ihrer Marke.",
-        "Eine Architektur auf Basis von Next.js und Laravel gibt Ihrer Website sowohl Geschwindigkeit als auch dauerhafte Sichtbarkeit in den Suchergebnissen. Technisches SEO, strukturierte Daten und GEO — also Optimierung für KI-gestützte Suchsysteme — sorgen dafür, dass Ihre Marke nicht nur bei Google, sondern auch auf KI-Plattformen gefunden wird.",
-        "Wir verstehen jedes Projekt als langfristige Partnerschaft: von der Analyse bis zum Design, vom Code bis zum laufenden Support tragen wir in jeder Phase zu Ihrem Geschäftserfolg bei."
+        "H2 Solutions baut, was Ihr Unternehmen im Netz braucht: Websites, Onlineshops, Apps für iOS und Android und individuelle Unternehmenssoftware. Dazu kommen SEO und GEO sowie UI/UX-Design und Branding. Alles entsteht in einem Team, das Technik und Geschäft zusammendenkt.",
+        "Wir bauen mit Next.js und Laravel. Das macht Ihre Website schnell und legt die technische Grundlage dafür, dass sie in den Suchergebnissen sichtbar bleibt. Technisches SEO, strukturierte Daten und GEO, also die Optimierung für KI-gestützte Suchsysteme, zielen darauf, dass man Ihre Marke bei Google ebenso findet wie auf KI-Plattformen.",
+        "Jedes Projekt ist für uns eine langfristige Partnerschaft. Wir begleiten Sie von der Analyse über Design und Code bis zum laufenden Support und behalten in jeder Phase Ihr Geschäftsziel im Blick."
       ]
     }
   },
   "usp": {
     "label": "Warum wir",
     "title": "Warum H2 Solutions?",
-    "subtitle": "Drei Säulen, auf denen unsere digitale Arbeit steht:",
+    "subtitle": "Drei Dinge, auf die Sie sich bei uns verlassen können:",
     "items": [
       {
         "title": "Pünktliche Übergabe",
-        "description": "Wir übergeben zum vereinbarten Termin und zeigen Ihnen jede Woche den Stand — das Projekt ist nie eine Blackbox."
+        "description": "Wir übergeben zum vereinbarten Termin. Jede Woche zeigen wir Ihnen den Stand – Sie wissen immer, wo Ihr Projekt steht."
       },
       {
         "title": "Messbare Ergebnisse",
-        "description": "Ziel ist keine hübsche Website, sondern Anfragen und Umsatz. Wir messen, was funktioniert, und teilen den Bericht mit Ihnen."
+        "description": "Eine hübsche Website ist nicht das Ziel, Anfragen und Umsatz sind es. Wir messen, was funktioniert, und teilen den Bericht mit Ihnen."
       },
       {
         "title": "Persönliche Partnerschaft",
-        "description": "Keine Vorlagen — jede Lösung wird auf Ihr Geschäft zugeschnitten. Mit jedem Kunden arbeiten wir persönlich."
+        "description": "Vorlagen verwenden wir nicht. Jede Lösung schneiden wir auf Ihr Geschäft zu, und mit jedem Kunden arbeiten wir persönlich."
       }
     ]
   },
   "servicesPreview": {
     "title": "Unsere Leistungen",
-    "subtitle": "Von der ersten Codezeile bis zum dauerhaften Wachstum — wir decken den gesamten Zyklus ab.",
+    "subtitle": "Von der ersten Codezeile bis zum laufenden Betrieb – alles, was Ihr Auftritt im Netz braucht.",
     "viewAll": "Alle Leistungen"
   },
   "services": {
     "title": "Leistungen",
-    "intro": "Von Websites und Apps über SEO bis zur Prozessautomatisierung — sechs Kernleistungen für Ihr Online-Wachstum.",
+    "intro": "Sechs Leistungen für Ihren Auftritt im Netz: Website, Onlineshop, App, Unternehmenssoftware, SEO und GEO, UI/UX-Design und Branding.",
     "included": "Was ist enthalten?",
     "lastUpdated": "Zuletzt aktualisiert",
     "related": "Weitere Leistungen",
     "startTitle": "Starten Sie Ihr Projekt",
-    "startText": "Fragen zu dieser Leistung? Senden Sie ein kurzes Briefing — wir melden uns innerhalb von 24 Stunden.",
+    "startText": "Fragen zu dieser Leistung? Schicken Sie uns ein kurzes Briefing – wir melden uns innerhalb von 24 Stunden.",
     "empty": "Leistungen werden in Kürze ergänzt.",
     "faqTitle": "Fragen zu dieser Leistung",
     "faq": {
@@ -236,52 +236,52 @@
       "title": "Was Kunden vor dem Projektstart fragen",
       "items": [
         {
-          "question": "Woher wissen wir, welche Leistung zu uns passt?",
-          "answer": "In einem kostenlosen Erstgespräch prüfen wir Ihr Geschäftsziel, Ihre bestehende digitale Infrastruktur und Ihr Budget. Sie erhalten ein schriftliches Angebot, welche Leistungen in welcher Reihenfolge sinnvoll sind."
+          "question": "Wie finden wir heraus, welche Leistung zu uns passt?",
+          "answer": "Das klären wir in einem kostenlosen Erstgespräch. Wir sehen uns Ihr Geschäftsziel, Ihre bestehenden Systeme und Ihr Budget an. Danach erhalten Sie schriftlich, welche Leistungen sinnvoll sind und in welcher Reihenfolge."
         },
         {
           "question": "Lassen sich mehrere Leistungen kombinieren?",
-          "answer": "Ja. Website, mobile App, SEO und Automatisierung können als ein Projekt geplant werden — das erleichtert die Integration und senkt das Gesamtbudget."
+          "answer": "Ja. Website, Onlineshop, App, Unternehmenssoftware, SEO und GEO sowie Design und Branding lassen sich als ein Projekt planen. So greifen die Teile besser ineinander, und das Gesamtbudget sinkt."
         },
         {
-          "question": "Wir haben bereits eine Website — muss alles neu gebaut werden?",
-          "answer": "Nicht zwingend. Wir starten mit einem technischen Audit; oft genügen Verbesserungen bei Geschwindigkeit, SEO und Design. Ein kompletter Neubau ist nur bei veralteter Technologie zu empfehlen."
+          "question": "Wir haben schon eine Website. Muss alles neu gebaut werden?",
+          "answer": "Nicht unbedingt. Wir beginnen mit einem technischen Audit. Oft reicht es, Geschwindigkeit, SEO und Design zu verbessern. Einen kompletten Neubau empfehlen wir nur, wenn die Technik veraltet ist."
         },
         {
-          "question": "Wie entsteht der Preis?",
-          "answer": "Der Preis richtet sich nach Umfang, Integrationen und Anzahl der Sprachen. Auf Basis Ihres Briefings erstellen wir ein Festpreisangebot — ungeplante Kosten während des Projekts gibt es nicht."
+          "question": "Wie setzt sich der Preis zusammen?",
+          "answer": "Der Preis hängt vom Umfang, von den Integrationen und von der Zahl der Sprachen ab. Aus Ihrem Briefing machen wir ein Festpreisangebot. Ungeplante Kosten kommen im laufenden Projekt nicht dazu."
         },
         {
-          "question": "Wann können Sie mit der Arbeit beginnen?",
-          "answer": "In der Regel 3–5 Werktage nach Vertragsunterzeichnung. Für dringende Projekte stellen wir ein paralleles Team bereit."
+          "question": "Wie schnell können Sie mit der Arbeit beginnen?",
+          "answer": "In der Regel starten wir 3–5 Werktage nach der Vertragsunterzeichnung. Für dringende Projekte stellen wir ein eigenes Team ab, das parallel arbeitet."
         },
         {
           "question": "Wem gehört das Projekt nach der Übergabe?",
-          "answer": "Ihnen. Code, Domain, Hosting und Admin-Zugänge werden vollständig übergeben, inklusive Dokumentation und Einweisung."
+          "answer": "Ihnen. Wir übergeben Code, Domain, Hosting und alle Admin-Zugänge vollständig. Dokumentation und eine Einweisung gehören dazu."
         }
       ]
     },
     "seoText": {
-      "label": "SEO-Text",
-      "title": "Digitale Leistungen aus einer Hand",
+      "label": "Aus einer Hand",
+      "title": "Eine Digitalagentur statt vieler Dienstleister",
       "body": [
-        "H2 Solutions vereint Webentwicklung, mobile Anwendungen, E-Commerce, SEO und Prozessautomatisierung unter einem Dach. Statt mehrere Dienstleister zu koordinieren, arbeiten Sie mit einem Team, das das gesamte System kennt — von der Datenbank bis zur Oberfläche, die Ihre Kundschaft sieht.",
-        "Alle Leistungen folgen demselben technischen Standard: Architektur mit Next.js und Laravel, mobile-first Oberflächen, messbare Ladegeschwindigkeit, technisches SEO und strukturierte Daten. Deshalb bleibt eine von uns übergebene Website auch nach dem Launch schnell und sichtbar — in klassischen Suchmaschinen ebenso wie in KI-gestützter Suche.",
-        "Unsere Arbeit endet nicht mit der Übergabe. Analytics, Inhalte, laufendes SEO und die Entwicklung neuer Funktionen laufen in monatlichen Paketen weiter, damit Ihr digitales Produkt mit dem Unternehmen Schritt hält."
+        "H2 Solutions vereint Website-Erstellung, Onlineshops, App-Entwicklung, Unternehmenssoftware, SEO und GEO sowie UI/UX-Design und Branding in einem Team. Sie stimmen nicht mehrere Dienstleister ab, sondern arbeiten mit Leuten, die das ganze System kennen – von der Datenbank bis zur Oberfläche, die Ihre Kunden sehen.",
+        "Für alle Leistungen gilt derselbe technische Standard. Wir bauen mit Next.js und Laravel, entwickeln die Oberflächen mobile-first und messen die Ladezeit. Technisches SEO und strukturierte Daten sind immer dabei. So ist Ihre Website auch nach dem Launch schnell und darauf ausgelegt, in klassischen Suchmaschinen wie in der KI-gestützten Suche gefunden zu werden.",
+        "Mit der Übergabe ist unsere Arbeit nicht zu Ende. In monatlichen Paketen kümmern wir uns weiter um Analytics, Inhalte, laufendes SEO und neue Funktionen. So wächst Ihr digitales Produkt mit Ihrem Unternehmen mit."
       ]
     }
   },
   "about": {
     "label": "Über uns",
     "title": "Über H2 Solutions",
-    "subtitle": "Eine Marke, ein Versprechen: Qualität und Niveau.",
-    "story": "H2 Solutions ist die Agentur, die Hamid Hamidli auf technischem Perfektionismus und geschäftlichen Ergebnissen aufgebaut hat. Wir betrachten jedes Projekt mit unternehmerischem Blick — und bauen Lösungen, die nicht nur funktionieren, sondern Umsatz erzeugen.",
+    "subtitle": "Unser Anspruch in zwei Worten: Qualität und Niveau.",
+    "story": "Hamid Hamidli hat H2 Solutions mit zwei Ansprüchen gegründet: technische Sorgfalt und Ergebnisse fürs Geschäft. Wir sehen jedes Projekt mit den Augen eines Unternehmers. Deshalb bauen wir Lösungen, die nicht nur funktionieren, sondern auf Umsatz ausgelegt sind.",
     "storyLabel": "Unsere Geschichte",
     "storyTitle": "Digitale Arbeit, die wirkt — nicht nur gut aussieht",
     "storyParagraphs": [
-      "H2 Solutions ist eine technische Agentur mit Sitz in Baku und baut das Online-Fundament kleiner und mittlerer Unternehmen. Das „H2“ im Namen steht für zwei einfache Zusagen — hohe Qualität und Höhe: jedes Projekt eine Stufe über den Ausgangspunkt zu heben.",
-      "Alles begann mit einer Frage: Warum sehen so viele Websites gut aus und bringen trotzdem keine Kunden? Der Grund ist, dass Geschäftslogik und technische Umsetzung meist getrennt gedacht werden. Deshalb beginnen wir nicht mit dem Design, sondern mit Ihrem Ziel, Ihren Wettbewerbern und der realen Suchnachfrage.",
-      "Heute realisieren wir Unternehmenswebsites, E-Commerce-Plattformen, SEO/GEO und Automatisierungsprojekte auf Next.js und Laravel. Auch nach dem Launch bleiben wir dabei: messen, lernen und den nächsten Schritt gemeinsam mit Ihnen planen."
+      "H2 Solutions ist eine Webagentur mit Sitz in Baku. Wir bauen das digitale Fundament für kleine und mittlere Unternehmen. Das „H2“ im Namen steht für zwei Zusagen: hohe Qualität und Höhe. Mit Höhe meinen wir, dass jedes Projekt eine Stufe über seinem Ausgangspunkt ankommt.",
+      "Am Anfang stand eine Frage: Warum sehen so viele Websites gut aus und bringen trotzdem keine Kunden? Meist liegt es daran, dass Geschäft und Technik getrennt geplant werden. Wir fangen deshalb nicht beim Design an, sondern bei Ihrem Ziel, Ihren Wettbewerbern und dem, wonach Ihre Kunden tatsächlich suchen.",
+      "Heute bauen wir Websites, Onlineshops, Apps und Unternehmenssoftware wie CRM und ERP. Dazu kommen SEO und GEO sowie UI/UX-Design und Branding. Unsere Basis sind Next.js und Laravel. Auch nach dem Launch bleiben wir dabei: Wir messen, lernen daraus und planen den nächsten Schritt gemeinsam mit Ihnen."
     ],
     "founder": {
       "label": "Gründer",
@@ -310,7 +310,7 @@
     "commitments": {
       "label": "Unsere Zusagen",
       "title": "Wir arbeiten mit Bedingungen, nicht mit Versprechen",
-      "subtitle": "Vier einfache Zusagen, die ab dem ersten Tag der Zusammenarbeit gelten:",
+      "subtitle": "Vier Zusagen, die vom ersten Tag unserer Zusammenarbeit an gelten:",
       "items": [
         {
           "value": "24 Stunden",
@@ -332,33 +332,33 @@
     },
     "valuesLabel": "Prinzipien",
     "valuesTitle": "Unsere Werte",
-    "valuesSubtitle": "Diese vier Prinzipien prägen alles — von den Projekten, die wir annehmen, bis zur täglichen Kommunikation mit Ihnen.",
+    "valuesSubtitle": "Nach diesen vier Prinzipien entscheiden wir, welche Projekte wir annehmen und wie wir täglich mit Ihnen sprechen.",
     "values": [
       {
         "title": "Transparenz",
-        "description": "Wir erklären die Gründe hinter jedem Prozess und jeder Entscheidung. Preis, Zeitrahmen und Risiken werden vorab schriftlich vereinbart.",
+        "description": "Wir erklären Ihnen, warum wir etwas so und nicht anders machen. Preis, Zeitrahmen und Risiken halten wir vorab schriftlich fest.",
         "icon": "heroicon-o-eye"
       },
       {
         "title": "Technische Exzellenz",
-        "description": "Der Branche einen Schritt voraus — neue Technologien setzen wir früh ein, aber erst, nachdem wir sie selbst geprüft haben.",
+        "description": "Neue Technologien setzen wir früh ein, aber erst, nachdem wir sie selbst geprüft haben.",
         "icon": "heroicon-o-cpu-chip"
       },
       {
         "title": "Respekt vor Ihrer Zeit",
-        "description": "Wir halten den vereinbarten Termin ein. Zeichnet sich eine Verzögerung ab, erfahren Sie es am ersten Tag — nicht am letzten.",
+        "description": "Den vereinbarten Termin halten wir ein. Droht eine Verzögerung, erfahren Sie das am ersten Tag und nicht am letzten.",
         "icon": "heroicon-o-clock"
       },
       {
         "title": "Langfristige Partnerschaft",
-        "description": "Wir liefern nicht ab und verschwinden — wir verfolgen die Ergebnisse, verbessern das Produkt und wachsen gemeinsam mit Ihnen.",
+        "description": "Nach der Übergabe sind wir nicht weg. Wir beobachten die Ergebnisse, verbessern das Produkt und wachsen gemeinsam mit Ihnen.",
         "icon": "heroicon-o-users"
       }
     ],
     "stack": {
       "label": "Technologie",
       "title": "Der Stack, auf dem wir bauen",
-      "subtitle": "Keine Vorlagen, keine Baukästen — jede Lösung läuft auf schneller Open-Source-Technologie, die über Jahre wartbar bleibt.",
+      "subtitle": "Wir arbeiten ohne Vorlagen und ohne Baukästen. Jede Lösung läuft auf schneller Open-Source-Technologie, die sich über Jahre warten lässt.",
       "groups": [
         {
           "title": "Frontend",
@@ -407,26 +407,26 @@
     "audience": {
       "label": "Mit wem wir arbeiten",
       "title": "Unternehmen, zu denen wir am besten passen",
-      "subtitle": "Wir nehmen nicht jedes Projekt an. In den folgenden Fällen bringt die Zusammenarbeit für beide Seiten das beste Ergebnis.",
+      "subtitle": "Wir nehmen nicht jedes Projekt an. In diesen vier Fällen lohnt sich die Zusammenarbeit für beide Seiten am meisten.",
       "items": [
         {
           "title": "Unternehmen & Mittelstand",
-          "description": "Firmen, die ihre Marke online richtig darstellen, Vertrauen gewinnen und qualifizierte Anfragen an den Vertrieb übergeben wollen.",
+          "description": "Firmen, die ihre Marke online überzeugend zeigen, Vertrauen aufbauen und ihrem Vertrieb qualifizierte Anfragen liefern wollen.",
           "icon": "heroicon-o-building-office-2"
         },
         {
           "title": "E-Commerce & Handel",
-          "description": "Shops, die ihren Onlineumsatz steigern und Bestell- sowie Lagerprozesse vereinfachen möchten.",
+          "description": "Händler, die online mehr verkaufen und Bestellungen und Lager einfacher verwalten wollen.",
           "icon": "heroicon-o-shopping-bag"
         },
         {
           "title": "Start-ups",
-          "description": "Teams, die schnell ein MVP ausliefern, es am Markt validieren und Investoren zeigen wollen.",
+          "description": "Teams, die schnell ein MVP auf den Markt bringen, es dort testen und Investoren vorführen wollen.",
           "icon": "heroicon-o-rocket-launch"
         },
         {
           "title": "Lokale Dienstleister",
-          "description": "Kliniken, Salons, Servicezentren und Studios in Baku und den Regionen, die Anfragen über die Suche erhalten möchten.",
+          "description": "Kliniken, Salons, Servicezentren und Studios in Baku und den Regionen, die über die Suche gefunden und angefragt werden wollen.",
           "icon": "heroicon-o-map-pin"
         }
       ]
@@ -434,7 +434,7 @@
   },
   "portfolio": {
     "title": "Unsere Projekte",
-    "subtitle": "Echte Unternehmen, echte Ergebnisse. Erzählt als Problem → Lösung → Ergebnis.",
+    "subtitle": "Echte Unternehmen, echte Ergebnisse. Jeden Case erzählen wir in drei Schritten: Problem, Lösung, Ergebnis.",
     "empty": "Projekte folgen in Kürze.",
     "viewCase": "Case ansehen",
     "overviewTitle": "Über das Projekt",
@@ -455,7 +455,7 @@
   "blog": {
     "label": "Blog",
     "title": "Blog",
-    "subtitle": "Fachbeiträge zu Webentwicklung, SEO und digitalem Geschäft.",
+    "subtitle": "Praxiswissen zu Websites, Onlineshops, SEO und KI-Suche.",
     "empty": "Neue Artikel folgen in Kürze ...",
     "emptyCta": "Kontakt aufnehmen",
     "readMore": "Weiterlesen",
@@ -469,15 +469,15 @@
     "backToList": "Zurück zu allen Artikeln",
     "tocTitle": "In diesem Artikel",
     "helpTitle": "Brauchen Sie dabei Unterstützung?",
-    "helpText": "Sehen wir uns Ihre Website gemeinsam an und sagen Ihnen, wo Sie anfangen sollten."
+    "helpText": "Wir sehen uns Ihre Website mit Ihnen an und sagen Ihnen, wo Sie anfangen sollten."
   },
   "contact": {
     "label": "Kontakt aufnehmen",
     "title": "Kontakt",
-    "subtitle": "Sprechen wir über Ihr Projekt. Wir antworten innerhalb von 24 Stunden.",
+    "subtitle": "Erzählen Sie uns von Ihrem Projekt. Wir antworten innerhalb von 24 Stunden.",
     "infoTitle": "Direkter Kontakt",
     "infoHeading": "Wählen Sie den Kanal, der Ihnen passt",
-    "infoSubtitle": "Kein Formular nötig — schreiben oder rufen Sie uns direkt über einen der folgenden Kanäle an.",
+    "infoSubtitle": "Ein Formular brauchen Sie nicht. Schreiben Sie uns direkt oder rufen Sie an, auf dem Kanal, der Ihnen am liebsten ist.",
     "emailLabel": "E-Mail",
     "email": "info@h2solutions.az",
     "emailNote": "Der schnellste Weg — senden Sie Ihr Briefing, wir antworten innerhalb von 24 Stunden.",
@@ -499,55 +499,55 @@
     "brief": {
       "label": "Briefing",
       "title": "Was Sie beim Schreiben angeben sollten",
-      "text": "Diese Angaben machen unsere erste Antwort konkret: Richtbudget, Zeitrahmen und der passende technische Ansatz.",
+      "text": "Mit diesen Angaben fällt schon unsere erste Antwort konkret aus: mit Richtbudget, Zeitrahmen und dem passenden technischen Ansatz.",
       "items": [
         "Ihr Unternehmen und Ihre Branche",
-        "Die gewünschte Leistung: Website, App, E-Commerce, SEO oder Automatisierung",
-        "Das Hauptziel des Projekts und woran Sie Erfolg messen",
-        "Ein ungefährer Budgetrahmen und Ihr Wunschstart",
-        "Ihre aktuelle Website, Referenzlinks oder Wettbewerbsbeispiele"
+        "Die gewünschte Leistung: Website, Onlineshop, App, Software (CRM/ERP), SEO/GEO oder UI/UX-Design und Branding",
+        "Das wichtigste Ziel des Projekts und woran Sie den Erfolg messen",
+        "Ihr ungefähres Budget und der gewünschte Starttermin",
+        "Ihre aktuelle Website, Links zu Vorbildern oder Beispiele von Wettbewerbern"
       ],
       "cta": "Briefing per E-Mail senden"
     },
     "next": {
       "label": "Nächste Schritte",
       "title": "Was nach Ihrer Nachricht passiert",
-      "subtitle": "Ein kurzer, transparenter Prozess — keine langen Fragebögen, kein Warten.",
+      "subtitle": "Der Ablauf ist kurz und durchschaubar: ohne lange Fragebögen und ohne Wartezeit.",
       "steps": [
         {
           "title": "Wir prüfen Ihre Nachricht",
-          "description": "Wir lesen jede Anfrage innerhalb von 24 Stunden und stellen ein paar Rückfragen, falls etwas fehlt.",
+          "description": "Wir lesen jede Anfrage innerhalb von 24 Stunden. Fehlt uns etwas, fragen wir kurz nach.",
           "icon": "heroicon-o-inbox-arrow-down"
         },
         {
           "title": "Kostenlose Beratung",
-          "description": "In einem 30-minütigen Online-Gespräch klären wir Ziele, technische Anforderungen und mögliche Optionen.",
+          "description": "In einem 30-minütigen Online-Gespräch besprechen wir Ihre Ziele, die technischen Anforderungen und die Wege, die infrage kommen.",
           "icon": "heroicon-o-chat-bubble-left-right"
         },
         {
           "title": "Angebot und Zeitplan",
-          "description": "Sie erhalten ein schriftliches Angebot mit Leistungsumfang, Preis und Phasenplan — die Entscheidung liegt bei Ihnen.",
+          "description": "Sie bekommen ein schriftliches Angebot mit Leistungsumfang, Preis und Phasenplan. Ob Sie es annehmen, entscheiden Sie.",
           "icon": "heroicon-o-document-check"
         }
       ]
     },
     "direct": {
       "title": "Sprechen wir über Ihr Projekt",
-      "text": "Auch eine Frage in einem Satz ist willkommen — jede Anfrage wird persönlich beantwortet.",
+      "text": "Auch eine Frage in einem Satz ist willkommen. Jede Anfrage beantworten wir persönlich.",
       "emailCta": "E-Mail schreiben",
       "whatsappCta": "Über WhatsApp schreiben",
       "linkedin": "Auf LinkedIn vernetzen"
     }
   },
   "footer": {
-    "tagline": "Wir entwickeln Technologielösungen und innovative Produkte, die die Digitalisierung von Unternehmen unterstützen.",
+    "tagline": "Wir bauen Websites, Onlineshops, Apps und Software für Unternehmen – und arbeiten daran, dass Kunden Sie finden.",
     "navTitle": "Schnellzugriff",
     "servicesTitle": "Unsere Leistungen",
     "contactTitle": "Kontakt",
     "rights": "Alle Rechte vorbehalten",
     "madeWith": "Mit Sorgfalt gebaut —",
     "newsletterTitle": "Newsletter",
-    "newsletterText": "Abonnieren Sie Neuigkeiten und nützliche Einblicke.",
+    "newsletterText": "Neues aus unserer Arbeit und Tipps, die Sie nutzen können.",
     "newsletterPlaceholder": "Ihre E-Mail-Adresse",
     "newsletterSubmit": "Abonnieren",
     "newsletterSuccess": "Sie haben das Abo bestätigt. Vielen Dank!",
