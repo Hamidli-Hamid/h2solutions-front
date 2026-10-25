@@ -1273,6 +1273,7 @@
     color: var(--color-foreground-soft);
     font-size: 1rem;
     line-height: 1.85;
+    overflow-wrap: break-word;
   }
   .prose-tech > * + * {
     margin-top: 1.25rem;
@@ -1380,11 +1381,28 @@
     border: 1px solid var(--color-border);
     padding: 0.625rem 0.75rem;
     text-align: left;
+    /* `anywhere` lets a long token shrink a column, so no table outgrows the
+       article; the floor stops that squeezing a short column into syllables. */
+    overflow-wrap: anywhere;
+    min-width: 9rem;
   }
   .prose-tech th {
     background: var(--color-background-elevated);
     color: var(--color-foreground);
     font-weight: 600;
+  }
+  /* Too narrow for the floor: equal columns, wrapping inside the article. A
+     scrolling table would need a focusable wrapper the editor cannot emit. */
+  @media (max-width: 639px) {
+    .prose-tech table {
+      table-layout: fixed;
+      font-size: 0.875rem;
+    }
+    .prose-tech th,
+    .prose-tech td {
+      min-width: 0;
+      padding: 0.5rem;
+    }
   }
 
   /* Connector that draws itself as the process band scrolls into view.

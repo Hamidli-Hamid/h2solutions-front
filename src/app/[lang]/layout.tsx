@@ -27,7 +27,7 @@ import { brandAsset } from "@/lib/brand";
 import { getPageSeo } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { i18n, isLocale } from "@/i18n-config";
-import { fetchServices, withFallback } from "@/lib/api";
+import { fetchBlogPosts, fetchServices, partialPostLocales, withFallback } from "@/lib/api";
 import {
   founderAliases,
   founderName,
@@ -214,11 +214,14 @@ export default async function LangLayout({
   /* The footer's service column and `knowsAbout` are the one place in the
      layout where a failed read is allowed to render as "no list": a page must
      not fail because its footer could not be filled. */
-  const [dict, services, allDicts, layoutSeo] = await Promise.all([
+  const [dict, services, allDicts, layoutSeo, posts] = await Promise.all([
     getDictionary(lang),
     withFallback(fetchServices(lang), [], `Footer services (${lang})`),
     getAllDictionaries(),
     getPageSeo(lang, "layout"),
+    /* The header sits above the page, so this is how the language switcher
+       learns which posts lack a language. A failed read costs only that. */
+    withFallback(fetchBlogPosts(lang), [], `Post languages (${lang})`),
   ]);
   const siteGraph = mergeAdminNodes(
     siteGraphJsonLd({
@@ -249,7 +252,7 @@ export default async function LangLayout({
         </a>
         <PointerGlow />
         <RevealObserver />
-        <Header lang={lang} dict={dict} />
+        <Header lang={lang} dict={dict} postLocales={partialPostLocales(posts)} />
         <main id="main-content" className="flex-1">
           {/* Route changes cross-fade inside this boundary (`page` is the
               class the transition rules in globals.css target); the header,

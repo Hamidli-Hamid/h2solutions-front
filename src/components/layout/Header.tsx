@@ -12,9 +12,11 @@ import type { Dictionary } from "@/lib/dictionaries";
 type Props = {
   lang: Locale;
   dict: Dictionary;
+  /** Passed to the language switcher; see `LanguageSwitcher`. */
+  postLocales: Record<string, Locale[]>;
 };
 
-export function Header({ lang, dict }: Props) {
+export function Header({ lang, dict, postLocales }: Props) {
   const contactHref = localePath(lang, "/contact");
   const navigation = resolveNav(dict, lang);
   const branding = resolveBranding(dict);
@@ -41,7 +43,11 @@ export function Header({ lang, dict }: Props) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <LanguageSwitcher current={lang} label={dict.nav.language} />
+          <LanguageSwitcher
+            current={lang}
+            label={dict.nav.language}
+            postLocales={postLocales}
+          />
           <Link
             href={contactHref}
             data-magnetic

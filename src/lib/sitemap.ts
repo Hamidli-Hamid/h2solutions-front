@@ -1,6 +1,6 @@
 import "server-only";
 
-import { i18n, type Locale } from "@/i18n-config";
+import { availableLocales, i18n, xDefaultLocale, type Locale } from "@/i18n-config";
 import { localeUrl, siteConfig } from "@/lib/site-config";
 import {
   fetchBlogPosts,
@@ -98,12 +98,15 @@ function loc(locale: Locale, path: string): string {
   return xml(url === `${siteConfig.url}/` ? siteConfig.url : url);
 }
 
-function buildAlternates(path: string): Record<string, string> {
+function buildAlternates(
+  path: string,
+  locales: readonly Locale[] = i18n.locales,
+): Record<string, string> {
   return {
-    ...Object.fromEntries(i18n.locales.map((l) => [l, loc(l, path)])),
+    ...Object.fromEntries(locales.map((l) => [l, loc(l, path)])),
     /* The same fallback the <head> annotations declare — the two hreflang
        clusters have to agree or Google discards the pair. */
-    "x-default": loc(i18n.defaultLocale, path),
+    "x-default": loc(xDefaultLocale(locales), path),
   };
 }
 
@@ -284,7 +287,7 @@ export async function collectSitemapEntries(): Promise<SitemapEntry[]> {
         /* An edited post is fresher than its publication date; either beats
            stamping it with the moment the sitemap was fetched. */
         lastModified: recordModified(post) ?? lastModified(post.published_at),
-        alternates: buildAlternates(`/blog/${post.slug}`),
+        alternates: buildAlternates(`/blog/${post.slug}`, availableLocales(post.locales)),
         images: images(post.cover_image, post.seo?.og_image),
       });
     }

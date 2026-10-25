@@ -16,7 +16,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getDictionary } from "@/lib/dictionaries";
 import { fetchBlogPost, fetchBlogPosts } from "@/lib/api";
 import { formatDate } from "@/lib/format";
-import { localePath, i18n, isLocale } from "@/i18n-config";
+import { availableLocales, localePath, i18n, isLocale } from "@/i18n-config";
 import { buildMetadata, twitterHandleFor } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
 import { localeUrl, resolveSite } from "@/lib/site-config";
@@ -49,6 +49,7 @@ export async function generateMetadata({
   return buildMetadata({
     lang,
     path: `/blog/${slug}`,
+    locales: availableLocales(post.locales),
     title: post.title,
     description: post.excerpt,
     ogType: "article",
@@ -162,8 +163,10 @@ export default async function BlogPostPage({
         </div>
       )}
 
-      {/* BODY — article beside a sticky rail listing the other posts. */}
-      <div className="container-h2 grid gap-10 pb-12 md:pb-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+      {/* BODY — article beside a sticky rail listing the other posts. The base
+          track is minmax(0, 1fr) because an auto one grows to the article's
+          min-content, and .tech-canvas clips what passes the screen edge. */}
+      <div className="container-h2 grid grid-cols-[minmax(0,1fr)] gap-10 pb-12 md:pb-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
         <article
           className="prose-tech max-w-[68ch]"
           /* Content comes from the admin rich editor, which stores HTML. */

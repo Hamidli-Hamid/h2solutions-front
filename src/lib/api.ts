@@ -1,5 +1,5 @@
 import "server-only";
-import type { Locale } from "@/i18n-config";
+import { availableLocales, i18n, type Locale } from "@/i18n-config";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8888/api";
 
@@ -108,6 +108,11 @@ export type ApiBlogPost = {
   title: string;
   excerpt: string;
   content?: string;
+  /**
+   * The languages this post exists in. Optional: absent means all of them
+   * (read it through `availableLocales`).
+   */
+  locales?: string[];
   seo?: ApiSeo;
 };
 
@@ -307,6 +312,15 @@ export async function fetchProject(
 
 export async function fetchBlogPosts(locale: Locale, options?: ReadOptions): Promise<ApiBlogPost[]> {
   return readList<ApiBlogPost>("/blog", locale, options);
+}
+
+/** Slug → languages, only for the posts missing from at least one language. */
+export function partialPostLocales(posts: ApiBlogPost[]): Record<string, Locale[]> {
+  return Object.fromEntries(
+    posts
+      .map((post) => [post.slug, availableLocales(post.locales)] as const)
+      .filter(([, locales]) => locales.length < i18n.locales.length),
+  );
 }
 
 export async function fetchBlogPost(

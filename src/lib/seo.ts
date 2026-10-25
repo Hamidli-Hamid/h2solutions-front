@@ -1,7 +1,7 @@
 import "server-only";
 import type { Metadata } from "next";
 
-import { i18n, ogLocales, type Locale } from "@/i18n-config";
+import { i18n, ogLocales, xDefaultLocale, type Locale } from "@/i18n-config";
 import { localeUrl, resolveSite, siteConfig } from "@/lib/site-config";
 import { getPageSeo, type PageKey } from "@/lib/content";
 import { getDictionary } from "@/lib/dictionaries";
@@ -11,6 +11,8 @@ type BuildInput = {
   lang: Locale;
   /** Route under the language prefix — "" for the homepage, "/about", … */
   path: string;
+  /** The languages this page exists in, when that is not all of them. */
+  locales?: readonly Locale[];
   /** Copy the page derives from its own content, used when nothing is overridden. */
   title: string;
   description: string;
@@ -60,10 +62,11 @@ function withBrand(title: string): string {
   return title.includes(siteConfig.brand) ? title : `${title}${BRAND_SUFFIX}`;
 }
 
-function alternates(path: string) {
-  return Object.fromEntries(
-    i18n.locales.map((locale) => [locale, localeUrl(locale, path)]),
-  );
+function alternates(path: string, locales: readonly Locale[]) {
+  return {
+    ...Object.fromEntries(locales.map((locale) => [locale, localeUrl(locale, path)])),
+    "x-default": localeUrl(xDefaultLocale(locales), path),
+  };
 }
 
 /**
@@ -75,6 +78,7 @@ function alternates(path: string) {
 export function buildMetadata({
   lang,
   path,
+  locales = i18n.locales,
   title,
   description,
   seo,
@@ -140,10 +144,7 @@ export function buildMetadata({
     description: metaDescription,
     alternates: {
       canonical: url,
-      languages: {
-        ...alternates(path),
-        "x-default": localeUrl(i18n.defaultLocale, path),
-      },
+      languages: alternates(path, locales),
     },
     openGraph: {
       type: ogType,
@@ -152,7 +153,7 @@ export function buildMetadata({
       description: ogDescription,
       url,
       locale: ogLocales[lang],
-      alternateLocale: i18n.locales
+      alternateLocale: locales
         .filter((locale) => locale !== lang)
         .map((locale) => ogLocales[locale]),
       images: ogImages,

@@ -18,6 +18,8 @@ type Props = {
   current: Locale;
   /** Accessible name for the control, e.g. dict.nav.language. */
   label: string;
+  /** Slug → languages, for the posts not available in all of them. */
+  postLocales: Record<string, Locale[]>;
 };
 
 function persistLocaleCookie(locale: Locale) {
@@ -35,7 +37,7 @@ function persistLocaleCookie(locale: Locale) {
  * are in the served HTML of every page, and the control still works with
  * JavaScript off.
  */
-export function LanguageSwitcher({ current, label }: Props) {
+export function LanguageSwitcher({ current, label, postLocales }: Props) {
   const details = useRef<HTMLDetailsElement>(null);
   const pathname = usePathname() ?? localePath(current);
 
@@ -47,6 +49,18 @@ export function LanguageSwitcher({ current, label }: Props) {
        sixth. Strip it only when it really is one. */
     if (segments.length > 0 && isLocale(segments[0])) {
       segments.shift();
+    }
+    /* A post that does not exist in this language would be a 404 there, so
+       the link goes to that language's blog instead. */
+    const [section, slug] = segments;
+    if (
+      section === "blog" &&
+      slug &&
+      /* The slug comes from the URL: `/blog/constructor` must not match a built-in. */
+      Object.hasOwn(postLocales, slug) &&
+      !postLocales[slug].includes(locale)
+    ) {
+      return localePath(locale, "/blog");
     }
     return localePath(locale, segments.length > 0 ? `/${segments.join("/")}` : "");
   }

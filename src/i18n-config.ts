@@ -49,6 +49,25 @@ export function isLocale(value: string): value is Locale {
 }
 
 /**
+ * The languages a record really exists in. The API's `locales` is optional:
+ * absent or unusable means every language, which is what a record was before
+ * the field existed. Codes this site does not serve are dropped.
+ */
+export function availableLocales(locales: unknown): Locale[] {
+  const known = Array.isArray(locales)
+    ? locales.filter(
+        (locale): locale is Locale => typeof locale === "string" && isLocale(locale),
+      )
+    : [];
+  return known.length > 0 ? known : [...i18n.locales];
+}
+
+/** `x-default`: the default language when the record exists there, else its first. */
+export function xDefaultLocale(locales: readonly Locale[]): Locale {
+  return locales.includes(i18n.defaultLocale) ? i18n.defaultLocale : locales[0];
+}
+
+/**
  * A route's path in one language.
  *
  * Azerbaijani is the site's default and is served from the bare path — `/about`,
