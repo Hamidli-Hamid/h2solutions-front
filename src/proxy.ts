@@ -45,9 +45,14 @@ export function proxy(request: NextRequest) {
 
   const locale = pickLocale(request);
 
+  /* A post need not exist in the cookie's language and the proxy cannot ask,
+     so following the cookie could turn a working link into a 404. The switcher
+     on the page offers whichever translations do exist. */
+  const isBlogPost = first === "blog" && rest.length === 1;
+
   /* No explicit choice of another language: serve the page at the URL
      requested, so the canonical URL is a 200 for every client. */
-  if (locale === i18n.defaultLocale) {
+  if (locale === i18n.defaultLocale || isBlogPost) {
     const url = request.nextUrl.clone();
     url.pathname = `/${i18n.defaultLocale}${pathname === "/" ? "" : pathname}`;
     return NextResponse.rewrite(url);
