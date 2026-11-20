@@ -38,7 +38,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ revalidated: false }, { status: 401 });
   }
 
-  revalidateTag(CONTENT_TAG, "max");
+  // Expire now, not "max": with stale-while-revalidate the first visitor of
+  // every page after an admin save still got the old content (a replaced blog
+  // cover stayed on the detail pages until each had been opened once).
+  revalidateTag(CONTENT_TAG, { expire: 0 });
   // Every page reads the content tree through the layout, so one sweep of it
   // covers all languages and routes.
   revalidatePath("/[lang]", "layout");
