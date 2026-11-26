@@ -54,6 +54,24 @@ function formatAmount(amount: number, lang: Locale): string {
   return Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
 }
 
+/**
+ * Admin values arrive as text ("1500", "1"), the bundled copy as numbers and
+ * booleans; both are read here so the page works on either.
+ */
+function amountOf(value: unknown): number | null {
+  const n = typeof value === "number" ? value : Number(String(value ?? "").replace(/[^\d.]/g, ""));
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function flagOf(value: unknown): boolean {
+  if (typeof value === "boolean") return value;
+  return ["1", "true", "yes", "bəli", "beli"].includes(String(value ?? "").trim().toLowerCase());
+}
+
+function textOf(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
+}
+
 function PriceTag({
   amount,
   lang,
@@ -67,10 +85,14 @@ function PriceTag({
   monthly?: boolean;
   size?: "lg" | "md";
 }) {
+  // "{price} AZN-dən" / "from {price} AZN": the number is set large, the words
+  // around it small, in whatever order the language puts them.
+  const format = t.priceFormat.includes("{price}") ? t.priceFormat : "{price} AZN";
+  const [before, after] = format.split("{price}");
   return (
     <p className="flex flex-wrap items-baseline gap-x-1.5">
-      {t.fromPrefix && (
-        <span className="text-sm text-[color:var(--color-foreground-soft)]">{t.fromPrefix}</span>
+      {before.trim() && (
+        <span className="text-sm font-semibold text-[color:var(--color-foreground-soft)]">{before.trim()}</span>
       )}
       <span
         className={`font-[family-name:var(--font-display)] font-bold tracking-tight ${
@@ -79,10 +101,9 @@ function PriceTag({
       >
         {formatAmount(amount, lang)}
       </span>
-      <span className="text-sm font-semibold text-[color:var(--color-foreground-soft)]">
-        {t.currency}
-        {t.from}
-      </span>
+      {after.trim() && (
+        <span className="text-sm font-semibold text-[color:var(--color-foreground-soft)]">{after.trim()}</span>
+      )}
       {monthly && (
         <span className="text-sm text-[color:var(--color-foreground-muted)]">/ {t.perMonth}</span>
       )}
@@ -95,6 +116,28 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
   if (!isLocale(lang)) notFound();
   const [dict, pageSeo] = await Promise.all([getDictionary(lang), getPageSeo(lang, "pricing")]);
   const t = dict.pricing;
+  // Rows without a usable price are skipped rather than shown as "0 AZN".
+  const packages = t.packages.flatMap((p) => {
+    const price = amountOf(p.price);
+    return price === null
+      ? []
+      : [{ ...p, price, featured: flagOf("featured" in p ? p.featured : false), key: textOf(p.key) || p.name }];
+  });
+  const services = t.services.flatMap((s) => {
+    const price = amountOf(s.price);
+    return price === null
+      ? []
+      : [
+          {
+            ...s,
+            price,
+            monthly: flagOf("monthly" in s ? s.monthly : false),
+            slug: textOf("slug" in s ? s.slug : ""),
+            icon: textOf(s.icon).replace(/^heroicon-[os]-/, ""),
+            key: textOf(s.key) || s.name,
+          },
+        ];
+  });
   const chat = projectChat(dict.contact);
   const url = localeUrl(lang, "/pricing");
 
@@ -131,8 +174,8 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
       "@type": "OfferCatalog",
       name: t.title,
       itemListElement: [
-        ...t.packages.map((p) => offerOf(p.name, p.description, p.price)),
-        ...t.services.map((s) => offerOf(s.name, s.description, s.price, "monthly" in s && Boolean(s.monthly))),
+        ...packages.map((p) => offerOf(p.name, p.description, p.price)),
+        ...services.map((s) => offerOf(s.name, s.description, s.price, s.monthly)),
       ],
     },
   };
@@ -172,8 +215,8 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
           />
 
           <ul className="mt-9 grid gap-5 lg:grid-cols-3 lg:items-stretch">
-            {t.packages.map((pkg) => {
-              const featured = "featured" in pkg && Boolean(pkg.featured);
+            {packages.map((pkg) => {
+              const featured = pkg.featured;
               const message = t.packageMessage.replace("{name}", pkg.name);
               return (
                 <li key={pkg.key} className="flex">
@@ -244,9 +287,9 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
           />
 
           <ul className="mt-9 grid gap-4 md:grid-cols-2 md:gap-5 xl:grid-cols-3">
-            {t.services.map((service) => {
-              const monthly = "monthly" in service && Boolean(service.monthly);
-              const slug = "slug" in service ? service.slug : undefined;
+            {services.map((service) => {
+              const monthly = service.monthly;
+              const slug = service.slug;
               const message = t.packageMessage.replace("{name}", service.name);
               return (
                 <li key={service.key} className="flex">

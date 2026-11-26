@@ -686,9 +686,7 @@
     "title": "Sayt hazırlanması və IT xidmətlərinin qiymətləri",
     "subtitle": "Başlanğıc qiymətlər, müddətlər və hər paketə nəyin daxil olduğu — sürprizsiz. Dəqiq və sabit qiymət qısa brifdən sonra yazılı təklifdə gəlir.",
     "metaDescription": "H2 Solutions qiymətləri: landing page 600 AZN-dən, korporativ sayt 1 500 AZN-dən, onlayn mağaza 3 500 AZN-dən, SEO və GEO ayda 600 AZN-dən. Müddətlər, paketlərə daxil olanlar və ödəniş qaydası.",
-    "from": "-dan",
-    "fromPrefix": "",
-    "currency": "AZN",
+    "priceFormat": "{price} AZN-dən",
     "perMonth": "ayda",
     "durationLabel": "Müddət",
     "popular": "Ən çox seçilən",
@@ -854,7 +852,7 @@
       "title": "Qiymətlər haqqında tez-tez verilən suallar",
       "items": [
         {
-          "question": "Niyə qiymətlər «-dan» yazılıb?",
+          "question": "Niyə qiymətlər «-dən» yazılıb?",
           "answer": "Çünki eyni adlı iki sayt həcmcə çox fərqli ola bilər. Göstərilən rəqəm paketdə yazılan işin başlanğıc qiymətidir. Brifinizi alandan sonra sabit qiymət yazılı təklifdə gəlir və iş gedişində dəyişmir."
         },
         {
