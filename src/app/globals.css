@@ -2098,6 +2098,23 @@
   white-space: nowrap;
 }
 
+/* Pricing: the recommended package carries an accent border, the glow and a
+   badge beside its name. */
+.pricing-featured {
+  border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  box-shadow: var(--shadow-glow);
+}
+.pricing-badge {
+  padding: 0.3125rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-on-accent);
+  background: linear-gradient(100deg, var(--color-accent), var(--color-accent-alt-soft));
+}
+
 .float-contact {
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));

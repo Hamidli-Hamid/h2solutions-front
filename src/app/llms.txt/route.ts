@@ -143,6 +143,7 @@ export async function GET() {
         { page: "home" as const, title: dict.nav.home, url: url(), summary: dict.hero.subtitle },
         { page: "about" as const, title: dict.about.title, url: url("/about"), summary: dict.about.story },
         { page: "services" as const, title: dict.services.title, url: url("/services"), summary: dict.services.intro },
+        { page: "pricing" as const, title: dict.pricing.title, url: url("/pricing"), summary: dict.pricing.metaDescription },
         /* A listing is named only once it lists something — the empty hubs are
            `noindex` and out of the sitemap for the same reason. */
         ...(allProjects.length > 0

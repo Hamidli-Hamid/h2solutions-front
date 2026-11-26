@@ -8,6 +8,7 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
+    "pricing": "Pricing",
     "portfolio": "Projects",
     "blog": "Blog",
     "contact": "Contact",
@@ -679,5 +680,206 @@
     "backgroundColor": "#0d1117",
     "appName": "H2 Solutions — Premium web solutions and SEO",
     "appShortName": "H2 Solutions"
+  },
+  "pricing": {
+    "label": "Pricing",
+    "title": "Website development and IT services pricing",
+    "subtitle": "Starting prices, timelines and exactly what each package includes — no surprises. You get a precise, fixed price in a written proposal after a short brief.",
+    "metaDescription": "H2 Solutions pricing: landing page from 600 AZN, corporate website from 1,500 AZN, online store from 3,500 AZN, SEO and GEO from 600 AZN per month.",
+    "from": "",
+    "fromPrefix": "from",
+    "currency": "AZN",
+    "perMonth": "per month",
+    "durationLabel": "Timeline",
+    "popular": "Most popular",
+    "packagesLabel": "Websites",
+    "packagesTitle": "Website packages",
+    "packagesSubtitle": "Our three most requested formats. Each can be extended to fit your business — extra languages, pages or features are listed separately in the proposal.",
+    "packageCta": "Discuss this package",
+    "packageMessage": "Hello! I'm writing from the h2solutions.az website. I'm interested in the “{name}” package.",
+    "packages": [
+      {
+        "key": "landing",
+        "name": "Landing page",
+        "price": 600,
+        "duration": "1–2 weeks",
+        "description": "A sales page that collects enquiries for a single ad campaign or offer.",
+        "features": [
+          "Custom one-page design",
+          "Enquiry form, WhatsApp and call buttons",
+          "Fast-loading and easy to use on phones",
+          "Google Analytics and ad tracking codes",
+          "Domain, hosting and SSL setup"
+        ]
+      },
+      {
+        "key": "corporate",
+        "name": "Corporate website",
+        "price": 1500,
+        "duration": "3–5 weeks",
+        "description": "A website that presents your company, services and work, and brings in customers from Google.",
+        "featured": true,
+        "features": [
+          "Custom design for up to 8 pages",
+          "A dedicated page for each service",
+          "Admin panel — edit texts and images yourself",
+          "SEO basics: headings, speed, sitemap",
+          "Blog and enquiry forms",
+          "Domain, hosting and SSL setup"
+        ]
+      },
+      {
+        "key": "shop",
+        "name": "Online store",
+        "price": 3500,
+        "duration": "6–10 weeks",
+        "description": "A store built to sell, with a catalogue, cart and order management.",
+        "features": [
+          "Categories, filters and search",
+          "Cart, checkout and online payment",
+          "Instalment payments and loyalty bonuses",
+          "Admin panel: products, prices, stock and orders",
+          "SMS or WhatsApp alerts for new orders",
+          "Search-ready category and product pages"
+        ]
+      }
+    ],
+    "servicesLabel": "Other services",
+    "servicesTitle": "Platforms, apps, SEO and design",
+    "servicesSubtitle": "The scope of this work varies a lot from project to project, so we show starting prices here. You get the exact figure after the brief.",
+    "detailsCta": "Learn more",
+    "services": [
+      {
+        "key": "platform",
+        "name": "Custom platform and marketplace",
+        "price": 7000,
+        "description": "Classifieds sites, marketplaces, portals with user accounts — projects like TopdanMall and MegaMall.",
+        "slug": "web-development",
+        "icon": "building-storefront"
+      },
+      {
+        "key": "mobile",
+        "name": "Mobile app (iOS and Android)",
+        "price": 6000,
+        "description": "An app for the App Store and Google Play that runs on the same data as your website.",
+        "slug": "mobile-apps",
+        "icon": "device-phone-mobile"
+      },
+      {
+        "key": "automation",
+        "name": "Business software: CRM, ERP, inventory",
+        "price": 4000,
+        "description": "Software built around your processes that brings sales, inventory and customer work into one system.",
+        "slug": "business-automation",
+        "icon": "cog-6-tooth"
+      },
+      {
+        "key": "seo",
+        "name": "SEO and GEO",
+        "price": 600,
+        "monthly": true,
+        "description": "Monthly work to get you found on Google and in AI search such as ChatGPT and Gemini: audit, content, technical fixes, reporting.",
+        "slug": "seo-optimization",
+        "icon": "magnifying-glass"
+      },
+      {
+        "key": "design",
+        "name": "UI/UX design, logo and branding",
+        "price": 500,
+        "description": "A logo, corporate identity, or user-friendly interface design for your website or app.",
+        "slug": "ui-ux-branding",
+        "icon": "swatch"
+      },
+      {
+        "key": "support",
+        "name": "Technical support and development",
+        "price": 200,
+        "monthly": true,
+        "description": "Updates, backups, security, small changes and new features for your existing website.",
+        "icon": "wrench-screwdriver"
+      }
+    ],
+    "includedLabel": "Included in every price",
+    "includedTitle": "Things we don't charge extra for",
+    "included": [
+      "Free initial consultation and written proposal",
+      "Design that works well on phones and computers",
+      "Admin panel and training on how to use it",
+      "SEO basics: proper headings, speed, sitemap",
+      "Domain, hosting and SSL setup",
+      "1 month of free technical support after handover",
+      "The code, domain and all logins belong to you",
+      "Visible progress every week"
+    ],
+    "factorsLabel": "How pricing works",
+    "factorsTitle": "What affects the final price",
+    "factors": [
+      {
+        "title": "Number of pages and languages",
+        "text": "Every new page and every extra language means its own design, copy and testing."
+      },
+      {
+        "title": "Custom features",
+        "text": "Any feature that isn't ready-made — a calculator, user accounts, bookings — is built separately."
+      },
+      {
+        "title": "Integrations",
+        "text": "Connecting a payment system, CRM, 1C or your existing software adds to the workload."
+      },
+      {
+        "title": "Copy and content",
+        "text": "When we write the copy, pages are built around the searches your customers actually make."
+      }
+    ],
+    "factorsLink": "More on the 7 factors that affect the price",
+    "paymentLabel": "Payment",
+    "paymentTitle": "Payment is split into stages",
+    "paymentSubtitle": "The scope, price, stages and handover terms are set out in the contract. No extra costs appear that you haven't agreed to.",
+    "paymentSteps": [
+      {
+        "title": "Advance",
+        "text": "The contract is signed and work starts within 3–5 business days."
+      },
+      {
+        "title": "Interim payment",
+        "text": "Once the design is approved and the main part is ready."
+      },
+      {
+        "title": "Final payment",
+        "text": "When the website is tested, handed over and everything works."
+      }
+    ],
+    "faq": {
+      "label": "Questions",
+      "title": "Frequently asked questions about pricing",
+      "items": [
+        {
+          "question": "Why do the prices say “from”?",
+          "answer": "Because two websites of the same type can differ a lot in scope. The figure shown is the starting price for the work listed in the package. Once we receive your brief, you get a fixed price in a written proposal, and it doesn't change while the work is under way."
+        },
+        {
+          "question": "Are there hidden or unexpected costs?",
+          "answer": "No. The proposal spells out what is included and what isn't. You never pay for work you haven't agreed to."
+        },
+        {
+          "question": "Are the domain and hosting included in the price?",
+          "answer": "Setting up the domain, hosting and SSL is included. Their annual fees are listed separately in the proposal, and the domain is registered in your name — the domain and all logins always remain yours."
+        },
+        {
+          "question": "How much does it cost to update my existing website?",
+          "answer": "It depends on the state of the website and what you want to change. We review your site for free, then tell you honestly whether rebuilding or fixing it is the better value."
+        },
+        {
+          "question": "What does the SEO and GEO service include?",
+          "answer": "A technical audit, keyword research, writing and updating content, speed and indexing fixes, content structure for AI search, and a monthly report. We show results with Google Search Console data."
+        },
+        {
+          "question": "What support do I get after handover?",
+          "answer": "The first month of technical support is free. After that, if you like, we keep the website updated, secure and growing on a monthly support plan, or handle tasks one by one as you need them."
+        }
+      ]
+    },
+    "ctaTitle": "Find out what your project will cost",
+    "ctaText": "Tell us briefly about your business and what you need — we'll reply within 24 hours with an estimated price and timeline."
   }
 }

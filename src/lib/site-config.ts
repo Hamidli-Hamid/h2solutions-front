@@ -96,7 +96,7 @@ export function resolveSite(dict: SiteOverrides): SiteProfile {
   };
 }
 
-export type NavKey = "home" | "about" | "services" | "portfolio" | "blog" | "contact";
+export type NavKey = "home" | "about" | "services" | "pricing" | "portfolio" | "blog" | "contact";
 
 export type NavItem = { key: string; label?: string; href: string; external?: boolean };
 
@@ -105,6 +105,7 @@ export const navItems: Array<{ key: NavKey; href: (lang: Locale) => string }> = 
   { key: "home", href: (lang) => localePath(lang) },
   { key: "about", href: (lang) => localePath(lang, "/about") },
   { key: "services", href: (lang) => localePath(lang, "/services") },
+  { key: "pricing", href: (lang) => localePath(lang, "/pricing") },
   { key: "portfolio", href: (lang) => localePath(lang, "/portfolio") },
   { key: "blog", href: (lang) => localePath(lang, "/blog") },
   { key: "contact", href: (lang) => localePath(lang, "/contact") },

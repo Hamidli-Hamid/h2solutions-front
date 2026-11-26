@@ -8,6 +8,7 @@
     "home": "Startseite",
     "about": "Über uns",
     "services": "Leistungen",
+    "pricing": "Preise",
     "portfolio": "Projekte",
     "blog": "Blog",
     "contact": "Kontakt",
@@ -679,5 +680,206 @@
     "backgroundColor": "#0d1117",
     "appName": "H2 Solutions — Premium Weblösungen und SEO",
     "appShortName": "H2 Solutions"
+  },
+  "pricing": {
+    "label": "Preise",
+    "title": "Preise für Website-Entwicklung und IT-Leistungen",
+    "subtitle": "Einstiegspreise, Laufzeiten und was genau in jedem Paket enthalten ist — ohne Überraschungen. Den genauen Festpreis erhalten Sie nach einem kurzen Briefing in einem schriftlichen Angebot.",
+    "metaDescription": "H2 Solutions Preise: Landingpage ab 600 AZN, Firmenwebsite ab 1.500 AZN, Onlineshop ab 3.500 AZN, SEO und GEO ab 600 AZN pro Monat. Laufzeiten und Leistungen.",
+    "from": "",
+    "fromPrefix": "ab",
+    "currency": "AZN",
+    "perMonth": "pro Monat",
+    "durationLabel": "Laufzeit",
+    "popular": "Am beliebtesten",
+    "packagesLabel": "Websites",
+    "packagesTitle": "Website-Pakete",
+    "packagesSubtitle": "Unsere drei meistgefragten Formate. Jedes lässt sich auf Ihr Unternehmen zuschneiden — zusätzliche Sprachen, Seiten oder Funktionen weisen wir im Angebot gesondert aus.",
+    "packageCta": "Dieses Paket besprechen",
+    "packageMessage": "Hallo! Ich schreibe Ihnen über die Website h2solutions.az. Ich interessiere mich für das Paket „{name}“.",
+    "packages": [
+      {
+        "key": "landing",
+        "name": "Landingpage",
+        "price": 600,
+        "duration": "1–2 Wochen",
+        "description": "Eine Verkaufsseite, die Anfragen für eine Werbekampagne oder ein einzelnes Angebot sammelt.",
+        "features": [
+          "Individuelles Design für eine Seite",
+          "Anfrageformular, WhatsApp- und Anruf-Buttons",
+          "Schnell geladen und bequem auf dem Smartphone",
+          "Google Analytics und Tracking-Codes für Werbung",
+          "Einrichtung von Domain, Hosting und SSL"
+        ]
+      },
+      {
+        "key": "corporate",
+        "name": "Firmenwebsite",
+        "price": 1500,
+        "duration": "3–5 Wochen",
+        "description": "Eine Website, die Ihr Unternehmen, Ihre Leistungen und Referenzen vorstellt und Kunden über Google bringt.",
+        "featured": true,
+        "features": [
+          "Individuelles Design für bis zu 8 Seiten",
+          "Eine eigene Seite für jede Leistung",
+          "Admin-Panel — Texte und Bilder ändern Sie selbst",
+          "SEO-Grundlagen: Überschriften, Ladezeit, Sitemap",
+          "Blog und Anfrageformulare",
+          "Einrichtung von Domain, Hosting und SSL"
+        ]
+      },
+      {
+        "key": "shop",
+        "name": "Onlineshop",
+        "price": 3500,
+        "duration": "6–10 Wochen",
+        "description": "Ein Shop, der zum Verkaufen gebaut ist — mit Katalog, Warenkorb und Bestellverwaltung.",
+        "features": [
+          "Kategorien, Filter und Suche",
+          "Warenkorb, Bestellung und Online-Zahlung",
+          "Ratenzahlung und Bonusprogramme",
+          "Admin-Panel: Produkte, Preise, Lagerbestand und Bestellungen",
+          "Benachrichtigung über neue Bestellungen per SMS oder WhatsApp",
+          "Suchmaschinenfertige Kategorie- und Produktseiten"
+        ]
+      }
+    ],
+    "servicesLabel": "Weitere Leistungen",
+    "servicesTitle": "Plattformen, Apps, SEO und Design",
+    "servicesSubtitle": "Der Umfang dieser Arbeiten ist von Projekt zu Projekt sehr unterschiedlich, deshalb nennen wir hier Einstiegspreise. Die genaue Summe erhalten Sie nach dem Briefing.",
+    "detailsCta": "Mehr erfahren",
+    "services": [
+      {
+        "key": "platform",
+        "name": "Individuelle Plattform und Marktplatz",
+        "price": 7000,
+        "description": "Kleinanzeigenportal, Marktplatz, Portal mit Kundenkonto — Projekte wie TopdanMall und MegaMall.",
+        "slug": "web-development",
+        "icon": "building-storefront"
+      },
+      {
+        "key": "mobile",
+        "name": "Mobile App (iOS und Android)",
+        "price": 6000,
+        "description": "Eine App für App Store und Google Play, die mit denselben Daten arbeitet wie Ihre Website.",
+        "slug": "mobile-apps",
+        "icon": "device-phone-mobile"
+      },
+      {
+        "key": "automation",
+        "name": "Unternehmenssoftware: CRM, ERP, Lager",
+        "price": 4000,
+        "description": "Software nach Ihren Abläufen, die Vertrieb, Lager und Kundenarbeit in einem System bündelt.",
+        "slug": "business-automation",
+        "icon": "cog-6-tooth"
+      },
+      {
+        "key": "seo",
+        "name": "SEO und GEO",
+        "price": 600,
+        "monthly": true,
+        "description": "Monatliche Arbeit für Ihre Sichtbarkeit bei Google und in KI-Suchen wie ChatGPT und Gemini: Audit, Texte, technische Korrekturen, Bericht.",
+        "slug": "seo-optimization",
+        "icon": "magnifying-glass"
+      },
+      {
+        "key": "design",
+        "name": "UI/UX-Design, Logo und Branding",
+        "price": 500,
+        "description": "Logo, Corporate Design oder eine benutzerfreundliche Oberfläche für Website und App.",
+        "slug": "ui-ux-branding",
+        "icon": "swatch"
+      },
+      {
+        "key": "support",
+        "name": "Technischer Support und Weiterentwicklung",
+        "price": 200,
+        "monthly": true,
+        "description": "Updates, Backups, Sicherheit, kleine Änderungen und neue Funktionen für Ihre bestehende Website.",
+        "icon": "wrench-screwdriver"
+      }
+    ],
+    "includedLabel": "In jedem Preis enthalten",
+    "includedTitle": "Wofür wir nichts extra berechnen",
+    "included": [
+      "Kostenlose Erstberatung und schriftliches Angebot",
+      "Design, das auf Smartphone und Computer gut funktioniert",
+      "Admin-Panel und Einweisung in die Bedienung",
+      "SEO-Grundlagen: saubere Überschriften, Ladezeit, Sitemap",
+      "Einrichtung von Domain, Hosting und SSL",
+      "1 Monat kostenloser technischer Support nach der Übergabe",
+      "Code, Domain und alle Zugänge gehören Ihnen",
+      "Sichtbarer Fortschritt jede Woche"
+    ],
+    "factorsLabel": "So entsteht der Preis",
+    "factorsTitle": "Was den Endpreis beeinflusst",
+    "factors": [
+      {
+        "title": "Anzahl der Seiten und Sprachen",
+        "text": "Jede neue Seite und jede zusätzliche Sprache bedeutet eigenes Design, eigene Texte und eigene Prüfung."
+      },
+      {
+        "title": "Sonderfunktionen",
+        "text": "Jede Funktion, die es nicht fertig gibt — etwa ein Rechner, ein Kundenkonto oder eine Buchung — wird eigens entwickelt."
+      },
+      {
+        "title": "Integrationen",
+        "text": "Die Anbindung an ein Zahlungssystem, CRM, 1C oder Ihre bestehende Software erhöht den Aufwand."
+      },
+      {
+        "title": "Texte und Inhalte",
+        "text": "Wenn wir die Texte schreiben, richten wir die Seiten auf die Suchanfragen Ihrer Kunden aus."
+      }
+    ],
+    "factorsLink": "Mehr zu den 7 Faktoren, die den Preis beeinflussen",
+    "paymentLabel": "Zahlung",
+    "paymentTitle": "Die Zahlung erfolgt in Etappen",
+    "paymentSubtitle": "Leistungsumfang, Preis, Etappen und Übergabebedingungen stehen im Vertrag. Es entstehen keine Zusatzkosten, denen Sie nicht zugestimmt haben.",
+    "paymentSteps": [
+      {
+        "title": "Anzahlung",
+        "text": "Der Vertrag wird unterschrieben, die Arbeit beginnt innerhalb von 3–5 Werktagen."
+      },
+      {
+        "title": "Zwischenzahlung",
+        "text": "Nach Freigabe des Designs und Fertigstellung des Hauptteils."
+      },
+      {
+        "title": "Schlusszahlung",
+        "text": "Wenn die Website getestet und übergeben ist und alles funktioniert."
+      }
+    ],
+    "faq": {
+      "label": "Fragen",
+      "title": "Häufige Fragen zu den Preisen",
+      "items": [
+        {
+          "question": "Warum stehen die Preise mit „ab“?",
+          "answer": "Weil zwei Websites derselben Art im Umfang sehr unterschiedlich sein können. Der angegebene Betrag ist der Einstiegspreis für die im Paket genannten Leistungen. Nach Ihrem Briefing erhalten Sie einen Festpreis im schriftlichen Angebot, der sich während der Arbeit nicht ändert."
+        },
+        {
+          "question": "Gibt es versteckte oder nachträgliche Kosten?",
+          "answer": "Nein. Im Angebot steht gesondert, was enthalten ist und was nicht. Sie zahlen für keine Arbeit, der Sie nicht zugestimmt haben."
+        },
+        {
+          "question": "Sind Domain und Hosting im Preis enthalten?",
+          "answer": "Die Einrichtung von Domain, Hosting und SSL ist enthalten. Die jährlichen Gebühren dafür weisen wir im Angebot gesondert aus, und die Domain wird auf Ihren Namen registriert — Domain und alle Zugänge bleiben immer Ihr Eigentum."
+        },
+        {
+          "question": "Was kostet die Überarbeitung meiner bestehenden Website?",
+          "answer": "Das hängt vom Zustand der Website ab und davon, was Sie ändern möchten. Wir prüfen Ihre Website kostenlos und sagen Ihnen dann offen, ob sich ein Neuaufbau oder eine Überarbeitung mehr lohnt."
+        },
+        {
+          "question": "Was umfasst die Leistung SEO und GEO?",
+          "answer": "Technisches Audit, Keyword-Recherche, Erstellung und Aktualisierung von Texten, Korrekturen bei Ladezeit und Indexierung, Inhaltsstruktur für KI-Suchen und ein monatlicher Bericht. Die Ergebnisse belegen wir mit Zahlen aus der Google Search Console."
+        },
+        {
+          "question": "Wie sieht der Support nach der Übergabe aus?",
+          "answer": "Der erste Monat technischer Support ist kostenlos. Danach halten wir Ihre Website auf Wunsch mit einem monatlichen Supportpaket aktuell, sicher und entwickeln sie weiter — oder wir erledigen einzelne Aufgaben nach Bedarf."
+        }
+      ]
+    },
+    "ctaTitle": "Erfahren Sie, was Ihr Projekt kostet",
+    "ctaText": "Beschreiben Sie kurz Ihr Unternehmen und was Sie brauchen — wir antworten innerhalb von 24 Stunden mit einem ungefähren Preis und Zeitrahmen."
   }
 }

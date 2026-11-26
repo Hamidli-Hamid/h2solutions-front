@@ -16,6 +16,7 @@ export type PageKey =
   | "portfolio"
   | "blog"
   | "contact"
+  | "pricing"
   | "not-found"
   | "service-detail"
   | "project-detail"

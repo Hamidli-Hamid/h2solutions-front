@@ -8,6 +8,7 @@
     "home": "Bosh sahifa",
     "about": "Biz haqimizda",
     "services": "Xizmatlar",
+    "pricing": "Narxlar",
     "portfolio": "Loyihalar",
     "blog": "Blog",
     "contact": "Aloqa",
@@ -679,5 +680,206 @@
     "backgroundColor": "#0d1117",
     "appName": "H2 Solutions — Premium veb yechimlar va SEO",
     "appShortName": "H2 Solutions"
+  },
+  "pricing": {
+    "label": "Narxlar",
+    "title": "Sayt yaratish va IT xizmatlari narxlari",
+    "subtitle": "Boshlangʻich narxlar, muddatlar va har bir paketga nima kirishi — kutilmagan xarajatlarsiz. Aniq va qatʼiy narx qisqa brifdan keyin yozma taklifda beriladi.",
+    "metaDescription": "H2 Solutions narxlari: landing page 600 AZN-dan, korporativ sayt 1 500 AZN-dan, onlayn doʻkon 3 500 AZN-dan, SEO va GEO oyiga 600 AZN-dan. Muddat va toʻlov.",
+    "from": "-dan",
+    "fromPrefix": "",
+    "currency": "AZN",
+    "perMonth": "oyiga",
+    "durationLabel": "Muddat",
+    "popular": "Eng koʻp tanlanadi",
+    "packagesLabel": "Veb-saytlar",
+    "packagesTitle": "Sayt paketlari",
+    "packagesSubtitle": "Eng koʻp buyurtma qilinadigan uchta format. Har birini biznesingizga moslab kengaytirish mumkin — til, sahifa yoki funksiya qoʻshish taklifda alohida koʻrsatiladi.",
+    "packageCta": "Bu paketni muhokama qilish",
+    "packageMessage": "Assalomu alaykum! h2solutions.az saytidan yozyapman. «{name}» paketi bilan qiziqyapman.",
+    "packages": [
+      {
+        "key": "landing",
+        "name": "Landing page",
+        "price": 600,
+        "duration": "1–2 hafta",
+        "description": "Bitta reklama kampaniyasi yoki bitta taklif uchun murojaatlar yigʻadigan sotuv sahifasi.",
+        "features": [
+          "Bir sahifali individual dizayn",
+          "Murojaat shakli, WhatsApp va qoʻngʻiroq tugmalari",
+          "Telefonda qulay, tez ochiladigan sahifa",
+          "Google Analytics va reklama kuzatuv kodlari",
+          "Domen, hosting va SSL sozlash"
+        ]
+      },
+      {
+        "key": "corporate",
+        "name": "Korporativ sayt",
+        "price": 1500,
+        "duration": "3–5 hafta",
+        "description": "Kompaniya, xizmatlar va ishlaringizni tanishtiradigan, Google orqali mijoz olib keladigan sayt.",
+        "featured": true,
+        "features": [
+          "8 sahifagacha individual dizayn",
+          "Har bir xizmat uchun alohida sahifa",
+          "Admin panel — matn va rasmlarni oʻzingiz oʻzgartirasiz",
+          "SEO asoslari: sarlavhalar, tezlik, sitemap",
+          "Blog va murojaat shakllari",
+          "Domen, hosting va SSL sozlash"
+        ]
+      },
+      {
+        "key": "shop",
+        "name": "Onlayn doʻkon",
+        "price": 3500,
+        "duration": "6–10 hafta",
+        "description": "Katalog, savat va buyurtmalarni boshqarish imkoniyati bor, sotish uchun qurilgan doʻkon.",
+        "features": [
+          "Kategoriyalar, filtr va qidiruv",
+          "Savat, buyurtma va onlayn toʻlov",
+          "Boʻlib toʻlash va bonus imkoniyatlari",
+          "Admin panel: mahsulotlar, narxlar, ombordagi qoldiq va buyurtmalar",
+          "Yangi buyurtma haqida SMS yoki WhatsApp xabarnomasi",
+          "Qidiruvga tayyor kategoriya va mahsulot sahifalari"
+        ]
+      }
+    ],
+    "servicesLabel": "Boshqa xizmatlar",
+    "servicesTitle": "Platformalar, ilovalar, SEO va dizayn",
+    "servicesSubtitle": "Bu ishlarning hajmi loyihadan loyihaga juda farq qiladi, shuning uchun bu yerda boshlangʻich narxni koʻrsatamiz. Aniq summa brifdan keyin aytiladi.",
+    "detailsCta": "Batafsil",
+    "services": [
+      {
+        "key": "platform",
+        "name": "Individual platforma va marketpleys",
+        "price": 7000,
+        "description": "Eʼlonlar sayti, marketpleys, shaxsiy kabinetli portal — TopdanMall va MegaMall kabi loyihalar.",
+        "slug": "web-development",
+        "icon": "building-storefront"
+      },
+      {
+        "key": "mobile",
+        "name": "Mobil ilova (iOS va Android)",
+        "price": 6000,
+        "description": "Saytingiz bilan bir xil maʼlumotlar asosida ishlaydigan, App Store va Google Play uchun ilova.",
+        "slug": "mobile-apps",
+        "icon": "device-phone-mobile"
+      },
+      {
+        "key": "automation",
+        "name": "Biznes dasturlari: CRM, ERP, ombor",
+        "price": 4000,
+        "description": "Savdo, ombor va mijozlar bilan ishni bitta tizimga jamlaydigan, sizning jarayonlaringizga moslab yoziladigan dastur.",
+        "slug": "business-automation",
+        "icon": "cog-6-tooth"
+      },
+      {
+        "key": "seo",
+        "name": "SEO va GEO",
+        "price": 600,
+        "monthly": true,
+        "description": "Google va ChatGPT, Gemini kabi sunʼiy intellekt qidiruvlarida koʻrinish uchun oylik ish: audit, matnlar, texnik tuzatishlar, hisobot.",
+        "slug": "seo-optimization",
+        "icon": "magnifying-glass"
+      },
+      {
+        "key": "design",
+        "name": "UI/UX dizayn, logotip va brending",
+        "price": 500,
+        "description": "Logotip, korporativ uslub yoki sayt va ilova uchun foydalanishga qulay interfeys dizayni.",
+        "slug": "ui-ux-branding",
+        "icon": "swatch"
+      },
+      {
+        "key": "support",
+        "name": "Texnik yordam va rivojlantirish",
+        "price": 200,
+        "monthly": true,
+        "description": "Tayyor saytni yangilash, zaxira nusxalar, xavfsizlik, kichik oʻzgarishlar va yangi funksiyalar.",
+        "icon": "wrench-screwdriver"
+      }
+    ],
+    "includedLabel": "Har bir narxga kiradi",
+    "includedTitle": "Alohida pul olmaydigan narsalarimiz",
+    "included": [
+      "Bepul dastlabki maslahat va yozma taklif",
+      "Telefonda ham, kompyuterda ham qulay ishlaydigan dizayn",
+      "Admin panel va undan foydalanishni oʻrgatish",
+      "SEO asoslari: toʻgʻri sarlavhalar, tezlik, sitemap",
+      "Domen, hosting va SSL sozlash",
+      "Topshirgandan keyin 1 oy bepul texnik yordam",
+      "Kod, domen va barcha kirish maʼlumotlari sizga tegishli",
+      "Ish jarayonini har hafta koʻrib borasiz"
+    ],
+    "factorsLabel": "Narx qanday shakllanadi",
+    "factorsTitle": "Yakuniy narxga nima taʼsir qiladi",
+    "factors": [
+      {
+        "title": "Sahifalar va tillar soni",
+        "text": "Har bir yangi sahifa va har bir qoʻshimcha til — bu alohida dizayn, matn va tekshiruv demakdir."
+      },
+      {
+        "title": "Maxsus funksiyalar",
+        "text": "Kalkulyator, shaxsiy kabinet, bron qilish kabi tayyor yechimi boʻlmagan har bir funksiya alohida yoziladi."
+      },
+      {
+        "title": "Integratsiyalar",
+        "text": "Toʻlov tizimi, CRM, 1C yoki mavjud dasturlar bilan bogʻlash ish hajmini oshiradi."
+      },
+      {
+        "title": "Matnlar va kontent",
+        "text": "Matnlarni biz yozsak, sahifalar mijozlaringiz qidiradigan soʻrovlarga moslab tayyorlanadi."
+      }
+    ],
+    "factorsLink": "Narxga taʼsir qiluvchi 7 omil haqida batafsil",
+    "paymentLabel": "Toʻlov",
+    "paymentTitle": "Toʻlov bosqichlarga boʻlinadi",
+    "paymentSubtitle": "Ish hajmi, narx, bosqichlar va topshirish shartlari shartnomada yoziladi. Kelishilmagan qoʻshimcha xarajat chiqmaydi.",
+    "paymentSteps": [
+      {
+        "title": "Avans",
+        "text": "Shartnoma imzolanadi, ish 3–5 ish kuni ichida boshlanadi."
+      },
+      {
+        "title": "Oraliq toʻlov",
+        "text": "Dizayn tasdiqlangan va asosiy qism tayyor boʻlgandan keyin."
+      },
+      {
+        "title": "Yakuniy toʻlov",
+        "text": "Sayt sinovdan oʻtkazilib topshirilganda va hammasi ishlaganda."
+      }
+    ],
+    "faq": {
+      "label": "Savollar",
+      "title": "Narxlar haqida koʻp beriladigan savollar",
+      "items": [
+        {
+          "question": "Nega narxlar «-dan» deb yozilgan?",
+          "answer": "Chunki bir xil nomdagi ikki sayt hajmi jihatidan juda farq qilishi mumkin. Koʻrsatilgan summa — paketda yozilgan ishning boshlangʻich narxi. Brifingizni olganimizdan keyin qatʼiy narx yozma taklifda beriladi va ish davomida oʻzgarmaydi."
+        },
+        {
+          "question": "Yashirin yoki keyin chiqadigan xarajatlar boʻladimi?",
+          "answer": "Yoʻq. Taklifda nima kirishi va nima kirmasligi alohida yoziladi. Siz rozi boʻlmagan hech qanday ish uchun pul toʻlamaysiz."
+        },
+        {
+          "question": "Domen va hosting narxga kiradimi?",
+          "answer": "Domen, hosting va SSL sozlash kiradi. Ularning yillik toʻlovi taklifda alohida koʻrsatiladi, domen esa sizning nomingizga roʻyxatdan oʻtkaziladi — domen va barcha kirish maʼlumotlari doimo sizda qoladi."
+        },
+        {
+          "question": "Mavjud saytimni yangilash qancha turadi?",
+          "answer": "Bu saytning holatiga va nimani oʻzgartirmoqchi ekaningizga bogʻliq. Saytni bepul tekshiramiz, keyin qayta qurish yoki tuzatish — qaysi biri foydaliroq ekanini ochiq aytamiz."
+        },
+        {
+          "question": "SEO va GEO xizmatiga nima kiradi?",
+          "answer": "Texnik audit, kalit soʻzlarni tadqiq qilish, matnlarni yozish va yangilash, tezlik va indeksatsiyani tuzatish, sunʼiy intellekt qidiruvlari uchun kontent tuzilmasi va oylik hisobot. Natijani Google Search Console raqamlari bilan koʻrsatamiz."
+        },
+        {
+          "question": "Topshirgandan keyin yordam qanday boʻladi?",
+          "answer": "Birinchi oy texnik yordam bepul. Keyin xohlasangiz, oylik yordam paketi bilan saytni yangilab, himoya qilib va rivojlantirib boramiz yoki kerak boʻlganda alohida ishlar sifatida bajaramiz."
+        }
+      ]
+    },
+    "ctaTitle": "Loyihangiz narxini bilib oling",
+    "ctaText": "Biznesingiz va sizga nima kerakligini qisqacha yozing — 24 soat ichida taxminiy narx va muddat bilan javob beramiz."
   }
 }

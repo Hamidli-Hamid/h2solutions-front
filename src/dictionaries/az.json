@@ -8,6 +8,7 @@
     "home": "Ana səhifə",
     "about": "Haqqımızda",
     "services": "Xidmətlər",
+    "pricing": "Qiymətlər",
     "portfolio": "Layihələr",
     "blog": "Bloq",
     "contact": "Əlaqə",
@@ -679,5 +680,206 @@
     "backgroundColor": "#0d1117",
     "appName": "H2 Solutions — Premium veb həllər və SEO",
     "appShortName": "H2 Solutions"
+  },
+  "pricing": {
+    "label": "Qiymətlər",
+    "title": "Sayt hazırlanması və IT xidmətlərinin qiymətləri",
+    "subtitle": "Başlanğıc qiymətlər, müddətlər və hər paketə nəyin daxil olduğu — sürprizsiz. Dəqiq və sabit qiymət qısa brifdən sonra yazılı təklifdə gəlir.",
+    "metaDescription": "H2 Solutions qiymətləri: landing page 600 AZN-dən, korporativ sayt 1 500 AZN-dən, onlayn mağaza 3 500 AZN-dən, SEO və GEO ayda 600 AZN-dən. Müddətlər, paketlərə daxil olanlar və ödəniş qaydası.",
+    "from": "-dan",
+    "fromPrefix": "",
+    "currency": "AZN",
+    "perMonth": "ayda",
+    "durationLabel": "Müddət",
+    "popular": "Ən çox seçilən",
+    "packagesLabel": "Veb saytlar",
+    "packagesTitle": "Sayt paketləri",
+    "packagesSubtitle": "Üç ən çox sifariş olunan format. Hər birini biznesinizə görə genişləndirmək olar — dil, səhifə və ya funksiya əlavə etmək təklifdə ayrıca göstərilir.",
+    "packageCta": "Bu paketi müzakirə et",
+    "packageMessage": "Salam! h2solutions.az saytından yazıram. «{name}» paketi ilə maraqlanıram.",
+    "packages": [
+      {
+        "key": "landing",
+        "name": "Landing page",
+        "price": 600,
+        "duration": "1–2 həftə",
+        "description": "Bir reklam kampaniyası və ya tək təklif üçün müraciət toplayan satış səhifəsi.",
+        "features": [
+          "Bir səhifəlik fərdi dizayn",
+          "Müraciət forması, WhatsApp və zəng düymələri",
+          "Telefonda rahat, tez açılan səhifə",
+          "Google Analytics və reklam izləmə kodları",
+          "Domen, hosting və SSL quraşdırması"
+        ]
+      },
+      {
+        "key": "corporate",
+        "name": "Korporativ sayt",
+        "price": 1500,
+        "duration": "3–5 həftə",
+        "description": "Şirkəti, xidmətləri və işləri tanıdan, Google-dan müştəri gətirən sayt.",
+        "featured": true,
+        "features": [
+          "8 səhifəyə qədər fərdi dizayn",
+          "Hər xidmət üçün ayrıca səhifə",
+          "Admin panel — mətn və şəkilləri özünüz dəyişirsiniz",
+          "SEO əsasları: başlıqlar, sürət, sitemap",
+          "Bloq və müraciət formaları",
+          "Domen, hosting və SSL quraşdırması"
+        ]
+      },
+      {
+        "key": "shop",
+        "name": "Onlayn mağaza",
+        "price": 3500,
+        "duration": "6–10 həftə",
+        "description": "Kataloqu, səbəti və sifariş idarəsi olan, satış üçün qurulan mağaza.",
+        "features": [
+          "Kateqoriyalar, filtr və axtarış",
+          "Səbət, sifariş və onlayn ödəniş",
+          "Hissəli ödəniş və bonus imkanları",
+          "Admin panel: məhsul, qiymət, stok və sifarişlər",
+          "Yeni sifariş haqqında SMS və ya WhatsApp bildirişi",
+          "Axtarışa hazır kateqoriya və məhsul səhifələri"
+        ]
+      }
+    ],
+    "servicesLabel": "Digər xidmətlər",
+    "servicesTitle": "Platformalar, tətbiqlər, SEO və dizayn",
+    "servicesSubtitle": "Bu işlərin həcmi layihədən layihəyə çox dəyişir, ona görə burada başlanğıc qiymət göstəririk. Dəqiq rəqəm brifdən sonra gəlir.",
+    "detailsCta": "Ətraflı",
+    "services": [
+      {
+        "key": "platform",
+        "name": "Fərdi platforma və marketplace",
+        "price": 7000,
+        "description": "Elan saytı, marketplace, şəxsi kabinetli portal — TopdanMall və MegaMall kimi layihələr.",
+        "slug": "web-development",
+        "icon": "building-storefront"
+      },
+      {
+        "key": "mobile",
+        "name": "Mobil tətbiq (iOS və Android)",
+        "price": 6000,
+        "description": "Saytınızla eyni məlumatlarla işləyən, App Store və Google Play üçün tətbiq.",
+        "slug": "mobile-apps",
+        "icon": "device-phone-mobile"
+      },
+      {
+        "key": "automation",
+        "name": "Biznes proqramları: CRM, ERP, anbar",
+        "price": 4000,
+        "description": "Satış, anbar və müştəri işini bir sistemdə toplayan, sizin prosesinizə görə yazılan proqram.",
+        "slug": "business-automation",
+        "icon": "cog-6-tooth"
+      },
+      {
+        "key": "seo",
+        "name": "SEO və GEO",
+        "price": 600,
+        "monthly": true,
+        "description": "Google-da və ChatGPT, Gemini kimi süni intellekt axtarışlarında görünmək üçün aylıq iş: audit, mətn, texniki düzəlişlər, hesabat.",
+        "slug": "seo-optimization",
+        "icon": "magnifying-glass"
+      },
+      {
+        "key": "design",
+        "name": "UI/UX dizayn, loqo və brendinq",
+        "price": 500,
+        "description": "Loqo, korporativ üslub və ya sayt və tətbiq üçün istifadəsi rahat interfeys dizaynı.",
+        "slug": "ui-ux-branding",
+        "icon": "swatch"
+      },
+      {
+        "key": "support",
+        "name": "Texniki dəstək və inkişaf",
+        "price": 200,
+        "monthly": true,
+        "description": "Hazır saytın yenilənməsi, ehtiyat nüsxələr, təhlükəsizlik, kiçik dəyişikliklər və yeni funksiyalar.",
+        "icon": "wrench-screwdriver"
+      }
+    ],
+    "includedLabel": "Hər qiymətə daxildir",
+    "includedTitle": "Ayrıca pul istəmədiyimiz şeylər",
+    "included": [
+      "Pulsuz ilkin konsultasiya və yazılı təklif",
+      "Telefonda və kompüterdə rahat işləyən dizayn",
+      "Admin panel və istifadə təlimi",
+      "SEO əsasları: düzgün başlıqlar, sürət, sitemap",
+      "Domen, hosting və SSL-in qurulması",
+      "Təhvildən sonra 1 ay pulsuz texniki dəstək",
+      "Kod, domen və bütün girişlər sizə məxsusdur",
+      "Hər həftə görünən irəliləyiş"
+    ],
+    "factorsLabel": "Qiymət necə formalaşır",
+    "factorsTitle": "Yekun qiymətə nə təsir edir",
+    "factors": [
+      {
+        "title": "Səhifə və dil sayı",
+        "text": "Hər yeni səhifə və hər əlavə dil öz dizaynı, mətni və yoxlaması deməkdir."
+      },
+      {
+        "title": "Xüsusi funksiyalar",
+        "text": "Kalkulyator, şəxsi kabinet, rezervasiya kimi hazır olmayan hər funksiya ayrıca yazılır."
+      },
+      {
+        "title": "İnteqrasiyalar",
+        "text": "Ödəniş sistemi, CRM, 1C və ya mövcud proqramlarla əlaqə iş həcmini artırır."
+      },
+      {
+        "title": "Mətnlər və məzmun",
+        "text": "Mətnləri biz yazanda səhifələr müştərilərinizin axtardığı sorğulara görə hazırlanır."
+      }
+    ],
+    "factorsLink": "Qiymətə təsir edən 7 amil haqqında ətraflı",
+    "paymentLabel": "Ödəniş",
+    "paymentTitle": "Ödəniş mərhələlərə bölünür",
+    "paymentSubtitle": "İş həcmi, qiymət, mərhələlər və təhvil şərtləri müqavilədə yazılır. Razılaşdırılmamış əlavə xərc çıxmır.",
+    "paymentSteps": [
+      {
+        "title": "Avans",
+        "text": "Müqavilə imzalanır, iş 3–5 iş günü ərzində başlayır."
+      },
+      {
+        "title": "Aralıq ödəniş",
+        "text": "Dizayn təsdiqlənəndən və əsas hissə hazır olandan sonra."
+      },
+      {
+        "title": "Yekun ödəniş",
+        "text": "Sayt test olunub təhvil veriləndə və hər şey işləyəndə."
+      }
+    ],
+    "faq": {
+      "label": "Suallar",
+      "title": "Qiymətlər haqqında tez-tez verilən suallar",
+      "items": [
+        {
+          "question": "Niyə qiymətlər «-dan» yazılıb?",
+          "answer": "Çünki eyni adlı iki sayt həcmcə çox fərqli ola bilər. Göstərilən rəqəm paketdə yazılan işin başlanğıc qiymətidir. Brifinizi alandan sonra sabit qiymət yazılı təklifdə gəlir və iş gedişində dəyişmir."
+        },
+        {
+          "question": "Gizli və ya sonradan çıxan xərc olurmu?",
+          "answer": "Xeyr. Təklifdə nəyin daxil olduğu və nəyin daxil olmadığı ayrıca yazılır. Siz razılaşmadığınız heç bir iş üçün ödəniş etmirsiniz."
+        },
+        {
+          "question": "Domen və hosting qiymətə daxildirmi?",
+          "answer": "Domenin, hostinqin və SSL-in qurulması daxildir. Onların illik haqqı təklifdə ayrıca göstərilir, domen isə sizin adınıza qeydiyyatdan keçir — domen və bütün girişlər həmişə sizə məxsus qalır."
+        },
+        {
+          "question": "Mövcud saytımı yeniləmək neçəyə olar?",
+          "answer": "Bu, saytın vəziyyətindən və nə dəyişmək istədiyinizdən asılıdır. Saytı pulsuz yoxlayırıq, sonra yenidən qurmağın və ya düzəltməyin hansının sərfəli olduğunu açıq deyirik."
+        },
+        {
+          "question": "SEO və GEO xidmətinə nə daxildir?",
+          "answer": "Texniki audit, açar söz araşdırması, mətnlərin yazılması və yenilənməsi, sürət və indeksləmə düzəlişləri, süni intellekt axtarışları üçün məzmun quruluşu və aylıq hesabat. Nəticəni Google Search Console rəqəmləri ilə göstəririk."
+        },
+        {
+          "question": "Təhvildən sonra dəstək necə olur?",
+          "answer": "İlk ay texniki dəstək pulsuzdur. Sonra istəsəniz aylıq dəstək paketi ilə saytı yeniləyir, qoruyur və inkişaf etdiririk, ya da ehtiyac olanda ayrıca işlər kimi görürük."
+        }
+      ]
+    },
+    "ctaTitle": "Layihənizin qiymətini öyrənin",
+    "ctaText": "Biznesinizi və nə lazım olduğunu qısa yazın — 24 saat ərzində təxmini qiymət və müddətlə cavab verək."
   }
 }

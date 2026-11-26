@@ -35,6 +35,7 @@ const staticPaths: Array<{ path: string; page: PageKey }> = [
   { path: "", page: "home" },
   { path: "/about", page: "about" },
   { path: "/services", page: "services" },
+  { path: "/pricing", page: "pricing" },
   { path: "/portfolio", page: "portfolio" },
   { path: "/blog", page: "blog" },
   { path: "/contact", page: "contact" },
