@@ -56,8 +56,49 @@ export function telHref(phone: string): string {
  * `wa.me` takes the international number as bare digits — no `+`, no `00`
  * international prefix, no spacing.
  */
-export function whatsappHref(number: string): string {
-  return `https://wa.me/${number.replace(/\D/g, "").replace(/^00/, "")}`;
+export function whatsappHref(number: string, text?: string): string {
+  const query = text ? `?text=${encodeURIComponent(text)}` : "";
+  return `https://wa.me/${whatsappDigits(number)}${query}`;
+}
+
+/** WhatsApp Web's own chat URL — a desktop browser opens the chat in place
+ *  instead of wa.me's "open the app?" landing page. */
+export function whatsappWebHref(number: string, text?: string): string {
+  const query = text ? `&text=${encodeURIComponent(text)}` : "";
+  return `https://web.whatsapp.com/send?phone=${whatsappDigits(number)}${query}`;
+}
+
+function whatsappDigits(number: string): string {
+  return number.replace(/\D/g, "").replace(/^00/, "");
+}
+
+/**
+ * The chat every «discuss a project» button opens: the admin's WhatsApp line
+ * with the page language's ready-made first message. null while no real line
+ * exists, so callers keep linking to the contact page instead.
+ */
+export function projectChat(contact: {
+  phone?: string | null;
+  whatsapp?: string | null;
+  whatsappMessage?: string | null;
+}): { number: string; message: string; display: string; local: string } | null {
+  const { phone, whatsapp } = contactNumbers(contact);
+  if (!whatsapp) return null;
+  const sameLine = phone && phone.replace(/\D/g, "") === whatsapp.replace(/\D/g, "");
+  return {
+    number: whatsapp,
+    message: contact.whatsappMessage ?? "",
+    display: sameLine ? phone : `+${whatsappDigits(whatsapp)}`,
+    local: localAzNumber(whatsapp),
+  };
+}
+
+/** "+994 77 717-54-54" → "077 717 54 54", the way the number is said in
+ *  Azerbaijan and short enough for a phone's header. "" for other countries. */
+function localAzNumber(number: string): string {
+  const d = whatsappDigits(number);
+  if (!/^994\d{9}$/.test(d)) return "";
+  return `0${d.slice(3, 5)} ${d.slice(5, 8)} ${d.slice(8, 10)} ${d.slice(10)}`;
 }
 
 /**

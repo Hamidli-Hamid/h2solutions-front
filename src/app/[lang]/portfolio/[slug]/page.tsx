@@ -19,6 +19,7 @@ import { getPageSeo } from "@/lib/content";
 import { localeUrl } from "@/lib/site-config";
 import { breadcrumbJsonLd, mergeAdminNodes, projectJsonLd } from "@/lib/jsonld";
 import { resolveProjectVideo } from "@/lib/video";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -119,10 +120,10 @@ export default async function ProjectDetailPage({
         subtitle={project.summary}
         actions={
           <>
-            <Link href={localePath(lang, "/contact")} className="btn-primary">
+            <DiscussLink lang={lang} dict={dict} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
             {service && (
               <Link
                 href={localePath(lang, `/services/${service.slug}`)}

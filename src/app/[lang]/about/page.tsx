@@ -15,6 +15,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
 import { localeUrl } from "@/lib/site-config";
 import { aboutPageJsonLd, breadcrumbJsonLd, mergeAdminNodes } from "@/lib/jsonld";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 export async function generateMetadata({
   params,
@@ -59,10 +60,10 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
         subtitle={t.subtitle}
         actions={
           <>
-            <Link href={localePath(lang, "/contact")} className="btn-primary">
+            <DiscussLink lang={lang} dict={dict} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
             <Link href={localePath(lang, "/portfolio")} className="btn-secondary">
               {dict.hero.ctaSecondary}
             </Link>

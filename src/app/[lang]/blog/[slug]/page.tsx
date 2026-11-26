@@ -21,6 +21,7 @@ import { buildMetadata, twitterHandleFor } from "@/lib/seo";
 import { getPageSeo } from "@/lib/content";
 import { localeUrl, resolveSite } from "@/lib/site-config";
 import { blogPostingJsonLd, breadcrumbJsonLd, mergeAdminNodes } from "@/lib/jsonld";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 export async function generateStaticParams() {
   const all = await Promise.all(
@@ -184,13 +185,10 @@ export default async function BlogPostPage({
             <p className="mt-2 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
               {dict.blog.helpText}
             </p>
-            <Link
-              href={localePath(lang, "/contact")}
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
-            >
+            <DiscussLink lang={lang} dict={dict} className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
           </div>
 
           {related.length > 0 && (

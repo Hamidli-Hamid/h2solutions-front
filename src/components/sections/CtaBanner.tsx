@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { SplitWords } from "@/components/ui/SplitWords";
 import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 type Props = {
   lang: Locale;
@@ -65,14 +66,10 @@ export function CtaBanner({ lang, dict, title, subtitle, className }: Props) {
                 {subtitle ?? dict.contact.subtitle}
               </p>
             </div>
-            <Link
-              href={localePath(lang, "/contact")}
-              data-magnetic
-              className="btn-primary self-start px-7 py-4 md:self-end"
-            >
+            <DiscussLink lang={lang} dict={dict} magnetic className="btn-primary self-start px-7 py-4 md:self-end">
               <span>{dict.hero.ctaPrimary}</span>
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
           </div>
         </div>
       </div>

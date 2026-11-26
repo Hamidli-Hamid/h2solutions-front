@@ -29,6 +29,7 @@ import {
   serviceJsonLd,
   servicePageJsonLd,
 } from "@/lib/jsonld";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 /**
  * The description is plain text from a textarea: a blank line starts a new
@@ -148,10 +149,10 @@ export default async function ServiceDetailPage({
         subtitle={service.summary}
         actions={
           <>
-            <Link href={localePath(lang, "/contact")} className="btn-primary">
+            <DiscussLink lang={lang} dict={dict} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
             <Link href={localePath(lang, "/services")} className="btn-secondary">
               {dict.servicesPreview.viewAll}
             </Link>
@@ -238,13 +239,10 @@ export default async function ServiceDetailPage({
               <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
                 {dict.services.startText}
               </p>
-              <Link
-                href={localePath(lang, "/contact")}
-                className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm"
-              >
+              <DiscussLink lang={lang} dict={dict} className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm">
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon aria-hidden className="h-4 w-4" />
-              </Link>
+              </DiscussLink>
 
               <address className="mt-5 space-y-2.5 border-t border-[color:var(--color-border)] pt-5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
                 {/* Only a real number; the shipped placeholder is a gap, not a line. */}

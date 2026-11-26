@@ -10,6 +10,7 @@ import { OrbitDecor } from "@/components/ui/OrbitDecor";
 import { localePath, type Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { ApiService } from "@/lib/api";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 type Props = {
   lang: Locale;
@@ -110,14 +111,10 @@ export function Hero({ lang, dict, services }: Props) {
               className="rise mt-9 flex flex-wrap gap-3 xl:mt-10 xl:gap-4"
               style={{ "--d": "320ms" } as React.CSSProperties}
             >
-              <Link
-                href={localePath(lang, "/contact")}
-                data-magnetic
-                className="btn-primary max-sm:w-full max-sm:justify-center"
-              >
+              <DiscussLink lang={lang} dict={dict} magnetic className="btn-primary max-sm:w-full max-sm:justify-center">
                 <span>{dict.hero.ctaPrimary}</span>
                 <ArrowRightIcon aria-hidden className="h-4 w-4" />
-              </Link>
+              </DiscussLink>
               <Link
                 href={localePath(lang, "/portfolio")}
                 className="btn-secondary max-sm:w-full max-sm:justify-center"

@@ -22,6 +22,7 @@ import {
   mergeAdminNodes,
 } from "@/lib/jsonld";
 import { BriefcaseIcon } from "@heroicons/react/24/outline";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 export async function generateMetadata({
   params,
@@ -91,10 +92,10 @@ export default async function PortfolioPage({
         subtitle={dict.portfolio.subtitle}
         actions={
           <>
-            <Link href={localePath(lang, "/contact")} className="btn-primary">
+            <DiscussLink lang={lang} dict={dict} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
             <Link href={localePath(lang, "/services")} className="btn-secondary">
               {dict.servicesPreview.viewAll}
             </Link>

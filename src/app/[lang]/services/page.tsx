@@ -23,6 +23,7 @@ import {
   itemListJsonLd,
   mergeAdminNodes,
 } from "@/lib/jsonld";
+import { DiscussLink } from "@/components/ui/DiscussLink";
 
 export async function generateMetadata({
   params,
@@ -86,10 +87,10 @@ export default async function ServicesHubPage({
         subtitle={dict.services.intro}
         actions={
           <>
-            <Link href={localePath(lang, "/contact")} className="btn-primary">
+            <DiscussLink lang={lang} dict={dict} className="btn-primary">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
-            </Link>
+            </DiscussLink>
             <Link href={localePath(lang, "/portfolio")} className="btn-secondary">
               {dict.hero.ctaSecondary}
             </Link>

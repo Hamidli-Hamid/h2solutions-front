@@ -2,7 +2,8 @@ import { PhoneIcon } from "@heroicons/react/24/solid";
 
 import { MARKS } from "@/components/ui/ShareLinks";
 import type { Dictionary } from "@/lib/dictionaries";
-import { contactNumbers, telHref, whatsappHref } from "@/lib/format";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { contactNumbers, telHref } from "@/lib/format";
 
 type Props = {
   dict: Dictionary;
@@ -33,10 +34,9 @@ export function FloatingContact({ dict }: Props) {
         </a>
       )}
       {whatsapp && (
-        <a
-          href={whatsappHref(whatsapp)}
-          target="_blank"
-          rel="noopener noreferrer"
+        <WhatsAppLink
+          number={whatsapp}
+          message={t.whatsappMessage}
           aria-label={t.direct.whatsappCta}
           title={t.direct.whatsappCta}
           className="float-contact__btn float-contact__btn--whatsapp"
@@ -44,7 +44,7 @@ export function FloatingContact({ dict }: Props) {
           <svg aria-hidden viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor">
             <path d={MARKS.whatsapp} />
           </svg>
-        </a>
+        </WhatsAppLink>
       )}
     </nav>
   );

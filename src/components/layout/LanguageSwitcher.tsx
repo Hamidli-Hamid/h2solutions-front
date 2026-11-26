@@ -79,13 +79,13 @@ export function LanguageSwitcher({ current, label, postLocales }: Props) {
     >
       <summary
         aria-label={label}
-        className="flex cursor-pointer list-none items-center gap-1.5 rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-background-elevated)] px-2.5 py-2 font-semibold tracking-wider text-[color:var(--color-foreground)] transition hover:border-[color:var(--color-accent)]/60 focus-visible:border-[color:var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent)]/40 [&::-webkit-details-marker]:hidden"
+        className="flex cursor-pointer list-none items-center gap-1.5 rounded-md border border-[color:var(--color-border-strong)] bg-[color:var(--color-background-elevated)] px-2.5 py-2 font-semibold max-[479px]:px-2 tracking-wider text-[color:var(--color-foreground)] transition hover:border-[color:var(--color-accent)]/60 focus-visible:border-[color:var(--color-accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent)]/40 [&::-webkit-details-marker]:hidden"
       >
-        <GlobeAltIcon aria-hidden className="h-4 w-4 text-[color:var(--color-accent)]" />
+        <GlobeAltIcon aria-hidden className="h-4 w-4 text-[color:var(--color-accent)] max-[479px]:hidden" />
         {localeShortLabels[current]}
         <ChevronDownIcon
           aria-hidden
-          className="h-3.5 w-3.5 text-[color:var(--color-foreground-muted)] transition group-open:rotate-180"
+          className="h-3.5 w-3.5 text-[color:var(--color-foreground-muted)] transition group-open:rotate-180 max-[409px]:hidden"
         />
       </summary>
 

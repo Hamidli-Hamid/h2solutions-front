@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import type { NavItem } from "@/lib/site-config";
 
 type Props = {
@@ -9,9 +10,11 @@ type Props = {
   labels: Record<string, string>;
   ctaLabel: string;
   ctaHref: string;
+  /** When set, the button opens this WhatsApp chat instead of the contact page. */
+  chat?: { number: string; message: string } | null;
 };
 
-export function MobileMenu({ items, labels, ctaLabel, ctaHref }: Props) {
+export function MobileMenu({ items, labels, ctaLabel, ctaHref, chat }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export function MobileMenu({ items, labels, ctaLabel, ctaHref }: Props) {
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] lg:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[color:var(--color-border-strong)] xl:hidden"
       >
         <span className="sr-only">{open ? labels.close : labels.menu}</span>
         <div aria-hidden className="flex flex-col gap-1.5">
@@ -56,7 +59,7 @@ export function MobileMenu({ items, labels, ctaLabel, ctaHref }: Props) {
       {open && (
         <div
           id="mobile-menu"
-          className="menu-in fixed inset-x-0 top-16 z-40 max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto border-t border-[color:var(--color-border)] bg-[color:var(--color-background)]/95 backdrop-blur md:top-18 md:max-h-[calc(100dvh-4.5rem)] lg:hidden"
+          className="menu-in fixed inset-x-0 top-16 z-40 max-h-[calc(100dvh-4rem)] origin-top overflow-y-auto border-t border-[color:var(--color-border)] bg-[color:var(--color-background)]/95 backdrop-blur md:top-18 md:max-h-[calc(100dvh-4.5rem)] xl:hidden"
         >
           <nav aria-label={labels.menu} className="container-h2 flex flex-col gap-1 py-4">
             {items.map((item) => (
@@ -72,13 +75,24 @@ export function MobileMenu({ items, labels, ctaLabel, ctaHref }: Props) {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={ctaHref}
-              onClick={close}
-              className="btn-primary mt-3 justify-center"
-            >
-              {ctaLabel}
-            </Link>
+            {chat ? (
+              <WhatsAppLink
+                number={chat.number}
+                message={chat.message}
+                onClick={close}
+                className="btn-primary mt-3 justify-center"
+              >
+                {ctaLabel}
+              </WhatsAppLink>
+            ) : (
+              <Link
+                href={ctaHref}
+                onClick={close}
+                className="btn-primary mt-3 justify-center"
+              >
+                {ctaLabel}
+              </Link>
+            )}
           </nav>
         </div>
       )}
