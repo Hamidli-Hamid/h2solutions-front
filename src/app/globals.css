@@ -2084,9 +2084,9 @@
     height: 1.5rem;
   }
 }
-/* Very narrow phones and the 1280–1399 band, where the full navigation
+/* Very narrow phones and the 1280–1439 band, where the full navigation
    already fills the bar: the mark alone, as a round button. */
-@media (max-width: 374.98px), (min-width: 1280px) and (max-width: 1399.98px) {
+@media (max-width: 374.98px), (min-width: 1280px) and (max-width: 1439.98px) {
   .header-wa {
     padding: 0.1875rem;
   }
