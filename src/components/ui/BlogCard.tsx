@@ -48,7 +48,7 @@ export function BlogCard({
           </span>
         </p>
 
-        <Heading className="mt-3 text-base font-semibold leading-snug md:text-[1.0625rem]">
+        <Heading className="mt-3 text-base font-semibold leading-snug md:text-lg">
           <Link
             href={localePath(lang, `/blog/${post.slug}`)}
             className="transition before:absolute before:inset-0 before:content-[''] group-hover:text-[color:var(--color-accent)]"
@@ -57,13 +57,13 @@ export function BlogCard({
           </Link>
         </Heading>
 
-        <p className="mt-2.5 flex-1 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+        <p className="mt-2.5 flex-1 copy-sm">
           {post.excerpt}
         </p>
 
         <span
           aria-hidden
-          className="mt-6 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+          className="link-arrow mt-6"
         >
           {labels.readMore}
           <span className="arrow-chip h-6 w-6">

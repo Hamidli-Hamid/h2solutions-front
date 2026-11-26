@@ -73,7 +73,6 @@ export default async function ServicesHubPage({
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
@@ -99,7 +98,7 @@ export default async function ServicesHubPage({
       />
 
       <section aria-label={dict.services.title}>
-        <div className="container-h2 pb-12 md:pb-14">
+        <div className="container-h2 section">
           {services.length === 0 ? (
             <p className="panel p-10 text-center text-sm text-[color:var(--color-foreground-soft)]">
               {dict.services.empty}

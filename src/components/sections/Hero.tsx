@@ -97,7 +97,7 @@ export function Hero({ lang, dict, services }: Props) {
 
             <ul className="rise mt-8 flex flex-wrap gap-2.5 xl:mt-9" style={{ "--d": "220ms" } as React.CSSProperties}>
               {proofPoints.map((point) => (
-                <li key={point} className="chip py-1.5 pl-2 pr-3.5 text-[0.8125rem] text-[color:var(--color-foreground-soft)]">
+                <li key={point} className="chip py-1.5 pl-2 pr-3.5 text-sm text-[color:var(--color-foreground-soft)]">
                   <CheckCircleIcon
                     aria-hidden
                     className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
@@ -186,7 +186,7 @@ export function Hero({ lang, dict, services }: Props) {
                           className="h-5 w-5 xl:h-[1.375rem] xl:w-[1.375rem]"
                         />
                       </span>
-                      <span className="flex-1 text-[0.9375rem] font-semibold text-[color:var(--color-foreground)] transition group-hover:text-[color:var(--color-accent)] xl:text-base">
+                      <span className="flex-1 text-base font-semibold text-[color:var(--color-foreground)] transition group-hover:text-[color:var(--color-accent)] xl:text-base">
                         {service.name}
                       </span>
                       <span aria-hidden className="arrow-chip flex-none">
@@ -194,7 +194,7 @@ export function Hero({ lang, dict, services }: Props) {
                       </span>
                     </span>
 
-                    <span className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)] xl:mt-3 xl:text-[0.875rem]">
+                    <span className="mt-2.5 copy-sm xl:mt-3 xl:text-sm">
                       {service.description}
                     </span>
                   </Link>

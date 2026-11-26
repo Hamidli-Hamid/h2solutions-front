@@ -53,7 +53,7 @@ export function SectionHeading({
             {ordinal && (
               <span
                 aria-hidden
-                className="font-[family-name:var(--font-display)] text-[0.6875rem] font-semibold tracking-[0.18em] text-[color:var(--color-foreground-faint)]"
+                className="font-[family-name:var(--font-display)] text-xs font-semibold tracking-[0.18em] text-[color:var(--color-foreground-faint)]"
               >
                 {ordinal}
               </span>
@@ -65,7 +65,7 @@ export function SectionHeading({
           </h2>
 
           {subtitle && (
-            <p className="mt-4 text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)] md:text-base">
+            <p className="mt-4 text-base leading-relaxed text-[color:var(--color-foreground-soft)]">
               {subtitle}
             </p>
           )}

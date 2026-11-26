@@ -125,7 +125,6 @@ export default async function ContactPage({
     /* One continuous technical grid runs behind every section, as on the homepage. */
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [{ label: dict.nav.home, href: localePath(lang) }, { label: t.title }],
@@ -155,7 +154,7 @@ export default async function ContactPage({
 
       {/* CHANNELS — direct ways to reach us on the left, a writing brief on the right. */}
       <section aria-labelledby="contact-channels-heading" className="reveal">
-        <div className="container-h2 grid gap-10 pb-12 md:pb-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+        <div className="container-h2 grid gap-10 section lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
             <p className="section-label">{t.infoTitle}</p>
             <h2
@@ -164,7 +163,7 @@ export default async function ContactPage({
             >
               <SplitWords text={t.infoHeading} />
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-[color:var(--color-foreground-soft)] md:text-base">
+            <p className="mt-3 max-w-xl copy-sm md:text-base">
               {t.infoSubtitle}
             </p>
 
@@ -183,13 +182,13 @@ export default async function ContactPage({
                     </span>
 
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-foreground-muted)]">
+                      <span className="block meta-label">
                         {channel.label}
                       </span>
                       <span className="mt-1 block break-words text-base font-medium transition group-hover:text-[color:var(--color-accent)]">
                         {channel.value}
                       </span>
-                      <span className="mt-1.5 block text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                      <span className="mt-1.5 block copy-sm">
                         {channel.note}
                       </span>
                     </span>
@@ -209,16 +208,16 @@ export default async function ContactPage({
             <dl className="mt-3 grid gap-3 sm:grid-cols-2">
               {details.map((detail) => (
                 <div key={detail.label} className="panel min-w-0 p-5 pl-20">
-                  <dt className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-foreground-muted)]">
+                  <dt className="meta-label">
                     <span aria-hidden className="icon-tile absolute left-5 top-5 h-11 w-11">
                       <detail.icon className="h-5 w-5" />
                     </span>
                     {detail.label}
                   </dt>
-                  <dd className="mt-1 text-[0.9375rem] font-medium">
+                  <dd className="mt-1 text-base font-medium">
                     {detail.value}
                   </dd>
-                  <dd className="mt-1.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                  <dd className="mt-1.5 copy-sm">
                     {detail.note}
                   </dd>
                 </div>
@@ -236,7 +235,7 @@ export default async function ContactPage({
             <div className="relative">
               <p className="section-label">{t.brief.label}</p>
               <h2 className="type-h3 mt-4">{t.brief.title}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-foreground-soft)]">
+              <p className="mt-3 copy-sm">
                 {t.brief.text}
               </p>
 
@@ -244,11 +243,11 @@ export default async function ContactPage({
                 {t.brief.items.map((item, index) => (
                   <li
                     key={item}
-                    className="flex gap-3.5 text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)]"
+                    className="flex gap-3.5 text-base leading-relaxed text-[color:var(--color-foreground-soft)]"
                   >
                     <span
                       aria-hidden
-                      className="icon-tile mt-0.5 h-6 w-6 flex-none font-[family-name:var(--font-display)] text-[0.6875rem] font-bold"
+                      className="icon-tile mt-0.5 h-6 w-6 flex-none font-[family-name:var(--font-display)] text-xs font-bold"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
@@ -262,7 +261,7 @@ export default async function ContactPage({
                 <ArrowRightIcon aria-hidden className="h-4 w-4" />
               </a>
 
-              <p className="mt-5 flex items-center gap-2 border-t border-[color:var(--color-border)] pt-5 text-[0.8125rem] text-[color:var(--color-foreground-muted)]">
+              <p className="mt-5 flex items-center gap-2 border-t border-[color:var(--color-border)] pt-5 text-sm text-[color:var(--color-foreground-muted)]">
                 <ClockIcon aria-hidden className="h-4 w-4 flex-none text-[color:var(--color-accent)]" />
                 <span>
                   {t.responseLabel}:{" "}
@@ -278,7 +277,7 @@ export default async function ContactPage({
 
       {/* NEXT STEPS — what the enquiry turns into, as a three-node track. */}
       <section aria-labelledby="contact-next-heading" className="section-rule reveal">
-        <div className="container-h2 py-12 md:py-14">
+        <div className="container-h2 section">
           <p className="section-label">{t.next.label}</p>
           <h2
             id="contact-next-heading"
@@ -305,7 +304,7 @@ export default async function ContactPage({
                   </span>
                 </div>
                 <h3 className="mt-5 text-base font-semibold">{step.title}</h3>
-                <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                <p className="mt-2.5 copy-sm">
                   {step.description}
                 </p>
               </li>
@@ -320,7 +319,7 @@ export default async function ContactPage({
 
       {/* DIRECT — closing band; every action here leaves the site, none loops back. */}
       <section aria-labelledby="contact-direct-heading" className="reveal">
-        <div className="container-h2 py-12 md:py-14">
+        <div className="container-h2 section">
           <div className="panel relative overflow-hidden p-8 md:p-12">
             <div
               aria-hidden
@@ -339,7 +338,7 @@ export default async function ContactPage({
                 >
                   {t.direct.title}
                 </h2>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-[color:var(--color-foreground-soft)] md:text-base">
+                <p className="mt-3 max-w-xl copy-sm md:text-base">
                   {t.direct.text}
                 </p>
                 {linkedin && (
@@ -347,7 +346,7 @@ export default async function ContactPage({
                     href={linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                    className="link-arrow mt-5"
                   >
                     {t.direct.linkedin}
                     <ArrowUpRightIcon aria-hidden className="h-4 w-4" />

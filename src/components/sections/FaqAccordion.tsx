@@ -77,12 +77,12 @@ export function FaqAccordion({ content: t, variant = "section", index, image }: 
                   aria-expanded={open}
                   aria-controls={panelId}
                   onClick={() => setOpenIndex(open ? null : itemIndex)}
-                  className="group flex w-full items-center justify-between gap-4 py-4.5 text-left text-[0.9375rem] font-medium text-[color:var(--color-foreground)] transition hover:text-[color:var(--color-accent)]"
+                  className="group flex w-full items-center justify-between gap-4 py-4 text-left text-base font-medium leading-snug text-[color:var(--color-foreground)] transition hover:text-[color:var(--color-accent)]"
                 >
                   <span className="flex items-baseline gap-3">
                     <span
                       aria-hidden
-                      className={`font-[family-name:var(--font-display)] text-[0.6875rem] font-bold tracking-[0.12em] transition ${
+                      className={`font-[family-name:var(--font-display)] text-xs font-bold tracking-[0.12em] transition ${
                         open
                           ? "text-[color:var(--color-accent)]"
                           : "text-[color:var(--color-foreground-faint)] group-hover:text-[color:var(--color-accent)]"
@@ -121,7 +121,7 @@ export function FaqAccordion({ content: t, variant = "section", index, image }: 
                 <div
                   className={`overflow-hidden ${open ? "visible" : "invisible"}`}
                 >
-                  <p className="border-t border-[color:var(--color-border)] py-4 pl-8 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                  <p className="copy border-t border-[color:var(--color-border)] py-4 pl-8">
                     {item.answer}
                   </p>
                 </div>
@@ -140,7 +140,7 @@ export function FaqAccordion({ content: t, variant = "section", index, image }: 
   if (image) {
     return (
       <section aria-labelledby="faq-heading" className="reveal">
-        <div className="container-h2 grid gap-8 py-14 md:py-20 lg:grid-cols-12 lg:items-start lg:gap-14">
+        <div className="container-h2 grid gap-8 section lg:grid-cols-12 lg:items-start lg:gap-14">
           <div className="lg:sticky lg:top-28 lg:col-span-5">
             <SidePicture image={image} />
           </div>
@@ -152,7 +152,7 @@ export function FaqAccordion({ content: t, variant = "section", index, image }: 
 
   return (
     <section aria-labelledby="faq-heading" className="reveal">
-      <div className="container-h2 py-14 md:py-20">{body}</div>
+      <div className="container-h2 section">{body}</div>
     </section>
   );
 }

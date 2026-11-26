@@ -115,7 +115,6 @@ export default async function BlogPostPage({
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
@@ -127,30 +126,29 @@ export default async function BlogPostPage({
         eyebrow={dict.blog.label}
         title={post.title}
         subtitle={post.excerpt}
+        meta={
+          <dl className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-[color:var(--color-foreground-muted)]">
+            {meta.map((item) => (
+              <div key={item.value} className="flex items-center gap-2">
+                <dt className="flex items-center gap-2">
+                  <item.icon aria-hidden className="h-4 w-4 text-[color:var(--color-accent)]" />
+                  <span className="sr-only">{item.label ?? dict.blog.minRead}</span>
+                </dt>
+                <dd className="text-[color:var(--color-foreground-soft)]">
+                  {item.dateTime ? (
+                    <time dateTime={item.dateTime}>{item.value}</time>
+                  ) : (
+                    item.value
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        }
       />
 
-      <div className="container-h2 pb-10">
-        <dl className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-[color:var(--color-foreground-muted)]">
-          {meta.map((item) => (
-            <div key={item.value} className="flex items-center gap-2">
-              <dt className="flex items-center gap-2">
-                <item.icon aria-hidden className="h-4 w-4 text-[color:var(--color-accent)]" />
-                <span className="sr-only">{item.label ?? dict.blog.minRead}</span>
-              </dt>
-              <dd className="text-[color:var(--color-foreground-soft)]">
-                {item.dateTime ? (
-                  <time dateTime={item.dateTime}>{item.value}</time>
-                ) : (
-                  item.value
-                )}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-
       {post.cover_image && (
-        <div className="container-h2 pb-12 md:pb-14">
+        <div className="container-h2 pt-[var(--section-y)]">
           <div className="panel relative aspect-16/9 overflow-hidden">
             <Image
               src={post.cover_image}
@@ -167,7 +165,7 @@ export default async function BlogPostPage({
       {/* BODY — article beside a sticky rail listing the other posts. The base
           track is minmax(0, 1fr) because an auto one grows to the article's
           min-content, and .tech-canvas clips what passes the screen edge. */}
-      <div className="container-h2 grid grid-cols-[minmax(0,1fr)] gap-10 pb-12 md:pb-14 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+      <div className="container-h2 grid grid-cols-[minmax(0,1fr)] gap-10 section lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
         <article
           className="prose-tech max-w-[68ch]"
           /* Content comes from the admin rich editor, which stores HTML. */
@@ -182,10 +180,10 @@ export default async function BlogPostPage({
 
           <div className="panel p-6">
             <h2 className="text-base font-semibold">{dict.blog.helpTitle}</h2>
-            <p className="mt-2 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+            <p className="mt-2 copy-sm">
               {dict.blog.helpText}
             </p>
-            <DiscussLink lang={lang} dict={dict} className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]">
+            <DiscussLink lang={lang} dict={dict} className="link-arrow mt-5">
               {dict.hero.ctaPrimary}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </DiscussLink>
@@ -240,10 +238,10 @@ export default async function BlogPostPage({
                         </span>
 
                         <span className="flex min-w-0 flex-col gap-1.5">
-                          <span className="text-[0.875rem] font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
+                          <span className="text-sm font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
                             {item.title}
                           </span>
-                          <span className="flex flex-wrap items-center gap-x-2 text-[0.6875rem] text-[color:var(--color-foreground-muted)]">
+                          <span className="flex flex-wrap items-center gap-x-2 text-xs text-[color:var(--color-foreground-muted)]">
                             {itemDate && (
                               <time dateTime={item.published_at ?? undefined}>
                                 {itemDate}
@@ -264,7 +262,7 @@ export default async function BlogPostPage({
               <div className="mt-4 border-t border-[color:var(--color-border)] pt-4">
                 <Link
                   href={localePath(lang, "/blog")}
-                  className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
                 >
                   {dict.blog.latestTitle}
                   <ArrowRightIcon aria-hidden className="h-3.5 w-3.5" />

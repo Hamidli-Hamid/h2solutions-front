@@ -11,7 +11,7 @@ type Props = {
 
 export function EmptyState({ icon: IconComponent, title, description, ctaLabel, ctaHref }: Props) {
   return (
-    <div className="card relative overflow-hidden p-10 md:p-14">
+    <div className="panel relative overflow-hidden p-10 md:p-14">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[color:var(--color-accent)] opacity-10 blur-3xl"

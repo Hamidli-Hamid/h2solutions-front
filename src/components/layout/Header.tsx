@@ -76,7 +76,7 @@ export function Header({ lang, dict, postLocales }: Props) {
             lang={lang}
             dict={dict}
             magnetic
-            className="btn-primary hidden whitespace-nowrap px-4 py-2.5 text-sm lg:inline-flex"
+            className="btn-primary btn-sm hidden whitespace-nowrap lg:inline-flex"
           >
             <span>{dict.hero.ctaPrimary}</span>
             <ArrowRightIcon aria-hidden className="h-4 w-4" />

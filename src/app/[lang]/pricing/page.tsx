@@ -183,7 +183,6 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [{ label: dict.nav.home, href: localePath(lang) }, { label: t.label }],
@@ -206,7 +205,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
 
       {/* PACKAGES — the three website formats, the middle one highlighted. */}
       <section aria-labelledby="pricing-packages-heading" className="reveal">
-        <div className="container-h2 pb-14 md:pb-20">
+        <div className="container-h2 section">
           <SectionHeading
             id="pricing-packages-heading"
             label={t.packagesLabel}
@@ -230,13 +229,13 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
                       <h3 className="type-h3">{pkg.name}</h3>
                       {featured && <span className="pricing-badge">{t.popular}</span>}
                     </div>
-                    <p className="mt-2.5 min-h-[3rem] text-sm leading-relaxed text-[color:var(--color-foreground-soft)]">
+                    <p className="mt-2.5 min-h-[3rem] copy-sm">
                       {pkg.description}
                     </p>
 
                     <div className="mt-6">
                       <PriceTag amount={pkg.price} lang={lang} t={t} />
-                      <p className="mt-2 inline-flex items-center gap-1.5 text-[0.8125rem] text-[color:var(--color-foreground-soft)]">
+                      <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-[color:var(--color-foreground-soft)]">
                         <ClockIcon aria-hidden className="h-4 w-4 text-[color:var(--color-accent)]" />
                         {t.durationLabel}: <strong className="font-semibold text-[color:var(--color-foreground)]">{pkg.duration}</strong>
                       </p>
@@ -278,7 +277,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
 
       {/* OTHER SERVICES — starting prices, each linked to its service page. */}
       <section aria-labelledby="pricing-services-heading" className="reveal">
-        <div className="container-h2 pb-14 md:pb-20">
+        <div className="container-h2 section">
           <SectionHeading
             id="pricing-services-heading"
             label={t.servicesLabel}
@@ -297,8 +296,8 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
                     <span aria-hidden className="icon-tile h-11 w-11">
                       <Icon name={`heroicon-o-${service.icon}`} className="h-5 w-5" />
                     </span>
-                    <h3 className="mt-5 text-base font-semibold md:text-[1.0625rem]">{service.name}</h3>
-                    <p className="mt-2 flex-1 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                    <h3 className="mt-5 text-base font-semibold md:text-lg">{service.name}</h3>
+                    <p className="mt-2 flex-1 copy-sm">
                       {service.description}
                     </p>
                     <div className="mt-5 flex flex-wrap items-end justify-between gap-3 border-t border-[color:var(--color-border)] pt-5">
@@ -306,7 +305,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
                       {slug ? (
                         <Link
                           href={localePath(lang, `/services/${slug}`)}
-                          className="inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+                          className="link-arrow"
                         >
                           {t.detailsCta}
                           <span className="arrow-chip h-6 w-6">
@@ -317,7 +316,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
                         <WhatsAppLink
                           number={chat.number}
                           message={message}
-                          className="inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+                          className="link-arrow"
                         >
                           {t.packageCta}
                           <span className="arrow-chip h-6 w-6">
@@ -336,7 +335,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
 
       {/* INCLUDED + FACTORS — what every price covers, and what moves it. */}
       <section aria-labelledby="pricing-included-heading" className="reveal">
-        <div className="container-h2 grid gap-5 pb-14 md:pb-20 lg:grid-cols-2">
+        <div className="container-h2 grid gap-5 section lg:grid-cols-2">
           <div className="panel p-6 md:p-8">
             <p className="section-label">{t.includedLabel}</p>
             <h2 id="pricing-included-heading" className="type-h3 mt-4">
@@ -359,7 +358,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
               {t.factors.map((factor) => (
                 <div key={factor.title}>
                   <dt className="text-sm font-semibold">{factor.title}</dt>
-                  <dd className="mt-1.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                  <dd className="mt-1.5 copy-sm">
                     {factor.text}
                   </dd>
                 </div>
@@ -368,7 +367,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
             {lang === "az" && (
               <Link
                 href={localePath(lang, PRICE_FACTORS_POST)}
-                className="mt-6 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+                className="link-arrow mt-6"
               >
                 {t.factorsLink}
                 <span className="arrow-chip h-6 w-6">
@@ -382,7 +381,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
 
       {/* PAYMENT — three stages, numbered like the process strip. */}
       <section aria-labelledby="pricing-payment-heading" className="reveal">
-        <div className="container-h2 pb-14 md:pb-20">
+        <div className="container-h2 section">
           <SectionHeading
             id="pricing-payment-heading"
             label={t.paymentLabel}
@@ -396,7 +395,7 @@ export default async function PricingPage({ params }: PageProps<"/[lang]/pricing
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 text-base font-semibold">{step.title}</h3>
-                <p className="mt-2 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                <p className="mt-2 copy-sm">
                   {step.text}
                 </p>
               </li>

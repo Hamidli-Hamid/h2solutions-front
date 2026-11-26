@@ -77,7 +77,7 @@ export function ProjectsShowcase({ lang, dict, projects, index }: Props) {
 
   return (
     <section aria-labelledby="projects-heading" className="reveal">
-      <div className="container-h2 pb-14 pt-12 md:pb-20 md:pt-16">
+      <div className="container-h2 section">
         <SectionHeading
           id="projects-heading"
           label={t.label}
@@ -86,7 +86,7 @@ export function ProjectsShowcase({ lang, dict, projects, index }: Props) {
           action={
             <Link
               href={localePath(lang, "/portfolio")}
-              className="btn-secondary px-5 py-2.5 text-sm"
+              className="btn-secondary btn-sm"
             >
               {t.viewAll}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
@@ -133,7 +133,7 @@ export function ProjectsShowcase({ lang, dict, projects, index }: Props) {
                     </h3>
 
                     {entry.summary && (
-                      <p className="mt-3 line-clamp-2 max-w-xl text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                      <p className="mt-3 line-clamp-2 max-w-xl text-base leading-relaxed text-[color:var(--color-foreground-soft)]">
                         {entry.summary}
                       </p>
                     )}
@@ -142,7 +142,7 @@ export function ProjectsShowcase({ lang, dict, projects, index }: Props) {
                       <Link
                         href={entry.href}
                         /* Above the block's overlay link, so its own hover state shows. */
-                        className="btn-secondary relative z-[4] px-5 py-2.5 text-sm"
+                        className="btn-secondary btn-sm relative z-[4]"
                       >
                         {t.viewCase}
                         <ArrowRightIcon aria-hidden className="h-4 w-4" />

@@ -90,7 +90,7 @@ export function Footer({ lang, dict, services }: Props) {
       <div className="container-h2 relative grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.1fr_1.1fr_1.3fr] lg:gap-8">
         <div>
           <H2Logo logo={branding.logo} alt={site.brand} />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-[color:var(--color-foreground-soft)]">
+          <p className="mt-4 max-w-xs copy-sm">
             {dict.footer.tagline}
           </p>
           {socials.length > 0 && (
@@ -102,7 +102,7 @@ export function Footer({ lang, dict, services }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-foreground-soft)] transition duration-300 hover:-translate-y-0.5 hover:border-transparent hover:bg-[image:linear-gradient(100deg,var(--h2-fill-from),var(--h2-fill-to))] hover:text-[color:var(--color-on-accent)] motion-reduce:hover:translate-y-0"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] text-[color:var(--color-foreground-soft)] transition-colors duration-300 hover:border-transparent hover:bg-[image:linear-gradient(100deg,var(--h2-fill-from),var(--h2-fill-to))] hover:text-[color:var(--color-on-accent)]"
                 >
                   <svg
                     className="h-4 w-4"
@@ -122,7 +122,7 @@ export function Footer({ lang, dict, services }: Props) {
           <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.navTitle}
           </p>
-          <ul className="mt-4 space-y-2.5 text-sm">
+          <ul className="mt-3 space-y-0.5 text-sm">
             {navigation.map((item) => (
               <li key={item.key}>
                 <Link
@@ -130,7 +130,7 @@ export function Footer({ lang, dict, services }: Props) {
                   {...(item.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="link-underline text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
+                  className="link-underline inline-block py-1 text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
                 >
                   {item.label}
                 </Link>
@@ -143,12 +143,12 @@ export function Footer({ lang, dict, services }: Props) {
           <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.servicesTitle}
           </p>
-          <ul className="mt-4 space-y-2.5 text-sm">
+          <ul className="mt-3 space-y-0.5 text-sm">
             {serviceLinks.map((service) => (
               <li key={service.label}>
                 <Link
                   href={service.href}
-                  className="link-underline text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
+                  className="link-underline inline-block py-1 text-[color:var(--color-foreground-soft)] transition hover:text-[color:var(--color-accent)]"
                 >
                   {service.label}
                 </Link>
@@ -161,34 +161,34 @@ export function Footer({ lang, dict, services }: Props) {
           <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.contactTitle}
           </p>
-          <address className="mt-4 space-y-2.5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
+          <address className="mt-3 space-y-0.5 text-sm not-italic text-[color:var(--color-foreground-soft)]">
             {phone && (
-              <div className="flex items-center gap-2.5">
+              <div className="flex min-h-7 items-center gap-2.5">
                 <PhoneIcon
                   aria-hidden
                   className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
                 />
                 <a
                   href={telHref(phone)}
-                  className="transition hover:text-[color:var(--color-accent)]"
+                  className="inline-block py-1 transition hover:text-[color:var(--color-accent)]"
                 >
                   {phone}
                 </a>
               </div>
             )}
-            <div className="flex items-center gap-2.5">
+            <div className="flex min-h-7 items-center gap-2.5">
               <EnvelopeIcon
                 aria-hidden
                 className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
               />
               <a
                 href={`mailto:${dict.contact.email}`}
-                className="transition hover:text-[color:var(--color-accent)]"
+                className="inline-block py-1 transition hover:text-[color:var(--color-accent)]"
               >
                 {dict.contact.email}
               </a>
             </div>
-            <div className="flex items-center gap-2.5">
+            <div className="flex min-h-7 items-center gap-2.5">
               <MapPinIcon
                 aria-hidden
                 className="h-4 w-4 flex-none text-[color:var(--color-accent)]"
@@ -202,7 +202,7 @@ export function Footer({ lang, dict, services }: Props) {
           <p className="section-label font-[family-name:var(--font-display)]">
             {dict.footer.newsletterTitle}
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-[color:var(--color-foreground-muted)]">
+          <p className="mt-3 copy-sm">
             {dict.footer.newsletterText}
           </p>
           <NewsletterForm
@@ -228,7 +228,7 @@ export function Footer({ lang, dict, services }: Props) {
       </div>
 
       <div className="relative border-t border-[color:var(--color-border)]">
-        <div className="container-h2 flex flex-col items-start justify-between gap-2 py-6 text-xs text-[color:var(--color-foreground-muted)] md:flex-row md:items-center">
+        <div className="footer-legal container-h2 flex flex-col items-start justify-between gap-2 py-6 text-sm text-[color:var(--color-foreground-muted)] md:flex-row md:items-center">
           <p>
             © {year} {site.brand}. {dict.footer.rights}.
           </p>

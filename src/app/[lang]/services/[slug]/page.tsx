@@ -135,7 +135,6 @@ export default async function ServiceDetailPage({
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
@@ -161,7 +160,7 @@ export default async function ServiceDetailPage({
       />
 
       <article>
-        <div className="container-h2 grid items-start gap-8 pb-12 md:pb-14 lg:grid-cols-[1.6fr_1fr] lg:gap-10">
+        <div className="container-h2 grid items-start gap-8 section lg:grid-cols-[1.6fr_1fr] lg:gap-10">
           <div>
             <div className="panel p-6 md:p-8">
               <span aria-hidden className="icon-tile h-11 w-11">
@@ -184,7 +183,7 @@ export default async function ServiceDetailPage({
                 </section>
               ))}
               {modifiedLabel && (
-                <p className="mt-5 border-t border-[color:var(--color-border)] pt-4 text-[0.8125rem] text-[color:var(--color-foreground-soft)]">
+                <p className="mt-5 border-t border-[color:var(--color-border)] pt-4 text-sm text-[color:var(--color-foreground-soft)]">
                   {`${dict.services.lastUpdated}: `}
                   <time dateTime={modifiedAt}>{modifiedLabel}</time>
                 </p>
@@ -200,7 +199,7 @@ export default async function ServiceDetailPage({
                   {service.features.map((feature) => (
                     <li
                       key={feature}
-                      className="panel flex items-start gap-3 p-4 text-sm leading-relaxed text-[color:var(--color-foreground-soft)]"
+                      className="panel flex items-start gap-3 p-4 copy-sm"
                     >
                       <span
                         aria-hidden
@@ -236,10 +235,10 @@ export default async function ServiceDetailPage({
               <h2 className="mt-3 text-lg font-semibold">
                 {dict.services.startTitle}
               </h2>
-              <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+              <p className="mt-2.5 copy-sm">
                 {dict.services.startText}
               </p>
-              <DiscussLink lang={lang} dict={dict} className="btn-primary mt-5 w-full justify-center px-4 py-2.5 text-sm">
+              <DiscussLink lang={lang} dict={dict} className="btn-primary btn-sm mt-5 w-full">
                 {dict.hero.ctaPrimary}
                 <ArrowRightIcon aria-hidden className="h-4 w-4" />
               </DiscussLink>
@@ -294,10 +293,10 @@ export default async function ServiceDetailPage({
                           <Icon name={item.icon} className="h-4 w-4" />
                         </span>
                         <span className="flex min-w-0 flex-col gap-1">
-                          <span className="text-[0.875rem] font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
+                          <span className="text-sm font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
                             {item.title}
                           </span>
-                          <span className="line-clamp-2 text-[0.6875rem] leading-relaxed text-[color:var(--color-foreground-muted)]">
+                          <span className="line-clamp-2 text-xs leading-relaxed text-[color:var(--color-foreground-muted)]">
                             {item.summary}
                           </span>
                         </span>
@@ -308,7 +307,7 @@ export default async function ServiceDetailPage({
 
                 <Link
                   href={localePath(lang, "/services")}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                  className="link-arrow mt-5"
                 >
                   {dict.servicesPreview.viewAll}
                   <ArrowRightIcon aria-hidden className="h-4 w-4" />
@@ -322,7 +321,7 @@ export default async function ServiceDetailPage({
       {/* Links to our own case pages only — never to the client's site. */}
       {cases.length > 0 && (
         <section aria-labelledby="service-projects-heading" className="reveal">
-          <div className="container-h2 pb-12 md:pb-14">
+          <div className="container-h2 section">
             <h2 id="service-projects-heading" className="type-h2">
               {dict.services.projectsTitle}
             </h2>

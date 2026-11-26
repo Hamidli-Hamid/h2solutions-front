@@ -35,7 +35,7 @@ export function BlogPreview({ lang, dict, posts, index }: Props) {
 
   return (
     <section aria-labelledby="blog-heading" className="reveal">
-      <div className="container-h2 py-14 md:py-20">
+      <div className="container-h2 section">
         <SectionHeading
           id="blog-heading"
           label={t.label}
@@ -44,7 +44,7 @@ export function BlogPreview({ lang, dict, posts, index }: Props) {
           action={
             <Link
               href={localePath(lang, "/blog")}
-              className="btn-secondary px-5 py-2.5 text-sm"
+              className="btn-secondary btn-sm"
             >
               {t.viewAll}
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
@@ -71,7 +71,7 @@ export function BlogPreview({ lang, dict, posts, index }: Props) {
                         {label}
                       </time>
                     )}
-                    <h3 className="mt-3 flex-1 text-[0.9375rem] font-semibold leading-snug">
+                    <h3 className="mt-3 flex-1 text-base font-semibold leading-snug">
                       <Link
                         href={card.href}
                         className="transition group-hover:text-[color:var(--color-accent)] before:absolute before:inset-0 before:content-['']"
@@ -81,7 +81,7 @@ export function BlogPreview({ lang, dict, posts, index }: Props) {
                     </h3>
                     <span
                       aria-hidden
-                      className="mt-5 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+                      className="mt-5 link-arrow"
                     >
                       {t.readMore}
                       <span className="arrow-chip h-6 w-6">

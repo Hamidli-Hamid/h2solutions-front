@@ -79,7 +79,7 @@ export function ProjectTimelineGallery({ images, title, labels, shots }: Props) 
                 top-left corner and a phone frame on the right. */}
             <span
               aria-hidden
-              className="gallery-glass absolute bottom-2 left-2 rounded-full px-2 py-0.5 font-[family-name:var(--font-display)] text-[0.625rem] font-semibold tabular-nums tracking-wider text-[color:var(--color-foreground-soft)] md:bottom-3 md:left-3 md:px-2.5 md:py-1 md:text-[0.6875rem]"
+              className="gallery-glass absolute bottom-2 left-2 rounded-full px-2 py-0.5 font-[family-name:var(--font-display)] text-xs font-semibold tabular-nums tracking-wider text-[color:var(--color-foreground-soft)] md:bottom-3 md:left-3 md:px-2.5 md:py-1 md:text-xs"
             >
               <span className="text-[color:var(--color-accent)]">01</span> / {pad(total)}
             </span>

@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 import { SplitWords } from "@/components/ui/SplitWords";
-import { localePath, type Locale } from "@/i18n-config";
+import type { Locale } from "@/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import { DiscussLink } from "@/components/ui/DiscussLink";
 
@@ -18,7 +17,7 @@ type Props = {
 export function CtaBanner({ lang, dict, title, subtitle, className }: Props) {
   return (
     <section className={className ?? "section-rule reveal"}>
-      <div className="container-h2 py-14 md:py-20">
+      <div className="container-h2 section">
         {/* The one place on the page that gets the travelling border: it is
             the last thing above the footer, and the motion is what pulls the
             eye back up to the action after a long scroll. */}
@@ -62,11 +61,11 @@ export function CtaBanner({ lang, dict, title, subtitle, className }: Props) {
                   </>
                 )}
               </h2>
-              <p className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)] md:text-base">
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-[color:var(--color-foreground-soft)]">
                 {subtitle ?? dict.contact.subtitle}
               </p>
             </div>
-            <DiscussLink lang={lang} dict={dict} magnetic className="btn-primary self-start px-7 py-4 md:self-end">
+            <DiscussLink lang={lang} dict={dict} magnetic className="btn-primary self-start max-sm:w-full md:self-end">
               <span>{dict.hero.ctaPrimary}</span>
               <ArrowRightIcon aria-hidden className="h-4 w-4" />
             </DiscussLink>

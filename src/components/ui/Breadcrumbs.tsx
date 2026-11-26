@@ -14,7 +14,7 @@ type Props = {
 export function Breadcrumbs({ items, label }: Props) {
   return (
     <nav aria-label={label}>
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[color:var(--color-foreground-muted)]">
+      <ol className="flex flex-wrap items-center gap-x-2 text-sm text-[color:var(--color-foreground-muted)]">
         {items.map((item, index) => (
           <li key={item.label} className="flex items-center gap-2">
             {index > 0 && (
@@ -25,7 +25,7 @@ export function Breadcrumbs({ items, label }: Props) {
             {item.href ? (
               <Link
                 href={item.href}
-                className="link-underline transition hover:text-[color:var(--color-accent)]"
+                className="link-underline inline-block py-1 transition hover:text-[color:var(--color-accent)]"
               >
                 {item.label}
               </Link>

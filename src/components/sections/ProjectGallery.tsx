@@ -96,7 +96,7 @@ export function ProjectGallery({ images, title, labels, shots }: Props) {
                 <span aria-hidden className="bento-shade" />
                 <span
                   aria-hidden
-                  className="gallery-glass absolute left-2.5 top-2.5 rounded-full px-2 py-0.5 font-[family-name:var(--font-display)] text-[0.625rem] font-semibold tabular-nums tracking-wider text-[color:var(--color-foreground-soft)] md:left-3.5 md:top-3.5"
+                  className="gallery-glass absolute left-2.5 top-2.5 rounded-full px-2 py-0.5 font-[family-name:var(--font-display)] text-xs font-semibold tabular-nums tracking-wider text-[color:var(--color-foreground-soft)] md:left-3.5 md:top-3.5"
                 >
                   {pad(index + 1)}
                 </span>

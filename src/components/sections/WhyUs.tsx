@@ -8,7 +8,7 @@ type Props = {
 export function WhyUs({ dict }: Props) {
   return (
     <section aria-labelledby="why-heading" className="reveal">
-      <div className="container-h2 py-14 md:py-20">
+      <div className="container-h2 section">
         <SectionHeading
           id="why-heading"
           label={dict.usp.label}
@@ -26,10 +26,10 @@ export function WhyUs({ dict }: Props) {
               <span aria-hidden className="step-ordinal select-none">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 text-base font-semibold md:text-[1.0625rem]">
+              <h3 className="mt-4 text-base font-semibold md:text-lg">
                 {item.title}
               </h3>
-              <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+              <p className="mt-2.5 copy-sm">
                 {item.description}
               </p>
             </li>

@@ -8,48 +8,32 @@ type Props = {
   title: string;
   subtitle?: string;
   breadcrumbs?: { items: Crumb[]; label: string };
-  /** Actions rendered under the subtitle (CTA buttons). */
+  /** Facts under the subtitle (an article's date and reading time). */
+  meta?: ReactNode;
+  /** Actions rendered under the rule (CTA buttons). */
   actions?: ReactNode;
-  /**
-   * Tall hero treatment with its own bordered grid band. Pages wrapped in
-   * `.tech-canvas` pass `false` and get the compact header instead — the
-   * square grid is still drawn behind it, just without the extra padding.
-   */
-  withGrid?: boolean;
 };
 
-export function PageHeader({
-  eyebrow,
-  title,
-  subtitle,
-  breadcrumbs,
-  actions,
-  withGrid = true,
-}: Props) {
+/**
+ * The opening band of every inner page. It has no bottom padding of its own:
+ * the first `.section` under it supplies one `--section-y`, so the step from a
+ * header to its content is the same on every page.
+ */
+export function PageHeader({ eyebrow, title, subtitle, breadcrumbs, meta, actions }: Props) {
   return (
-    <header
-      className={
-        withGrid
-          ? "grid-bg border-b border-[color:var(--color-border)]"
-          : "hero-canvas overflow-hidden"
-      }
-    >
+    <header className="hero-canvas overflow-hidden">
       {/* The open half of an inner page header carries the orbit motif the
           home hero introduces, so the inner pages read as the same site. */}
-      {!withGrid && (
-        <OrbitDecor
-          className="orbit-in hidden md:block"
-          style={{ right: "-11rem", top: "-9rem", width: "46rem", height: "46rem" }}
-        />
-      )}
-      <div
-        className={`container-h2 ${withGrid ? "py-20 md:py-28" : "pt-10 pb-14 md:pt-12 md:pb-16"}`}
-      >
+      <OrbitDecor
+        className="orbit-in hidden md:block"
+        style={{ right: "-11rem", top: "-9rem", width: "46rem", height: "46rem" }}
+      />
+      <div className="container-h2 pt-8 md:pt-10 lg:pt-12">
         {/* The header opens with the same top-to-bottom choreography as the
             home hero: the title and lead are transform-only (`rise-solid`,
             LCP-safe), everything else fades and rises in around them. */}
         {breadcrumbs && (
-          <div className="rise mb-7">
+          <div className="rise mb-6 md:mb-7">
             <Breadcrumbs items={breadcrumbs.items} label={breadcrumbs.label} />
           </div>
         )}
@@ -59,10 +43,8 @@ export function PageHeader({
           </p>
         )}
 
-        {/* Same fluid scale as the home hero, so a landing page and an inner
-            page read as one site instead of two type systems. */}
         <h1
-          className={`type-display rise-solid text-balance ${eyebrow ? "mt-5" : ""}`}
+          className={`type-h1 rise-solid max-w-5xl text-balance ${eyebrow ? "mt-4" : ""}`}
           style={{ "--d": "80ms" } as React.CSSProperties}
         >
           {title}
@@ -70,22 +52,28 @@ export function PageHeader({
 
         {subtitle && (
           <p
-            className="type-lead rise-solid mt-5 max-w-2xl"
+            className="type-lead rise-solid mt-5 max-w-2xl text-pretty"
             style={{ "--d": "160ms" } as React.CSSProperties}
           >
             {subtitle}
           </p>
         )}
 
+        {meta && (
+          <div className="rise mt-5" style={{ "--d": "200ms" } as React.CSSProperties}>
+            {meta}
+          </div>
+        )}
+
         <hr
           aria-hidden
-          className="rule-gradient rise mt-9 max-w-md"
+          className="rule-gradient rise mt-8 max-w-md"
           style={{ "--d": "240ms" } as React.CSSProperties}
         />
 
         {actions && (
           <div
-            className="rise mt-8 flex flex-wrap gap-3"
+            className="rise mt-7 flex flex-wrap items-center gap-3 max-sm:[&>.btn-primary]:w-full max-sm:[&>.btn-secondary]:w-full"
             style={{ "--d": "300ms" } as React.CSSProperties}
           >
             {actions}

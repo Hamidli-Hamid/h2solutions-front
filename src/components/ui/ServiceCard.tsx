@@ -58,7 +58,7 @@ export function ServiceCard({
       </Heading>
 
       <p
-        className={`mt-3 text-sm leading-relaxed text-[color:var(--color-foreground-soft)] ${
+        className={`mt-3 copy-sm ${
           features.length === 0 ? "flex-1" : ""
         }`}
       >
@@ -66,7 +66,7 @@ export function ServiceCard({
       </p>
 
       {features.length > 0 && (
-        <ul className="mt-6 flex-1 space-y-2.5 border-t border-[color:var(--color-border)] pt-6 text-[0.8125rem] text-[color:var(--color-foreground-soft)]">
+        <ul className="mt-6 flex-1 space-y-2.5 border-t border-[color:var(--color-border)] pt-6 text-sm text-[color:var(--color-foreground-soft)]">
           {features.map((feature) => (
             <li key={feature} className="flex items-start gap-2.5">
               <span
@@ -81,7 +81,7 @@ export function ServiceCard({
 
       <span
         aria-hidden
-        className="mt-7 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+        className="mt-7 link-arrow"
       >
         {ctaLabel}
         <span className="arrow-chip h-6 w-6">

@@ -76,7 +76,6 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
@@ -91,7 +90,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
 
       {posts.length === 0 ? (
         <section aria-label={dict.blog.title}>
-          <div className="container-h2 pb-12 md:pb-14">
+          <div className="container-h2 section">
             <EmptyState
               icon={PencilSquareIcon}
               title={dict.blog.empty}
@@ -105,7 +104,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
         <>
           {/* FEATURED — the latest post, wide on desktop. */}
           <section aria-labelledby="featured-post-heading" className="reveal">
-            <div className="container-h2 pb-12 md:pb-14">
+            <div className="container-h2 section">
               <p className="section-label">{dict.blog.featuredLabel}</p>
               <article className="panel panel-interactive group mt-4 grid overflow-hidden md:grid-cols-2">
                 <CardMedia
@@ -116,7 +115,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
                   className="aspect-16/10 border-b md:h-full md:border-b-0 md:border-r"
                 />
                 <div className="flex flex-col justify-center p-6 md:p-10">
-                  <p className="flex flex-wrap items-center gap-x-2 text-[0.75rem] text-[color:var(--color-foreground-muted)]">
+                  <p className="flex flex-wrap items-center gap-x-2 text-xs text-[color:var(--color-foreground-muted)]">
                     {formatDate(featured.published_at, lang) && (
                       <time dateTime={featured.published_at ?? undefined}>
                         {formatDate(featured.published_at, lang)}
@@ -140,7 +139,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
                     </Link>
                   </h2>
 
-                  <p className="mt-4 text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                  <p className="mt-4 text-base leading-relaxed text-[color:var(--color-foreground-soft)]">
                     {featured.excerpt}
                   </p>
 
@@ -158,7 +157,7 @@ export default async function BlogPage({ params }: PageProps<"/[lang]/blog">) {
 
           {rest.length > 0 && (
             <section aria-labelledby="all-posts-heading" className="reveal">
-              <div className="container-h2 pb-12 md:pb-14">
+              <div className="container-h2 section">
                 <h2 id="all-posts-heading" className="type-h2">
                   {dict.blog.latestTitle}
                 </h2>

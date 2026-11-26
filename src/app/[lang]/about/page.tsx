@@ -50,7 +50,6 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
     /* One continuous technical grid runs behind every section, as on the homepage. */
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [{ label: dict.nav.home, href: localePath(lang) }, { label: t.title }],
@@ -73,7 +72,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
       {/* STORY — narrative on the left, founder identity card on the right. */}
       <section aria-labelledby="about-story-heading" className="reveal">
-        <div className="container-h2 grid gap-10 pb-12 md:pb-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+        <div className="container-h2 grid gap-10 section lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
           <div>
             <p className="section-label">{t.storyLabel}</p>
             <h2
@@ -89,8 +88,8 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                   key={index}
                   className={
                     index === 0
-                      ? "text-base leading-relaxed text-[color:var(--color-foreground-soft)] md:text-[1.0625rem]"
-                      : "text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)]"
+                      ? "text-base leading-relaxed text-[color:var(--color-foreground-soft)] md:text-lg"
+                      : "text-base leading-relaxed text-[color:var(--color-foreground-soft)]"
                   }
                 >
                   {paragraph}
@@ -111,13 +110,13 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
               </span>
               <span>
                 <span className="block text-lg font-semibold">{t.founder.name}</span>
-                <span className="mt-0.5 block text-[0.8125rem] text-[color:var(--color-foreground-muted)]">
+                <span className="mt-0.5 block text-sm text-[color:var(--color-foreground-muted)]">
                   {t.founder.role}
                 </span>
               </span>
             </div>
 
-            <blockquote className="mt-6 border-l-2 border-[color:var(--color-accent)] pl-4 text-[0.9375rem] leading-relaxed text-[color:var(--color-foreground-soft)] italic">
+            <blockquote className="mt-6 border-l-2 border-[color:var(--color-accent)] pl-4 text-base leading-relaxed text-[color:var(--color-foreground-soft)] italic">
               {t.founder.quote}
             </blockquote>
 
@@ -127,14 +126,14 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                   key={fact.label}
                   className="border-t border-[color:var(--color-border)] pt-3"
                 >
-                  <dt className="text-[0.6875rem] uppercase tracking-[0.14em] text-[color:var(--color-foreground-muted)]">
+                  <dt className="text-xs uppercase tracking-[0.14em] text-[color:var(--color-foreground-muted)]">
                     {fact.label}
                   </dt>
                   <dd className="mt-1 text-sm font-medium">{fact.value}</dd>
                 </div>
               ))}
               <div className="border-t border-[color:var(--color-border)] pt-3 sm:col-span-2">
-                <dt className="text-[0.6875rem] uppercase tracking-[0.14em] text-[color:var(--color-foreground-muted)]">
+                <dt className="text-xs uppercase tracking-[0.14em] text-[color:var(--color-foreground-muted)]">
                   {dict.contact.emailLabel}
                 </dt>
                 <dd className="mt-1">
@@ -153,7 +152,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
       {/* COMMITMENTS — one panel split into four figures. */}
       <section aria-labelledby="about-commitments-heading" className="reveal">
-        <div className="container-h2 py-12 md:py-14">
+        <div className="container-h2 section">
           <p className="section-label">{t.commitments.label}</p>
           <h2
             id="about-commitments-heading"
@@ -175,7 +174,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                 <dt className="accent-text font-[family-name:var(--font-display)] text-[1.75rem] font-bold leading-none md:text-[2rem]">
                   {item.value}
                 </dt>
-                <dd className="mt-2 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                <dd className="mt-2 copy-sm">
                   {item.label}
                 </dd>
               </div>
@@ -186,7 +185,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
       {/* VALUES */}
       <section aria-labelledby="about-values-heading" className="reveal">
-        <div className="container-h2 py-12 md:py-14">
+        <div className="container-h2 section">
           <p className="section-label">{t.valuesLabel}</p>
           <h2
             id="about-values-heading"
@@ -213,7 +212,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                   </span>
                 </span>
                 <h3 className="mt-5 text-base font-semibold">{value.title}</h3>
-                <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                <p className="mt-2.5 copy-sm">
                   {value.description}
                 </p>
               </li>
@@ -224,7 +223,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
       {/* TECH STACK */}
       <section aria-labelledby="about-stack-heading" className="reveal">
-        <div className="container-h2 py-12 md:py-14">
+        <div className="container-h2 section">
           <p className="section-label">{t.stack.label}</p>
           <h2
             id="about-stack-heading"
@@ -243,7 +242,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                   <span aria-hidden className="icon-tile h-9 w-9 flex-none">
                     <Icon name={group.icon} className="h-[1.125rem] w-[1.125rem]" />
                   </span>
-                  <h3 className="text-[0.9375rem] font-semibold">{group.title}</h3>
+                  <h3 className="text-base font-semibold">{group.title}</h3>
                 </span>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {group.items.map((item) => (
@@ -263,7 +262,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
       {/* WHO WE WORK WITH */}
       <section aria-labelledby="about-audience-heading" className="reveal">
-        <div className="container-h2 py-12 md:py-14">
+        <div className="container-h2 section">
           <p className="section-label">{t.audience.label}</p>
           <h2
             id="about-audience-heading"
@@ -286,7 +285,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
                 </span>
                 <span>
                   <h3 className="text-base font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+                  <p className="mt-2 copy-sm">
                     {item.description}
                   </p>
                 </span>

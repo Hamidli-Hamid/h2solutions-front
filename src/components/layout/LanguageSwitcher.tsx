@@ -106,7 +106,7 @@ export function LanguageSwitcher({ current, label, postLocales }: Props) {
                   persistLocaleCookie(locale);
                   if (details.current) details.current.open = false;
                 }}
-                className={`flex items-center justify-between gap-3 px-3 py-2 text-[0.8125rem] transition hover:bg-[color:var(--color-background)] ${
+                className={`flex items-center justify-between gap-3 px-3 py-2 text-sm transition hover:bg-[color:var(--color-background)] ${
                   isCurrent
                     ? "font-semibold text-[color:var(--color-accent)]"
                     : "text-[color:var(--color-foreground-soft)]"

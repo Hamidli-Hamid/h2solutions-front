@@ -106,7 +106,6 @@ export default async function ProjectDetailPage({
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
@@ -141,7 +140,7 @@ export default async function ProjectDetailPage({
           the text container — edge to edge up to a cap, so the work leads
           and the story about it follows underneath. */}
       {hasGallery && (
-        <div className="mx-auto w-full max-w-[120rem] px-4 pb-4 md:px-6">
+        <div className="mx-auto w-full max-w-[120rem] px-4 pt-[var(--section-y)] md:px-6">
           <ProjectGallery
             images={galleryImages}
             shots={shotsByImage(project)}
@@ -160,7 +159,7 @@ export default async function ProjectDetailPage({
       {/* Under the gallery: the facts and the project text, with the rest of
           the portfolio in the rail beside them. */}
       <div className="reveal">
-        <div className="container-h2 grid items-start gap-10 py-12 md:py-16 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+        <div className="container-h2 section grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
           <article aria-labelledby="overview-heading" className="min-w-0">
             <h2 id="overview-heading" className="type-h2">
               {dict.portfolio.overviewTitle}
@@ -170,7 +169,7 @@ export default async function ProjectDetailPage({
               <dl className="mt-6 grid grid-cols-2 gap-3">
                 {facts.map((fact) => (
                   <div key={fact.label} className="panel min-w-0 px-5 py-4">
-                    <dt className="text-[0.6875rem] font-semibold uppercase tracking-[0.16em] text-[color:var(--color-foreground-muted)]">
+                    <dt className="meta-label">
                       {fact.label}
                     </dt>
                     <dd className="mt-1.5 truncate font-[family-name:var(--font-display)] text-base font-semibold">
@@ -195,10 +194,9 @@ export default async function ProjectDetailPage({
               on the same edge. */}
           {related.length > 0 && (
             <aside className="lg:sticky lg:top-24">
-              <h2
-                id="related-projects-heading"
-                className="type-h2"
-              >
+              {/* Rail heading one step down from the article's: in a 20rem
+                  column the H2 size broke "Digər layihələr" over two lines. */}
+              <h2 id="related-projects-heading" className="type-h3">
                 {dict.portfolio.related}
               </h2>
               <nav
@@ -228,10 +226,10 @@ export default async function ProjectDetailPage({
                         </span>
 
                         <span className="flex min-w-0 flex-col gap-1.5">
-                          <span className="text-[0.875rem] font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
+                          <span className="text-sm font-medium leading-snug transition group-hover:text-[color:var(--color-accent)]">
                             {item.title}
                           </span>
-                          <span className="flex flex-wrap items-center gap-x-2 text-[0.6875rem] text-[color:var(--color-foreground-muted)]">
+                          <span className="flex flex-wrap items-center gap-x-2 text-xs text-[color:var(--color-foreground-muted)]">
                             {item.client && <span>{item.client}</span>}
                             {item.client && item.year && <span aria-hidden>·</span>}
                             {item.year && <span>{item.year}</span>}
@@ -244,7 +242,7 @@ export default async function ProjectDetailPage({
 
                 <Link
                   href={localePath(lang, "/portfolio")}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+                  className="link-arrow mt-5"
                 >
                   {dict.portfolio.title}
                   <ArrowRightIcon aria-hidden className="h-4 w-4" />

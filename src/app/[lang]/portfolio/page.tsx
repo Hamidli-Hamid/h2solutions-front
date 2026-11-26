@@ -79,7 +79,6 @@ export default async function PortfolioPage({
   return (
     <div className="tech-canvas">
       <PageHeader
-        withGrid={false}
         breadcrumbs={{
           label: dict.nav.menu,
           items: [
@@ -104,7 +103,7 @@ export default async function PortfolioPage({
       />
 
       <section aria-label={dict.portfolio.title}>
-        <div className="container-h2 pb-12 md:pb-14">
+        <div className="container-h2 section">
           {projects.length === 0 ? (
             <EmptyState
               icon={BriefcaseIcon}

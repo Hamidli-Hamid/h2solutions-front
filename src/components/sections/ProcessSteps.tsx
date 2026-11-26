@@ -10,7 +10,7 @@ type Props =
   | {
       variant?: "full";
       dict: Dictionary;
-      /** Ordinal beside the label; the home page passes its own when a section before it is hidden. */
+      /** Ordinal beside the label — only where the page numbers its sections in full. */
       index?: number;
     }
   | {
@@ -25,7 +25,7 @@ export function ProcessSteps(props: Props) {
     return <ProcessStrip dict={props.dict} lang={props.lang} />;
   }
 
-  const { dict, index = 2 } = props;
+  const { dict, index } = props;
   const t = dict.home.process;
 
   return (
@@ -36,7 +36,7 @@ export function ProcessSteps(props: Props) {
          heading clear of the sticky header after the jump. */
       className="band reveal scroll-mt-24"
     >
-      <div className="container-h2 py-14 md:py-20">
+      <div className="container-h2 section">
         <SectionHeading
           id="process-heading"
           label={t.label}
@@ -85,10 +85,10 @@ export function ProcessSteps(props: Props) {
                   {String(position + 1).padStart(2, "0")}
                 </span>
 
-                <h3 className="mt-2 text-[0.95rem] font-semibold md:text-base">
+                <h3 className="mt-2 text-base font-semibold">
                   {step.title}
                 </h3>
-                <p className="mt-2.5 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)] md:px-1">
+                <p className="mt-2.5 copy-sm md:px-1">
                   {step.description}
                 </p>
               </div>
@@ -129,7 +129,7 @@ function ProcessStrip({ dict, lang }: { dict: Dictionary; lang: Locale }) {
 
         <Link
           href={`${localePath(lang, "/services")}#process`}
-          className="inline-flex flex-none items-center gap-1.5 text-sm font-medium text-[color:var(--color-accent)] transition hover:text-[color:var(--color-accent-strong)]"
+          className="link-arrow flex-none"
         >
           {t.title}
           <ArrowRightIcon aria-hidden className="h-4 w-4" />

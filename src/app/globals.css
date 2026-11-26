@@ -296,9 +296,28 @@
     border-color: var(--color-border);
   }
 
+  /* One vertical rhythm for the whole site. Every section carries this as
+     its top and bottom padding, so two sections always sit 2× apart and a
+     page header hands over to its first section at 1×. */
+  :root {
+    --section-y: 2.5rem;
+  }
+  @media (min-width: 768px) {
+    :root {
+      --section-y: 3rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --section-y: 3.5rem;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Anchored jumps and focused fields land below the sticky header. */
+    scroll-padding-top: 5.5rem;
   }
 
   body {
@@ -379,6 +398,10 @@
     }
   }
 
+  .section {
+    padding-block: var(--section-y);
+  }
+
   /* ---------------------------------------------------------------
      Type scale. Fluid between the two ends of the viewport so the
      display sizes stop stepping at breakpoints, and the headline
@@ -392,6 +415,16 @@
     font-size: clamp(2.375rem, 0.85rem + 5.2vw, 5.5rem);
     line-height: 0.96;
     letter-spacing: -0.04em;
+    font-weight: 700;
+  }
+
+  /* Inner page titles. One step under the home headline: a case or article
+     title runs to three lines, and at display size it pushed the page's own
+     content below the fold. Same face, weight and tracking as the hero. */
+  .type-h1 {
+    font-size: clamp(2.25rem, 1.35rem + 2.9vw, 4rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
     font-weight: 700;
   }
 
@@ -415,16 +448,61 @@
     color: var(--color-foreground-soft);
   }
 
+  /* Running copy, in two sizes. Cards and rails use `copy-sm`; anything a
+     visitor reads as a paragraph (answers, descriptions, SEO text) `copy`. */
+  .copy {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-foreground-soft);
+  }
+  .copy-sm {
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--color-foreground-soft);
+  }
+
+  /* Small uppercase caption over a value (contact channels, facts, rails). */
+  .meta-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-foreground-muted);
+  }
+
+  /* Accent text link with the round arrow chip — "Ətraflı", "Oxumaq", "view
+     all". 2rem tall so it is a comfortable target inside a card. */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    transition: color 0.2s ease;
+  }
+  .link-arrow:hover {
+    color: var(--color-accent-strong);
+  }
+
   /* ---------------------------------------------------------------
      Buttons
      --------------------------------------------------------------- */
+  /* Two buttons, two sizes. Default is 3rem tall (the action of a block);
+     `.btn-sm` is 2.5rem (header, "view all", rails). Both centre their label,
+     so a full-width button on a phone needs no extra utility. */
   .btn-primary {
     position: relative;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
+    min-height: 3rem;
     overflow: hidden;
-    padding: 0.875rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 999px;
     background: linear-gradient(
       100deg,
@@ -436,7 +514,9 @@
     font-weight: 600;
     font-size: 0.95rem;
     letter-spacing: 0.01em;
-    transition: transform 0.25s var(--ease-out-quint),
+    line-height: 1.25;
+    text-align: center;
+    transition: transform 0.2s var(--ease-out-quint),
       box-shadow 0.25s var(--ease-out-quint);
     box-shadow: var(--shadow-glow);
   }
@@ -460,22 +540,38 @@
     transition: transform 0.7s var(--ease-out-expo);
   }
   .btn-primary:hover {
-    transform: translateY(-2px);
     box-shadow: 0 14px 44px -14px color-mix(in oklab, var(--color-accent) 70%, transparent);
-  }
-  .btn-primary:hover::after {
-    transform: translateX(120%);
   }
 
   /* The arrow in any button nudges forward on hover — the smallest cue that
      the control leads somewhere. */
   .btn-primary svg,
   .btn-secondary svg {
+    flex: none;
     transition: transform 0.3s var(--ease-out-quint);
   }
-  .btn-primary:hover svg,
-  .btn-secondary:hover svg {
-    transform: translateX(3px);
+
+  /* Movement on hover only where there is a real hover: on a touch screen a
+     tap leaves `:hover` stuck and the button would stay lifted. */
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+    .btn-primary:hover::after {
+      transform: translateX(120%);
+    }
+    .btn-primary:hover svg,
+    .btn-secondary:hover svg {
+      transform: translateX(3px);
+    }
+  }
+
+  /* Press feedback, every pointer type. */
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
   }
 
   /* Magnetic control: `PointerGlow` writes an inline transform that pulls
@@ -488,9 +584,13 @@
   .btn-secondary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 999px;
+    line-height: 1.25;
+    text-align: center;
     background: color-mix(in oklab, var(--color-background-elevated) 70%, transparent);
     color: var(--color-foreground);
     font-weight: 500;
@@ -502,27 +602,24 @@
   .btn-secondary:hover {
     border-color: var(--color-accent);
     background-color: color-mix(in oklab, var(--color-accent) 8%, transparent);
-    transform: translateY(-2px);
+  }
+
+  .btn-sm {
+    min-height: 2.5rem;
+    padding: 0.5rem 1.125rem;
+    font-size: 0.875rem;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .btn-primary:hover,
-    .btn-secondary:hover {
+    .btn-secondary:hover,
+    .btn-primary:active,
+    .btn-secondary:active {
       transform: none;
     }
     .btn-primary::after {
       display: none;
     }
-  }
-
-  .card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-  .card:hover {
-    border-color: var(--color-border-strong);
   }
 
   /* Cyan → violet, with the stop positions drifting so the fill is never
@@ -786,10 +883,10 @@
     display: inline-flex;
     align-items: center;
     gap: 0.625rem;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    line-height: 1;
-    letter-spacing: 0.18em;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: color-mix(in oklab, var(--color-accent) 78%, var(--color-foreground-soft));
   }
@@ -927,12 +1024,10 @@
     box-shadow:
       inset 0 1px 0 0 color-mix(in oklab, var(--color-accent) 55%, transparent),
       0 22px 50px -30px color-mix(in oklab, var(--color-accent) 90%, transparent);
-    transform: translateY(-4px);
   }
-
-  @media (prefers-reduced-motion: reduce) {
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
     .panel-interactive:hover {
-      transform: none;
+      transform: translateY(-4px);
     }
   }
 
@@ -1078,16 +1173,14 @@
 
   .service-card:hover {
     border-color: color-mix(in oklab, var(--color-accent) 42%, transparent);
-    transform: translateY(-3px);
     box-shadow: 0 22px 46px -30px color-mix(in oklab, var(--color-accent) 90%, transparent);
   }
   .service-card:hover::after {
     opacity: 1;
   }
-
-  @media (prefers-reduced-motion: reduce) {
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
     .service-card:hover {
-      transform: none;
+      transform: translateY(-3px);
     }
   }
 
@@ -1106,7 +1199,8 @@
       transform 0.3s var(--ease-out-quint);
   }
   .service-card:hover .arrow-chip,
-  .group:hover .arrow-chip {
+  .group:hover .arrow-chip,
+  .link-arrow:hover .arrow-chip {
     background-image: linear-gradient(
       100deg,
       var(--h2-fill-from),
@@ -1114,7 +1208,22 @@
     );
     border-color: transparent;
     color: var(--color-on-accent);
-    transform: translateX(3px);
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .service-card:hover .arrow-chip,
+    .group:hover .arrow-chip,
+    .link-arrow:hover .arrow-chip {
+      transform: translateX(3px);
+    }
+  }
+
+  .arrow-chip-sm {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .arrow-chip-sm svg {
+    height: 0.75rem;
+    width: 0.75rem;
   }
 
   /* Square icon tile used by service, process and contact items. */
@@ -1172,45 +1281,14 @@
       var(--color-accent) var(--h2-chip-tint),
       color-mix(in oklab, var(--color-background) 72%, transparent)
     );
-    padding: 0.25rem 0.625rem;
-    font-size: 0.6875rem;
+    min-height: 1.75rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--color-foreground-muted);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: var(--color-foreground-soft);
     backdrop-filter: blur(4px);
-  }
-
-  /* ---------------------------------------------------------------
-     Marquee — one continuous track, duplicated in the markup so the
-     loop has no seam. Pauses on hover and is frozen for reduced motion.
-     --------------------------------------------------------------- */
-  .marquee {
-    position: relative;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(
-      90deg,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  }
-
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    gap: 3rem;
-    padding-inline: 1.5rem;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .marquee-track {
-      animation: marquee-slide 38s linear infinite;
-    }
-    .marquee:hover .marquee-track {
-      animation-play-state: paused;
-    }
   }
 
   /* Reading-progress rail pinned under the header. Driven by the document
@@ -1254,17 +1332,6 @@
     background-position: center;
   }
 
-  /* Gradient scrim over card artwork so a caption stays legible on any
-     image the admin uploads. */
-  .media-scrim {
-    background: linear-gradient(
-      to top,
-      color-mix(in oklab, var(--color-background) 92%, transparent) 0%,
-      color-mix(in oklab, var(--color-background) 45%, transparent) 42%,
-      transparent 75%
-    );
-  }
-
   /* ---------------------------------------------------------------
      Article body — styles the HTML the admin rich editor produces.
      Only element selectors; the editor emits no classes.
@@ -1280,13 +1347,15 @@
   }
   .prose-tech h2 {
     margin-top: 2.75rem;
-    font-size: 1.375rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
     font-weight: 700;
     scroll-margin-top: 6rem;
   }
   .prose-tech h3 {
     margin-top: 2rem;
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
+    line-height: 1.35;
     font-weight: 600;
     scroll-margin-top: 6rem;
   }
@@ -1683,16 +1752,6 @@
   }
   to {
     background-position: 100% 50%;
-  }
-}
-
-@keyframes marquee-slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    /* The track holds the list twice; half of it is one full cycle. */
-    transform: translateX(-50%);
   }
 }
 
@@ -2098,6 +2157,14 @@
   white-space: nowrap;
 }
 
+/* On phones the footer's last rows wrap before the floating call/WhatsApp
+   column (3rem wide, 1rem from the edge), so no line ever runs under it. */
+@media (max-width: 767.98px) {
+  .footer-legal {
+    padding-right: calc(4.75rem + env(safe-area-inset-right));
+  }
+}
+
 /* Pricing: the recommended package carries an accent border, the glow and a
    badge beside its name. */
 .pricing-featured {
@@ -2116,27 +2183,35 @@
 }
 
 .float-contact {
+  /* Height of the stack, read by the footer so its last line is never under it. */
+  --fab-size: 3rem;
+  --fab-gap: 0.625rem;
   position: fixed;
   right: max(1rem, env(safe-area-inset-right));
   bottom: max(1rem, env(safe-area-inset-bottom));
   z-index: 30;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--fab-gap);
 }
 .float-contact__btn {
   position: relative;
   display: flex;
-  height: 3.25rem;
-  width: 3.25rem;
+  height: var(--fab-size);
+  width: var(--fab-size);
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
   box-shadow: var(--h2-shadow-glow);
   transition: transform 0.25s var(--ease-out-quint), box-shadow 0.25s var(--ease-out-quint);
 }
-.float-contact__btn:hover {
-  transform: translateY(-2px) scale(1.05);
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .float-contact__btn:hover {
+    transform: translateY(-2px);
+  }
+}
+.float-contact__btn:active {
+  transform: scale(0.95);
 }
 .float-contact__btn:focus-visible {
   outline: 2px solid var(--color-accent);
@@ -2162,6 +2237,45 @@
     pointer-events: none;
   }
 }
+/* The stack fades in once the visitor scrolls past the first screen: in the
+   fold it sat on the hero's service panel and competed with the hero's own
+   call to action, which the header's WhatsApp line already backs up. Where
+   scroll timelines are missing (or the page cannot scroll) it is simply
+   always there, as before. */
+@supports (animation-timeline: scroll()) {
+  .float-contact {
+    animation: float-contact-in linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 45vh;
+  }
+}
+@keyframes float-contact-in {
+  0%,
+  40% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(0.75rem);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes float-contact-in {
+    0%,
+    40% {
+      opacity: 0;
+      visibility: hidden;
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
 @keyframes float-contact-ring {
   0% {
     opacity: 0.7;

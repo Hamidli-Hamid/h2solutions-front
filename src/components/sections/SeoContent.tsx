@@ -15,7 +15,7 @@ type Props = {
 
 export function SeoContent({ content: t, image }: Props) {
   const paragraphs = (
-    <div className="space-y-4 text-[0.875rem] leading-[1.9] text-[color:var(--color-foreground-soft)] md:text-[0.9375rem]">
+    <div className="copy max-w-[68ch] space-y-4">
       {t.body.map((paragraph) => (
         <p key={paragraph.slice(0, 40)}>{paragraph}</p>
       ))}
@@ -25,7 +25,7 @@ export function SeoContent({ content: t, image }: Props) {
   if (image) {
     return (
       <section aria-labelledby="seo-content-heading" className="reveal">
-        <div className="container-h2 py-14 md:py-20">
+        <div className="container-h2 section">
           <div className="panel grid gap-8 rounded-[var(--radius-xl)] p-6 md:p-10 lg:grid-cols-12 lg:items-center lg:gap-14">
             <div className="lg:col-span-7">
               <p className="section-label">{t.label}</p>
@@ -46,7 +46,7 @@ export function SeoContent({ content: t, image }: Props) {
 
   return (
     <section aria-labelledby="seo-content-heading" className="reveal">
-      <div className="container-h2 py-14 md:py-20">
+      <div className="container-h2 section">
         {/* Two columns from `lg`: the heading holds the left rail while the
             copy runs down the right, which keeps the measure readable instead
             of stretching a paragraph across the full 92rem container. */}

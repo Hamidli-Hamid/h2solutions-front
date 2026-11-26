@@ -39,7 +39,7 @@ export function ProjectCard({
       />
       <div className="flex flex-1 flex-col p-5 md:p-6">
         {meta && <p className="chip w-fit">{meta}</p>}
-        <Heading className="mt-3 text-base font-semibold md:text-[1.0625rem]">
+        <Heading className="mt-3 text-base font-semibold md:text-lg">
           <Link
             href={href}
             className="transition group-hover:text-[color:var(--color-accent)]"
@@ -47,12 +47,12 @@ export function ProjectCard({
             {project.title}
           </Link>
         </Heading>
-        <p className="mt-2.5 flex-1 text-[0.8125rem] leading-relaxed text-[color:var(--color-foreground-soft)]">
+        <p className="mt-2.5 flex-1 copy-sm">
           {project.summary}
         </p>
         <span
           aria-hidden
-          className="mt-6 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-[color:var(--color-accent)]"
+          className="link-arrow mt-6"
         >
           {ctaLabel}
           <span className="arrow-chip h-6 w-6">
